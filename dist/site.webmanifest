@@ -1,0 +1,12 @@
+{
+  "name": "Fortex Appliance Repair",
+  "short_name": "Fortex",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#E11B22",
+  "icons": [
+    { "src": "/img/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/img/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}

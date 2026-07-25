@@ -1,0 +1,14 @@
+# Original full-size source photos (~183 MB). Kept local only — the optimized
+# responsive variants under dist/images are what the site actually serves.
+assets/
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# NOTE: dist/ and site_gen/_image_meta.json are intentionally NOT ignored.
+# Images are generated on macOS with `sips`, which Vercel's Linux builders
+# don't have, so the prebuilt output is committed and served as-is.
