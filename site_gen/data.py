@@ -347,6 +347,52 @@ NEARBY = ["Newport Beach", "Costa Mesa", "Tustin", "Lake Forest", "Fountain Vall
 
 CITIES_BY_SLUG = {c["slug"]: c for c in CITIES}
 
+# Approximate city centres (lat, lon), used to draw the coverage map in
+# components.coverage_map(). Drawn as inline SVG rather than a Google Maps embed:
+# an embed needs an API key with billing attached, loads third-party script on
+# every page, and sets cookies — a lot of cost for a picture that never changes.
+CITY_COORDS = {
+    "Irvine":          (33.6846, -117.8265),
+    "Huntington Beach": (33.6603, -117.9992),
+    "Anaheim":         (33.8366, -117.9143),
+    "Santa Ana":       (33.7455, -117.8677),
+    "Yorba Linda":     (33.8886, -117.8131),
+    "Newport Beach":   (33.6189, -117.9298),
+    "Costa Mesa":      (33.6411, -117.9187),
+    "Tustin":          (33.7458, -117.8261),
+    "Lake Forest":     (33.6469, -117.6892),
+    "Fountain Valley": (33.7092, -117.9537),
+    "Orange":          (33.7879, -117.8531),
+    "Garden Grove":    (33.7739, -117.9414),
+    "Fullerton":       (33.8704, -117.9243),
+    "Mission Viejo":   (33.6000, -117.6719),
+    "Laguna Niguel":   (33.5225, -117.7075),
+}
+
+# Label nudges in SVG units for cities that sit close enough for their labels to
+# collide. Santa Ana and Tustin are ~4 km apart on almost the same latitude, so
+# without this their names overlap. (dx, dy) — positive dy moves the label below.
+LABEL_OFFSETS = {
+    "Tustin":        (26, 40),
+    "Costa Mesa":    (-14, 0),
+    "Newport Beach": (10, 34),
+    "Orange":        (26, 0),
+    # Nudged left and up so it clears Santa Ana once the labels grow on mobile.
+    "Garden Grove":  (-46, -14),
+}
+
+# Coastline waypoints (lat, lon) from Seal Beach down to Dana Point, so the map
+# reads as Orange County rather than as dots floating in space.
+COASTLINE = [
+    (33.7542, -118.1100),
+    (33.7100, -118.0600),
+    (33.6603, -117.9992),
+    (33.6100, -117.9400),
+    (33.5600, -117.8300),
+    (33.5225, -117.7600),
+    (33.4700, -117.6900),
+]
+
 # ---------------------------------------------------------------- reviews
 # ONLY genuine, verbatim customer reviews belong here. Two invented "Google"
 # entries were removed on 2026-07-25 — they were written from review *themes*

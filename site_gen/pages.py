@@ -1,7 +1,7 @@
 """Page renderers. Each returns (path, html)."""
 from .components import (
     page, esc, stars, icon, img, trust_strip, cta_band, brand_strip,
-    review_card, faq_block, faq_schema, areas_grid, sms_consent,
+    review_card, faq_block, faq_schema, areas_grid, sms_consent, coverage_map,
 )
 from .data import (
     SITE, SERVICES, SERVICES_BY_SLUG, CITIES, NEARBY, STEPS, WHY, STATS,
@@ -324,6 +324,11 @@ def render_areas_index():
   <p>Local, licensed technicians serving cities throughout Orange County with same-day and next-day appointments. Find your city below.</p>
 </div></section>
 <section class="section"><div class="wrap">
+  <div class="section-head center" style="margin-bottom:32px"><h2>Where we work</h2>
+    <p class="lede">Every city below is within our daily route across Orange County.</p></div>
+  {coverage_map()}
+</div></section>
+<section class="section section--surface"><div class="wrap">
   <div class="cards grid-3">{cards}</div>
   <div class="section-head center" style="margin-top:48px"><h3>Also serving nearby</h3></div>
   <div class="area-list">{near}</div>
@@ -380,6 +385,12 @@ def render_city(c):
 <section class="section"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(c['name'])} appliance repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
+</div></section>
+<section class="section section--surface"><div class="wrap">
+  <div class="section-head center" style="margin-bottom:32px"><p class="eyebrow">Coverage</p>
+    <h2>{esc(c['name'])} and everywhere around it</h2>
+    <p class="lede">We cover {esc(c['name'])} daily, along with the neighbouring cities below.</p></div>
+  {coverage_map()}
 </div></section>
 {cta_band(heading=f"Appliance trouble in {c['name']}?")}
 """
