@@ -2,7 +2,9 @@
 import html
 import json
 
+import hashlib
 import math
+import os
 
 from .data import (SITE, SERVICES, CITIES, NEARBY, BRANDS, CITY_COORDS,
                    COASTLINE, LABEL_OFFSETS)
@@ -12,6 +14,26 @@ from .images import img
 
 def esc(s):
     return html.escape(str(s), quote=True)
+
+
+_STATIC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static")
+
+
+def asset(path):
+    """Return an asset URL with a content hash appended.
+
+    /css/styles.css and /js/main.js are served with max-age=604800 under fixed
+    names, so without this a returning visitor keeps a week-old stylesheet after
+    a deploy. That is not just cosmetic: an SVG element whose fill only exists in
+    the new CSS falls back to the SVG default of solid black.
+    """
+    local = os.path.join(_STATIC, path.lstrip("/"))
+    try:
+        with open(local, "rb") as fh:
+            digest = hashlib.md5(fh.read()).hexdigest()[:8]
+    except OSError:
+        return path
+    return f"{path}?v={digest}"
 
 
 def stars(n=5):
@@ -91,7 +113,7 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded"):
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 {GOOGLE_FONTS}
-<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="{asset("/css/styles.css")}">
 {schema_tag}
 </head>
 <body>
@@ -103,7 +125,7 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded"):
 </main>
 {footer()}
 {mobilebar()}
-<script src="/js/main.js" defer></script>
+<script src="{asset("/js/main.js")}" defer></script>
 </body>
 </html>"""
 
@@ -374,8 +396,8 @@ def coverage_map():
         dx, dy = LABEL_OFFSETS.get(c["name"], (0, 0))
         pins.append(
             f'<a href="/areas/{c["slug"]}/" class="map-pin map-pin--main">'
-            f'<circle cx="{x}" cy="{y}" r="11"/>'
-            f'<text x="{x + dx}" y="{y - 20 + dy}">{esc(c["name"])}</text></a>'
+            f'<circle cx="{x}" cy="{y}" r="11" fill="#e5231c"/>'
+            f'<text x="{x + dx}" y="{y - 20 + dy}" fill="#141c27" font-size="25" font-weight="700" text-anchor="middle">{esc(c["name"])}</text></a>'
         )
     for name in NEARBY:
         if name not in CITY_COORDS:
@@ -383,18 +405,18 @@ def coverage_map():
         x, y = _project(*CITY_COORDS[name])
         dx, dy = LABEL_OFFSETS.get(name, (0, 0))
         pins.append(
-            f'<g class="map-pin map-pin--near"><circle cx="{x}" cy="{y}" r="6"/>'
-            f'<text x="{x + dx}" y="{y - 14 + dy}">{esc(name)}</text></g>'
+            f'<g class="map-pin map-pin--near"><circle cx="{x}" cy="{y}" r="6" fill="#94a3b8"/>'
+            f'<text x="{x + dx}" y="{y - 14 + dy}" fill="#64748b" font-size="19" font-weight="600" text-anchor="middle">{esc(name)}</text></g>'
         )
 
     return f"""<div class="map-wrap reveal">
   <svg viewBox="0 0 {_MAP_W} {_MAP_H}" class="cov-map" role="img"
        aria-label="Map of the Orange County cities Fortex Appliance Repair serves">
     <title>Fortex Appliance Repair service area in Orange County</title>
-    <rect width="{_MAP_W}" height="{_MAP_H}" class="map-land"/>
-    <path d="{ocean_d}" class="map-ocean"/>
-    <path d="{coast_d}" class="map-coast"/>
-    <text x="120" y="640" class="map-ocean-label">Pacific Ocean</text>
+    <rect width="{_MAP_W}" height="{_MAP_H}" class="map-land" fill="#f4f6f8"/>
+    <path d="{ocean_d}" class="map-ocean" fill="#dbeaf4"/>
+    <path d="{coast_d}" class="map-coast" fill="none" stroke="#9cc4dc" stroke-width="3"/>
+    <text x="120" y="640" class="map-ocean-label" fill="#7ba7c2" font-size="26" font-style="italic">Pacific Ocean</text>
     {''.join(pins)}
   </svg>
   <p class="map-legend">
