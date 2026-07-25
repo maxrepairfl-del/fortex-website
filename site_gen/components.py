@@ -285,6 +285,36 @@ def brand_strip():
 </div></section>"""
 
 
+# Bump this string whenever the consent wording below changes. It is submitted
+# with every form, so a stored lead always records which version the customer
+# actually saw — RingCentral asks for this if consent is ever challenged.
+SMS_CONSENT_VERSION = "2026-07-25"
+
+SMS_CONSENT_TEXT = (
+    "I consent to receive conversational and customer-care text messages from "
+    "Fortex Appliance Repair regarding my service request, pricing, scheduling, "
+    "appointments, repair updates, parts updates, and return visits. Message "
+    "frequency varies. Message and data rates may apply. Reply STOP to opt out "
+    "or HELP for assistance. Consent is not a condition of purchase."
+)
+
+
+def sms_consent(prefix, source_page):
+    """Optional, unchecked-by-default SMS consent checkbox (A2P 10DLC / RingCentral).
+
+    Must never be `required` and must never carry `checked` — the form has to
+    submit fine without it, and a pre-ticked box is not valid consent.
+    """
+    cid = f"{prefix}sms-consent"
+    return f"""<div class="consent">
+  <input type="checkbox" id="{cid}" name="sms_consent" value="yes">
+  <label for="{cid}">{esc(SMS_CONSENT_TEXT)} View our
+    <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms &amp; Conditions</a>.</label>
+</div>
+<input type="hidden" name="sms_consent_version" value="{esc(SMS_CONSENT_VERSION)}">
+<input type="hidden" name="consent_source" value="{esc(source_page)}">"""
+
+
 def source_url(source):
     """Profile URL for a review's source, so customers can verify it themselves."""
     return {"Yelp": SITE["yelp_url"], "Google": SITE.get("google_url")}.get(source) or ""

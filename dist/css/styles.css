@@ -432,6 +432,15 @@ strong { color: var(--ink); font-weight: 700; }
 .form-note { font-size: .82rem; color: var(--muted); margin-top: 4px; }
 .hp { position: absolute; left: -9999px; }
 
+/* SMS consent (A2P 10DLC) — optional, never pre-checked */
+.consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 4px; }
+.consent input[type="checkbox"] {
+  flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--red); cursor: pointer;
+}
+.consent label { font-size: .8rem; line-height: 1.5; color: var(--muted); cursor: pointer; }
+.consent a { color: var(--red); text-decoration: underline; }
+.consent a:hover { color: var(--ink); }
+
 /* ---------- footer ---------- */
 .site-footer { background: var(--surface-2); color: var(--body); border-top: 3px solid var(--red); padding-block: clamp(48px,6vw,72px) 28px; }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 36px; }

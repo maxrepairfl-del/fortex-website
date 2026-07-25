@@ -1,7 +1,7 @@
 """Page renderers. Each returns (path, html)."""
 from .components import (
     page, esc, stars, icon, img, trust_strip, cta_band, brand_strip,
-    review_card, faq_block, faq_schema, areas_grid,
+    review_card, faq_block, faq_schema, areas_grid, sms_consent,
 )
 from .data import (
     SITE, SERVICES, SERVICES_BY_SLUG, CITIES, NEARBY, STEPS, WHY, STATS,
@@ -87,6 +87,7 @@ def home_quote_form():
       </div>
       <div class="field"><label for="q-issue">What's wrong? <span class="req">*</span></label>
         <input id="q-issue" name="issue" placeholder="e.g. Fridge not cooling and making noise" required></div>
+      {sms_consent('q-', '/')}
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Get My Free Quote</button>
       <p class="form-note">No obligation. We'll never share your information.</p>
     </form>
@@ -551,6 +552,7 @@ def render_book():
             <option>Anytime</option><option>Morning (8am–12pm)</option>
             <option>Afternoon (12–4pm)</option><option>Evening (4–8pm)</option></select></div>
       </div>
+      {sms_consent('b-', '/book/')}
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request My Appointment</button>
       <p class="form-note">By submitting you agree to be contacted about your repair. We never share your info.</p>
     </form>
@@ -624,12 +626,23 @@ def render_privacy():
         f"<p>Fortex Appliance Repair (“Fortex,” “we,” “us”) respects your privacy. This policy explains what information we collect when you contact us or use this website, and how we use it.</p>",
         "<h2>Information we collect</h2>",
         "<p>We collect the information you provide when you book a repair, request a quote, call, or text us — such as your name, phone number, email address, service address, and details about your appliance and the problem. We also collect basic, non-identifying website analytics (such as pages visited).</p>",
+        "<h3>Information Collected Through SMS</h3>",
+        "<p>When you communicate with us by text message, we may collect your mobile phone number, the content of your messages, photos or other information you send, message timestamps, delivery information, and records related to your consent or opt-out preferences.</p>",
         "<h2>How we use your information</h2>",
         "<ul><li>To schedule, perform, and follow up on your appliance repair</li><li>To contact you about your request, appointment, or estimate</li><li>To improve our services and website</li></ul>",
+        "<h3>How We Use SMS Information</h3>",
+        "<p>We use information received through SMS to respond to customer inquiries, provide service and pricing information, request appliance details, schedule or reschedule appointments, coordinate diagnostic and repair services, provide parts and return-visit updates, maintain service records, and comply with applicable legal and carrier requirements.</p>",
         "<h2>Text messages</h2>",
-        f"<p>If you provide your phone number, we may text you appointment confirmations and arrival updates. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for help. You can also call us at {esc(p)}.</p>",
+        "<p>When a customer initiates a text conversation with Fortex Appliance Repair or otherwise agrees to receive text messages from us, we may send conversational and customer-care messages related to the customer's appliance service request.</p>",
+        "<p>These messages may include responses to service inquiries, pricing or diagnostic-fee information, requests for appliance photos or model-number information, appointment scheduling or rescheduling, appointment confirmations, repair updates, parts updates, and return-visit coordination.</p>",
+        "<p>Message frequency varies depending on the customer's service request and conversation. Message and data rates may apply. Customers may reply <strong>STOP</strong> at any time to opt out of further text messages and may reply <strong>HELP</strong> for assistance. A customer who opts out may receive one final message confirming the opt-out request.</p>",
+        "<p>Consent to receive text messages is not a condition of purchasing goods or services from Fortex Appliance Repair.</p>",
+        "<p>For additional information about our text messaging practices, please review our <a href=\"/terms/\">Terms &amp; Conditions</a>.</p>",
         "<h2>How we share information</h2>",
         "<p>We do not sell your personal information. We share it only as needed to perform your service (for example, with parts suppliers) or when required by law.</p>",
+        "<h3>SMS Data Sharing</h3>",
+        "<p>No mobile opt-in information or text message consent is shared with third parties or affiliates.</p>",
+        "<p>We may use service providers solely to operate our communications, scheduling, customer-management, or message-delivery systems. Such providers may process information only on our behalf and are not permitted to use mobile opt-in information or text message consent for their own marketing or promotional purposes.</p>",
         "<h2>Your choices</h2>",
         f"<p>You may ask us to review, update, or delete the information we hold about you by emailing <a href=\"mailto:{esc(e)}\">{esc(e)}</a> or calling {esc(p)}.</p>",
         "<h2>Contact us</h2>",
@@ -655,6 +668,25 @@ def render_terms():
         f"<p>Appointment windows are estimates and may shift due to earlier jobs; we'll keep you updated by call or text. To reschedule or cancel, please contact us at {esc(p)} as early as possible.</p>",
         "<h2>Limitation of liability</h2>",
         "<p>To the fullest extent permitted by law, Fortex's liability for any claim related to our services is limited to the amount paid for the specific repair. We are not liable for indirect or consequential damages.</p>",
+        "<h2>SMS Terms and Conditions</h2>",
+        "<h3>Program Description</h3>",
+        "<p>When you initiate a text conversation with Fortex Appliance Repair or otherwise consent to receive text messages from us, you agree to receive conversational and customer-care SMS messages related to your appliance service request.</p>",
+        "<p>Messages may include responses to inquiries, service and pricing information, diagnostic-fee information, requests for appliance photos or model-number information, appointment scheduling and rescheduling, appointment confirmations, repair updates, parts updates, and return-visit coordination.</p>",
+        "<p>Fortex Appliance Repair does not use this SMS program for recurring bulk promotional or marketing messages.</p>",
+        "<h3>Message Frequency</h3>",
+        "<p>Message frequency varies depending on your service request and the ongoing conversation.</p>",
+        "<h3>Message and Data Rates</h3>",
+        "<p>Message and data rates may apply according to your mobile carrier and service plan.</p>",
+        "<h3>Opt-Out Instructions</h3>",
+        "<p>You may opt out at any time by replying <strong>STOP</strong> to a message from Fortex Appliance Repair. After you send STOP, you may receive one final confirmation message. No additional SMS messages will be sent unless you later initiate a new conversation or provide consent again.</p>",
+        "<h3>Help and Support</h3>",
+        f"<p>Reply <strong>HELP</strong> for assistance, or contact Fortex Appliance Repair at <strong>{esc(p)}</strong>.</p>",
+        "<h3>Consent Is Not a Condition of Purchase</h3>",
+        "<p>Consent to receive text messages is not a condition of purchasing any goods or services from Fortex Appliance Repair.</p>",
+        "<h3>Carrier Disclaimer</h3>",
+        "<p>Mobile carriers are not responsible for delayed or undelivered messages.</p>",
+        "<h3>Privacy</h3>",
+        "<p>Our handling of personal information, mobile phone numbers, SMS consent, and text-message data is described in our <a href=\"/privacy/\">Privacy Policy</a>.</p>",
         "<h2>Governing law</h2>",
         "<p>These terms are governed by the laws of the State of California.</p>",
         "<h2>Contact us</h2>",
