@@ -10,7 +10,12 @@ SITE = {
     "phone": "(949) 479-0089",
     "phone_href": "tel:+19494790089",
     "sms_href": "sms:+19494790089",
-    "email": "service@fortexappliancerepair.com",  # FIXME confirm real inbox
+    # Public contact address. Deliberately a Gmail, not a domain address: the
+    # only working domain mailbox is maksym.technician@fortexappliancerepair.com,
+    # which is reserved for Google Business Profile / RingCentral verification.
+    # service@fortexappliancerepair.com was on every page until 2026-07-25 and
+    # had never existed — mail to it bounced with "550 5.1.1 User does not exist".
+    "email": "fortexappliancerepair@gmail.com",
     # Formspree endpoint for booking/quote submissions, e.g.
     # "https://formspree.io/f/xdkoblqz". The build refuses to emit forms while
     # this is empty — an unwired form silently swallows leads.
