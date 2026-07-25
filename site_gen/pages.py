@@ -224,7 +224,7 @@ def render_home():
 """
     desc = ("Same-day appliance repair in Orange County, CA. Licensed & insured Fortex technicians "
             "repair refrigerators, washers, dryers, dishwashers, ovens and more. Free service call with repair. "
-            "Call (949) 479-0089.")
+            "Call (949) 478-0089.")
     return "/index.html", page(
         f"{SITE['name']} | Same-Day Appliance Repair in Orange County, CA",
         desc, "/", body, extra_schema=faq_schema(HOME_FAQ),
@@ -246,7 +246,7 @@ def render_services_index():
 """
     return "/services/index.html", page(
         f"Appliance Repair Services in Orange County | {SITE['name']}",
-        "Refrigerator, washer, dryer, dishwasher, oven, microwave and more — same-day appliance repair across Orange County, CA. Licensed & insured. Call (949) 479-0089.",
+        "Refrigerator, washer, dryer, dishwasher, oven, microwave and more — same-day appliance repair across Orange County, CA. Licensed & insured. Call (949) 478-0089.",
         "/services/", body,
     )
 
@@ -303,7 +303,7 @@ def render_service(s):
     }
     return f"/services/{s['slug']}/index.html", page(
         f"{s['name']} in Orange County, CA | {SITE['name']}",
-        f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 12-month warranty. Call (949) 479-0089.",
+        f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 12-month warranty. Call (949) 478-0089.",
         f"/services/{s['slug']}/", body,
         extra_schema=[svc_schema, faq_schema(faqs)], og_image=s["photo"],
     )
@@ -338,7 +338,7 @@ def render_areas_index():
 """
     return "/areas/index.html", page(
         f"Appliance Repair Service Areas in Orange County | {SITE['name']}",
-        "Fortex provides same-day appliance repair across Orange County — Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda and nearby cities. Call (949) 479-0089.",
+        "Fortex provides same-day appliance repair across Orange County — Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda and nearby cities. Call (949) 478-0089.",
         "/areas/", body,
     )
 
@@ -396,7 +396,7 @@ def render_city(c):
 """
     return f"/areas/{c['slug']}/index.html", page(
         f"Appliance Repair in {c['name']}, CA | {SITE['name']}",
-        f"Same-day appliance repair in {c['name']}, CA. Licensed & insured Fortex technicians repair refrigerators, washers, dryers, ovens and more. Free service call with repair. Call (949) 479-0089.",
+        f"Same-day appliance repair in {c['name']}, CA. Licensed & insured Fortex technicians repair refrigerators, washers, dryers, ovens and more. Free service call with repair. Call (949) 478-0089.",
         f"/areas/{c['slug']}/", body,
         extra_schema=faq_schema(faqs), og_image=c["photo"],
     )
@@ -432,7 +432,7 @@ def render_how():
 """
     return "/how-it-works/index.html", page(
         f"How It Works | {SITE['name']}",
-        "Easy scheduling, a free diagnostic with your repair, and a 12-month warranty. See exactly how Fortex Appliance Repair works in Orange County. Call (949) 479-0089.",
+        "Easy scheduling, a free diagnostic with your repair, and a 12-month warranty. See exactly how Fortex Appliance Repair works in Orange County. Call (949) 478-0089.",
         "/how-it-works/", body, og_image="diagnostic-meter",
     )
 
@@ -591,7 +591,7 @@ def render_book():
 """
     return "/book/index.html", page(
         f"Book Online | {SITE['name']}",
-        "Book your Orange County appliance repair online in 60 seconds. Same-day & next-day appointments, free service call with repair. Or call (949) 479-0089.",
+        "Book your Orange County appliance repair online in 60 seconds. Same-day & next-day appointments, free service call with repair. Or call (949) 478-0089.",
         "/book/", body,
     )
 

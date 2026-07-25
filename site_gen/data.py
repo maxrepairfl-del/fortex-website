@@ -7,9 +7,9 @@ NOTE: items marked FIXME need confirmation from the owner before launch
 SITE = {
     "name": "Fortex Appliance Repair",
     "short": "Fortex",
-    "phone": "(949) 479-0089",
-    "phone_href": "tel:+19494790089",
-    "sms_href": "sms:+19494790089",
+    "phone": "(949) 478-0089",
+    "phone_href": "tel:+19494780089",
+    "sms_href": "sms:+19494780089",
     # Public contact address. Deliberately a Gmail, not a domain address: the
     # only working domain mailbox is maksym.technician@fortexappliancerepair.com,
     # which is reserved for Google Business Profile / RingCentral verification.
