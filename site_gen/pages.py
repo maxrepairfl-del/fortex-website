@@ -159,8 +159,8 @@ def reviews_section(items=None, heading="Reviews"):
     <p class="lede">Don't take our word for it — here's what neighbors across OC say about Fortex.</p></div>
   <div class="reviews">{cards}</div>
   <div class="rating-summary">
-    <span class="rating-pill">{stars()} <b>5.0</b> on Yelp · 101 reviews</span>
-    <span class="rating-pill">{stars()} <b>5.0</b> on Google</span>
+    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · 101 reviews</a>
+    <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Google</a>
   </div>
   <div class="center" style="margin-top:26px"><a class="btn btn--outline" href="/reviews/">Read more reviews {icon('arrow-right', size=16)}</a></div>
 </div></section>"""
@@ -472,8 +472,8 @@ def render_reviews():
   <h1>5.0 Stars Across Orange County</h1>
   <p>We've earned 101 five-star reviews on Yelp and a 5.0 rating on Google by doing right by our customers — every visit, every time.</p>
   <div class="rating-summary" style="justify-content:flex-start">
-    <span class="rating-pill">{stars()} <b>5.0</b> on Yelp · 101 reviews</span>
-    <span class="rating-pill">{stars()} <b>5.0</b> on Google</span>
+    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · 101 reviews</a>
+    <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Google</a>
   </div>
 </div></section>
 <section class="section"><div class="wrap">

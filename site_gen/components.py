@@ -245,18 +245,24 @@ def footer():
 
 # ----------------------------------------------------------------- sections
 def trust_strip():
+    # The two rating items link out to the actual profiles — a rating a visitor
+    # can go and check beats one they have to take our word for.
     items = [
-        (stars() + " <span>5.0 on Yelp</span>", None),
-        (stars() + " <span>5.0 on Google</span>", None),
-        ("2,000+ repairs completed", "wrench"),
-        (f"Licensed &amp; insured · #{SITE['license']}", "shield-plain"),
-        ("Same-day service", "bolt"),
-        ("12-month warranty", "award"),
+        (stars() + " <span>5.0 on Yelp</span>", None, SITE["yelp_url"]),
+        (stars() + " <span>5.0 on Google</span>", None, SITE.get("google_url")),
+        ("2,000+ repairs completed", "wrench", None),
+        (f"Licensed &amp; insured · #{SITE['license']}", "shield-plain", None),
+        ("Same-day service", "bolt", None),
+        ("12-month warranty", "award", None),
     ]
     out = []
-    for label, ic in items:
+    for label, ic, href in items:
         lead = icon(ic, size=22) if ic else ""
-        out.append(f'<div class="trust-item">{lead}<span>{label}</span></div>')
+        if href:
+            out.append(f'<a class="trust-item trust-item--link" href="{href}" '
+                       f'target="_blank" rel="noopener nofollow">{lead}<span>{label}</span></a>')
+        else:
+            out.append(f'<div class="trust-item">{lead}<span>{label}</span></div>')
     return f'<section class="trust-strip"><div class="wrap">{"".join(out)}</div></section>'
 
 

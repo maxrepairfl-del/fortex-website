@@ -245,6 +245,10 @@ strong { color: var(--ink); font-weight: 700; }
 @media (max-width: 420px) { .trust-strip .wrap { grid-template-columns: 1fr; } }
 .trust-item svg { width: 22px; height: 22px; color: var(--red); flex-shrink: 0; }
 .trust-item .stars { color: var(--gold); letter-spacing: 1px; }
+/* Rating items link to the Yelp / Google profiles so the score is checkable. */
+.trust-item--link { text-decoration: none; color: var(--ink); border-radius: 999px; padding: 6px 12px; margin: -6px -12px; transition: background .15s, color .15s; }
+.trust-item--link:hover { background: rgba(0,0,0,.04); color: var(--red); }
+.trust-item--link:hover .stars { color: var(--gold); }
 
 /* ---------- services grid ---------- */
 .cards { display: grid; gap: 18px; }
@@ -332,7 +336,8 @@ strong { color: var(--ink); font-weight: 700; }
 
 /* rating summary */
 .rating-summary { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 28px; }
-.rating-pill { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 12px 22px; box-shadow: var(--shadow-sm); }
+.rating-pill { display: inline-flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 12px 22px; box-shadow: var(--shadow-sm); color: var(--ink); text-decoration: none; transition: border-color .15s, box-shadow .15s, transform .15s; }
+a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); transform: translateY(-2px); }
 .rating-pill .stars { color: var(--gold); letter-spacing: 1px; }
 .rating-pill b { font-family: var(--font-head); }
 
@@ -454,6 +459,10 @@ strong { color: var(--ink); font-weight: 700; }
 .footer-col ul { display: grid; gap: 9px; }
 .footer-col a { font-size: .94rem; color: var(--muted); transition: color .15s; }
 .footer-col a:hover { color: var(--red); }
+/* Buttons in the footer are still <a>, so the muted link colour above wins on
+   specificity and leaves dark text on the red fill. Restore the button colour. */
+.footer-col a.btn--primary,
+.footer-col a.btn--primary:hover { color: #fff; font-size: .95rem; }
 .footer-contact li { display: flex; gap: 10px; align-items: flex-start; font-size: .94rem; margin-bottom: 12px; color: var(--muted); }
 .footer-contact svg { width: 18px; height: 18px; color: var(--red); flex-shrink: 0; margin-top: 3px; }
 .footer-contact a { color: var(--ink); font-weight: 600; }
