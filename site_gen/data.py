@@ -60,10 +60,10 @@ BRANDS = [
 STEPS = [
     ("calendar", "Easy Scheduling",
      "Call, text, or book online in under a minute. Tell us the appliance and the symptom and we lock in a same-day or next-day window that fits your schedule."),
-    ("shield", "Free Diagnostic",
+    ("shield", "Upfront Price",
      "Our licensed technician arrives on time, diagnoses the problem, and gives you an upfront, all-in price. The service call is free when you approve the repair — no hidden fees."),
     ("award", "12-Month Warranty",
-     "We fix it right with original manufacturer parts and back the work with a 12-month parts and 90-day labor warranty. Most repairs are done in a single visit."),
+     "We fix it right using OEM parts whenever available, and back the work with a 12-month parts and 90-day labor warranty. Most repairs are done in a single visit."),
 ]
 
 # ---------------------------------------------------------------- why fortex
@@ -75,7 +75,7 @@ WHY = [
     ("dollar", "Upfront, honest pricing",
      "A clear all-in quote before any work begins. Free service call with your repair and no surprise add-ons."),
     ("award", "Warrantied repairs",
-     "Original manufacturer parts and a 12-month parts / 90-day labor warranty on every job."),
+     "OEM parts whenever available, and a 12-month parts / 90-day labor warranty on every job."),
     ("truck", "We come to you",
      "Fully stocked vans mean most parts are on board, so we finish the job in one visit whenever possible."),
     ("leaf", "Clean, respectful service",
@@ -102,7 +102,7 @@ SERVICES = [
             ("My fridge stopped cooling — can you come today?",
              "In most of Orange County, yes. Call or text us and we'll give you the earliest same-day or next-day window available."),
             ("Is it worth repairing or should I replace it?",
-             "After the free diagnostic we'll tell you honestly. As a rule of thumb, if the repair costs less than half of a comparable new unit, repair is the smart choice — especially for higher-end and built-in brands."),
+             "After we diagnose it, we'll tell you honestly. As a rule of thumb, if the repair costs less than half of a comparable new unit, repair is the smart choice — especially for higher-end and built-in brands."),
             ("Do you work on built-in and high-end refrigerators?",
              "Yes — we regularly service Sub-Zero, Viking, Bosch, Thermador, and other premium built-in refrigerators."),
         ],
@@ -416,7 +416,7 @@ HOME_FAQ = [
     ("What brands do you repair?",
      "All major brands, including Samsung, LG, Whirlpool, GE, Bosch, Maytag, KitchenAid, Frigidaire, Kenmore, Sub-Zero, Viking, and more — from everyday to high-end and built-in appliances."),
     ("Do you guarantee your work?",
-     "We do. Repairs use original manufacturer parts and are backed by a 12-month parts and 90-day labor warranty."),
+     "We do. Repairs use OEM parts whenever available and are backed by a 12-month parts and 90-day labor warranty."),
     ("Which areas do you serve?",
      "We serve Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda, and surrounding Orange County cities including Newport Beach, Costa Mesa, Tustin, and Lake Forest."),
 ]

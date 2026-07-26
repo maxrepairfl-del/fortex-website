@@ -432,7 +432,7 @@ def render_how():
 """
     return "/how-it-works/index.html", page(
         f"How It Works | {SITE['name']}",
-        "Easy scheduling, a free diagnostic with your repair, and a 12-month warranty. See exactly how Fortex Appliance Repair works in Orange County. Call (949) 478-0089.",
+        "Easy scheduling, an upfront all-in price before any work, and a 12-month warranty. See exactly how Fortex Appliance Repair works in Orange County. Call (949) 478-0089.",
         "/how-it-works/", body, og_image="diagnostic-meter",
     )
 
@@ -672,7 +672,7 @@ def render_terms():
         "<h2>Estimates &amp; pricing</h2>",
         "<p>We provide an upfront, all-in price before any repair work begins. The service-call fee is waived when you approve and complete the repair. You are responsible for the quoted price only after you approve the work.</p>",
         "<h2>Warranty</h2>",
-        "<p>Completed repairs are backed by a 12-month warranty on parts and a 90-day warranty on labor, using original manufacturer parts. The warranty covers the specific repair performed and does not cover new, unrelated faults or damage caused by misuse.</p>",
+        "<p>Completed repairs are backed by a 12-month warranty on parts and a 90-day warranty on labor, using OEM parts whenever available. The warranty covers the specific repair performed and does not cover new, unrelated faults or damage caused by misuse.</p>",
         "<h2>Payment</h2>",
         "<p>Payment is due upon completion of the repair. We accept major credit cards (Visa, Mastercard, American Express, Discover) and other methods as agreed.</p>",
         "<h2>Scheduling &amp; cancellations</h2>",

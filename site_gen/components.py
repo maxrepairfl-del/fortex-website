@@ -310,7 +310,7 @@ def brand_strip():
     return f"""<section class="section section--tight section--surface"><div class="wrap center">
   <p class="eyebrow">We repair all major brands</p>
   <h2 style="margin-bottom:8px">From everyday to high-end &amp; built-in</h2>
-  <p class="lede center" style="margin-bottom:26px">Factory-trained on every major appliance brand sold in the U.S.</p>
+  <p class="lede center" style="margin-bottom:26px">We service every major appliance brand sold in the U.S. — from everyday to high-end and built-in.</p>
   <div class="brandstrip">{spans}</div>
 </div></section>"""
 
