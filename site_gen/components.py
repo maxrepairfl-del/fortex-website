@@ -3,11 +3,10 @@ import html
 import json
 
 import hashlib
-import math
 import os
 
 from .data import (SITE, SERVICES, CITIES, NEARBY, BRANDS, CITY_COORDS,
-                   COASTLINE, LABEL_OFFSETS)
+                   SERVICE_AREA_POLYGON)
 from .icons import icon, logo_mark
 from .images import img
 
@@ -347,80 +346,40 @@ def sms_consent(prefix, source_page):
 
 
 # --- coverage map -----------------------------------------------------------
-# Projection window. Longitude gets more padding than latitude so the finished
-# map is landscape; without it the county's own proportions give a tall, narrow
-# panel that wastes the width of a page section.
-_MAP_W, _MAP_H = 840, 700
-_LON_MIN, _LON_MAX = -118.15, -117.50
-_LAT_MIN, _LAT_MAX = 33.48, 33.93
-
-
-def _project(lat, lon):
-    """(lat, lon) -> SVG (x, y). Longitude is scaled by cos(lat) so the map keeps
-    real-world proportions instead of stretching east-west."""
-    mid = math.radians((_LAT_MIN + _LAT_MAX) / 2)
-    span_x = (_LON_MAX - _LON_MIN) * math.cos(mid)
-    x = ((lon - _LON_MIN) * math.cos(mid)) / span_x * _MAP_W
-    y = (_LAT_MAX - lat) / (_LAT_MAX - _LAT_MIN) * _MAP_H
-    return round(x, 1), round(y, 1)
-
-
-def _smooth_path(points):
-    """Catmull-Rom-ish smoothing so the coastline reads as a curve, not a zigzag."""
-    if len(points) < 2:
-        return ""
-    d = f"M {points[0][0]},{points[0][1]}"
-    for i in range(len(points) - 1):
-        x0, y0 = points[i - 1] if i else points[i]
-        x1, y1 = points[i]
-        x2, y2 = points[i + 1]
-        x3, y3 = points[i + 2] if i + 2 < len(points) else points[i + 1]
-        c1x, c1y = x1 + (x2 - x0) / 6, y1 + (y2 - y0) / 6
-        c2x, c2y = x2 - (x3 - x1) / 6, y2 - (y3 - y1) / 6
-        d += f" C {round(c1x,1)},{round(c1y,1)} {round(c2x,1)},{round(c2y,1)} {x2},{y2}"
-    return d
-
-
 def coverage_map():
-    """Inline SVG map of the service area. No external requests, no API key."""
-    coast = [_project(la, lo) for la, lo in COASTLINE]
-    coast_d = _smooth_path(coast)
-    # Close the coastline into the south-west corner to fill the ocean.
-    ocean_d = f"{coast_d} L {_MAP_W},{_MAP_H} L 0,{_MAP_H} Z"
+    """Real slippy map with the service area shaded, built on Leaflet.
 
-    pins = []
-    for c in CITIES:
-        if c["name"] not in CITY_COORDS:
-            continue
-        x, y = _project(*CITY_COORDS[c["name"]])
-        dx, dy = LABEL_OFFSETS.get(c["name"], (0, 0))
-        pins.append(
-            f'<a href="/areas/{c["slug"]}/" class="map-pin map-pin--main">'
-            f'<circle cx="{x}" cy="{y}" r="11" fill="#e5231c"/>'
-            f'<text x="{x + dx}" y="{y - 20 + dy}" fill="#141c27" font-size="25" font-weight="700" text-anchor="middle">{esc(c["name"])}</text></a>'
-        )
-    for name in NEARBY:
-        if name not in CITY_COORDS:
-            continue
-        x, y = _project(*CITY_COORDS[name])
-        dx, dy = LABEL_OFFSETS.get(name, (0, 0))
-        pins.append(
-            f'<g class="map-pin map-pin--near"><circle cx="{x}" cy="{y}" r="6" fill="#94a3b8"/>'
-            f'<text x="{x + dx}" y="{y - 14 + dy}" fill="#64748b" font-size="19" font-weight="600" text-anchor="middle">{esc(name)}</text></g>'
-        )
+    Tiles come from CARTO's light basemap (OpenStreetMap data) — free, no API
+    key and no developer account. Apple's MapKit needs a paid Apple Developer
+    membership, and screenshotting Apple or Google Maps onto a commercial site
+    breaks their terms, so neither of those is an option here.
 
+    The map only initialises once it scrolls near the viewport, so the library
+    and tiles cost nothing on pages the visitor never scrolls to the bottom of.
+    """
+    main = [
+        {"name": c["name"], "lat": CITY_COORDS[c["name"]][0],
+         "lon": CITY_COORDS[c["name"]][1], "url": f"/areas/{c['slug']}/"}
+        for c in CITIES if c["name"] in CITY_COORDS
+    ]
+    near = [
+        {"name": n, "lat": CITY_COORDS[n][0], "lon": CITY_COORDS[n][1]}
+        for n in NEARBY if n in CITY_COORDS
+    ]
+    payload = json.dumps({
+        "main": main, "near": near,
+        "area": [[la, lo] for la, lo in SERVICE_AREA_POLYGON],
+    }, separators=(",", ":"))
+
+    # Plain-text fallback for no-JS and for crawlers.
+    names = ", ".join([c["name"] for c in CITIES] + list(NEARBY))
     return f"""<div class="map-wrap reveal">
-  <svg viewBox="0 0 {_MAP_W} {_MAP_H}" class="cov-map" role="img"
-       aria-label="Map of the Orange County cities Fortex Appliance Repair serves">
-    <title>Fortex Appliance Repair service area in Orange County</title>
-    <rect width="{_MAP_W}" height="{_MAP_H}" class="map-land" fill="#f4f6f8"/>
-    <path d="{ocean_d}" class="map-ocean" fill="#dbeaf4"/>
-    <path d="{coast_d}" class="map-coast" fill="none" stroke="#9cc4dc" stroke-width="3"/>
-    <text x="120" y="640" class="map-ocean-label" fill="#7ba7c2" font-size="26" font-style="italic">Pacific Ocean</text>
-    {''.join(pins)}
-  </svg>
+  <div id="fx-map" class="fx-map" data-map='{esc(payload)}'
+       role="img" aria-label="Map of the Orange County area served by Fortex Appliance Repair">
+    <noscript><p class="map-fallback">We serve {esc(names)}.</p></noscript>
+  </div>
   <p class="map-legend">
-    <span><i class="dot dot--main"></i>Cities we cover in depth — tap for details</span>
+    <span><i class="dot dot--main"></i>Cities we cover in depth — tap a pin for details</span>
     <span><i class="dot dot--near"></i>Also serving nearby</span>
   </p>
 </div>"""

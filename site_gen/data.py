@@ -369,29 +369,24 @@ CITY_COORDS = {
     "Laguna Niguel":   (33.5225, -117.7075),
 }
 
-# Label nudges in SVG units for cities that sit close enough for their labels to
-# collide. Santa Ana and Tustin are ~4 km apart on almost the same latitude, so
-# without this their names overlap. (dx, dy) — positive dy moves the label below.
-LABEL_OFFSETS = {
-    "Tustin":        (26, 40),
-    "Costa Mesa":    (-14, 0),
-    "Newport Beach": (10, 34),
-    "Orange":        (26, 0),
-    # Nudged left and up so it clears Santa Ana once the labels grow on mobile.
-    "Garden Grove":  (-46, -14),
-}
-
-# Coastline waypoints (lat, lon) from Seal Beach down to Dana Point, so the map
-# reads as Orange County rather than as dots floating in space.
-COASTLINE = [
-    (33.7542, -118.1100),
-    (33.7100, -118.0600),
-    (33.6603, -117.9992),
-    (33.6100, -117.9400),
-    (33.5600, -117.8300),
-    (33.5225, -117.7600),
-    (33.4700, -117.6900),
+# Outline of the area we actually cover, drawn as one shaded polygon on the map:
+# inland from Fullerton across to Yorba Linda, south past Lake Forest and Mission
+# Viejo to Laguna Niguel, then back up the coast through Newport and Huntington
+# Beach to Seal Beach.
+SERVICE_AREA_POLYGON = [
+    (33.9250, -118.0250),
+    (33.9300, -117.7550),
+    (33.8250, -117.6450),
+    (33.6900, -117.5900),
+    (33.5750, -117.6100),
+    (33.4900, -117.6950),
+    (33.5450, -117.8000),
+    (33.5950, -117.8950),
+    (33.6350, -117.9700),
+    (33.7150, -118.0650),
+    (33.7600, -118.1150),
 ]
+
 
 # ---------------------------------------------------------------- reviews
 # ONLY genuine, verbatim customer reviews belong here. Two invented "Google"

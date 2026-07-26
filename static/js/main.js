@@ -102,3 +102,93 @@
     }
   }
 })();
+
+/* ---------------------------------------------------------------- service map
+   Leaflet loads from the CDN only on pages that contain a map, and only once
+   the map is near the viewport. Trigger is proximity-checked on scroll rather
+   than IntersectionObserver alone: IO does not fire in every environment (a
+   backgrounded or non-painting tab, for one), and a map stuck on "Loading…"
+   forever is worse than one that loads a little eagerly. */
+(function () {
+  var el = document.getElementById("fx-map");
+  if (!el) return;
+
+  var LEAFLET_CSS = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+  var LEAFLET_JS = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+  var started = false;
+
+  function fail() { el.classList.add("fx-map--failed"); }
+
+  function load(cb) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = LEAFLET_CSS;
+    document.head.appendChild(link);
+    var s = document.createElement("script");
+    s.src = LEAFLET_JS;
+    s.onload = cb;
+    s.onerror = fail;
+    document.head.appendChild(s);
+    // If the CDN hangs rather than erroring, stop showing "Loading map…".
+    setTimeout(function () {
+      if (!el.classList.contains("fx-map--ready")) fail();
+    }, 12000);
+  }
+
+  function init() {
+    if (typeof L === "undefined") { fail(); return; }
+    var data;
+    try { data = JSON.parse(el.getAttribute("data-map")); }
+    catch (e) { fail(); return; }
+
+    var map = L.map(el, { scrollWheelZoom: false });
+
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: "abcd",
+      maxZoom: 19
+    }).addTo(map);
+
+    var area = L.polygon(data.area, {
+      color: "#e5231c", weight: 2, opacity: .85,
+      fillColor: "#e5231c", fillOpacity: .10
+    }).addTo(map);
+
+    data.near.forEach(function (c) {
+      L.circleMarker([c.lat, c.lon], {
+        radius: 5, color: "#fff", weight: 2, fillColor: "#64748b", fillOpacity: 1
+      }).addTo(map).bindTooltip(c.name, { direction: "top" });
+    });
+
+    data.main.forEach(function (c) {
+      L.circleMarker([c.lat, c.lon], {
+        radius: 9, color: "#fff", weight: 3, fillColor: "#e5231c", fillOpacity: 1
+      }).addTo(map)
+        .bindTooltip(c.name, { direction: "top" })
+        .bindPopup('<strong>' + c.name + '</strong><br><a href="' + c.url + '">Appliance repair in ' + c.name + ' &rarr;</a>');
+    });
+
+    map.fitBounds(area.getBounds(), { padding: [24, 24] });
+    el.classList.add("fx-map--ready");
+  }
+
+  function start() {
+    if (started) return;
+    started = true;
+    window.removeEventListener("scroll", maybeStart);
+    window.removeEventListener("resize", maybeStart);
+    load(init);
+  }
+
+  function maybeStart() {
+    var r = el.getBoundingClientRect();
+    // Within one viewport of the fold, in either direction.
+    if (r.top < window.innerHeight * 2 && r.bottom > -window.innerHeight) start();
+  }
+
+  window.addEventListener("scroll", maybeStart, { passive: true });
+  window.addEventListener("resize", maybeStart);
+  maybeStart();
+  // Last resort: if nothing above triggered it, load once the page settles.
+  window.addEventListener("load", function () { setTimeout(maybeStart, 1200); });
+})();
