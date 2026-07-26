@@ -311,12 +311,18 @@ def render_service(s):
 
 # ----------------------------------------------------------------- areas
 def render_areas_index():
-    cards = ""
+    # City list beside the map, no photos. The old photo cards carried a stock
+    # image per city that said nothing about the city and pushed the useful
+    # content — which city, and is it near me — below the fold.
+    rows = ""
     for c in CITIES:
-        cards += f"""<a class="photo-card reveal" href="/areas/{c['slug']}/">
-  <div class="ph">{img(c['photo'], sizes='(max-width:860px) 90vw, 360px')}</div>
-  <div class="bd"><h3>{esc(c['name'])}</h3><p>{esc(c['blurb'])}</p></div></a>"""
-    near = "".join(f'<a href="/book/">{icon("pin", size=18)}{esc(n)}</a>' for n in NEARBY)
+        rows += f"""<li><a href="/areas/{c['slug']}/">
+  <span class="ci">{icon('pin', size=18)}</span>
+  <span class="cd"><b>{esc(c['name'])}</b><span>{esc(c['blurb'])}</span></span>
+  <span class="ca">{icon('arrow-right', size=18)}</span></a></li>"""
+    # Nearby cities are plain text: they have no pages of their own, and linking
+    # them all to /book/ looked like a link to a city page and wasn't one.
+    near = " · ".join(esc(n) for n in NEARBY)
     body = f"""
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Service Areas</span></div>
@@ -324,14 +330,18 @@ def render_areas_index():
   <p>Local, licensed technicians serving cities throughout Orange County with same-day and next-day appointments. Find your city below.</p>
 </div></section>
 <section class="section"><div class="wrap">
-  <div class="section-head center" style="margin-bottom:32px"><h2>Where we work</h2>
-    <p class="lede">Every city below is within our daily route across Orange County.</p></div>
-  {coverage_map()}
-</div></section>
-<section class="section section--surface"><div class="wrap">
-  <div class="cards grid-3">{cards}</div>
-  <div class="section-head center" style="margin-top:48px"><h3>Also serving nearby</h3></div>
-  <div class="area-list">{near}</div>
+  <div class="areas-split">
+    <div class="areas-col">
+      <h2>Cities we cover</h2>
+      <ul class="city-list">{rows}</ul>
+      <div class="nearby">
+        <h3>Also serving nearby</h3>
+        <p>{near}</p>
+        <a class="btn btn--outline" href="/book/">{icon('calendar', size=18)} Book a repair</a>
+      </div>
+    </div>
+    <div class="areas-map">{coverage_map()}</div>
+  </div>
 </div></section>
 {trust_strip()}
 {cta_band()}

@@ -341,6 +341,36 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 .rating-pill .stars { color: var(--gold); letter-spacing: 1px; }
 .rating-pill b { font-family: var(--font-head); }
 
+/* ---------- areas index: list beside map ---------- */
+.areas-split { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(24px, 3.5vw, 44px); align-items: start; }
+.areas-col h2 { margin-bottom: 18px; }
+.city-list { display: flex; flex-direction: column; gap: 10px; }
+.city-list a {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px;
+  padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--r);
+  background: #fff; box-shadow: var(--shadow-sm);
+  transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+.city-list a:hover { border-color: var(--red); transform: translateX(3px); box-shadow: var(--shadow); }
+.city-list .ci { width: 38px; height: 38px; border-radius: 10px; background: var(--red-tint); color: var(--red); display: grid; place-items: center; }
+.city-list .cd { display: block; min-width: 0; }
+.city-list .cd b { display: block; font-family: var(--font-head); font-size: 1.06rem; color: var(--ink); }
+.city-list .cd span { display: block; font-size: .87rem; color: var(--muted); line-height: 1.45; margin-top: 3px; }
+.city-list .ca { color: var(--muted); display: grid; place-items: center; }
+.city-list a:hover .ca { color: var(--red); }
+.nearby { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+.nearby h3 { font-size: 1.02rem; margin-bottom: 8px; }
+.nearby p { font-size: .92rem; color: var(--muted); line-height: 1.7; }
+.nearby .btn { margin-top: 16px; }
+.areas-map { position: sticky; top: calc(var(--nav-h) + 18px); }
+.areas-map .map-wrap { max-width: none; }
+.areas-map .fx-map { height: clamp(420px, 62vh, 640px); }
+@media (max-width: 900px) {
+  .areas-split { grid-template-columns: 1fr; }
+  .areas-map { position: static; order: -1; }
+  .areas-map .fx-map { height: clamp(320px, 52vw, 420px); }
+}
+
 /* ---------- coverage map ---------- */
 .map-wrap { max-width: 900px; margin: 0 auto; }
 .fx-map {

@@ -25,7 +25,9 @@ SITE = {
     "license": "50759",
     "region": "Orange County, CA",
     "tagline": "Same-Day Appliance Repair in Orange County",
-    "hours": "Mon–Fri 8am–7pm · Sat 9am–1pm",  # confirmed by owner (Sun closed)
+    # Must stay identical to the hours on Google Business Profile and Yelp —
+# Google treats a mismatch between site and GBP as a negative local signal.
+    "hours": "Mon–Fri 9am–6pm · Sat 9am–1pm",  # Sun closed
     "promo": "Free service call with any completed repair",
     "warranty": "12-month parts / 90-day labor warranty",
     "founded": 2016,
