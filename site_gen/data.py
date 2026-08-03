@@ -63,7 +63,7 @@ STEPS = [
     ("calendar", "Easy Scheduling",
      "Call, text, or book online in under a minute. Tell us the appliance and the symptom and we lock in a same-day or next-day window that fits your schedule."),
     ("shield", "Upfront Price",
-     "Our licensed technician arrives on time, diagnoses the problem, and gives you an upfront, all-in price. The service call is free when you approve the repair — no hidden fees."),
+     "Our licensed technician arrives on time, diagnoses the problem, and gives you an upfront, all-in price. Free service visit with any repair — no hidden fees."),
     ("award", "12-Month Warranty",
      "We fix it right using OEM parts whenever available, and back the work with a 12-month parts and 90-day labor warranty. Most repairs are done in a single visit."),
 ]

@@ -310,7 +310,7 @@ def brand_strip():
     return f"""<section class="section section--tight section--surface"><div class="wrap center">
   <p class="eyebrow">We repair all major brands</p>
   <h2 style="margin-bottom:8px">From everyday to high-end &amp; built-in</h2>
-  <p class="lede center" style="margin-bottom:26px">We service every major appliance brand sold in the U.S. — from everyday to high-end and built-in.</p>
+  <p class="lede center" style="margin-bottom:26px">Hands-on experience with every major appliance brand sold in the U.S.</p>
   <div class="brandstrip">{spans}</div>
 </div></section>"""
 
@@ -318,14 +318,10 @@ def brand_strip():
 # Bump this string whenever the consent wording below changes. It is submitted
 # with every form, so a stored lead always records which version the customer
 # actually saw — RingCentral asks for this if consent is ever challenged.
-SMS_CONSENT_VERSION = "2026-07-25"
+SMS_CONSENT_VERSION = "2026-08-02"
 
 SMS_CONSENT_TEXT = (
-    "I consent to receive conversational and customer-care text messages from "
-    "Fortex Appliance Repair regarding my service request, pricing, scheduling, "
-    "appointments, repair updates, parts updates, and return visits. Message "
-    "frequency varies. Message and data rates may apply. Reply STOP to opt out "
-    "or HELP for assistance. Consent is not a condition of purchase."
+    "By checking this box, I consent to receive conversational and customer-care SMS messages from Fortex Appliance Repair LLC regarding my service request, pricing, scheduling, appointment confirmations, repair updates, parts updates, and return visits. Messaging frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for support. Consent is not a condition of purchase. View our "
 )
 
 
@@ -338,8 +334,7 @@ def sms_consent(prefix, source_page):
     cid = f"{prefix}sms-consent"
     return f"""<div class="consent">
   <input type="checkbox" id="{cid}" name="sms_consent" value="yes">
-  <label for="{cid}">{esc(SMS_CONSENT_TEXT)} View our
-    <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms &amp; Conditions</a>.</label>
+  <label for="{cid}">{esc(SMS_CONSENT_TEXT)}<a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms &amp; Conditions</a>.</label>
 </div>
 <input type="hidden" name="sms_consent_version" value="{esc(SMS_CONSENT_VERSION)}">
 <input type="hidden" name="consent_source" value="{esc(source_page)}">"""
