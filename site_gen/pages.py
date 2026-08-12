@@ -2,6 +2,7 @@
 from .components import (
     page, esc, stars, icon, img, trust_strip, cta_band, brand_strip,
     review_card, faq_block, faq_schema, areas_grid, sms_consent, coverage_map,
+    heard_about,
 )
 from .data import (
     SITE, SERVICES, SERVICES_BY_SLUG, CITIES, NEARBY, STEPS, WHY, STATS,
@@ -87,6 +88,7 @@ def home_quote_form():
       </div>
       <div class="field"><label for="q-issue">What's wrong? <span class="req">*</span></label>
         <input id="q-issue" name="issue" placeholder="e.g. Fridge not cooling and making noise" required></div>
+      {heard_about('q-')}
       {sms_consent('q-', '/')}
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Get My Free Quote</button>
       <p class="form-note">No obligation. We'll never share your information.</p>
@@ -569,6 +571,7 @@ def render_book():
             <option>Anytime</option><option>Morning (8am–12pm)</option>
             <option>Afternoon (12–4pm)</option><option>Evening (4–8pm)</option></select></div>
       </div>
+      {heard_about('b-')}
       {sms_consent('b-', '/book/')}
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request My Appointment</button>
       <p class="form-note">By submitting you agree to be contacted about your repair. We never share your info.</p>

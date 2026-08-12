@@ -132,6 +132,8 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
 {footer()}
 {mobilebar()}
 <script src="{asset("/js/main.js")}" defer></script>
+<script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>"""
 
@@ -330,6 +332,22 @@ SMS_CONSENT_VERSION = "2026-08-02"
 SMS_CONSENT_TEXT = (
     "By checking this box, I consent to receive conversational and customer-care SMS messages from Fortex Appliance Repair LLC regarding my service request, pricing, scheduling, appointment confirmations, repair updates, parts updates, and return visits. Messaging frequency may vary. Message and data rates may apply. Reply STOP to opt out or HELP for support. Consent is not a condition of purchase. View our "
 )
+
+
+def heard_about(prefix):
+    """"How did you hear about us?" — attribution for web leads at zero cost.
+
+    Fortex quotes a different service-call fee depending on where the customer
+    found them ($60 via Yelp, $80 via Google), and until now nothing on the site
+    recorded which it was. Optional on purpose: a required field here would cost
+    more bookings than the answer is worth.
+    """
+    opts = ["Google search", "Google Maps", "Yelp", "Friend or neighbor",
+            "Saw our van", "Returning customer", "Other"]
+    o = "".join(f"<option>{esc(x)}</option>" for x in opts)
+    return f"""<div class="field"><label for="{prefix}heard">How did you hear about us?</label>
+  <select id="{prefix}heard" name="heard_about">
+    <option value="" selected>Prefer not to say</option>{o}</select></div>"""
 
 
 def sms_consent(prefix, source_page):
