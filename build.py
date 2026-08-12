@@ -47,6 +47,11 @@ def copy_static():
         src = os.path.join(STATIC, sub)
         if os.path.isdir(src):
             shutil.copytree(src, os.path.join(DIST, sub), dirs_exist_ok=True)
+    # static/root/* lands at the site root — for files that must sit at an exact
+    # top-level URL, such as the Google Search Console verification file.
+    root_src = os.path.join(STATIC, "root")
+    if os.path.isdir(root_src):
+        shutil.copytree(root_src, DIST, dirs_exist_ok=True)
 
 
 def canonical_of(path):
