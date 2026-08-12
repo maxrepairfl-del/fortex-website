@@ -25,7 +25,7 @@ SITE = {
     # Google Search Console: paste the content="..." value from the "HTML tag"
     # verification method here, then rebuild and deploy. Verifying this way needs
     # no DNS edit, so the Zoho mail records are never at risk.
-    "google_site_verification": "",
+    "google_site_verification": "zSfVYjeLCH30q6qbZxdtjg3NBDO1HIQRJ41XYCk3hzY",
     "license": "50759",
     "region": "Orange County, CA",
     "tagline": "Same-Day Appliance Repair in Orange County",
