@@ -66,12 +66,12 @@ def base_schema():
         },
         "areaServed": [{"@type": "City", "name": c["name"]} for c in CITIES]
         + [{"@type": "City", "name": n} for n in NEARBY],
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "101",
-            "bestRating": "5",
-        },
+        # No aggregateRating on purpose. Google's structured-data policy treats a
+        # rating a business publishes about itself as self-serving and excludes
+        # it for LocalBusiness, and ours is sourced from Yelp and Google rather
+        # than collected on this site. It bought nothing — Google stopped showing
+        # self-serving LocalBusiness stars years ago — and risked a manual
+        # action. The real ratings still appear as visible, linked text.
         "openingHoursSpecification": [
             {"@type": "OpeningHoursSpecification",
              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],

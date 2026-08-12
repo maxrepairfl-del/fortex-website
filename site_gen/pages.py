@@ -159,7 +159,7 @@ def reviews_section(items=None, heading="Reviews"):
     <p class="lede">Don't take our word for it — here's what neighbors across OC say about Fortex.</p></div>
   <div class="reviews">{cards}</div>
   <div class="rating-summary">
-    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · 101 reviews</a>
+    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
     <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Google</a>
   </div>
   <div class="center" style="margin-top:26px"><a class="btn btn--outline" href="/reviews/">Read more reviews {icon('arrow-right', size=16)}</a></div>
@@ -491,16 +491,16 @@ def render_reviews():
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Reviews</span></div>
   <h1>5.0 Stars Across Orange County</h1>
-  <p>We've earned 101 five-star reviews on Yelp and a 5.0 rating on Google by doing right by our customers — every visit, every time.</p>
+  <p>We've earned {SITE['yelp_reviews']} five-star reviews on Yelp and {SITE['google_reviews']} more on Google by doing right by our customers — every visit, every time.</p>
   <div class="rating-summary" style="justify-content:flex-start">
-    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · 101 reviews</a>
+    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
     <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Google</a>
   </div>
 </div></section>
 <section class="section"><div class="wrap">
   <div class="reviews">{cards}</div>
   <div class="center" style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <a class="btn btn--outline" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} Read all 101 on Yelp</a>
+    <a class="btn btn--outline" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} Read all {SITE['yelp_reviews']} on Yelp</a>
     <a class="btn btn--outline" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} See our Google reviews</a>
   </div>
 </div></section>
@@ -510,7 +510,6 @@ def render_reviews():
     review_schema = {
         "@context": "https://schema.org", "@type": "HVACBusiness",
         "name": SITE["name"], "@id": SITE["url"] + "/#business",
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "100"},
         # No "review" array on purpose. These are Yelp reviews, and Google's
         # structured-data policy forbids marking up reviews sourced from
         # third-party sites; the entries also have no author name, which makes
@@ -518,7 +517,7 @@ def render_reviews():
     }
     return "/reviews/index.html", page(
         f"Reviews | {SITE['name']}",
-        "Read 5-star reviews for Fortex Appliance Repair from homeowners across Orange County. 101 five-star Yelp reviews and a 5.0 Google rating.",
+        f"Read 5-star reviews for Fortex Appliance Repair from homeowners across Orange County. {SITE['yelp_reviews']} five-star Yelp reviews and {SITE['google_reviews']} on Google.",
         "/reviews/", body, extra_schema=review_schema,
     )
 

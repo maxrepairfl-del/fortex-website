@@ -26,6 +26,10 @@ SITE = {
     # verification method here, then rebuild and deploy. Verifying this way needs
     # no DNS edit, so the Zoho mail records are never at risk.
     "google_site_verification": "zSfVYjeLCH30q6qbZxdtjg3NBDO1HIQRJ41XYCk3hzY",
+    # Review counts, checked 2026-08-11. Used in the visible copy on the reviews
+    # page and the trust strip; update here and they change everywhere.
+    "yelp_reviews": 110,
+    "google_reviews": 44,
     "license": "50759",
     "region": "Orange County, CA",
     "tagline": "Same-Day Appliance Repair in Orange County",
@@ -402,7 +406,7 @@ SERVICE_AREA_POLYGON = [
 # structured-data penalty. To add more, paste the exact text from the Yelp or
 # Google profile; never paraphrase or reconstruct.
 REVIEWS = [
-    # --- Yelp (verbatim excerpts from the 5.0★ / 101-review profile) ---
+    # --- Yelp (verbatim excerpts from the 5.0★ profile) ---
     {"name": "", "city": "Orange County", "source": "Yelp", "rating": 5, "verified": True,
      "text": "Maks was very professional, made the repair quickly, and told me to call back if there were any issues. Couldn't ask for more."},
     {"name": "", "city": "Orange County", "source": "Yelp", "rating": 5, "verified": True,
