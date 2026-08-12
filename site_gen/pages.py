@@ -507,18 +507,15 @@ def render_reviews():
 {brand_strip()}
 {cta_band()}
 """
-    review_schema = {
-        "@context": "https://schema.org", "@type": "HVACBusiness",
-        "name": SITE["name"], "@id": SITE["url"] + "/#business",
-        # No "review" array on purpose. These are Yelp reviews, and Google's
-        # structured-data policy forbids marking up reviews sourced from
-        # third-party sites; the entries also have no author name, which makes
-        # Review markup invalid. The reviews still render as normal HTML.
-    }
+    # No page-specific schema here. This block used to carry a second
+    # HVACBusiness with its own aggregateRating alongside the one every page
+    # already emits, which is exactly what Search Console flagged as "Review has
+    # multiple aggregate ratings". With the ratings and the review array both
+    # gone it held nothing the base schema does not already say.
     return "/reviews/index.html", page(
         f"Reviews | {SITE['name']}",
         f"Read 5-star reviews for Fortex Appliance Repair from homeowners across Orange County. {SITE['yelp_reviews']} five-star Yelp reviews and {SITE['google_reviews']} on Google.",
-        "/reviews/", body, extra_schema=review_schema,
+        "/reviews/", body,
     )
 
 
