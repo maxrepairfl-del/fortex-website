@@ -622,7 +622,7 @@ def render_thankyou():
     return "/book/thank-you/index.html", page(
         f"Thank You | {SITE['name']}",
         "Thanks for your appliance repair request. Fortex will confirm your Orange County appointment shortly.",
-        "/book/thank-you/", body,
+        "/book/thank-you/", body, noindex=True,
     )
 
 

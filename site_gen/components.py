@@ -83,7 +83,8 @@ def base_schema():
     }
 
 
-def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded"):
+def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
+         noindex=False):
     canonical = SITE["url"] + path
     og = f'{SITE["url"]}/images/{og_image}-1200.jpg'
     schema = [base_schema()]
@@ -92,6 +93,11 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded"):
     schema_tag = "".join(
         f'<script type="application/ld+json">{json.dumps(s)}</script>' for s in schema
     )
+    robots = '<meta name="robots" content="noindex,follow">' if noindex else ""
+    # Google Search Console ownership tag. Empty until the token is pasted into
+    # data.py; verification then needs only a rebuild, no DNS change.
+    gsc = SITE.get("google_site_verification", "")
+    gsc_tag = f'<meta name="google-site-verification" content="{esc(gsc)}">' if gsc else ""
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -108,6 +114,7 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded"):
 <meta property="og:image" content="{og}">
 <meta property="og:site_name" content="{esc(SITE['name'])}">
 <meta name="twitter:card" content="summary_large_image">
+{robots}{gsc_tag}
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">

@@ -22,6 +22,10 @@ SITE = {
     "form_endpoint": "https://formspree.io/f/mdaqpezy",
     "domain": "fortexappliancerepair.com",
     "url": "https://www.fortexappliancerepair.com",
+    # Google Search Console: paste the content="..." value from the "HTML tag"
+    # verification method here, then rebuild and deploy. Verifying this way needs
+    # no DNS edit, so the Zoho mail records are never at risk.
+    "google_site_verification": "",
     "license": "50759",
     "region": "Orange County, CA",
     "tagline": "Same-Day Appliance Repair in Orange County",
