@@ -77,7 +77,7 @@ def base_schema():
              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
              "opens": "09:00", "closes": "18:00"},
             {"@type": "OpeningHoursSpecification",
-             "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"},
+             "dayOfWeek": "Saturday", "opens": "09:00", "closes": "16:00"},
         ],
         "sameAs": [u for u in [SITE["yelp_url"], SITE.get("google_url")] if u and u != "#"],
     }
