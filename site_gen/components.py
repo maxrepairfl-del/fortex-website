@@ -281,8 +281,8 @@ def trust_strip():
     # The two rating items link out to the actual profiles — a rating a visitor
     # can go and check beats one they have to take our word for.
     items = [
-        (stars() + " <span>5.0 on Yelp</span>", None, SITE["yelp_url"]),
-        (stars() + " <span>5.0 on Google</span>", None, SITE.get("google_url")),
+        (stars() + f" <span>{SITE['yelp_rating']} on Yelp</span>", None, SITE["yelp_url"]),
+        (stars() + f" <span>{SITE['google_rating']} on Google</span>", None, SITE.get("google_url")),
         ("2,000+ repairs completed", "wrench", None),
         (f"Licensed &amp; insured · #{SITE['license']}", "shield-plain", None),
         ("Same-day service", "bolt", None),

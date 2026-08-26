@@ -505,6 +505,17 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 .aside-list li { display: flex; gap: 11px; align-items: flex-start; font-size: .95rem; }
 .aside-list svg { width: 20px; height: 20px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
 .form-note { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+
+/* shown in place when the form provider fails, so the lead can still reach us */
+.form-error {
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--red-tint); border: 1.5px solid var(--red);
+  border-radius: var(--r); padding: 16px 18px; margin-bottom: 14px;
+}
+.form-error strong { color: var(--red-ink); font-family: var(--font-head); }
+.form-error span { font-size: .9rem; color: var(--body); }
+.form-error__cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.form-error__cta .btn { padding: 11px 20px; font-size: .95rem; }
 .hp { position: absolute; left: -9999px; }
 
 /* SMS consent (A2P 10DLC) — optional, never pre-checked */

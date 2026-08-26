@@ -71,11 +71,43 @@
     });
   }
 
-  /* ---------- booking form: light validation + UX ---------- */
-  var form = document.querySelector("[data-booking]");
-  if (form) {
-    // require an appliance choice (only for the radio-button form)
+  /* ---------- booking forms: validation, resilient submit, UX ----------
+
+     Submitted with fetch rather than a native POST navigation. Formspree sits
+     behind Cloudflare and does go down (a 502 there used to replace our page
+     with Cloudflare's error screen, losing the lead and the visitor). Keeping
+     the visitor on our page lets us offer the phone number instead.
+
+     The native action/method are left intact, so with JS disabled the form
+     still submits the old way.
+  */
+  var TEL = (document.querySelector('a[href^="tel:"]') || {}).href || "";
+  var SMS = (document.querySelector('a[href^="sms:"]') || {}).href || "";
+  var TEL_TEXT = (document.querySelector(".nav-phone") || {}).textContent || "call us";
+
+  function submitFailed(form, btn, btnHtml) {
+    if (btn) { btn.disabled = false; btn.style.opacity = ""; btn.innerHTML = btnHtml; }
+    var box = form.querySelector(".form-error");
+    if (!box) {
+      box = document.createElement("div");
+      box.className = "form-error";
+      box.setAttribute("role", "alert");
+      box.innerHTML =
+        "<strong>We couldn't send that just now.</strong>" +
+        "<span>Our form provider isn't responding. Your request was not submitted — " +
+        "please call or text and we'll get you booked right away.</span>" +
+        '<span class="form-error__cta">' +
+          (TEL ? '<a class="btn btn--primary" href="' + TEL + '">' + TEL_TEXT.trim() + "</a>" : "") +
+          (SMS ? '<a class="btn btn--outline" href="' + SMS + '">Text us</a>' : "") +
+        "</span>";
+      (btn && btn.parentNode ? btn.parentNode.insertBefore(box, btn) : form.appendChild(box));
+    }
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-booking]"), function (form) {
     form.addEventListener("submit", function (e) {
+      // the radio-button form must have an appliance picked
       var radios = form.querySelectorAll('input[name="appliance"]');
       if (radios.length && !form.querySelector('input[name="appliance"]:checked')) {
         e.preventDefault();
@@ -87,9 +119,37 @@
         }
         return;
       }
+      if (!window.fetch || !form.action) return; // fall back to a native POST
+
+      e.preventDefault();
       var btn = form.querySelector('button[type="submit"]');
+      var btnHtml = btn ? btn.innerHTML : "";
       if (btn) { btn.disabled = true; btn.style.opacity = ".7"; btn.textContent = "Sending…"; }
+      var err = form.querySelector(".form-error");
+      if (err) err.remove();
+
+      var done = false;
+      var giveUp = setTimeout(function () {
+        if (!done) { done = true; submitFailed(form, btn, btnHtml); }
+      }, 15000);
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      }).then(function (res) {
+        if (done) return;
+        done = true; clearTimeout(giveUp);
+        if (!res.ok) return submitFailed(form, btn, btnHtml);
+        var next = form.querySelector('input[name="_next"]');
+        window.location.href = next && next.value ? next.value : "/book/thank-you/";
+      }).catch(function () {
+        if (done) return;
+        done = true; clearTimeout(giveUp);
+        submitFailed(form, btn, btnHtml);
+      });
     });
+
     // light phone formatting
     var phone = form.querySelector('input[name="phone"]');
     if (phone) {
@@ -100,7 +160,7 @@
         else if (d.length > 0) phone.value = "(" + d;
       });
     }
-  }
+  });
 })();
 
 /* ---------------------------------------------------------------- service map

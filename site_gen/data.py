@@ -26,9 +26,13 @@ SITE = {
     # verification method here, then rebuild and deploy. Verifying this way needs
     # no DNS edit, so the Zoho mail records are never at risk.
     "google_site_verification": "zSfVYjeLCH30q6qbZxdtjg3NBDO1HIQRJ41XYCk3hzY",
-    # Review counts, checked 2026-08-11. Used in the visible copy on the reviews
-    # page and the trust strip; update here and they change everywhere.
-    "yelp_reviews": 110,
+    # Ratings and counts, checked against the live profiles 2026-08-20. Used in
+    # the visible copy on the reviews page and the trust strip; update here and
+    # they change everywhere. Yelp slipped to 4.9 after a 1-star on 2026-08-20 —
+    # never round this up, a published rating has to match the source profile.
+    "yelp_rating": "4.9",
+    "yelp_reviews": 114,
+    "google_rating": "5.0",  # FIXME re-verify against the GBP profile
     "google_reviews": 44,
     "license": "50759",
     "region": "Orange County, CA",
@@ -52,7 +56,7 @@ SITE = {
 
 STATS = [
     ("2,000+", "Repairs completed"),
-    ("5.0★", "Yelp & Google rating"),
+    ("4.9★", "Yelp & Google rating"),
     ("Same-Day", "Service available"),
     ("100%", "Licensed & insured"),
 ]

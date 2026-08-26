@@ -161,8 +161,8 @@ def reviews_section(items=None, heading="Reviews"):
     <p class="lede">Don't take our word for it — here's what neighbors across OC say about Fortex.</p></div>
   <div class="reviews">{cards}</div>
   <div class="rating-summary">
-    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
-    <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Google</a>
+    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['yelp_rating']}</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
+    <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['google_rating']}</b> on Google</a>
   </div>
   <div class="center" style="margin-top:26px"><a class="btn btn--outline" href="/reviews/">Read more reviews {icon('arrow-right', size=16)}</a></div>
 </div></section>"""
@@ -192,7 +192,7 @@ def render_home():
   <span class="hero-glow"></span>
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow"><span style="color:var(--yellow)">{icon('star', size=15)}</span> Orange County's 5-star appliance repair</p>
+      <p class="eyebrow"><span style="color:var(--yellow)">{icon('star', size=15)}</span> Orange County's top-rated appliance repair</p>
       <h1>Same-Day <span class="accent">Appliance Repair</span> in Orange County</h1>
       <p class="hero-sub">Licensed &amp; insured. Trusted by 2,000+ homeowners across Irvine, Huntington Beach, Anaheim and surrounding cities. Free service call with any repair.</p>
       <div class="hero-cta">
@@ -470,7 +470,7 @@ def render_about():
     <p class="eyebrow">Our story</p>
     <h2>Built on honest, reliable service</h2>
     <p>We started Fortex Appliance Repair to do appliance service the way it should be done. No call-center runaround, no inflated quotes, no mystery fees — just experienced technicians who show up on time, diagnose honestly, and stand behind their work.</p>
-    <p>Today we've completed more than 2,000 repairs across Orange County and earned a 5.0-star reputation on Yelp and Google. We repair every major brand, from everyday Whirlpool and Samsung units to high-end Sub-Zero and Viking built-ins.</p>
+    <p>Today we've completed more than 2,000 repairs across Orange County and earned a 4.9-star reputation on Yelp and Google. We repair every major brand, from everyday Whirlpool and Samsung units to high-end Sub-Zero and Viking built-ins.</p>
     <p>Whether it's a fridge that quit on a Saturday or a dryer that's been slow for weeks, our goal is the same: get your home running again quickly, and earn a customer for life.</p>
   </div>
 </div></section>
@@ -481,7 +481,7 @@ def render_about():
 """
     return "/about/index.html", page(
         f"About Us | {SITE['name']}",
-        "Fortex Appliance Repair is a licensed, insured, 5-star appliance repair company serving Orange County, CA with 2,000+ completed repairs. Honest pricing, warrantied work.",
+        "Fortex Appliance Repair is a licensed, insured, top-rated appliance repair company serving Orange County, CA with 2,000+ completed repairs. Honest pricing, warrantied work.",
         "/about/", body, og_image="tech-portrait",
     )
 
@@ -492,11 +492,11 @@ def render_reviews():
     body = f"""
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Reviews</span></div>
-  <h1>5.0 Stars Across Orange County</h1>
-  <p>We've earned {SITE['yelp_reviews']} five-star reviews on Yelp and {SITE['google_reviews']} more on Google by doing right by our customers — every visit, every time.</p>
+  <h1>Rated 4.9 Across Orange County</h1>
+  <p>We've earned {SITE['yelp_reviews']} reviews on Yelp and {SITE['google_reviews']} more on Google by doing right by our customers — every visit, every time.</p>
   <div class="rating-summary" style="justify-content:flex-start">
-    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
-    <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>5.0</b> on Google</a>
+    <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['yelp_rating']}</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
+    <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['google_rating']}</b> on Google</a>
   </div>
 </div></section>
 <section class="section"><div class="wrap">
@@ -516,7 +516,7 @@ def render_reviews():
     # gone it held nothing the base schema does not already say.
     return "/reviews/index.html", page(
         f"Reviews | {SITE['name']}",
-        f"Read 5-star reviews for Fortex Appliance Repair from homeowners across Orange County. {SITE['yelp_reviews']} five-star Yelp reviews and {SITE['google_reviews']} on Google.",
+        f"Read customer reviews for Fortex Appliance Repair from homeowners across Orange County. {SITE['yelp_reviews']} Yelp reviews and {SITE['google_reviews']} on Google.",
         "/reviews/", body,
     )
 
