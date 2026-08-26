@@ -419,9 +419,10 @@ def review_card(r):
                 f'class="src">{src}</a>') if url else f'<span class="src">{src}</span>'
     if name:
         initials = "".join(p[0] for p in name.split()[:2]).upper()
+        when = f' · {esc(r["date"])}' if r.get("date") else ""
         who = (f'<span class="av">{initials}</span>'
                f'<span><b>{esc(name)}</b><span>{esc(r["city"])} · '
-               f'{src_link}</span></span>')
+               f'{src_link}{when}</span></span>')
     else:
         who = (f'<span class="av av--verified">{icon("check", size=20)}</span>'
                f'<span><b>Verified {src_link} review</b>'

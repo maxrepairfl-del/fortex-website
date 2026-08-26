@@ -410,13 +410,24 @@ SERVICE_AREA_POLYGON = [
 # structured-data penalty. To add more, paste the exact text from the Yelp or
 # Google profile; never paraphrase or reconstruct.
 REVIEWS = [
-    # --- Yelp (verbatim excerpts from the 5.0★ profile) ---
-    {"name": "", "city": "Orange County", "source": "Yelp", "rating": 5, "verified": True,
-     "text": "Maks was very professional, made the repair quickly, and told me to call back if there were any issues. Couldn't ask for more."},
-    {"name": "", "city": "Orange County", "source": "Yelp", "rating": 5, "verified": True,
-     "text": "They came out in the pouring rain at 7 at night to check out my dishwasher — and it wasn't even an emergency. That kind of service is rare."},
-    {"name": "", "city": "Orange County", "source": "Yelp", "rating": 5, "verified": True,
-     "text": "Fast, honest, and tidy. I really appreciate the plastic booties he wears over his shoes. Highly recommend Fortex."},
+    # Short verbatim excerpts from the public Yelp profile, each attributed to
+    # the reviewer as Yelp shows them (first name + initial, their city, date)
+    # and linked back to the profile. Quoting an excerpt with attribution is the
+    # normal way to reuse these; do not paste whole reviews, and never edit the
+    # wording of a quote — each block below is one contiguous run of the
+    # reviewer's own sentences.
+    {"name": "Marcia T.", "city": "Los Angeles", "date": "Feb 2026", "source": "Yelp", "rating": 5,
+     "text": "Ivan came out to fix my washing machine and he was absolutely professional, kind, and extremely knowledgeable. He diagnosed the issue quickly, I could tell he really knew what he was doing. Ivan cleaned up everything very neatly after he was done and was mindful of my hardwood floors."},
+    {"name": "Steve G.", "city": "Huntington Beach", "date": "Aug 2026", "source": "Yelp", "rating": 5,
+     "text": "Maks showed up the same day to diagnose an issue with a dishwasher. He was very honest and upfront about the potential fix and the cost. Came back a few days later to install a new part, and it was done very professionally and efficiently."},
+    {"name": "Gabriela G.", "city": "Huntington Beach", "date": "May 2026", "source": "Yelp", "rating": 5,
+     "text": "I appreciated the communication throughout the process; I received a text about 30 minutes before the technician arrived with an ETA, and once he got there, he called me. Alan was courteous and professional."},
+    {"name": "Megan W.", "city": "Covina", "date": "Aug 2026", "source": "Yelp", "rating": 5,
+     "text": "They were honest and charged for the consult (even though they had bought the other part and spent many hours trying to get it to work). Unfortunately, we got a new washing machine but appreciated their honesty and kindness."},
+    {"name": "Chris R.", "city": "Lake Forest", "date": "Jul 2026", "source": "Yelp", "rating": 5,
+     "text": "Max the technician was just excellent. He was on time and diagnosed and repaired the issue very quickly after a follow up visit. I can't recommend Fortex highly enough!"},
+    {"name": "Sean M.", "city": "Huntington Beach", "date": "Jul 2026", "source": "Yelp", "rating": 5,
+     "text": "Max with Fortex was amazing. Diagnosed the problem within minutes and was able to execute with excellence. I'd highly recommend this business to anyone wanting fast high-quality service."},
 ]
 
 # ---------------------------------------------------------------- home FAQ
