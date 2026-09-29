@@ -253,6 +253,96 @@ def render_services_index():
     )
 
 
+def cta_row(label, sub=""):
+    """A step that follows on from the block just read, rather than a generic button.
+
+    Mobile leads with the call, desktop leads with the form (CSS `order`), and
+    main.js swaps the emphasis outside business hours — nobody should be sent to
+    a phone that will not be answered.
+    """
+    note = f'<p class="cta-inline__sub">{sub}</p>' if sub else ""
+    return f"""<div class="cta-inline reveal">
+  <p class="cta-inline__lead">{label}</p>{note}
+  <div class="cta-inline__btns">
+    <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
+    <a class="btn btn--outline btn--lg cta-book" href="/book/">{icon('calendar', size=20)} Book online</a>
+  </div>
+  <p class="cta-inline__closed">We're closed right now — book online and we'll call you first thing.</p>
+</div>"""
+
+
+def causes_block(s):
+    if not s.get("causes"):
+        return ""
+    rows = "".join(
+        f"<tr><td><strong>{esc(a)}</strong></td><td>{esc(b)}</td><td>{esc(c)}</td></tr>"
+        for a, b, c in s["causes"]
+    )
+    return f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Likely causes</p>
+    <h2>What is usually behind it</h2>
+    <p class="lede">The same symptom can have very different causes, and they cost very different amounts. This is what we are actually looking for.</p></div>
+  <div class="cause-table"><table>
+    <thead><tr><th>What you see</th><th>Usual cause</th><th>What we do</th></tr></thead>
+    <tbody>{rows}</tbody>
+  </table></div>
+</div></section>"""
+
+
+def pricing_block(s):
+    return f"""<section class="section section--surface"><div class="wrap">
+  <div class="split">
+    <div>
+      <p class="eyebrow">What it costs</p>
+      <h2>Free service visit with any repair</h2>
+      <p class="lede" style="margin-top:14px">If you decide not to go ahead, the visit is $80. That is the only number we can give you honestly before we look — the same symptom can be an inexpensive part or an expensive board, and we are not going to guess at your expense.</p>
+      <ul class="aside-list" style="margin-top:22px;gap:14px">
+        <li>{icon('check-circle', size=20)}<span>A licensed technician finds the <strong>actual</strong> cause</span></li>
+        <li>{icon('check-circle', size=20)}<span>You get the <strong>full, all-in price</strong> before anything is touched</span></li>
+        <li>{icon('check-circle', size=20)}<span>Nothing starts until you say yes — and then the visit is <strong>free</strong></span></li>
+        <li>{icon('check-circle', size=20)}<span>90 days on our labor, a full year on OEM parts</span></li>
+      </ul>
+    </div>
+    <div>{cta_row('Find out what is actually wrong.', 'Most repairs are finished in the same visit.')}</div>
+  </div>
+</div></section>"""
+
+
+def maintenance_block(s):
+    if not s.get("maintenance"):
+        return ""
+    cards = "".join(
+        f"""<div class="maint-card reveal">
+  <div class="maint-card__head"><h3>{esc(tier)}</h3><span class="maint-card__price">${price}</span></div>
+  <p>{esc(desc)}</p>
+</div>"""
+        for tier, price, desc in s["maintenance"]
+    )
+    return f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Fixed price</p>
+    <h2>{esc(s['noun'])} maintenance</h2>
+    <p class="lede">Not broken, just tired? Maintenance is a flat price — the same for everyone, booked on its own, no diagnosis needed.</p></div>
+  <div class="maint-grid">{cards}</div>
+  {cta_row('Book maintenance at the price above.')}
+</div></section>"""
+
+
+def types_block(s):
+    if not s.get("types"):
+        return ""
+    cards = "".join(
+        f'<div class="type-card reveal"><h3>{t}</h3><p>{d}</p></div>'
+        for t, d in s["types"]
+    )
+    return f"""<section class="section section--surface"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Every kind</p>
+    <h2>Yes, we work on yours</h2>
+    <p class="lede">Built in, double, part of a range — the awkward ones are the ones we get called for most.</p></div>
+  <div class="type-grid">{cards}</div>
+  {cta_row('Not sure which you have?', 'Text us a photo of the model sticker and we will bring the right part.')}
+</div></section>"""
+
+
 def render_service(s):
     symptoms = "".join(
         f'<li>{icon("check", size=20)}<span>{esc(x)}</span></li>' for x in s["symptoms"]
@@ -284,12 +374,18 @@ def render_service(s):
     <h2>{esc(s['noun'])} problems we fix</h2>
     <p class="lede">Seeing one of these? We diagnose the real cause and fix it right — usually the same or next day.</p></div>
   <ul class="checks">{symptoms}</ul>
+  {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day and next-day appointments across Orange County.')}
 </div></section>
+{causes_block(s)}
+{pricing_block(s)}
+{maintenance_block(s)}
+{types_block(s)}
 {steps_section()}
 {why_split(s['photo'], heading='Why choose Fortex for your repair')}
 <section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(s['noun'])} repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
+  {cta_row('Still not sure?', 'Call and describe it — we will tell you straight whether it is worth fixing.')}
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">More services</p><h2>We fix these too</h2></div>
