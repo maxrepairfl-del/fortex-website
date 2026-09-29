@@ -218,9 +218,19 @@
 
     var map = L.map(el, { scrollWheelZoom: false });
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: "abcd",
+    // Leaflet's default attribution prefix carries a Ukrainian flag emoji, added
+    // upstream in 2022. It is a political statement on a Californian repair
+    // company's coverage map, so the prefix is set explicitly instead.
+    map.attributionControl.setPrefix(
+      '<a href="https://leafletjs.com/">Leaflet</a>'
+    );
+
+    // CARTO's basemap started demanding an API key and began stamping
+    // "API KEY REQUIRED" across every tile. OpenStreetMap's own tiles need no
+    // key; this site's traffic is far below the level their usage policy cares
+    // about, and the required attribution is right here.
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19
     }).addTo(map);
 

@@ -369,8 +369,9 @@ def sms_consent(prefix, source_page):
 def coverage_map():
     """Real slippy map with the service area shaded, built on Leaflet.
 
-    Tiles come from CARTO's light basemap (OpenStreetMap data) — free, no API
-    key and no developer account. Apple's MapKit needs a paid Apple Developer
+    Tiles come straight from OpenStreetMap — no API key and no account. CARTO's
+    basemap was used until it began requiring a key and stamping "API KEY
+    REQUIRED" across every tile. Apple's MapKit needs a paid Apple Developer
     membership, and screenshotting Apple or Google Maps onto a commercial site
     breaks their terms, so neither of those is an option here.
 

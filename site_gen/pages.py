@@ -378,7 +378,6 @@ def render_service(s):
 </div></section>
 {causes_block(s)}
 {pricing_block(s)}
-{maintenance_block(s)}
 {types_block(s)}
 {steps_section()}
 {why_split(s['photo'], heading='Why choose Fortex for your repair')}
