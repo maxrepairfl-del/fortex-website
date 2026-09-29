@@ -41,7 +41,7 @@ SITE = {
     # Google treats a site/GBP mismatch as a negative local signal.
     "hours": "Mon–Fri 9am–6pm · Sat 9am–4pm",  # Sun closed
     "promo": "Free service call with any completed repair",
-    "warranty": "12-month parts / 90-day labor warranty",
+    "warranty": "1-year warranty on OEM parts · 90-day labor",
     "founded": 2016,
     # YouTube "business card" / process video. FIXME: set the 11-char video id
     # (the part after youtu.be/ or watch?v=). Leave "" to hide the video section.
@@ -76,8 +76,8 @@ STEPS = [
      "Call, text, or book online in under a minute. Tell us the appliance and the symptom and we lock in a same-day or next-day window that fits your schedule."),
     ("shield", "Upfront Price",
      "Our licensed technician arrives on time, diagnoses the problem, and gives you an upfront, all-in price. Free service visit with any repair — no hidden fees."),
-    ("award", "12-Month Warranty",
-     "We fix it right using OEM parts whenever available, and back the work with a 12-month parts and 90-day labor warranty. Most repairs are done in a single visit."),
+    ("award", "Warrantied Work",
+     "We fix it right and stand behind it: a full year on original manufacturer (OEM) parts and 90 days on our labor. Most repairs are done in a single visit."),
 ]
 
 # ---------------------------------------------------------------- why fortex
@@ -89,7 +89,7 @@ WHY = [
     ("dollar", "Upfront, honest pricing",
      "A clear all-in quote before any work begins. Free service call with your repair and no surprise add-ons."),
     ("award", "Warrantied repairs",
-     "OEM parts whenever available, and a 12-month parts / 90-day labor warranty on every job."),
+     "A full year on original manufacturer (OEM) parts and 90 days on our labor, on every job."),
     ("truck", "We come to you",
      "Fully stocked vans mean most parts are on board, so we finish the job in one visit whenever possible."),
     ("leaf", "Clean, respectful service",
@@ -328,7 +328,8 @@ _NOUNS = {
     "refrigerator-repair": "Refrigerator", "dishwasher-repair": "Dishwasher",
     "washing-machine-repair": "Washing Machine", "dryer-repair": "Dryer",
     "freezer-repair": "Freezer", "garbage-disposal-repair": "Garbage Disposal",
-    "microwave-repair": "Microwave", "oven-stove-repair": "Oven & Stove",
+    "microwave-repair": "Microwave",
+    "oven-stove-repair": "Oven & Stove",
     "dryer-vent-cleaning": "Dryer Vent", "wine-cooler-repair": "Wine Cooler",
     "commercial-freezer-repair": "Commercial Freezer", "ice-machine-repair": "Ice Machine",
 }
@@ -441,7 +442,7 @@ HOME_FAQ = [
     ("What brands do you repair?",
      "All major brands, including Samsung, LG, Whirlpool, GE, Bosch, Maytag, KitchenAid, Frigidaire, Kenmore, Sub-Zero, Viking, and more — from everyday to high-end and built-in appliances."),
     ("Do you guarantee your work?",
-     "We do. Repairs use OEM parts whenever available and are backed by a 12-month parts and 90-day labor warranty."),
+     "We do. Original manufacturer (OEM) parts carry a full year, and our labor carries 90 days on every repair. We tell you which parts we are fitting before you approve the work."),
     ("Which areas do you serve?",
      "We serve Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda, and surrounding Orange County cities including Newport Beach, Costa Mesa, Tustin, and Lake Forest."),
 ]

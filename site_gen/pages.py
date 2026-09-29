@@ -59,7 +59,7 @@ def home_quote_form():
     bullets = [
         ("bolt", "Same-day &amp; next-day appointments"),
         ("dollar", "Free service call with your repair"),
-        ("award", "12-month parts / 90-day labor warranty"),
+        ("award", "1-year warranty on OEM parts, 90 days on labor"),
     ]
     blist = "".join(f'<li>{icon(ic, size=20)}<span>{t}</span></li>' for ic, t in bullets)
     return f"""<section class="section section--surface" id="quote"><div class="wrap">
@@ -202,7 +202,7 @@ def render_home():
       <ul class="hero-points">
         <li>{icon('check-circle', size=20)}<span>Free service call with repair</span></li>
         <li>{icon('check-circle', size=20)}<span>Certified, insured technicians</span></li>
-        <li>{icon('check-circle', size=20)}<span>12-month warranty</span></li>
+        <li>{icon('check-circle', size=20)}<span>1-year OEM parts warranty</span></li>
       </ul>
     </div>
     <div class="hero-media reveal">
@@ -305,7 +305,7 @@ def render_service(s):
     }
     return f"/services/{s['slug']}/index.html", page(
         f"{s['name']} in Orange County, CA | {SITE['name']}",
-        f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 12-month warranty. Call (949) 478-0089.",
+        f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 1-year OEM parts warranty. Call (949) 478-0089.",
         f"/services/{s['slug']}/", body,
         extra_schema=[svc_schema, faq_schema(faqs)], og_image=s["photo"],
     )
@@ -371,7 +371,7 @@ def render_city(c):
   <div>
     <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <a href="/areas/">Service Areas</a> <span>›</span> <span>{esc(c['name'])}</span></div>
     <h1>Appliance Repair in {esc(c['name'])}, CA</h1>
-    <p>{esc(c['blurb'])} Licensed, insured, and backed by a 12-month warranty.</p>
+    <p>{esc(c['blurb'])} Licensed, insured, and backed by a 1-year warranty on OEM parts.</p>
     <div class="hero-cta">
       <a class="btn btn--primary btn--lg" href="/book/">{icon('calendar', size=20)} Book Online</a>
       <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
@@ -384,7 +384,7 @@ def render_city(c):
   <div class="prose">
     <h2>Your local {esc(c['name'])} appliance repair team</h2>
     <p>When an appliance breaks down in {esc(c['name'])}, you need a technician who can get there fast and fix it right the first time. Fortex Appliance Repair serves homeowners across {esc(c['name'])} — including {esc(c['areas'])} — with same-day and next-day service on every major brand.</p>
-    <p>Every repair includes an honest diagnostic and an upfront, all-in price before any work begins. The service call is free when you approve the repair, and we back our work with a 12-month parts and 90-day labor warranty. Licensed (CA #{SITE['license']}) and fully insured.</p>
+    <p>Every repair includes an honest diagnostic and an upfront, all-in price before any work begins. The service call is free when you approve the repair, and we back our work with a full year on original manufacturer (OEM) parts and 90 days on our labor. Licensed (CA #{SITE['license']}) and fully insured.</p>
   </div>
 </div></section>
 <section class="section section--surface"><div class="wrap">
@@ -444,7 +444,7 @@ def render_how():
 """
     return "/how-it-works/index.html", page(
         f"How It Works | {SITE['name']}",
-        "Easy scheduling, an upfront all-in price before any work, and a 12-month warranty. See exactly how Fortex Appliance Repair works in Orange County. Call (949) 478-0089.",
+        "Easy scheduling, an upfront all-in price before any work, and a 1-year OEM parts warranty. See exactly how Fortex Appliance Repair works in Orange County. Call (949) 478-0089.",
         "/how-it-works/", body, og_image="diagnostic-meter",
     )
 
@@ -584,7 +584,7 @@ def render_book():
           <li>{icon('check-circle', size=20)}<span><strong>Same-day &amp; next-day</strong> appointments across Orange County</span></li>
           <li>{icon('check-circle', size=20)}<span><strong>Free service call</strong> with any completed repair</span></li>
           <li>{icon('check-circle', size=20)}<span><strong>Upfront pricing</strong> — approved before any work begins</span></li>
-          <li>{icon('check-circle', size=20)}<span><strong>12-month parts</strong> / 90-day labor warranty</span></li>
+          <li>{icon('check-circle', size=20)}<span><strong>1-year warranty on OEM parts</strong> / 90-day labor</span></li>
           <li>{icon('check-circle', size=20)}<span>Licensed CA #{SITE['license']} &amp; fully insured</span></li>
         </ul>
       </div>
@@ -681,7 +681,7 @@ def render_terms():
         "<h2>Estimates &amp; pricing</h2>",
         "<p>We provide an upfront, all-in price before any repair work begins. The service-call fee is waived when you approve and complete the repair. You are responsible for the quoted price only after you approve the work.</p>",
         "<h2>Warranty</h2>",
-        "<p>Completed repairs are backed by a 12-month warranty on parts and a 90-day warranty on labor, using OEM parts whenever available. The warranty covers the specific repair performed and does not cover new, unrelated faults or damage caused by misuse.</p>",
+        "<p>Our labor carries a 90-day warranty on every completed repair. Original manufacturer (OEM) parts carry a full year. We tell you which parts are being fitted before you approve the work, using OEM parts whenever available. The warranty covers the specific repair performed and does not cover new, unrelated faults or damage caused by misuse.</p>",
         "<h2>Payment</h2>",
         "<p>Payment is due upon completion of the repair. We accept major credit cards (Visa, Mastercard, American Express, Discover) and other methods as agreed.</p>",
         "<h2>Scheduling &amp; cancellations</h2>",

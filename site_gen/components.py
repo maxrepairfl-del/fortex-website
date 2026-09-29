@@ -286,7 +286,7 @@ def trust_strip():
         ("2,000+ repairs completed", "wrench", None),
         (f"Licensed &amp; insured · #{SITE['license']}", "shield-plain", None),
         ("Same-day service", "bolt", None),
-        ("12-month warranty", "award", None),
+        ("1-year OEM parts warranty", "award", None),
     ]
     out = []
     for label, ic, href in items:
