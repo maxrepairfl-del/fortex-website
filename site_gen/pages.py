@@ -11,7 +11,7 @@ from .data import (
 
 
 # ----------------------------------------------------------- shared fragments
-def steps_section(heading="How it works", sub="Three simple steps from broken to fixed — usually in a single visit."):
+def steps_section(heading="How it works", sub="Three simple steps from broken to fixed, usually in a single visit."):
     cards = ""
     for i, (ic, title, body) in enumerate(STEPS, 1):
         cards += f"""<div class="step reveal">
@@ -29,7 +29,7 @@ def video_section(poster="fridge-branded"):
     vid = SITE.get("video_id", "")
     play = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
     points = [
-        ("clock", "On time, every time — we respect your schedule"),
+        ("clock", "On time, every time. We respect your schedule"),
         ("dollar", "An upfront price before any work begins"),
         ("leaf", "Tidy, booties-on service that leaves no mess"),
     ]
@@ -41,7 +41,7 @@ def video_section(poster="fridge-branded"):
     <div>
       <p class="eyebrow">Watch · 60 seconds</p>
       <h2>See a real Fortex repair, start to finish</h2>
-      <p class="lede" style="margin-top:14px">No mystery and no upsell. Watch exactly how a visit goes — the diagnosis, the fix, and the clean-up — so you know what to expect before we knock on your door.</p>
+      <p class="lede" style="margin-top:14px">No mystery and no upsell. Watch exactly how a visit goes, the diagnosis, the fix, and the clean-up, so you know what to expect before we knock on your door.</p>
       <ul class="aside-list" style="margin-top:22px;gap:14px">{plist}</ul>
       <a class="btn btn--primary" style="margin-top:26px" href="/book/">{icon('calendar', size=18)} Book Your Repair</a>
     </div>
@@ -72,7 +72,7 @@ def home_quote_form():
     </div>
     <form class="form-card" name="quote" method="POST" action="{esc(SITE['form_endpoint'])}" data-booking>
       <input type="hidden" name="_next" value="{esc(SITE['url'])}/book/thank-you/">
-      <input type="hidden" name="_subject" value="New quote request — fortexappliancerepair.com">
+      <input type="hidden" name="_subject" value="New quote request, fortexappliancerepair.com">
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
       <div class="field-row">
         <div class="field"><label for="q-appl">Appliance <span class="req">*</span></label>
@@ -116,7 +116,7 @@ def why_split(photo="tech-portrait", heading="Orange County trusts Fortex"):
 
 
 def services_tiles(heading="What we fix", title="Repair for every major appliance",
-                   sub="From refrigerators to ice machines — tap your appliance to see common problems we fix."):
+                   sub="From refrigerators to ice machines, tap your appliance to see common problems we fix."):
     tiles = ""
     for s in SERVICES:
         tiles += f"""<a class="svc-tile reveal" href="/services/{s['slug']}/">
@@ -158,7 +158,7 @@ def reviews_section(items=None, heading="Reviews"):
     return f"""<section class="section section--surface" id="reviews"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
     <h2>Loved by 2,000+ Orange County homeowners</h2>
-    <p class="lede">Don't take our word for it — here's what neighbors across OC say about Fortex.</p></div>
+    <p class="lede">Don't take our word for it, here's what neighbors across OC say about Fortex.</p></div>
   <div class="reviews">{cards}</div>
   <div class="rating-summary">
     <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['yelp_rating']}</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
@@ -248,7 +248,7 @@ def render_services_index():
 """
     return "/services/index.html", page(
         f"Appliance Repair Services in Orange County | {SITE['name']}",
-        "Refrigerator, washer, dryer, dishwasher, oven, microwave and more — same-day appliance repair across Orange County, CA. Licensed & insured. Call (949) 478-0089.",
+        "Refrigerator, washer, dryer, dishwasher, oven, microwave and more, same-day appliance repair across Orange County, CA. Licensed & insured. Call (949) 478-0089.",
         "/services/", body,
     )
 
@@ -257,7 +257,7 @@ def cta_row(label, sub=""):
     """A step that follows on from the block just read, rather than a generic button.
 
     Mobile leads with the call, desktop leads with the form (CSS `order`), and
-    main.js swaps the emphasis outside business hours — nobody should be sent to
+    main.js swaps the emphasis outside business hours. Nobody should be sent to
     a phone that will not be answered.
     """
     note = f'<p class="cta-inline__sub">{sub}</p>' if sub else ""
@@ -267,7 +267,7 @@ def cta_row(label, sub=""):
     <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
     <a class="btn btn--outline btn--lg cta-book" href="/book/">{icon('calendar', size=20)} Book online</a>
   </div>
-  <p class="cta-inline__closed">We're closed right now — book online and we'll call you first thing.</p>
+  <p class="cta-inline__closed">We're closed right now, book online and we'll call you first thing.</p>
 </div>"""
 
 
@@ -295,11 +295,11 @@ def pricing_block(s):
     <div>
       <p class="eyebrow">What it costs</p>
       <h2>Free service visit with any repair</h2>
-      <p class="lede" style="margin-top:14px">If you decide not to go ahead, the visit is $80. That is the only number we can give you honestly before we look — the same symptom can be an inexpensive part or an expensive board, and we are not going to guess at your expense.</p>
+      <p class="lede" style="margin-top:14px">If you decide not to go ahead, the visit is $80. That is the only number we can give you honestly before we look. The same symptom can be an inexpensive part or an expensive board, and we are not going to guess at your expense.</p>
       <ul class="aside-list" style="margin-top:22px;gap:14px">
         <li>{icon('check-circle', size=20)}<span>A licensed technician finds the <strong>actual</strong> cause</span></li>
         <li>{icon('check-circle', size=20)}<span>You get the <strong>full, all-in price</strong> before anything is touched</span></li>
-        <li>{icon('check-circle', size=20)}<span>Nothing starts until you say yes — and then the visit is <strong>free</strong></span></li>
+        <li>{icon('check-circle', size=20)}<span>Nothing starts until you say yes, and then the visit is <strong>free</strong></span></li>
         <li>{icon('check-circle', size=20)}<span>90 days on our labor, a full year on OEM parts</span></li>
       </ul>
     </div>
@@ -321,7 +321,7 @@ def maintenance_block(s):
     return f"""<section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Fixed price</p>
     <h2>{esc(s['noun'])} maintenance</h2>
-    <p class="lede">Not broken, just tired? Maintenance is a flat price — the same for everyone, booked on its own, no diagnosis needed.</p></div>
+    <p class="lede">Not broken, just tired? Maintenance is a flat price, the same for everyone, booked on its own, no diagnosis needed.</p></div>
   <div class="maint-grid">{cards}</div>
   {cta_row('Book maintenance at the price above.')}
 </div></section>"""
@@ -337,7 +337,7 @@ def types_block(s):
     return f"""<section class="section section--surface"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Every kind</p>
     <h2>Yes, we work on yours</h2>
-    <p class="lede">Built in, double, part of a range — the awkward ones are the ones we get called for most.</p></div>
+    <p class="lede">Built in, double, part of a range. The awkward ones are the ones we get called for most.</p></div>
   <div class="type-grid">{cards}</div>
   {cta_row('Not sure which you have?', 'Text us a photo of the model sticker and we will bring the right part.')}
 </div></section>"""
@@ -372,7 +372,7 @@ def render_service(s):
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Common problems</p>
     <h2>{esc(s['noun'])} problems we fix</h2>
-    <p class="lede">Seeing one of these? We diagnose the real cause and fix it right — usually the same or next day.</p></div>
+    <p class="lede">Seeing one of these? We diagnose the real cause and fix it right, usually the same or next day.</p></div>
   <ul class="checks">{symptoms}</ul>
   {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day and next-day appointments across Orange County.')}
 </div></section>
@@ -384,7 +384,7 @@ def render_service(s):
 <section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(s['noun'])} repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
-  {cta_row('Still not sure?', 'Call and describe it — we will tell you straight whether it is worth fixing.')}
+  {cta_row('Still not sure?', 'Call and describe it. We will tell you straight whether it is worth fixing.')}
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">More services</p><h2>We fix these too</h2></div>
@@ -445,7 +445,7 @@ def render_areas_index():
 """
     return "/areas/index.html", page(
         f"Appliance Repair Service Areas in Orange County | {SITE['name']}",
-        "Fortex provides same-day appliance repair across Orange County — Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda and nearby cities. Call (949) 478-0089.",
+        "Fortex provides same-day appliance repair across Orange County, Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda and nearby cities. Call (949) 478-0089.",
         "/areas/", body,
     )
 
@@ -458,7 +458,7 @@ def render_city(c):
   <p>{esc(s['card'])}</p><span class="more">Learn more {icon('arrow-right', size=16)}</span></a>"""
     faqs = [
         (f"Do you offer same-day appliance repair in {c['name']}?",
-         f"Yes — we schedule same-day and next-day appointments throughout {c['name']} and the surrounding area whenever possible. Call or text early for the best availability."),
+         f"Yes. We schedule same-day and next-day appointments throughout {c['name']} and the surrounding area whenever possible. Call or text early for the best availability."),
         HOME_FAQ[1], HOME_FAQ[3], HOME_FAQ[4],
     ]
     body = f"""
@@ -478,7 +478,7 @@ def render_city(c):
 <section class="section"><div class="wrap">
   <div class="prose">
     <h2>Your local {esc(c['name'])} appliance repair team</h2>
-    <p>When an appliance breaks down in {esc(c['name'])}, you need a technician who can get there fast and fix it right the first time. Fortex Appliance Repair serves homeowners across {esc(c['name'])} — including {esc(c['areas'])} — with same-day and next-day service on every major brand.</p>
+    <p>When an appliance breaks down in {esc(c['name'])}, you need a technician who can get there fast and fix it right the first time. Fortex Appliance Repair serves homeowners across {esc(c['name'])}, including {esc(c['areas'])}, with same-day and next-day service on every major brand.</p>
     <p>Every repair includes an honest diagnostic and an upfront, all-in price before any work begins. The service call is free when you approve the repair, and we back our work with a full year on original manufacturer (OEM) parts and 90 days on our labor. Licensed (CA #{SITE['license']}) and fully insured.</p>
   </div>
 </div></section>
@@ -515,7 +515,7 @@ def render_how():
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>How It Works</span></div>
   <h1>How Fortex Works</h1>
-  <p>Getting a broken appliance fixed should be simple. Here's exactly what to expect from your first call to a fully working appliance — with no surprises along the way.</p>
+  <p>Getting a broken appliance fixed should be simple. Here's exactly what to expect from your first call to a fully working appliance, with no surprises along the way.</p>
 </div></section>
 {steps_section(sub='No call-center runaround and no surprise fees. Just a fast, honest, warrantied repair.')}
 {video_section()}
@@ -526,7 +526,7 @@ def render_how():
       <p class="eyebrow">The diagnostic</p>
       <h2>Free service call with your repair</h2>
       <div class="prose" style="margin-top:18px">
-        <p>Every visit starts with a thorough diagnostic. Your technician inspects the appliance, identifies the true root cause, and explains it in plain language — then gives you a clear, all-in price.</p>
+        <p>Every visit starts with a thorough diagnostic. Your technician inspects the appliance, identifies the true root cause, and explains it in plain language, then gives you a clear, all-in price.</p>
         <p>If you approve the repair, the service call is free. There are no hidden fees and no pressure. Most parts are already on the van, so the majority of repairs are completed in that same visit.</p>
       </div>
     </div>
@@ -564,7 +564,7 @@ def render_about():
   <div class="prose" style="max-width:760px;margin-inline:auto">
     <p class="eyebrow">Our story</p>
     <h2>Built on honest, reliable service</h2>
-    <p>We started Fortex Appliance Repair to do appliance service the way it should be done. No call-center runaround, no inflated quotes, no mystery fees — just experienced technicians who show up on time, diagnose honestly, and stand behind their work.</p>
+    <p>We started Fortex Appliance Repair to do appliance service the way it should be done. No call-center runaround, no inflated quotes, no mystery fees, just experienced technicians who show up on time, diagnose honestly, and stand behind their work.</p>
     <p>Today we've completed more than 2,000 repairs across Orange County and earned a 4.9-star reputation on Yelp and Google. We repair every major brand, from everyday Whirlpool and Samsung units to high-end Sub-Zero and Viking built-ins.</p>
     <p>Whether it's a fridge that quit on a Saturday or a dryer that's been slow for weeks, our goal is the same: get your home running again quickly, and earn a customer for life.</p>
   </div>
@@ -588,7 +588,7 @@ def render_reviews():
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Reviews</span></div>
   <h1>Rated 4.9 Across Orange County</h1>
-  <p>We've earned {SITE['yelp_reviews']} reviews on Yelp and {SITE['google_reviews']} more on Google by doing right by our customers — every visit, every time.</p>
+  <p>We've earned {SITE['yelp_reviews']} reviews on Yelp and {SITE['google_reviews']} more on Google by doing right by our customers. Every visit, every time.</p>
   <div class="rating-summary" style="justify-content:flex-start">
     <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['yelp_rating']}</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
     <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['google_rating']}</b> on Google</a>
@@ -626,14 +626,14 @@ def render_book():
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Book Online</span></div>
   <h1>Book Your Repair</h1>
-  <p>Tell us what's going on and we'll confirm your same-day or next-day appointment. Takes about 60 seconds — or call <a href="{SITE['phone_href']}" style="color:var(--red);font-weight:700">{esc(SITE['phone'])}</a>.</p>
+  <p>Tell us what's going on and we'll confirm your same-day or next-day appointment. Takes about 60 seconds, or call <a href="{SITE['phone_href']}" style="color:var(--red);font-weight:700">{esc(SITE['phone'])}</a>.</p>
 </div></section>
 <section class="section"><div class="wrap">
   <div class="booking">
     <form class="form-card" name="booking" method="POST"
           action="{esc(SITE['form_endpoint'])}" data-booking>
       <input type="hidden" name="_next" value="{esc(SITE['url'])}/book/thank-you/">
-      <input type="hidden" name="_subject" value="New booking request — fortexappliancerepair.com">
+      <input type="hidden" name="_subject" value="New booking request, fortexappliancerepair.com">
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
 
       <div class="field">
@@ -678,7 +678,7 @@ def render_book():
         <ul class="aside-list">
           <li>{icon('check-circle', size=20)}<span><strong>Same-day &amp; next-day</strong> appointments across Orange County</span></li>
           <li>{icon('check-circle', size=20)}<span><strong>Free service call</strong> with any completed repair</span></li>
-          <li>{icon('check-circle', size=20)}<span><strong>Upfront pricing</strong> — approved before any work begins</span></li>
+          <li>{icon('check-circle', size=20)}<span><strong>Upfront pricing</strong>, approved before any work begins</span></li>
           <li>{icon('check-circle', size=20)}<span><strong>1-year warranty on OEM parts</strong> / 90-day labor</span></li>
           <li>{icon('check-circle', size=20)}<span>Licensed CA #{SITE['license']} &amp; fully insured</span></li>
         </ul>
@@ -704,7 +704,7 @@ def render_thankyou():
     body = f"""
 <section class="section" style="padding-block:clamp(60px,10vw,120px)"><div class="wrap center">
   <div class="ic" style="width:84px;height:84px;border-radius:50%;background:var(--red-tint);color:var(--green);display:grid;place-items:center;margin:0 auto 24px">{icon('check-circle', size=48, stroke=2)}</div>
-  <h1>Thank you — request received!</h1>
+  <h1>Thank you, request received!</h1>
   <p class="lede" style="margin:16px auto 0">A Fortex team member will call or text you shortly to confirm your appointment. Need immediate help? Call us now.</p>
   <div class="hero-cta" style="justify-content:center;margin-top:30px">
     <a class="btn btn--primary btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
@@ -740,7 +740,7 @@ def render_privacy():
     blocks = [
         f"<p>Fortex Appliance Repair (“Fortex,” “we,” “us”) respects your privacy. This policy explains what information we collect when you contact us or use this website, and how we use it.</p>",
         "<h2>Information we collect</h2>",
-        "<p>We collect the information you provide when you book a repair, request a quote, call, or text us — such as your name, phone number, email address, service address, and details about your appliance and the problem. We also collect basic, non-identifying website analytics (such as pages visited).</p>",
+        "<p>We collect the information you provide when you book a repair, request a quote, call, or text us, such as your name, phone number, email address, service address, and details about your appliance and the problem. We also collect basic, non-identifying website analytics (such as pages visited).</p>",
         "<h3>Information Collected Through SMS</h3>",
         "<p>When you communicate with us by text message, we may collect your mobile phone number, the content of your messages, photos or other information you send, message timestamps, delivery information, and records related to your consent or opt-out preferences.</p>",
         "<h2>How we use your information</h2>",
@@ -764,7 +764,7 @@ def render_privacy():
         f"<p>Fortex Appliance Repair · Huntington Beach, CA · {esc(p)} · <a href=\"mailto:{esc(e)}\">{esc(e)}</a></p>",
     ]
     return _legal_page("privacy", "Privacy Policy", "Privacy", blocks,
-                       "Fortex Appliance Repair privacy policy — what information we collect and how we use it.")
+                       "Fortex Appliance Repair privacy policy, what information we collect and how we use it.")
 
 
 def render_terms():
@@ -816,7 +816,7 @@ def render_404():
 <section class="section" style="padding-block:clamp(60px,10vw,120px)"><div class="wrap center">
   <p class="eyebrow">404</p>
   <h1>We couldn't find that page</h1>
-  <p class="lede" style="margin:16px auto 0">The page may have moved. Let's get you back on track — or book a repair in 60 seconds.</p>
+  <p class="lede" style="margin:16px auto 0">The page may have moved. Let's get you back on track, or book a repair in 60 seconds.</p>
   <div class="hero-cta" style="justify-content:center;margin-top:30px">
     <a class="btn btn--primary btn--lg" href="/">Back to Home</a>
     <a class="btn btn--outline btn--lg" href="/services/">Browse Services</a>

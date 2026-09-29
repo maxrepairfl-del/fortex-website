@@ -300,7 +300,7 @@ def trust_strip():
 
 
 def cta_band(heading="Ready to get your appliance fixed?",
-             sub="Call now or book online and a licensed Fortex technician will be at your door — often the same day."):
+             sub="Call now or book online and a licensed Fortex technician will be at your door, often the same day."):
     return f"""<section class="section"><div class="wrap">
   <div class="cta-band reveal">
     <h2>{esc(heading)}</h2>
@@ -335,7 +335,7 @@ SMS_CONSENT_TEXT = (
 
 
 def heard_about(prefix):
-    """"How did you hear about us?" — attribution for web leads at zero cost.
+    """"How did you hear about us?", attribution for web leads at zero cost.
 
     Fortex quotes a different service-call fee depending on where the customer
     found them ($60 via Yelp, $80 via Google), and until now nothing on the site
@@ -353,7 +353,7 @@ def heard_about(prefix):
 def sms_consent(prefix, source_page):
     """Optional, unchecked-by-default SMS consent checkbox (A2P 10DLC / RingCentral).
 
-    Must never be `required` and must never carry `checked` — the form has to
+    Must never be `required` and must never carry `checked`, the form has to
     submit fine without it, and a pre-ticked box is not valid consent.
     """
     cid = f"{prefix}sms-consent"
@@ -369,7 +369,7 @@ def sms_consent(prefix, source_page):
 def coverage_map():
     """Real slippy map with the service area shaded, built on Leaflet.
 
-    Tiles come straight from OpenStreetMap — no API key and no account. CARTO's
+    Tiles come straight from OpenStreetMap, no API key and no account. CARTO's
     basemap was used until it began requiring a key and stamping "API KEY
     REQUIRED" across every tile. Apple's MapKit needs a paid Apple Developer
     membership, and screenshotting Apple or Google Maps onto a commercial site
@@ -400,7 +400,7 @@ def coverage_map():
     <noscript><p class="map-fallback">We serve {esc(names)}.</p></noscript>
   </div>
   <p class="map-legend">
-    <span><i class="dot dot--main"></i>Cities we cover in depth — tap a pin for details</span>
+    <span><i class="dot dot--main"></i>Cities we cover in depth, tap a pin for details</span>
     <span><i class="dot dot--near"></i>Also serving nearby</span>
   </p>
 </div>"""
