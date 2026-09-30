@@ -1,4 +1,5 @@
 """Page renderers. Each returns (path, html)."""
+from urllib.parse import quote
 from .components import (
     page, esc, stars, icon, img, trust_strip, cta_band, brand_strip,
     review_card, faq_block, faq_schema, areas_grid, sms_consent, coverage_map,
@@ -253,7 +254,7 @@ def render_services_index():
     )
 
 
-def cta_row(label, sub=""):
+def cta_row(label, sub="", href="/book/"):
     """A step that follows on from the block just read, rather than a generic button.
 
     Mobile leads with the call, desktop leads with the form (CSS `order`), and
@@ -265,7 +266,7 @@ def cta_row(label, sub=""):
   <p class="cta-inline__lead">{label}</p>{note}
   <div class="cta-inline__btns">
     <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
-    <a class="btn btn--outline btn--lg cta-book" href="/book/">{icon('calendar', size=20)} Book online</a>
+    <a class="btn btn--outline btn--lg cta-book" href="{href}">{icon('calendar', size=20)} Request an Appointment</a>
   </div>
   <p class="cta-inline__closed">We're closed right now, book online and we'll call you first thing.</p>
 </div>"""
@@ -339,7 +340,61 @@ def types_block(s):
     <h2>Yes, we work on yours</h2>
     <p class="lede">Built in, double, part of a range. The awkward ones are the ones we get called for most.</p></div>
   <div class="type-grid">{cards}</div>
-  {cta_row('Not sure which you have?', 'Text us a photo of the model sticker and we will bring the right part.')}
+  {cta_row('Not sure which you have?', 'Text us a photo of the model sticker and we will bring the right part.', href='#request')}
+</div></section>"""
+
+
+DIAGNOSTIC_TERMS = ("$80 diagnostic visit. The fee is waived if you proceed with the repair, "
+                    "and you approve the repair price before any work begins.")
+
+
+def service_request_form(s):
+    """Short request form living on the service page itself.
+
+    The appliance is already known from the page, so it is stated rather than
+    asked again. Only name and phone are required: this is a request for a call
+    back, not a booking, and every extra required field costs leads.
+    """
+    appliance = s["noun"]
+    nxt = f"{SITE['url']}/book/thank-you/?for={quote(appliance)}"
+    return f"""<section class="section section--surface" id="request"><div class="wrap">
+  <div class="req-grid">
+    <div>
+      <p class="eyebrow">Request an appointment</p>
+      <h2>Tell us what's wrong and we'll call you back</h2>
+      <p class="lede" style="margin-top:12px">We confirm the time with you by phone, so you are never left guessing about a window. {esc(DIAGNOSTIC_TERMS)}</p>
+      <ul class="aside-list" style="margin-top:20px;gap:13px">
+        <li>{icon('check-circle', size=20)}<span>No account, no full address, no model number needed</span></li>
+        <li>{icon('check-circle', size=20)}<span>Licensed CA #{SITE['license']} and fully insured</span></li>
+        <li>{icon('check-circle', size=20)}<span>1 year on OEM parts, 90 days on labor</span></li>
+      </ul>
+    </div>
+    <form class="form-card" name="request" method="POST" action="{esc(SITE['form_endpoint'])}" data-booking data-lead-form>
+      <input type="hidden" name="_next" value="{esc(nxt)}">
+      <input type="hidden" name="_subject" value="New {esc(appliance.lower())} request - fortexappliancerepair.com">
+      <input type="hidden" name="appliance" value="{esc(appliance)}">
+      <input type="hidden" name="source_page" value="/services/{s['slug']}/">
+      <input type="hidden" name="ad_source" value="" data-ad-source>
+      <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+
+      <p class="req-chip">{icon(s['icon'], size=20)}<span><strong>{esc(appliance)} repair</strong></span>
+        <a href="/book/">Change</a></p>
+
+      <div class="field-row">
+        <div class="field"><label for="rq-name">Your name <span class="req">*</span></label>
+          <input id="rq-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="rq-phone">Phone <span class="req">*</span></label>
+          <input id="rq-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+      </div>
+      <div class="field"><label for="rq-zip">ZIP code <span class="opt">optional</span></label>
+        <input id="rq-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="92646"></div>
+      <div class="field"><label for="rq-issue">What's wrong? <span class="opt">optional</span></label>
+        <input id="rq-issue" name="issue" placeholder="e.g. {esc(s['symptoms'][0])}"></div>
+
+      <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request an Appointment</button>
+      <p class="form-note">We'll call you to confirm availability and your appointment window.</p>
+    </form>
+  </div>
 </div></section>"""
 
 
@@ -360,31 +415,37 @@ def render_service(s):
   <div>
     <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <a href="/services/">Services</a> <span>›</span> <span>{esc(s['short'])}</span></div>
     <h1>{esc(s['name'])} in Orange County</h1>
-    <p>{esc(s['intro'])}</p>
+    <p class="hero-lead">{esc(s.get('hero_sub') or s['intro'])}</p>
     <div class="hero-cta">
-      <a class="btn btn--primary btn--lg" href="/book/">{icon('calendar', size=20)} Book This Repair</a>
-      <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
+      <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
+      <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request an Appointment</a>
     </div>
+    <p class="hero-terms">{icon('dollar', size=18)}<span>{esc(DIAGNOSTIC_TERMS)}</span></p>
+    <p class="hero-avail">Same-day appointments may be available. Call to check.</p>
+    <ul class="hero-proof">
+      <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} {SITE['yelp_rating']} on Yelp</a></li>
+      <li>{icon('shield-plain', size=17)} Licensed CA #{SITE['license']}</li>
+      <li>{icon('award', size=17)} 1 year on OEM parts / 90 days labor</li>
+    </ul>
   </div>
   <div class="media reveal">{img(s['photo'], sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
 </div></section>
-{trust_strip()}
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Common problems</p>
-    <h2>{esc(s['noun'])} problems we fix</h2>
-    <p class="lede">Seeing one of these? We diagnose the real cause and fix it right, usually the same or next day.</p></div>
+    <h2>Common problems we fix</h2>
+    <p class="lede">{esc(s['intro'])}</p></div>
   <ul class="checks">{symptoms}</ul>
-  {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day and next-day appointments across Orange County.')}
+  {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day appointments may be available. Call to check.', href='#request')}
 </div></section>
+{service_request_form(s)}
 {causes_block(s)}
-{pricing_block(s)}
 {types_block(s)}
 {steps_section()}
 {why_split(s['photo'], heading='Why choose Fortex for your repair')}
 <section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(s['noun'])} repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
-  {cta_row('Still not sure?', 'Call and describe it. We will tell you straight whether it is worth fixing.')}
+  {cta_row('Still not sure?', 'Call and describe it. We will tell you straight whether it is worth fixing.', href='#request')}
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">More services</p><h2>We fix these too</h2></div>

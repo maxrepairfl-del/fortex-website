@@ -17,6 +17,44 @@
     if (!open) document.body.classList.add("is-closed");
   } catch (e) { /* leave the default layout */ }
 
+
+  /* ---------- carry the ad source into whatever form gets submitted ----------
+     The click that paid for the visit happens on the landing page, but the form
+     may be submitted several pages later, so the parameters are stashed for the
+     session rather than read off the current URL. */
+  try {
+    var KEY = "fx_ad_source";
+    var qs = new URLSearchParams(window.location.search);
+    var keys = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","gad_source","msclkid"];
+    var found = {};
+    keys.forEach(function (k) { if (qs.get(k)) found[k] = qs.get(k); });
+    if (Object.keys(found).length) {
+      found.landed_on = window.location.pathname;
+      sessionStorage.setItem(KEY, JSON.stringify(found));
+    }
+    var stored = sessionStorage.getItem(KEY);
+    if (!stored && document.referrer && !/fortexappliancerepair\.com/.test(document.referrer)) {
+      stored = JSON.stringify({ referrer: document.referrer, landed_on: window.location.pathname });
+      sessionStorage.setItem(KEY, stored);
+    }
+    if (stored) {
+      Array.prototype.forEach.call(document.querySelectorAll("[data-ad-source]"), function (el) {
+        el.value = stored;
+      });
+    }
+  } catch (e) { /* a missing ad source must never block a submission */ }
+
+
+  /* On a page that carries its own request form, the sticky mobile button and
+     the header CTA should reach it rather than send the visitor to the general
+     booking page and make them pick the appliance a second time. */
+  try {
+    if (document.getElementById("request")) {
+      var mb = document.querySelector(".mobilebar .book");
+      if (mb) mb.setAttribute("href", "#request");
+    }
+  } catch (e) {}
+
   /* ---------- mobile nav ---------- */
   var nav = document.querySelector(".mobile-nav");
   var scrim = document.querySelector(".scrim");
