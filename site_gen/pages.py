@@ -338,7 +338,7 @@ def types_block(s):
     return f"""<section class="section section--surface"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Every kind</p>
     <h2>Yes, we work on yours</h2>
-    <p class="lede">Built in, double, part of a range. The awkward ones are the ones we get called for most.</p></div>
+    <p class="lede">Including the awkward installs other companies would rather not take on.</p></div>
   <div class="type-grid">{cards}</div>
   {cta_row('Not sure which you have?', 'Text us a photo of the model sticker and we will bring the right part.', href='#request')}
 </div></section>"""
@@ -359,16 +359,6 @@ def service_request_form(s):
     nxt = f"{SITE['url']}/book/thank-you/?for={quote(appliance)}"
     return f"""<section class="section section--surface" id="request"><div class="wrap">
   <div class="req-grid">
-    <div>
-      <p class="eyebrow">Request an appointment</p>
-      <h2>Tell us what's wrong and we'll call you back</h2>
-      <p class="lede" style="margin-top:12px">We confirm the time with you by phone, so you are never left guessing about a window. {esc(DIAGNOSTIC_TERMS)}</p>
-      <ul class="aside-list" style="margin-top:20px;gap:13px">
-        <li>{icon('check-circle', size=20)}<span>No account, no full address, no model number needed</span></li>
-        <li>{icon('check-circle', size=20)}<span>Licensed CA #{SITE['license']} and fully insured</span></li>
-        <li>{icon('check-circle', size=20)}<span>1 year on OEM parts, 90 days on labor</span></li>
-      </ul>
-    </div>
     <form class="form-card" name="request" method="POST" action="{esc(SITE['form_endpoint'])}" data-booking data-lead-form>
       <input type="hidden" name="_next" value="{esc(nxt)}">
       <input type="hidden" name="_subject" value="New {esc(appliance.lower())} request - fortexappliancerepair.com">
@@ -379,6 +369,7 @@ def service_request_form(s):
 
       <p class="req-chip">{icon(s['icon'], size=20)}<span><strong>{esc(appliance)} repair</strong></span>
         <a href="/book/">Change</a></p>
+      <p class="req-line">Leave your details. We'll call to confirm your appointment.</p>
 
       <div class="field-row">
         <div class="field"><label for="rq-name">Your name <span class="req">*</span></label>
@@ -386,14 +377,21 @@ def service_request_form(s):
         <div class="field"><label for="rq-phone">Phone <span class="req">*</span></label>
           <input id="rq-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
       </div>
-      <div class="field"><label for="rq-zip">ZIP code <span class="opt">optional</span></label>
-        <input id="rq-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="92646"></div>
-      <div class="field"><label for="rq-issue">What's wrong? <span class="opt">optional</span></label>
-        <input id="rq-issue" name="issue" placeholder="e.g. {esc(s['symptoms'][0])}"></div>
+      <div class="field-row">
+        <div class="field"><label for="rq-zip">ZIP code <span class="opt">optional</span></label>
+          <input id="rq-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="92646"></div>
+        <div class="field"><label for="rq-issue">What's wrong? <span class="opt">optional</span></label>
+          <input id="rq-issue" name="issue" placeholder="e.g. {esc(s['symptoms'][0])}"></div>
+      </div>
 
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request an Appointment</button>
-      <p class="form-note">We'll call you to confirm availability and your appointment window.</p>
+      <p class="form-note">We'll call you to confirm availability and your appointment window. {esc(DIAGNOSTIC_TERMS)}</p>
     </form>
+    <div class="req-aside">
+      <p class="eyebrow">Request an appointment</p>
+      <h2>We call you back to agree a time</h2>
+      <p class="lede" style="margin-top:12px">No account, no full address and no model number needed to get started. Tell us the appliance and how to reach you, and a licensed technician takes it from there.</p>
+    </div>
   </div>
 </div></section>"""
 
@@ -432,8 +430,7 @@ def render_service(s):
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Common problems</p>
-    <h2>Common problems we fix</h2>
-    <p class="lede">{esc(s['intro'])}</p></div>
+    <h2>Common problems we fix</h2></div>
   <ul class="checks">{symptoms}</ul>
   {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day appointments may be available. Call to check.', href='#request')}
 </div></section>
@@ -724,8 +721,8 @@ def render_book():
             <option>This week</option><option>Specific date (note below)</option></select></div>
         <div class="field"><label for="time">Preferred time</label>
           <select id="time" name="preferred_time">
-            <option>Anytime</option><option>Morning (8am–12pm)</option>
-            <option>Afternoon (12–4pm)</option><option>Evening (4–8pm)</option></select></div>
+            <option>Anytime</option><option>Morning (9am–12pm)</option>
+            <option>Afternoon (12–3pm)</option><option>Late afternoon (3–6pm)</option></select></div>
       </div>
       {heard_about('b-')}
       {sms_consent('b-', '/book/')}

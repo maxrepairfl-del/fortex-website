@@ -50,8 +50,20 @@
      booking page and make them pick the appliance a second time. */
   try {
     if (document.getElementById("request")) {
-      var mb = document.querySelector(".mobilebar .book");
-      if (mb) mb.setAttribute("href", "#request");
+      // Every route to booking on a page that already has a form should reach
+      // that form. Otherwise the header, footer and closing band all send the
+      // visitor to the catalogue to choose the appliance a second time.
+      Array.prototype.forEach.call(
+        document.querySelectorAll('a[href="/book/"], a[href$="/book/"]'),
+        function (a) {
+          if (a.closest(".req-chip")) return;   // "Change" must still go there
+          a.setAttribute("href", "#request");
+          var label = a.textContent.trim();
+          if (/^book\s*(online|a service|a repair|this repair)?$/i.test(label)) {
+            a.textContent = "Request Appointment";
+          }
+        }
+      );
     }
   } catch (e) {}
 

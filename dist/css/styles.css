@@ -698,3 +698,13 @@ body.is-closed .cta-inline__closed { display: block; }
 body.is-closed .ty-when { display: none; }
 body.is-closed .ty-when--closed { display: block; }
 .ty-note { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .93rem; color: var(--muted); }
+
+/* one line above the fields, so the form starts where the eye lands */
+.req-line { font-size: .95rem; color: var(--muted); margin-bottom: 18px; }
+.req-aside { align-self: center; }
+@media (max-width: 900px) { .req-aside { display: none; } }
+/* tighter symptom list: eight of these stacked on a phone was a lot of scrolling */
+@media (max-width: 700px) {
+  .checks li { padding: 11px 13px; gap: 9px; }
+  .checks li span { font-size: .93rem; }
+}

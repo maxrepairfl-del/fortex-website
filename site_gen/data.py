@@ -503,7 +503,7 @@ _NOUNS = {
     "washing-machine-repair": "Washing Machine", "dryer-repair": "Dryer",
     "freezer-repair": "Freezer", "garbage-disposal-repair": "Garbage Disposal",
     "microwave-repair": "Microwave",
-    "oven-repair": "Oven", "stove-cooktop-repair": "Cooktop",
+    "oven-repair": "Oven", "stove-cooktop-repair": "Stove / Cooktop",
     "dryer-vent-cleaning": "Dryer Vent", "wine-cooler-repair": "Wine Cooler",
     "commercial-freezer-repair": "Commercial Freezer", "ice-machine-repair": "Ice Machine",
 }
@@ -624,6 +624,7 @@ HOME_FAQ = [
 # choices used by the booking form (label, icon)
 BOOKING_APPLIANCES = [
     ("Refrigerator", "refrigerator"), ("Washer", "washer"), ("Dryer", "dryer"),
-    ("Dishwasher", "dishwasher"), ("Oven / Stove", "oven"), ("Microwave", "microwave"),
+    ("Dishwasher", "dishwasher"), ("Oven", "oven"), ("Stove / Cooktop", "oven"),
+    ("Microwave", "microwave"),
     ("Freezer", "freezer"), ("Garbage Disposal", "disposal"), ("Other", "tools"),
 ]
