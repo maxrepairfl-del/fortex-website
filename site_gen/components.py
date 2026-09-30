@@ -285,7 +285,7 @@ def trust_strip():
         (stars() + f" <span>{SITE['google_rating']} on Google</span>", None, SITE.get("google_url")),
         ("2,000+ repairs completed", "wrench", None),
         (f"Licensed &amp; insured · #{SITE['license']}", "shield-plain", None),
-        ("Same-day service", "bolt", None),
+        ("Same-day service available", "bolt", None),
         ("1-year OEM parts warranty", "award", None),
     ]
     out = []

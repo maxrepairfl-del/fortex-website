@@ -83,7 +83,7 @@ STEPS = [
 # ---------------------------------------------------------------- why fortex
 WHY = [
     ("bolt", "Same-day & next-day service",
-     "Most repairs scheduled the same or next day across Orange County. We know a broken fridge can't wait."),
+     "Most repairs scheduled the same or next day across Orange County. We know a broken appliance can't wait."),
     ("shield-plain", "Licensed & insured",
      f"California license #{SITE['license']} and full liability insurance. A vetted, uniformed technician every time."),
     ("dollar", "Upfront, honest pricing",
@@ -384,7 +384,7 @@ SERVICES = [
         ],
     },
     {
-        "slug": "stove-cooktop-repair", "name": "Stove &amp; Cooktop Repair", "short": "Stoves &amp; Cooktops",
+        "slug": "stove-cooktop-repair", "name": "Stove & Cooktop Repair", "short": "Stoves & Cooktops",
         "icon": "oven", "photo": "oven-1",
         "card": "Burner won't light, element stays cold, or clicking that never stops? We fix it.",
         "intro": "Burners that will not light, elements that stay cold, and igniters that click without end. We repair gas, electric and induction cooktops, plus the burner side of freestanding and slide-in ranges, from every major brand.",
