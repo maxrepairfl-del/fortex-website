@@ -84,6 +84,7 @@ def base_schema():
 
 
 def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
+         book_href="/book/",
          noindex=False):
     canonical = SITE["url"] + path
     og = f'{SITE["url"]}/images/{og_image}-1200.jpg'
@@ -124,13 +125,13 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
 </head>
 <body>
 {promobar()}
-{header(path)}
-{mobile_nav()}
+{header(path, book_href)}
+{mobile_nav(book_href)}
 <main id="main">
 {body}
 </main>
-{footer()}
-{mobilebar()}
+{footer(book_href)}
+{mobilebar(book_href)}
 <script src="{asset("/js/main.js")}" defer></script>
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -184,7 +185,8 @@ def _cur(path, target):
     return ' aria-current="page"' if path.startswith(target) else ""
 
 
-def header(path="/"):
+def header(path="/", book_href="/book/"):
+    book_label = "Request Appointment" if book_href != "/book/" else "Book Online"
     return f"""<header class="site-header">
 <div class="wrap nav">
 {brand()}
@@ -198,14 +200,15 @@ def header(path="/"):
 </nav>
 <div class="nav-cta">
   <a class="nav-phone" href="{SITE['phone_href']}">{icon('phone', size=18)}{esc(SITE['phone'])}</a>
-  <a class="btn btn--primary" href="/book/">Book Online</a>
+  <a class="btn btn--primary" href="{book_href}">{book_label}</a>
 </div>
 <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" data-nav-open>{icon('menu', size=26)}</button>
 </div>
 </header>"""
 
 
-def mobile_nav():
+def mobile_nav(book_href="/book/"):
+    book_label = "Request Appointment" if book_href != "/book/" else "Book Online"
     links = "".join(
         f'<a href="{href}">{label}</a>'
         for href, label in [
@@ -217,20 +220,22 @@ def mobile_nav():
 <aside class="mobile-nav" aria-label="Mobile menu">
   <div class="m-head">{brand()}<button class="nav-toggle" aria-label="Close menu" data-nav-close>{icon('close', size=26)}</button></div>
   {links}
-  <a class="btn btn--primary btn--block" href="/book/" style="margin-top:14px">Book Online</a>
+  <a class="btn btn--primary btn--block" href="{book_href}" style="margin-top:14px">{book_label}</a>
   <a class="btn btn--outline btn--block" href="{SITE['phone_href']}" style="margin-top:10px">{icon('phone', size=18)} {esc(SITE['phone'])}</a>
 </aside>"""
 
 
-def mobilebar():
+def mobilebar(book_href="/book/"):
+    book_label = "Request Appointment" if book_href != "/book/" else "Book Online"
     return f"""<div class="mobilebar">
   <a class="call" href="{SITE['phone_href']}">{icon('phone', size=19)} Call Now</a>
-  <a class="book" href="/book/">{icon('calendar', size=19)} Book Online</a>
+  <a class="book" href="{book_href}">{icon('calendar', size=19)} {book_label}</a>
 </div>"""
 
 
 # ----------------------------------------------------------------- footer
-def footer():
+def footer(book_href="/book/"):
+    book_label = "Request Appointment" if book_href != "/book/" else "Book a Repair"
     svc = "".join(
         f'<li><a href="/services/{s["slug"]}/">{esc(s["short"])}</a></li>' for s in SERVICES[:8]
     )
@@ -263,7 +268,7 @@ def footer():
         <li>{icon('pin', size=18)}<span>Serving {esc(SITE['region'])}</span></li>
         <li>{icon('clock', size=18)}<span>{esc(SITE['hours'])}</span></li>
       </ul>
-      <a class="btn btn--primary" href="/book/" style="margin-top:6px">Book a Repair</a>
+      <a class="btn btn--primary" href="{book_href}" style="margin-top:6px">{book_label}</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -299,14 +304,14 @@ def trust_strip():
     return f'<section class="trust-strip"><div class="wrap">{"".join(out)}</div></section>'
 
 
-def cta_band(heading="Ready to get your appliance fixed?",
+def cta_band(heading="Ready to get your appliance fixed?", book_href="/book/",
              sub="Call now or book online and a licensed Fortex technician will be at your door, often the same day."):
     return f"""<section class="section"><div class="wrap">
   <div class="cta-band reveal">
     <h2>{esc(heading)}</h2>
     <p>{esc(sub)}</p>
     <div class="hero-cta">
-      <a class="btn btn--primary btn--lg" href="/book/">{icon('calendar', size=20)} Book Online</a>
+      <a class="btn btn--primary btn--lg" href="{book_href}">{icon('calendar', size=20)} {"Request Appointment" if book_href != "/book/" else "Book Online"}</a>
       <a class="btn btn--ghost btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
     </div>
   </div>

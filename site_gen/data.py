@@ -248,7 +248,7 @@ SERVICES = [
             ("Is a long drying time actually a problem?",
              "Yes, and not only for your power bill. Restricted airflow makes the dryer overheat, which trips the high-limit thermostat and, over time, kills the heating element. It is also the condition behind most dryer fires."),
             ("Do you clean dryer vents?",
-             "We diagnose whether the venting is the cause of your problem and tell you exactly what is wrong, so you know what needs doing. Ask us at the visit about the cleaning itself."),
+             "Yes, where the run is reachable from both ends: an opening at the dryer and an outside vent hood we can get to. Long runs buried inside walls or ceilings with no outside access are not something we take on, and we will tell you that at the visit rather than charge you to find out."),
             ("My dryer squeals when it turns.",
              "Drum rollers, the idler pulley, or the belt. We replace the worn set rather than a single part, because the rest are the same age and would have you calling us again in a few months."),
             ("The drum isn't turning at all.",

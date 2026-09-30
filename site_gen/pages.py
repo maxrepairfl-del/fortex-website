@@ -476,7 +476,7 @@ def render_service(s):
   <div class="section-head center"><p class="eyebrow">More services</p><h2>We fix these too</h2></div>
   <div class="cards grid-4">{rel_cards}</div>
 </div></section>
-{cta_band(heading=f"Need your {s['noun'].lower()} repaired today?")}
+{cta_band(heading=f"Need your {s['noun'].lower()} repaired today?", book_href="#request")}
 """
     svc_schema = {
         "@context": "https://schema.org", "@type": "Service",
@@ -489,6 +489,7 @@ def render_service(s):
         f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 1-year OEM parts warranty. Call (949) 478-0089.",
         f"/services/{s['slug']}/", body,
         extra_schema=[svc_schema, faq_schema(faqs)], og_image=s["photo"],
+        book_href="#request",
     )
 
 
