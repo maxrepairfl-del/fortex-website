@@ -75,6 +75,21 @@
     fill("[data-ad-params]", stored.ad_params);
   } catch (e) { /* attribution must never block a submission */ }
 
+
+  /* ---------- name the appliance back on the confirmation page ----------
+     Carried on the query string by the form's redirect. Falls back to the
+     generic word rather than printing an empty sentence, and the value is
+     written as text so a crafted URL cannot inject markup. */
+  try {
+    var tyEl = document.querySelector("[data-ty-appliance]");
+    if (tyEl) {
+      var forWhat = new URLSearchParams(window.location.search).get("for");
+      if (forWhat) {
+        tyEl.textContent = forWhat.replace(/[^\w &'/-]/g, "").slice(0, 40).toLowerCase();
+      }
+    }
+  } catch (e) {}
+
   /* ---------- mobile nav ---------- */
   var nav = document.querySelector(".mobile-nav");
   var scrim = document.querySelector(".scrim");
