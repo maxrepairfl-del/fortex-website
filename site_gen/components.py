@@ -99,10 +99,18 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
     # data.py; verification then needs only a rebuild, no DNS change.
     gsc = SITE.get("google_site_verification", "")
     gsc_tag = f'<meta name="google-site-verification" content="{esc(gsc)}">' if gsc else ""
+    # Google Ads tag. Google asks for it right after <head>, once per page.
+    ads = SITE.get("google_ads_id", "")
+    ads_tag = (
+        f'<script async src="https://www.googletagmanager.com/gtag/js?id={esc(ads)}"></script>\n'
+        "<script>window.dataLayer=window.dataLayer||[];"
+        "function gtag(){dataLayer.push(arguments);}"
+        f"gtag('js',new Date());gtag('config','{esc(ads)}');</script>\n"
+    ) if ads else ""
     return f"""<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+{ads_tag}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
