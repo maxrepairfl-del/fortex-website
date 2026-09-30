@@ -681,3 +681,20 @@ body.is-closed .cta-inline__closed { display: block; }
 .req-chip a { margin-left: auto; font-size: .86rem; color: var(--muted); text-decoration: underline; }
 .req-chip a:hover { color: var(--red); }
 .field .opt { font-weight: 500; font-size: .8rem; color: var(--muted); text-transform: none; letter-spacing: 0; }
+
+/* ---------- request received ---------- */
+.ty-card { max-width: 720px; margin-inline: auto; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow); padding: clamp(28px, 4vw, 44px); }
+.ty-ic { width: 76px; height: 76px; border-radius: 50%; background: #e8f7ef; color: var(--green);
+  display: grid; place-items: center; margin-bottom: 22px; }
+.ty-what { font-size: 1.1rem; color: var(--body); margin-top: 10px; }
+.ty-steps { margin-top: 26px; display: flex; flex-direction: column; gap: 16px; }
+.ty-steps li { display: flex; gap: 14px; align-items: flex-start; }
+.ty-steps .n { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--red);
+  color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; font-size: .88rem; }
+.ty-steps span strong { color: var(--ink); }
+.ty-when { display: block; font-style: normal; font-size: .89rem; color: var(--muted); margin-top: 4px; }
+.ty-when--closed { display: none; }
+body.is-closed .ty-when { display: none; }
+body.is-closed .ty-when--closed { display: block; }
+.ty-note { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .93rem; color: var(--muted); }

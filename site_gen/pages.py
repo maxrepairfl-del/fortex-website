@@ -762,21 +762,38 @@ def render_book():
 
 
 def render_thankyou():
+    """Confirms a request was received, not that a visit is booked.
+
+    The appliance comes back on the query string so the page can name it; the
+    step after this is a phone call, and saying otherwise is how a customer
+    ends up expecting a technician nobody scheduled.
+    """
     body = f"""
-<section class="section" style="padding-block:clamp(60px,10vw,120px)"><div class="wrap center">
-  <div class="ic" style="width:84px;height:84px;border-radius:50%;background:var(--red-tint);color:var(--green);display:grid;place-items:center;margin:0 auto 24px">{icon('check-circle', size=48, stroke=2)}</div>
-  <h1>Thank you, request received!</h1>
-  <p class="lede" style="margin:16px auto 0">A Fortex team member will call or text you shortly to confirm your appointment. Need immediate help? Call us now.</p>
-  <div class="hero-cta" style="justify-content:center;margin-top:30px">
-    <a class="btn btn--primary btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
-    <a class="btn btn--outline btn--lg" href="/">Back to Home</a>
+<section class="section" style="padding-block:clamp(52px,8vw,96px)"><div class="wrap">
+  <div class="ty-card">
+    <div class="ty-ic">{icon('check-circle', size=44, stroke=2)}</div>
+    <h1>Request received</h1>
+    <p class="ty-what">We have your <strong data-ty-appliance>appliance</strong> repair request.</p>
+
+    <ol class="ty-steps">
+      <li><span class="n">1</span><span><strong>Done</strong> &mdash; we have your details.</span></li>
+      <li><span class="n">2</span><span><strong>We call you</strong> to confirm availability and agree your appointment window.
+        <em class="ty-when">Usually within business hours: Mon&ndash;Fri 9am&ndash;6pm, Sat 9am&ndash;4pm.</em>
+        <em class="ty-when ty-when--closed">We are closed right now, so this will be first thing on our next working morning.</em></span></li>
+      <li><span class="n">3</span><span><strong>Technician arrives</strong> in the window you agreed, diagnoses the fault and gives you the full price before any work starts.</span></li>
+    </ol>
+
+    <p class="ty-note">Nothing is booked until we have spoken. If you would rather not wait for our call, reach us directly.</p>
+    <div class="hero-cta" style="margin-top:20px">
+      <a class="btn btn--primary btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
+      <a class="btn btn--outline btn--lg" href="{SITE['sms_href']}">{icon('chat', size=20)} Text us</a>
+    </div>
   </div>
 </div></section>
-{reviews_section()}
 """
     return "/book/thank-you/index.html", page(
-        f"Thank You | {SITE['name']}",
-        "Thanks for your appliance repair request. Fortex will confirm your Orange County appointment shortly.",
+        f"Request received | {SITE['name']}",
+        "We have your appliance repair request. A Fortex team member will call to confirm your appointment window.",
         "/book/thank-you/", body, noindex=True,
     )
 
