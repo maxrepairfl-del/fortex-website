@@ -75,6 +75,10 @@ def home_quote_form():
       <input type="hidden" name="_next" value="{esc(SITE['url'])}/book/thank-you/">
       <input type="hidden" name="_subject" value="New quote request, fortexappliancerepair.com">
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
       <div class="field-row">
         <div class="field"><label for="q-appl">Appliance <span class="req">*</span></label>
           <select id="q-appl" name="appliance" required><option value="" disabled selected>Choose…</option>{opts}</select></div>
@@ -153,14 +157,35 @@ def stats_band():
     return f'<section class="section section--tight section--slate"><div class="wrap"><div class="stats">{cells}</div></div></section>'
 
 
+def source_panel():
+    """Shown where quotes used to be: the rating and a way to go and read it.
+
+    Reproducing the review text would be republishing other people's writing
+    from Yelp, which is the thing the roadmap decided against.
+    """
+    cards = [
+        ("Yelp", SITE["yelp_rating"], f"{SITE['yelp_reviews']} reviews", SITE["yelp_url"], "Read them on Yelp"),
+        ("Google", SITE["google_rating"], f"{SITE['google_reviews']} reviews", SITE["google_url"], "Read them on Google"),
+    ]
+    out = ""
+    for name, rating, count, url, label in cards:
+        out += f"""<a class="src-card reveal" href="{url}" target="_blank" rel="noopener nofollow">
+  <span class="src-card__rating">{rating}</span>
+  {stars()}
+  <span class="src-card__where">on {name} · {count}</span>
+  <span class="more">{label} {icon('arrow-right', size=16)}</span>
+</a>"""
+    return f'<div class="src-cards">{out}</div>'
+
+
 def reviews_section(items=None, heading="Reviews"):
-    items = items or REVIEWS[:3]
-    cards = "".join(review_card(r) for r in items)
+    items = items if items is not None else REVIEWS[:3]
+    cards = "".join(review_card(r) for r in items) if items else source_panel()
     return f"""<section class="section section--surface" id="reviews"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
     <h2>Loved by 2,000+ Orange County homeowners</h2>
-    <p class="lede">Don't take our word for it, here's what neighbors across OC say about Fortex.</p></div>
-  <div class="reviews">{cards}</div>
+    <p class="lede">Don't take our word for it. Both profiles are public, so go and read them.</p></div>
+  {cards}
   <div class="rating-summary">
     <a class="rating-pill" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['yelp_rating']}</b> on Yelp · {SITE['yelp_reviews']} reviews</a>
     <a class="rating-pill" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} <b>{SITE['google_rating']}</b> on Google</a>
@@ -364,7 +389,10 @@ def service_request_form(s):
       <input type="hidden" name="_subject" value="New {esc(appliance.lower())} request - fortexappliancerepair.com">
       <input type="hidden" name="appliance" value="{esc(appliance)}">
       <input type="hidden" name="source_page" value="/services/{s['slug']}/">
-      <input type="hidden" name="ad_source" value="" data-ad-source>
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
 
       <p class="req-chip">{icon(s['icon'], size=20)}<span><strong>{esc(appliance)} repair</strong></span>
@@ -641,7 +669,7 @@ def render_about():
 
 # ----------------------------------------------------------------- reviews
 def render_reviews():
-    cards = "".join(review_card(r) for r in REVIEWS)
+    cards = "".join(review_card(r) for r in REVIEWS) if REVIEWS else source_panel()
     body = f"""
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Reviews</span></div>
@@ -653,7 +681,7 @@ def render_reviews():
   </div>
 </div></section>
 <section class="section"><div class="wrap">
-  <div class="reviews">{cards}</div>
+  {cards}
   <div class="center" style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
     <a class="btn btn--outline" href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} Read all {SITE['yelp_reviews']} on Yelp</a>
     <a class="btn btn--outline" href="{SITE['google_url']}" target="_blank" rel="noopener nofollow">{stars()} See our Google reviews</a>
@@ -693,6 +721,10 @@ def render_book():
       <input type="hidden" name="_next" value="{esc(SITE['url'])}/book/thank-you/">
       <input type="hidden" name="_subject" value="New booking request, fortexappliancerepair.com">
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
 
       <div class="field">
         <label>Which appliance needs repair? <span class="req">*</span></label>

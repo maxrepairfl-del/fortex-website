@@ -708,3 +708,14 @@ body.is-closed .ty-when--closed { display: block; }
   .checks li { padding: 11px 13px; gap: 9px; }
   .checks li span { font-size: .93rem; }
 }
+
+/* ---------- rating sources, where quoted reviews used to sit ---------- */
+.src-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 720px; margin-inline: auto; }
+.src-card { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 26px 22px;
+  box-shadow: var(--shadow-sm); transition: transform .16s ease, box-shadow .2s ease; }
+.src-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.src-card__rating { font-family: var(--font-head); font-weight: 800; font-size: 2.6rem; color: var(--ink); line-height: 1; }
+.src-card__where { font-size: .92rem; color: var(--muted); }
+.src-card .more { margin-top: 12px; display: inline-flex; align-items: center; gap: 7px; color: var(--red); font-weight: 700; font-size: .92rem; }
+@media (max-width: 560px) { .src-cards { grid-template-columns: 1fr; } }

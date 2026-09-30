@@ -18,67 +18,62 @@
   } catch (e) { /* leave the default layout */ }
 
 
-  /* ---------- carry the ad source into whatever form gets submitted ----------
-     The click that paid for the visit happens on the landing page, but the form
-     may be submitted several pages later, so the parameters are stashed for the
-     session rather than read off the current URL. */
+  /* ---------- work out where the lead actually came from ----------
+     Classified from the tracking parameters on the click, never from the
+     landing page or the appliance: someone who lands on the oven page from an
+     organic search is not a Google Ads lead, and saying so would make paid
+     spend look better than it is. With no parameters and no referrer the
+     answer is Direct, and anything unrecognised stays Unknown rather than
+     being attributed to a campaign.
+
+     Stashed for the session because the click that paid for the visit happens
+     on the landing page, while the form may be submitted several pages later. */
   try {
-    var KEY = "fx_ad_source";
+    var KEY = "fx_lead_origin";
     var qs = new URLSearchParams(window.location.search);
-    var keys = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","gad_source","msclkid"];
-    var found = {};
-    keys.forEach(function (k) { if (qs.get(k)) found[k] = qs.get(k); });
-    if (Object.keys(found).length) {
-      found.landed_on = window.location.pathname;
-      sessionStorage.setItem(KEY, JSON.stringify(found));
-    }
-    var stored = sessionStorage.getItem(KEY);
-    if (!stored && document.referrer && !/fortexappliancerepair\.com/.test(document.referrer)) {
-      stored = JSON.stringify({ referrer: document.referrer, landed_on: window.location.pathname });
-      sessionStorage.setItem(KEY, stored);
-    }
-    if (stored) {
-      Array.prototype.forEach.call(document.querySelectorAll("[data-ad-source]"), function (el) {
-        el.value = stored;
-      });
-    }
-  } catch (e) { /* a missing ad source must never block a submission */ }
+    var AD_KEYS = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content",
+                   "gclid","gbraid","wbraid","gad_source","msclkid"];
+    var params = {};
+    AD_KEYS.forEach(function (k) { if (qs.get(k)) params[k] = qs.get(k); });
 
-
-  /* On a page that carries its own request form, the sticky mobile button and
-     the header CTA should reach it rather than send the visitor to the general
-     booking page and make them pick the appliance a second time. */
-  try {
-    if (document.getElementById("request")) {
-      // Every route to booking on a page that already has a form should reach
-      // that form. Otherwise the header, footer and closing band all send the
-      // visitor to the catalogue to choose the appliance a second time.
-      Array.prototype.forEach.call(
-        document.querySelectorAll('a[href="/book/"], a[href$="/book/"]'),
-        function (a) {
-          if (a.closest(".req-chip")) return;   // "Change" must still go there
-          a.setAttribute("href", "#request");
-          var label = a.textContent.trim();
-          if (/^book\s*(online|a service|a repair|this repair)?$/i.test(label)) {
-            a.textContent = "Request Appointment";
-          }
-        }
-      );
+    function classify(p, referrer) {
+      var src = (p.utm_source || "").toLowerCase();
+      var med = (p.utm_medium || "").toLowerCase();
+      if (p.gclid || p.gbraid || p.wbraid || (src === "google" && /cpc|ppc|paid/.test(med))) return "Google Ads";
+      if (/chatgpt|openai/.test(src)) return "ChatGPT Ads";
+      if (p.msclkid || (src === "bing" && /cpc|ppc|paid/.test(med))) return "Bing Ads";
+      if (/cpc|ppc|paid/.test(med) && src) return "Paid - " + src;
+      if (src) return "Campaign - " + src;
+      if (!referrer) return "Direct";
+      if (/google\.|bing\.|duckduckgo\.|search\.yahoo\./.test(referrer)) return "Organic Search";
+      if (/yelp\./.test(referrer)) return "Yelp";
+      if (/facebook\.|instagram\./.test(referrer)) return "Social";
+      return "Referral - " + referrer.replace(/^https?:\/\//, "").split("/")[0];
     }
-  } catch (e) {}
 
+    var ref = document.referrer && !/fortexappliancerepair\.com/.test(document.referrer)
+      ? document.referrer : "";
+    var stored = null;
+    try { stored = JSON.parse(sessionStorage.getItem(KEY) || "null"); } catch (e) {}
 
-  /* ---------- name the appliance back on the confirmation page ----------
-     Carried on the query string by the form's redirect. Falls back to the
-     generic word rather than printing an empty sentence, and the value is
-     written as text so a crafted URL cannot inject markup. */
-  try {
-    var tyEl = document.querySelector("[data-ty-appliance]");
-    if (tyEl) {
-      var forWhat = new URLSearchParams(window.location.search).get("for");
-      if (forWhat) tyEl.textContent = forWhat.replace(/[^\w &'/-]/g, "").slice(0, 40).toLowerCase();
+    // the first touch of the session wins; a later internal page must not
+    // overwrite a paid click with "Direct"
+    if (!stored || Object.keys(params).length) {
+      stored = {
+        lead_source: classify(params, ref),
+        landing_page: window.location.pathname,
+        ad_params: Object.keys(params).length ? JSON.stringify(params) : ""
+      };
+      try { sessionStorage.setItem(KEY, JSON.stringify(stored)); } catch (e) {}
     }
-  } catch (e) {}
+
+    var fill = function (sel, val) {
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function (el) { el.value = val; });
+    };
+    fill("[data-lead-source]", stored.lead_source);
+    fill("[data-landing-page]", stored.landing_page);
+    fill("[data-ad-params]", stored.ad_params);
+  } catch (e) { /* attribution must never block a submission */ }
 
   /* ---------- mobile nav ---------- */
   var nav = document.querySelector(".mobile-nav");
