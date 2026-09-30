@@ -75,10 +75,6 @@ def home_quote_form():
       <input type="hidden" name="_next" value="{esc(SITE['url'])}/book/thank-you/">
       <input type="hidden" name="_subject" value="New quote request, fortexappliancerepair.com">
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
-      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
-      <input type="hidden" name="contact_method" value="Website Form">
-      <input type="hidden" name="landing_page" value="" data-landing-page>
-      <input type="hidden" name="ad_params" value="" data-ad-params>
       <div class="field-row">
         <div class="field"><label for="q-appl">Appliance <span class="req">*</span></label>
           <select id="q-appl" name="appliance" required><option value="" disabled selected>Choose…</option>{opts}</select></div>
@@ -95,6 +91,10 @@ def home_quote_form():
         <input id="q-issue" name="issue" placeholder="e.g. Fridge not cooling and making noise" required></div>
       {heard_about('q-')}
       {sms_consent('q-', '/')}
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Get My Free Quote</button>
       <p class="form-note">No obligation. We'll never share your information.</p>
     </form>
@@ -387,12 +387,6 @@ def service_request_form(s):
     <form class="form-card" name="request" method="POST" action="{esc(SITE['form_endpoint'])}" data-booking data-lead-form>
       <input type="hidden" name="_next" value="{esc(nxt)}">
       <input type="hidden" name="_subject" value="New {esc(appliance.lower())} request - fortexappliancerepair.com">
-      <input type="hidden" name="appliance" value="{esc(appliance)}">
-      <input type="hidden" name="source_page" value="/services/{s['slug']}/">
-      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
-      <input type="hidden" name="contact_method" value="Website Form">
-      <input type="hidden" name="landing_page" value="" data-landing-page>
-      <input type="hidden" name="ad_params" value="" data-ad-params>
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
 
       <p class="req-chip">{icon(s['icon'], size=20)}<span><strong>{esc(appliance)} repair</strong></span>
@@ -412,6 +406,12 @@ def service_request_form(s):
           <input id="rq-issue" name="issue" placeholder="e.g. {esc(s['symptoms'][0])}"></div>
       </div>
 
+      <input type="hidden" name="appliance" value="{esc(appliance)}">
+      <input type="hidden" name="source_page" value="/services/{s['slug']}/">
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request an Appointment</button>
       <p class="form-note">We'll call you to confirm availability and your appointment window. {esc(DIAGNOSTIC_TERMS)}</p>
     </form>
@@ -721,10 +721,6 @@ def render_book():
       <input type="hidden" name="_next" value="{esc(SITE['url'])}/book/thank-you/">
       <input type="hidden" name="_subject" value="New booking request, fortexappliancerepair.com">
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
-      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
-      <input type="hidden" name="contact_method" value="Website Form">
-      <input type="hidden" name="landing_page" value="" data-landing-page>
-      <input type="hidden" name="ad_params" value="" data-ad-params>
 
       <div class="field">
         <label>Which appliance needs repair? <span class="req">*</span></label>
@@ -758,6 +754,10 @@ def render_book():
       </div>
       {heard_about('b-')}
       {sms_consent('b-', '/book/')}
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request My Appointment</button>
       <p class="form-note">By submitting you agree to be contacted about your repair. We never share your info.</p>
     </form>
