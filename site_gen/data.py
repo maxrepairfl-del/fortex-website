@@ -367,7 +367,7 @@ SERVICES = [
             ("How much will my oven repair cost?",
              "It depends entirely on which part failed. The same symptom can be an inexpensive igniter or a control board that costs several times more. Guessing before we look would be dishonest. The service call is $80 and it is waived once you approve the repair. The technician finds the real cause and gives you the full, all-in price before touching anything, and you decide then."),
             ("What does the $80 service call cover?",
-             "A licensed technician comes out, diagnoses the actual fault, and gives you a complete price for the fix. If you approve the repair, the $80 is waived. You only pay for the repair itself. If you decide not to go ahead, you pay the $80 and owe nothing further."),
+             "A licensed technician comes out, diagnoses the actual fault, and gives you a complete price for the fix. If you approve the repair, the $80 is waived and you only pay for the repair itself. If you decide not to go ahead, you pay the $80 and owe nothing further. And if it turns out to be something simple, like a tripped breaker or a child lock, we sort it out there and then, covered by the same $80, with nothing extra to pay."),
             ("My oven won't hold the right temperature.",
              "That is almost always a failed bake element, igniter, or temperature sensor. We test each one, replace what actually failed, and verify the calibration against a reference thermometer before we leave."),
             ("Do you repair double ovens?",

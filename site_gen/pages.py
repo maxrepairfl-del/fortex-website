@@ -375,8 +375,8 @@ def types_block(s):
 DIAGNOSTIC_TERMS = (
     "Your diagnostic visit is free with any repair. Otherwise, it's just $80. "
     "Sometimes it's something simple, like an unplugged cord, a tripped breaker, "
-    "a closed water valve, or a child lock left on. We'll take care of it at no "
-    "extra charge."
+    "a closed water valve, or a child lock left on. We'll take care of it right "
+    "there, covered by the $80, with nothing extra to pay."
 )
 # Short form for under the submit button, where the full paragraph crowds out
 # the line about us calling back.
@@ -387,7 +387,7 @@ DIAGNOSTIC_TERMS_HTML = (
     "Your diagnostic visit is <b class=\"free\">FREE</b> with any repair. "
     "Otherwise, it's just $80. Sometimes it's something simple, like an unplugged "
     "cord, a tripped breaker, a closed water valve, or a child lock left on. "
-    "We'll take care of it at no extra charge."
+    "We'll take care of it right there, covered by the $80, with nothing extra to pay."
 )
 
 
