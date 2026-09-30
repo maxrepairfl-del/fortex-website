@@ -181,8 +181,11 @@
   Array.prototype.forEach.call(document.querySelectorAll("[data-booking]"), function (form) {
     form.addEventListener("submit", function (e) {
       // the radio-button form must have an appliance picked
-      var radios = form.querySelectorAll('input[name="appliance"]');
-      if (radios.length && !form.querySelector('input[name="appliance"]:checked')) {
+      // Must match radios only. The service pages carry the appliance in a
+      // hidden input of the same name, which is never :checked, so a looser
+      // selector silently cancelled every submission from those pages.
+      var radios = form.querySelectorAll('input[type="radio"][name="appliance"]');
+      if (radios.length && !form.querySelector('input[type="radio"][name="appliance"]:checked')) {
         e.preventDefault();
         var grid = form.querySelector(".choice-grid");
         if (grid) {
