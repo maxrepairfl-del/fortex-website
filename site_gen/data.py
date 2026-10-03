@@ -26,8 +26,10 @@ SITE = {
     # verification method here, then rebuild and deploy. Verifying this way needs
     # no DNS edit, so the Zoho mail records are never at risk.
     "google_site_verification": "zSfVYjeLCH30q6qbZxdtjg3NBDO1HIQRJ41XYCk3hzY",
-    # Google Ads account tag (gtag.js). Empty string drops the tag from every page.
+    # Google tag (gtag.js): Ads account and GA4 measurement ID share one tag.
+    # Empty strings drop them; both empty drops the tag from every page.
     "google_ads_id": "AW-18485374635",
+    "google_analytics_id": "G-G501HKMCLD",
     # Ratings and counts, checked against the live profiles 2026-08-20. Used in
     # the visible copy on the reviews page and the trust strip; update here and
     # they change everywhere. Yelp slipped to 4.9 after a 1-star on 2026-08-20 —
