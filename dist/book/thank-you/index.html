@@ -97,6 +97,15 @@
     </div>
   </div>
 </div></section>
+<script>
+/* ChatGPT Ads lead conversion. The form only lands here after a successful
+   submit; the session flag keeps a reload of this page from counting twice. */
+(function () {
+  var k = "fx_oai_lead_sent";
+  try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, "1"); } catch (e) {}
+  if (window.oaiq) oaiq("measure", "lead_created", { type: "customer_action" });
+})();
+</script>
 
 </main>
 <footer class="site-footer">
