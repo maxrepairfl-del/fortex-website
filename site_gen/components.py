@@ -110,16 +110,6 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
         + "".join(f"gtag('config','{esc(i)}');" for i in gids)
         + "</script>\n"
     ) if gids else ""
-    # Click-to-call conversion. Google's snippet cancels the click and dials
-    # only after its callback; a beacon lets the dialer open immediately.
-    call_to = SITE.get("google_ads_call_send_to", "")
-    if gids and call_to:
-        ads_tag += (
-            "<script>document.addEventListener('click',function(e){"
-            "var a=e.target.closest&&e.target.closest('a[href^=\"tel:\"]');if(!a)return;"
-            f"gtag('event','conversion',{{send_to:'{esc(call_to)}',value:1.0,currency:'USD',transport_type:'beacon'}});"
-            "},true);</script>\n"
-        )
     # ChatGPT Ads pixel, OpenAI's setup snippet verbatim apart from the ID.
     oai = SITE.get("openai_pixel_id", "")
     if oai:
@@ -130,6 +120,27 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
             "var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}"
             '(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");'
             f'oaiq("init",{{pixelId:"{esc(oai)}",debug:{dbg}}});</script>\n'
+        )
+    # Click-to-call conversions for every ad platform, from one listener.
+    # Google's snippet cancels the click and dials only after its callback;
+    # sending alongside the click lets the dialer open immediately.
+    call_to = SITE.get("google_ads_call_send_to", "")
+    oai_call = SITE.get("openai_call_event", "")
+    calls = []
+    if gids and call_to:
+        calls.append(
+            f"gtag('event','conversion',{{send_to:'{esc(call_to)}',value:1.0,currency:'USD',transport_type:'beacon'}});"
+        )
+    if oai and oai_call:
+        calls.append(
+            f"if(window.oaiq)oaiq('measure','custom',{{type:'custom'}},{{custom_event_name:'{esc(oai_call)}'}});"
+        )
+    if calls:
+        ads_tag += (
+            "<script>document.addEventListener('click',function(e){"
+            "var a=e.target.closest&&e.target.closest('a[href^=\"tel:\"]');if(!a)return;"
+            + "".join(calls)
+            + "},true);</script>\n"
         )
     return f"""<!doctype html>
 <html lang="en">

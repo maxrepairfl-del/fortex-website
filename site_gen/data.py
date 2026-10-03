@@ -37,6 +37,8 @@ SITE = {
     # browser console; switch off once the event stream shows conversions.
     "openai_pixel_id": "YJVHhAoFRAe2LgskcGj3md",
     "openai_pixel_debug": True,
+    # ChatGPT Ads custom conversion fired on every tel: link click.
+    "openai_call_event": "clicktocall",
     # Ratings and counts, checked against the live profiles 2026-08-20. Used in
     # the visible copy on the reviews page and the trust strip; update here and
     # they change everywhere. Yelp slipped to 4.9 after a 1-star on 2026-08-20 —
