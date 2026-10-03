@@ -110,6 +110,17 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
         + "".join(f"gtag('config','{esc(i)}');" for i in gids)
         + "</script>\n"
     ) if gids else ""
+    # ChatGPT Ads pixel, OpenAI's setup snippet verbatim apart from the ID.
+    oai = SITE.get("openai_pixel_id", "")
+    if oai:
+        dbg = "true" if SITE.get("openai_pixel_debug") else "false"
+        ads_tag += (
+            "<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};"
+            "q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;"
+            "var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}"
+            '(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");'
+            f'oaiq("init",{{pixelId:"{esc(oai)}",debug:{dbg}}});</script>\n'
+        )
     return f"""<!doctype html>
 <html lang="en">
 <head>

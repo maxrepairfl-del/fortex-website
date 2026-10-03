@@ -30,6 +30,10 @@ SITE = {
     # Empty strings drop them; both empty drops the tag from every page.
     "google_ads_id": "AW-18485374635",
     "google_analytics_id": "G-G501HKMCLD",
+    # ChatGPT Ads (OpenAI) pixel. Empty string drops it. Debug logs events to the
+    # browser console; switch off once the event stream shows conversions.
+    "openai_pixel_id": "YJVHhAoFRAe2LgskcGj3md",
+    "openai_pixel_debug": True,
     # Ratings and counts, checked against the live profiles 2026-08-20. Used in
     # the visible copy on the reviews page and the trust strip; update here and
     # they change everywhere. Yelp slipped to 4.9 after a 1-star on 2026-08-20 —
