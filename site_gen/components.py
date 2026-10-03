@@ -131,6 +131,12 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
         calls.append(
             f"gtag('event','conversion',{{send_to:'{esc(call_to)}',value:1.0,currency:'USD',transport_type:'beacon'}});"
         )
+    ga = SITE.get("google_analytics_id", "")
+    if ga:
+        # GA4 only (send_to), so Ads never sees a second copy of the call.
+        calls.append(
+            f"gtag('event','click_to_call',{{send_to:'{esc(ga)}',transport_type:'beacon'}});"
+        )
     if oai and oai_call:
         calls.append(
             f"if(window.oaiq)oaiq('measure','custom',{{type:'custom'}},{{custom_event_name:'{esc(oai_call)}'}});"

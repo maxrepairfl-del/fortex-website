@@ -839,12 +839,17 @@ def render_thankyou():
   </div>
 </div></section>
 <script>
-/* ChatGPT Ads lead conversion. The form only lands here after a successful
-   submit; the session flag keeps a reload of this page from counting twice. */
+/* Lead conversions for ChatGPT Ads and GA4. The form only lands here after a
+   successful submit; the session flag keeps a reload from counting twice.
+   Google Ads counts this page view by its own URL rule, so GA4 gets send_to. */
 (function () {{
   var k = "fx_oai_lead_sent";
   try {{ if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, "1"); }} catch (e) {{}}
   if (window.oaiq) oaiq("measure", "lead_created", {{ type: "customer_action" }});
+  var ga = "{esc(SITE.get('google_analytics_id', ''))}";
+  if (ga && window.gtag) gtag("event", "generate_lead", {{
+    send_to: ga, appliance: new URLSearchParams(location.search).get("for") || "unknown"
+  }});
 }})();
 </script>
 """
