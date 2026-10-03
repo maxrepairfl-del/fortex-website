@@ -30,6 +30,9 @@ SITE = {
     # Empty strings drop them; both empty drops the tag from every page.
     "google_ads_id": "AW-18485374635",
     "google_analytics_id": "G-G501HKMCLD",
+    # Google Ads "Click to call" conversion, fired on every tel: link. The form
+    # conversion needs no code: Ads matches the /book/thank-you/ page view.
+    "google_ads_call_send_to": "AW-18485374635/8zkYCMC52o8dEKvdwe5E",
     # ChatGPT Ads (OpenAI) pixel. Empty string drops it. Debug logs events to the
     # browser console; switch off once the event stream shows conversions.
     "openai_pixel_id": "YJVHhAoFRAe2LgskcGj3md",
