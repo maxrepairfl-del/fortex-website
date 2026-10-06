@@ -226,9 +226,10 @@ def render_home():
         <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
       </div>
       <ul class="hero-points">
-        <li>{icon('check-circle', size=20)}<span>Free service call with repair</span></li>
+        <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()}<span>{SITE['yelp_rating']} on Yelp · {SITE['yelp_reviews']} reviews</span></a></li>
+        <li>{icon('check-circle', size=20)}<span>2,000+ repairs completed</span></li>
         <li>{icon('check-circle', size=20)}<span>Licensed &amp; insured</span></li>
-        <li>{icon('check-circle', size=20)}<span>1-year OEM parts warranty</span></li>
+        <li>{icon('check-circle', size=20)}<span>Free service call with repair</span></li>
       </ul>
     </div>
     <div class="hero-media reveal">
@@ -237,7 +238,7 @@ def render_home():
     </div>
   </div>
 </section>
-{trust_strip()}
+{trust_strip(show_count=False)}
 {services_tiles()}
 {video_section()}
 {home_quote_form()}
@@ -470,7 +471,7 @@ def render_service(s):
     <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_LEAD_HTML}</span></p>
     <p class="hero-avail">Same-day appointments may be available. Call to check.</p>
     <ul class="hero-proof">
-      <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} {SITE['yelp_rating']} on Yelp</a></li>
+      <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} {SITE['yelp_rating']} on Yelp · {SITE['yelp_reviews']} reviews</a></li>
       <li>{icon('shield-plain', size=17)} Licensed CA #{SITE['license']}</li>
       <li>{icon('award', size=17)} 1 year on OEM parts / 90 days labor</li>
     </ul>
