@@ -51,7 +51,9 @@ GOOGLE_FONTS = (
 def base_schema():
     return {
         "@context": "https://schema.org",
-        "@type": "HVACBusiness",
+        # HomeAndConstructionBusiness, not HVACBusiness: schema.org has no
+        # appliance-repair type, and HVAC means heating and air conditioning.
+        "@type": "HomeAndConstructionBusiness",
         "@id": SITE["url"] + "/#business",
         "name": SITE["name"],
         "image": SITE["url"] + "/images/fridge-branded-1200.jpg",
@@ -79,7 +81,35 @@ def base_schema():
             {"@type": "OpeningHoursSpecification",
              "dayOfWeek": "Saturday", "opens": "09:00", "closes": "16:00"},
         ],
-        "sameAs": [u for u in [SITE["yelp_url"], SITE.get("google_url")] if u and u != "#"],
+        "sameAs": [u for u in [SITE["yelp_url"], SITE.get("google_maps_url")] if u and u != "#"],
+    }
+
+
+def breadcrumb_schema(path):
+    """BreadcrumbList matching the visible breadcrumb, built from the URL path."""
+    from .data import SERVICES_BY_SLUG, CITIES_BY_SLUG
+    sections = {"services": "Services", "areas": "Service Areas"}
+    parts = [x for x in path.strip("/").split("/") if x]
+    if not parts or path.endswith(".html"):
+        return None
+    items, url = [("Home", SITE["url"] + "/")], SITE["url"]
+    for i, part in enumerate(parts):
+        url += "/" + part
+        if i == 0:
+            name = sections.get(part, part.replace("-", " ").title())
+        elif parts[0] == "services" and part in SERVICES_BY_SLUG:
+            name = SERVICES_BY_SLUG[part]["name"]
+        elif parts[0] == "areas" and part in CITIES_BY_SLUG:
+            name = CITIES_BY_SLUG[part]["name"]
+        else:
+            name = part.replace("-", " ").title()
+        items.append((name, url + "/"))
+    return {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": n, "name": name, "item": u}
+            for n, (name, u) in enumerate(items, 1)
+        ],
     }
 
 
@@ -89,6 +119,9 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
     canonical = SITE["url"] + path
     og = f'{SITE["url"]}/images/{og_image}-1200.jpg'
     schema = [base_schema()]
+    crumbs = None if noindex else breadcrumb_schema(path)
+    if crumbs:
+        schema.append(crumbs)
     if extra_schema:
         schema += extra_schema if isinstance(extra_schema, list) else [extra_schema]
     schema_tag = "".join(

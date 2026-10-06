@@ -63,6 +63,9 @@ SITE = {
     # social — FIXME add real handles
     "yelp_url": "https://www.yelp.com/biz/fortex-appliance-repair-huntington-beach",
     "google_url": "https://share.google/ThxHGuDC4zLfMW4Bm",
+    # Stable Maps URL for the same Business Profile (CID), used in schema sameAs.
+    # The share.google link above is a redirect, fine for people, not for schema.
+    "google_maps_url": "https://maps.google.com/?cid=16977179539346351682",
     "instagram": "",
     "facebook": "",
 }

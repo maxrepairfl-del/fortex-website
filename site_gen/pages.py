@@ -250,9 +250,8 @@ def render_home():
 {home_faq_section()}
 {cta_band()}
 """
-    desc = ("Same-day appliance repair in Orange County, CA. Licensed & insured Fortex technicians "
-            "repair refrigerators, washers, dryers, dishwashers, ovens and more. Free service call with repair. "
-            "Call (949) 478-0089.")
+    desc = ("Same-day appliance repair in Orange County, CA. Licensed & insured technicians for "
+            "fridges, washers, dryers, ovens & more. Call (949) 478-0089.")
     return "/index.html", page(
         f"{SITE['name']} | Same-Day Appliance Repair in Orange County, CA",
         desc, "/", body, extra_schema=faq_schema(HOME_FAQ),
@@ -501,6 +500,12 @@ def render_service(s):
         "serviceType": s["name"], "provider": {"@id": SITE["url"] + "/#business"},
         "areaServed": SITE["region"],
         "name": f"{s['name']} in Orange County",
+        # The one price we publish: the service visit, waived with a repair.
+        "offers": {
+            "@type": "Offer", "price": "80", "priceCurrency": "USD",
+            "name": "Service visit and diagnosis",
+            "description": "Free when you approve the repair; $80 if you decide not to go ahead.",
+        },
     }
     return f"/services/{s['slug']}/index.html", page(
         f"{s['name']} in Orange County, CA | {SITE['name']}",
@@ -608,7 +613,7 @@ def render_city(c):
 """
     return f"/areas/{c['slug']}/index.html", page(
         f"Appliance Repair in {c['name']}, CA | {SITE['name']}",
-        f"Same-day appliance repair in {c['name']}, CA. Licensed & insured Fortex technicians repair refrigerators, washers, dryers, ovens and more. Free service call with repair. Call (949) 478-0089.",
+        f"Same-day appliance repair in {c['name']}, CA. Licensed & insured technicians for fridges, washers, dryers, ovens & more. Call (949) 478-0089.",
         f"/areas/{c['slug']}/", body,
         extra_schema=faq_schema(faqs), og_image=c["photo"],
     )
