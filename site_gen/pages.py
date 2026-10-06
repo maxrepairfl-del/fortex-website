@@ -500,12 +500,6 @@ def render_service(s):
         "serviceType": s["name"], "provider": {"@id": SITE["url"] + "/#business"},
         "areaServed": SITE["region"],
         "name": f"{s['name']} in Orange County",
-        # The one price we publish: the service visit, waived with a repair.
-        "offers": {
-            "@type": "Offer", "price": "80", "priceCurrency": "USD",
-            "name": "Service visit and diagnosis",
-            "description": "Free when you approve the repair; $80 if you decide not to go ahead.",
-        },
     }
     return f"/services/{s['slug']}/index.html", page(
         f"{s['name']} in Orange County, CA | {SITE['name']}",

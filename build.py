@@ -100,21 +100,19 @@ def write_meta_files():
 
 def llms_txt():
     """Plain-text site summary for AI assistants (llmstxt.org), built from data.py."""
-    from site_gen.data import SERVICES, CITIES, NEARBY
+    from site_gen.data import CITIES, NEARBY
     u = SITE["url"]
     lines = [
         f"# {SITE['name']}", "",
         f"> Licensed (CA #{SITE['license']}) and insured appliance repair across {SITE['region']}. "
         "Technicians come to the customer; there is no walk-in shop. "
-        "Service visit is free with an approved repair, $80 otherwise. "
+        "Service visit is waived with any repair. "
         "1-year warranty on OEM parts, 90 days on labor.", "",
         f"- Phone: {SITE['phone']}",
         f"- Hours: {SITE['hours']}",
         f"- Book online: {u}/book/", "",
-        "## Services", "",
+        "## Service areas", "",
     ]
-    lines += [f"- [{s['name']}]({u}/services/{s['slug']}/)" for s in SERVICES]
-    lines += ["", "## Service areas", ""]
     lines += [f"- [{c['name']}, CA]({u}/areas/{c['slug']}/)" for c in CITIES]
     lines += [f"- Also: {', '.join(NEARBY)}", "", "## About", "",
               f"- [How it works]({u}/how-it-works/)", f"- [About]({u}/about/)",
