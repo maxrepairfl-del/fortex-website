@@ -290,7 +290,7 @@ def cta_row(label, sub="", href="/book/"):
   <p class="cta-inline__lead">{label}</p>{note}
   <div class="cta-inline__btns">
     <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
-    <a class="btn btn--outline btn--lg cta-book" href="{href}">{icon('calendar', size=20)} Request an Appointment</a>
+    <a class="btn btn--outline btn--lg cta-book" href="{href}">{icon('calendar', size=20)} Request Appointment</a>
   </div>
   <p class="cta-inline__closed">We're closed right now, book online and we'll call you first thing.</p>
 </div>"""
@@ -434,7 +434,7 @@ def service_request_form(s):
       <input type="hidden" name="contact_method" value="Website Form">
       <input type="hidden" name="landing_page" value="" data-landing-page>
       <input type="hidden" name="ad_params" value="" data-ad-params>
-      <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request an Appointment</button>
+      <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request Appointment</button>
       <p class="form-note">We'll call you to confirm availability and your appointment window. {esc(DIAGNOSTIC_SHORT)}</p>
     </form>
     <div class="req-aside">
@@ -466,7 +466,7 @@ def render_service(s):
     <p class="hero-lead">{esc(s.get('hero_sub') or s['intro'])}</p>
     <div class="hero-cta">
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
-      <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request an Appointment</a>
+      <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
     </div>
     <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_LEAD_HTML}<span class="hero-terms__more"> {DIAGNOSTIC_SIMPLE}</span></span></p>
     <p class="hero-avail">Same-day appointments may be available. Call to check.</p>
