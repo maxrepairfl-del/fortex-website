@@ -468,7 +468,7 @@ def render_service(s):
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
       <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
     </div>
-    <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_LEAD_HTML}<span class="hero-terms__more"> {DIAGNOSTIC_SIMPLE}</span></span></p>
+    <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_LEAD_HTML}</span></p>
     <p class="hero-avail">Same-day appointments may be available. Call to check.</p>
     <ul class="hero-proof">
       <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} {SITE['yelp_rating']} on Yelp</a></li>

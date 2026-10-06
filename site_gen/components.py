@@ -235,8 +235,6 @@ def promobar():
     return (
         '<div class="promobar">'
         f'{icon("shield-plain", size=15)}<span><b>Licensed &amp; Insured</b> · CA Lic #{SITE["license"]}</span>'
-        '<span class="dot hide-sm">•</span>'
-        f'<span class="hide-sm">{esc(SITE["promo"])}</span>'
         '<span class="dot">•</span>'
         f'<a href="{SITE["phone_href"]}">Call {esc(SITE["phone"])}</a>'
         '</div>'
