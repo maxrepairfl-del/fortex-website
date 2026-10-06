@@ -118,7 +118,7 @@ SERVICES = [
     {
         "slug": "refrigerator-repair", "name": "Refrigerator Repair", "short": "Refrigerators",
         "icon": "refrigerator", "photo": "fridge-branded",
-        "hero_sub": 'Fridge not cooling, leaking, or making unusual noises? We diagnose and repair refrigerators, including built-in models.',
+        "hero_sub": 'Fridge not cooling or leaking? We repair all major brands, built-ins included.',
         "card": "Not cooling, leaking, or making noise? We fix all refrigerator types and brands.",
         "intro": "A warm refrigerator spoils food by the hour, which is why it is our most-requested same-day repair. We service French-door, side-by-side, top- and bottom-freezer, and built-in refrigerators from every major brand, diagnosing the real cause instead of swapping parts until something works.",
         "symptoms": [
@@ -295,7 +295,7 @@ SERVICES = [
     {
         "slug": "dryer-repair", "name": "Dryer Repair", "short": "Dryers",
         "icon": "dryer", "photo": "dryer-1",
-        "hero_sub": 'Dryer not heating, not spinning, or taking too long? We repair gas and electric dryers.',
+        "hero_sub": 'Dryer not heating or spinning? We repair gas and electric dryers.',
         "card": "Not heating, taking three cycles to dry, or squealing? We fix gas and electric dryers.",
         "intro": "A dryer that needs three cycles to dry one load is costing you time and power every single wash. We repair gas and electric dryers from every major brand, replacing heating elements, igniters, thermostats, belts, rollers and blower wheels, and finding out whether the fault is the machine or the air it is trying to push.",
         "symptoms": [
@@ -525,7 +525,7 @@ SERVICES = [
     {
         "slug": "oven-repair", "name": "Oven Repair", "short": "Ovens",
         "icon": "oven", "photo": "oven-1",
-        "hero_sub": 'Oven not heating or baking unevenly? We repair gas and electric ovens, including wall ovens and double ovens.',
+        "hero_sub": 'Oven not heating? We repair gas, electric, wall and double ovens.',
         "card": "Not heating, baking unevenly, or won't hold temperature? We repair every oven type.",
         "intro": "An oven that won't hold temperature ruins dinner and every batch after it. We repair gas and electric ovens, freestanding, built-in wall ovens, double ovens, and the oven half of a range, replacing elements, igniters, sensors and control boards, then verifying the calibration before we leave.",
         "symptoms": [

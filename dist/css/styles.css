@@ -558,6 +558,7 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 .mobilebar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 8px; font-family: var(--font-head); font-weight: 700; font-size: .98rem; }
 .mobilebar svg { width: 19px; height: 19px; }
 .mobilebar .call { color: var(--ink); flex: 0 0 auto; padding-inline: 18px; }
+@media (max-width: 340px) { .mobilebar a { gap: 6px; } .mobilebar .call { padding-inline: 10px; } .mobilebar .book { padding-inline: 4px; } }
 .mobilebar .book { background: var(--red); color: #fff; }
 
 /* ---------- video embed (YouTube facade) ---------- */
