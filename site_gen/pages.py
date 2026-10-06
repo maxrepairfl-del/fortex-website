@@ -220,14 +220,14 @@ def render_home():
     <div>
       <p class="eyebrow"><span style="color:var(--yellow)">{icon('star', size=15)}</span> Orange County's top-rated appliance repair</p>
       <h1>Same-Day <span class="accent">Appliance Repair</span> in Orange County</h1>
-      <p class="hero-sub">Serving Huntington Beach, Irvine, Anaheim and all of Orange County for 3 years.</p>
+      <p class="hero-sub">Serving Huntington Beach, Irvine, Anaheim and all of Orange County since 2024.</p>
       <div class="hero-cta">
         <a class="btn btn--primary btn--lg" href="/book/">{icon('calendar', size=20)} Book Online</a>
         <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
       </div>
       <ul class="hero-points">
         <li>{icon('check-circle', size=20)}<span>Free service call with repair</span></li>
-        <li>{icon('check-circle', size=20)}<span>Certified, insured technicians</span></li>
+        <li>{icon('check-circle', size=20)}<span>Licensed, insured technicians</span></li>
         <li>{icon('check-circle', size=20)}<span>1-year OEM parts warranty</span></li>
       </ul>
     </div>
