@@ -227,7 +227,7 @@ def render_home():
       </div>
       <ul class="hero-points">
         <li>{icon('check-circle', size=20)}<span>Free service call with repair</span></li>
-        <li>{icon('check-circle', size=20)}<span>Licensed, insured technicians</span></li>
+        <li>{icon('check-circle', size=20)}<span>Licensed &amp; insured</span></li>
         <li>{icon('check-circle', size=20)}<span>1-year OEM parts warranty</span></li>
       </ul>
     </div>

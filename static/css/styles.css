@@ -592,7 +592,7 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
   .hero-grid, .split, .booking, .page-hero-grid { grid-template-columns: 1fr; }
-  .hero-media { order: -1; }
+  .hero-media { margin-top: 30px; }  /* text and buttons first, photo right after */
   .grid-4 { grid-template-columns: repeat(2,1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
