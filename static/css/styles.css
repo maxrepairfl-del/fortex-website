@@ -664,6 +664,15 @@ body.is-closed .cta-inline__closed { display: block; }
 .hero-terms { display: flex; gap: 10px; align-items: flex-start; margin-top: 20px; padding: 13px 15px;
   background: var(--red-tint); border-radius: var(--r-sm); font-size: .92rem; color: var(--red-ink); max-width: 56ch; }
 .hero-terms svg { flex-shrink: 0; margin-top: 2px; color: var(--red); }
+/* phones: one line of terms in the first screen, the rest in its own block below */
+.simple-fix { display: none; }
+@media (max-width: 560px) {
+  .promobar, .page-hero .breadcrumb, .hero-terms__more { display: none; }
+  .simple-fix { display: block; padding: 22px 0 0; }
+  .simple-fix .wrap > * { max-width: 56ch; }
+  .simple-fix__q { font-family: var(--font-head); font-weight: 800; color: var(--ink); font-size: 1.05rem; }
+  .simple-fix p + p { margin-top: 6px; font-size: .95rem; color: var(--body); }
+}
 .hero-avail { margin-top: 10px; font-size: .9rem; color: var(--muted); }
 .hero-proof { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
 .hero-proof li { display: flex; align-items: center; gap: 7px; font-size: .9rem; font-weight: 600; color: var(--ink); }

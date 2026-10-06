@@ -381,12 +381,17 @@ DIAGNOSTIC_TERMS = (
 # the line about us calling back.
 DIAGNOSTIC_SHORT = "Your diagnostic visit is free with any repair. Otherwise, it's just $80."
 # Same words, emitted as markup so the first screen can shout the one that
-# matters. Emitted raw, so nothing here may come from user input.
-DIAGNOSTIC_TERMS_HTML = (
+# matters. Split in two: phones show only the lead in the first screen and the
+# simple-causes part in its own block just below it. Emitted raw, so nothing
+# here may come from user input.
+DIAGNOSTIC_LEAD_HTML = (
     "Your diagnostic visit is <b class=\"free\">FREE</b> with any repair. "
-    "Otherwise, it's just $80. Sometimes it's something simple, like an unplugged "
-    "cord, a tripped breaker, a closed water valve, or a child lock left on. "
-    "We'll take care of it right there, covered by the $80, with nothing extra to pay."
+    "Otherwise, it's just $80."
+)
+DIAGNOSTIC_SIMPLE = (
+    "Sometimes it's something simple, like an unplugged cord, a tripped breaker, "
+    "a closed water valve, or a child lock left on. We'll take care of it right "
+    "there, covered by the $80, with nothing extra to pay."
 )
 
 
@@ -463,7 +468,7 @@ def render_service(s):
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
       <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request an Appointment</a>
     </div>
-    <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_TERMS_HTML}</span></p>
+    <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_LEAD_HTML}<span class="hero-terms__more"> {DIAGNOSTIC_SIMPLE}</span></span></p>
     <p class="hero-avail">Same-day appointments may be available. Call to check.</p>
     <ul class="hero-proof">
       <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} {SITE['yelp_rating']} on Yelp</a></li>
@@ -472,6 +477,10 @@ def render_service(s):
     </ul>
   </div>
   <div class="media reveal">{img(s['photo'], sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+</div></section>
+<section class="simple-fix"><div class="wrap">
+  <p class="simple-fix__q">What if it's something simple?</p>
+  <p>{esc(DIAGNOSTIC_SIMPLE)}</p>
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Common problems</p>
