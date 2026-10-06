@@ -183,7 +183,7 @@ def reviews_section(items=None, heading="Reviews"):
     cards = "".join(review_card(r) for r in items) if items else source_panel()
     return f"""<section class="section section--surface" id="reviews"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
-    <h2>Loved by 2,000+ Orange County homeowners</h2>
+    <h2>What our customers say</h2>
     <p class="lede">Don't take our word for it. Both profiles are public, so go and read them.</p></div>
   {cards}
   <div class="rating-summary">
@@ -220,7 +220,7 @@ def render_home():
     <div>
       <p class="eyebrow"><span style="color:var(--yellow)">{icon('star', size=15)}</span> Orange County's top-rated appliance repair</p>
       <h1>Same-Day <span class="accent">Appliance Repair</span> in Orange County</h1>
-      <p class="hero-sub">Licensed &amp; insured. Trusted by 2,000+ homeowners across Irvine, Huntington Beach, Anaheim and surrounding cities. Free service call with any repair.</p>
+      <p class="hero-sub">Serving Huntington Beach, Irvine, Anaheim and all of Orange County for 3 years.</p>
       <div class="hero-cta">
         <a class="btn btn--primary btn--lg" href="/book/">{icon('calendar', size=20)} Book Online</a>
         <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
@@ -243,7 +243,6 @@ def render_home():
 {home_quote_form()}
 {steps_section()}
 {why_split('fridge-wide')}
-{stats_band()}
 {reviews_section()}
 {brand_strip()}
 {areas_section()}
