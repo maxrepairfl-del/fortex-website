@@ -52,7 +52,7 @@ SITE = {
     "tagline": "Same-Day Appliance Repair in Orange County",
     # Must stay identical to the hours on Google Business Profile and Yelp —
     # Google treats a site/GBP mismatch as a negative local signal.
-    "hours": "Mon–Fri 9am–6pm · Sat 9am–4pm",  # Sun closed
+    "hours": "Mon–Sat 9am–6pm",  # Sun closed
     "promo": "Free service call with any completed repair",
     "warranty": "1-year warranty on OEM parts · 90-day labor",
     "founded": 2016,

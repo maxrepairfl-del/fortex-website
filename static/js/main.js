@@ -4,16 +4,14 @@
 
 
   /* ---------- business hours: never push an unanswered phone ----------
-     Mon-Fri 9:00-18:00, Sat 9:00-16:00, Sun closed, Pacific — computed in the
+     Mon-Sat 9:00-18:00, Sun closed, Pacific — computed in the
      shop's timezone, not the visitor's, so someone browsing from another state
      still sees the right thing. Fails open: if anything throws, the page keeps
      its default (phone-first) layout rather than telling everyone we're shut. */
   try {
     var la = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
     var day = la.getDay(), hour = la.getHours() + la.getMinutes() / 60;
-    var open = day >= 1 && day <= 5 ? hour >= 9 && hour < 18
-             : day === 6 ? hour >= 9 && hour < 16
-             : false;
+    var open = day >= 1 && day <= 6 && hour >= 9 && hour < 18;
     if (!open) document.body.classList.add("is-closed");
   } catch (e) { /* leave the default layout */ }
 

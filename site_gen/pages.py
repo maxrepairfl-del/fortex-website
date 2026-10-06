@@ -825,7 +825,7 @@ def render_thankyou():
     <ol class="ty-steps">
       <li><span class="n">1</span><span><strong>Done</strong> &mdash; we have your details.</span></li>
       <li><span class="n">2</span><span><strong>We call you</strong> to confirm availability and agree your appointment window.
-        <em class="ty-when">Usually within business hours: Mon&ndash;Fri 9am&ndash;6pm, Sat 9am&ndash;4pm.</em>
+        <em class="ty-when">Usually within business hours: Mon&ndash;Sat 9am&ndash;6pm.</em>
         <em class="ty-when ty-when--closed">We are closed right now, so this will be first thing on our next working morning.</em></span></li>
       <li><span class="n">3</span><span><strong>Technician arrives</strong> in the window you agreed, diagnoses the fault and gives you the full price before any work starts.</span></li>
     </ol>
