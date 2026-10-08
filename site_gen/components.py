@@ -198,6 +198,8 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
 <meta property="og:site_name" content="{esc(SITE['name'])}">
 <meta name="twitter:card" content="summary_large_image">
 {robots}{gsc_tag}
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/img/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">

@@ -90,6 +90,8 @@ def write_meta_files():
         '  "theme_color": "#E11B22",\n'
         '  "icons": [\n'
         '    { "src": "/img/favicon.svg", "type": "image/svg+xml", "sizes": "any" },\n'
+        '    { "src": "/img/favicon-192.png", "type": "image/png", "sizes": "192x192" },\n'
+        '    { "src": "/img/favicon-512.png", "type": "image/png", "sizes": "512x512" },\n'
         '    { "src": "/img/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }\n'
         '  ]\n}\n'
     ))
@@ -121,14 +123,23 @@ def llms_txt():
 
 
 def make_apple_icon():
-    """Rasterize the favicon to a 180x180 PNG via sips, if possible."""
+    """Rasterize the favicon via sips: apple-touch-icon, PNG sizes and /favicon.ico.
+
+    Safari ignores SVG favicons and Google Search asks for a raster icon of at
+    least 48px, so the SVG alone leaves the tab blank there.
+    """
     import subprocess
     svg = os.path.join(STATIC, "img", "favicon.svg")
-    out = os.path.join(DIST, "img", "apple-touch-icon.png")
+    img = os.path.join(DIST, "img")
+    quiet = dict(check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     try:
-        subprocess.run(["sips", "-s", "format", "png", "-z", "180", "180", svg, "--out", out],
-                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return os.path.exists(out)
+        for name, px in [("apple-touch-icon.png", 180), ("favicon-48.png", 48),
+                         ("favicon-192.png", 192), ("favicon-512.png", 512)]:
+            subprocess.run(["sips", "-s", "format", "png", "-z", str(px), str(px), svg,
+                            "--out", os.path.join(img, name)], **quiet)
+        subprocess.run(["sips", "-s", "format", "ico", os.path.join(img, "favicon-48.png"),
+                        "--out", os.path.join(DIST, "favicon.ico")], **quiet)
+        return os.path.exists(os.path.join(DIST, "favicon.ico"))
     except Exception:
         return False
 
