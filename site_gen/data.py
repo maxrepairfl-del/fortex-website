@@ -36,7 +36,7 @@ SITE = {
     # ChatGPT Ads (OpenAI) pixel. Empty string drops it. Debug logs events to the
     # browser console; switch off once the event stream shows conversions.
     "openai_pixel_id": "YJVHhAoFRAe2LgskcGj3md",
-    "openai_pixel_debug": True,
+    "openai_pixel_debug": False,
     # ChatGPT Ads custom conversion fired on every tel: link click.
     "openai_call_event": "clicktocall",
     # Ratings and counts, checked against the live profiles 2026-10-06. Used in
