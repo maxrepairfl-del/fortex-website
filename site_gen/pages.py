@@ -735,6 +735,11 @@ def render_book():
     for label, ic in BOOKING_APPLIANCES:
         appls += f"""<label class="choice">{icon(ic, size=26)}<span>{esc(label)}</span>
   <input type="radio" name="appliance" value="{esc(label)}" required></label>"""
+    # On phones a dropdown replaces the ten tiles so name and phone sit on the
+    # first screen. Both carry name="appliance"; main.js disables whichever is
+    # hidden so only one is validated and submitted. Without JS the select
+    # stays disabled and hidden, and the tiles work as before.
+    sel_opts = "".join(f"<option>{esc(label)}</option>" for label, _ic in BOOKING_APPLIANCES)
     body = f"""
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Book Online</span></div>
@@ -750,8 +755,10 @@ def render_book():
       <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
 
       <div class="field">
-        <label>Which appliance needs repair? <span class="req">*</span></label>
+        <label for="appliance-select">Which appliance needs repair? <span class="req">*</span></label>
         <div class="choice-grid">{appls}</div>
+        <select id="appliance-select" class="choice-select" name="appliance" required disabled data-appliance-select>
+          <option value="" disabled selected>Choose…</option>{sel_opts}</select>
       </div>
       <div class="field-row">
         <div class="field"><label for="name">Your name <span class="req">*</span></label>

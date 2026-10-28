@@ -216,13 +216,39 @@
   }
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-booking]"), function (form) {
+    // Phones get a dropdown instead of the appliance tiles. Whichever control
+    // is hidden is disabled, so it is neither validated nor submitted; a pick
+    // carries over when the width changes (rotation, desktop resize).
+    var applSel = form.querySelector("[data-appliance-select]");
+    if (applSel && window.matchMedia) {
+      var mq = window.matchMedia("(max-width: 560px)");
+      var tiles = form.querySelectorAll('input[type="radio"][name="appliance"]');
+      var syncAppliance = function () {
+        var phone = mq.matches;
+        var picked = phone
+          ? form.querySelector('input[type="radio"][name="appliance"]:checked')
+          : null;
+        if (phone && picked) applSel.value = picked.value;
+        if (!phone && applSel.value) {
+          Array.prototype.forEach.call(tiles, function (t) { t.checked = t.value === applSel.value; });
+        }
+        applSel.disabled = !phone;
+        Array.prototype.forEach.call(tiles, function (t) { t.disabled = phone; });
+        form.classList.toggle("use-select", phone);
+      };
+      syncAppliance();
+      if (mq.addEventListener) mq.addEventListener("change", syncAppliance);
+      else if (mq.addListener) mq.addListener(syncAppliance);
+    }
+
     form.addEventListener("submit", function (e) {
       // the radio-button form must have an appliance picked
       // Must match radios only. The service pages carry the appliance in a
       // hidden input of the same name, which is never :checked, so a looser
       // selector silently cancelled every submission from those pages.
-      var radios = form.querySelectorAll('input[type="radio"][name="appliance"]');
-      if (radios.length && !form.querySelector('input[type="radio"][name="appliance"]:checked')) {
+      // Disabled tiles (phone layout, dropdown in use) are left out.
+      var radios = form.querySelectorAll('input[type="radio"][name="appliance"]:not(:disabled)');
+      if (radios.length && !form.querySelector('input[type="radio"][name="appliance"]:checked:not(:disabled)')) {
         e.preventDefault();
         var grid = form.querySelector(".choice-grid");
         if (grid) {

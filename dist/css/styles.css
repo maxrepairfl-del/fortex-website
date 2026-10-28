@@ -504,6 +504,10 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 .choice:hover { border-color: var(--red); }
 .choice:has(input:checked) { border-color: var(--red); background: var(--red-tint); color: var(--red-ink); }
 .choice:has(input:checked) svg { color: var(--red); }
+/* Phone-width dropdown that stands in for the tiles (toggled by main.js) */
+.choice-select { display: none; }
+.use-select .choice-grid { display: none; }
+.use-select .choice-select { display: block; }
 .form-aside { display: grid; gap: 18px; }
 .aside-card { background: var(--surface); border-radius: var(--r); padding: 24px; }
 .aside-card h3 { font-size: 1.1rem; margin-bottom: 12px; }
