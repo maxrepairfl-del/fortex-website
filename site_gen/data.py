@@ -855,12 +855,137 @@ CITIES = [
     {"slug": "yorba-linda", "name": "Yorba Linda", "photo": "fridge-branded",
      "blurb": "Professional appliance repair in Yorba Linda, same-day and next-day service for every major brand.",
      "areas": "East Lake Village, Travis Ranch, Fairmont, Bryant Ranch and Hidden Hills"},
+    {"slug": "fountain-valley", "name": "Fountain Valley", "photo": "oven-1",
+     "blurb": "In-home appliance repair for Fountain Valley homes in ZIP code 92708.",
+     "areas": "Fountain Valley (92708)"},
 ]
 # Additional cities listed in the footer / areas page (no dedicated page yet)
-NEARBY = ["Newport Beach", "Costa Mesa", "Tustin", "Lake Forest", "Fountain Valley",
+NEARBY = ["Newport Beach", "Costa Mesa", "Tustin", "Lake Forest",
           "Orange", "Garden Grove", "Fullerton", "Mission Viejo", "Laguna Niguel"]
 
 CITIES_BY_SLUG = {c["slug"]: c for c in CITIES}
+
+# ---------------------------------------------------------- city page content
+# Cities listed here get their own copy (render_city_page) instead of the shared
+# city template, which says the same thing for every city with only the name
+# swapped. Copy comes from the owner-approved brief of 2026-10-28. Only claims
+# that hold for the business go here: ZIP codes served, the published $80
+# diagnostic, the parts/labor warranty, the call-to-confirm booking. No local
+# cases yet; a "recent repairs" block waits for confirmed jobs with photos.
+_SVC = {
+    "fridge": ("Refrigerator repair", "/services/refrigerator-repair/"),
+    "freezer": ("Freezer repair", "/services/freezer-repair/"),
+    "washer": ("Washing machine repair", "/services/washing-machine-repair/"),
+    "washer_short": ("Washer repair", "/services/washing-machine-repair/"),
+    "dryer": ("Dryer repair", "/services/dryer-repair/"),
+    "dishwasher": ("Dishwasher repair", "/services/dishwasher-repair/"),
+    "oven": ("Oven repair", "/services/oven-repair/"),
+    "stove": ("Stove and cooktop repair", "/services/stove-cooktop-repair/"),
+}
+_PRICE = ("The diagnostic visit is $80. If you go ahead with the repair, the diagnostic fee "
+          "is waived. After checking the appliance, we explain the findings and give you the "
+          "repair price before work begins.")
+_WARRANTY = ("Completed repairs include a one-year warranty on original manufacturer (OEM) "
+             "parts and 90 days on labor.")
+
+CITY_PAGES = {
+    "huntington-beach": {
+        "title": "Appliance Repair in Huntington Beach, CA | Fortex",
+        "desc": "In-home appliance repair in Huntington Beach. Refrigerators, washers, dryers, ovens and more. Call Fortex at (949) 478-0089 to check availability.",
+        "intro": "A refrigerator that will not cool or a dryer that will not heat can disrupt your whole day. Fortex provides in-home appliance repair in Huntington Beach. Tell us what stopped working and your ZIP code, and we’ll confirm the next available appointment.",
+        "micro": "Same-day appointments may be available. Call to check.",
+        "trust": ["Licensed & insured", "Upfront repair pricing", "Warranty on completed repairs"],
+        "about": ("Appliance repair across Huntington Beach", [
+            "We serve Huntington Beach ZIP codes 92646, 92647, 92648 and 92649. Share your ZIP code when you call or send a request so we can confirm availability for your home.",
+            "Before the visit, tell us the appliance type, brand and what it is doing. A model number, if you have it, can help us prepare. You do not need to diagnose the problem yourself.",
+        ]),
+        "services_h2": "What needs repairing?",
+        "services": [
+            ("refrigerator", "Refrigerators and freezers", "Not cooling, temperature changes, water leaks or ice buildup.", ["fridge", "freezer"]),
+            ("washer", "Washers", "Not draining, not spinning or leaking during a cycle.", ["washer"]),
+            ("dryer", "Dryers", "No heat, unusual noise or a cycle that will not finish.", ["dryer"]),
+            ("dishwasher", "Dishwashers", "Standing water, leaks or dishes coming out dirty.", ["dishwasher"]),
+            ("oven", "Ovens and cooktops", "Uneven heating, an oven that stays cold or burners that will not work.", ["oven", "stove"]),
+        ],
+        "terms": ("Know the price before the repair", [
+            _PRICE,
+            _WARRANTY + " We explain the parts and work included in your repair before you approve it.",
+        ]),
+        "steps_h2": "From request to repair",
+        "steps": [
+            "Tell us the appliance, the problem and your Huntington Beach ZIP code.",
+            "We call to confirm availability and agree on an appointment window.",
+            "The technician diagnoses the problem and gives you a price. You decide whether to proceed.",
+        ],
+        "extra": None,
+        "faq_h2": "Huntington Beach appliance repair questions",
+        "faqs": [
+            ("Can you repair my appliance today?",
+             "Same-day appointments may be available. Call with your ZIP code and appliance details to check the schedule. Submitting the form does not confirm an appointment."),
+            ("Which Huntington Beach ZIP codes do you serve?",
+             "We serve 92646, 92647, 92648 and 92649. Contact us to confirm availability for your home."),
+            ("What if I do not know the model number?",
+             "You can still request service. Tell us the appliance type, brand if known and the symptoms. We can ask for the model number when we call."),
+            ("What happens after I send a request?",
+             "We call you to confirm availability and agree on an appointment window. Nothing is booked until we have spoken."),
+        ],
+        "form_h2": "Request appliance repair in Huntington Beach",
+        "form_lead": "Tell us what needs fixing. We’ll call to confirm availability and your appointment window.",
+        "form_note": "Your appointment is confirmed by phone after we review your request.",
+        "zip_placeholder": "92646",
+        "nearby": ("Need service in Fountain Valley?", "See Fountain Valley appliance repair", "/areas/fountain-valley/"),
+        "photos": ["dryer-branded", "dishwasher-1"],
+    },
+    "fountain-valley": {
+        "title": "Appliance Repair in Fountain Valley, CA | Fortex",
+        "desc": "Appliance repair at your Fountain Valley home. Fridges, washers, dryers, dishwashers and ovens. Call Fortex at (949) 478-0089 to check availability.",
+        "intro": "Washer stopped mid-cycle? Dishwasher leaving water behind? Fortex provides in-home appliance repair in Fountain Valley. Send us the appliance details and your contact number, and we’ll call to discuss the problem and confirm an available appointment.",
+        "micro": "Serving Fountain Valley ZIP code 92708. Availability confirmed by phone.",
+        "trust": ["Licensed & insured", "Diagnostic fee waived with repair", "Parts and labor warranty"],
+        "about": ("Repair help for your Fountain Valley home", [
+            "We serve homes in Fountain Valley ZIP code 92708. When you contact us, let us know which appliance needs attention and whether it is freestanding, stacked or built into cabinetry. If access is tight, mention that when we call to arrange the visit.",
+            "Not sure how to describe the fault? Tell us what you notice: water on the floor, no heat, unusual noise or a cycle that stops early. That is enough to start a service request.",
+        ]),
+        "services_h2": "Kitchen and laundry appliance repair",
+        "services": [
+            ("washer", "Laundry appliances", "We diagnose washers that will not drain or spin and dryers with heating, starting or noise problems.", ["washer_short", "dryer"]),
+            ("dishwasher", "Dishwashers", "Get help with leaks, drainage problems and poor washing results.", ["dishwasher"]),
+            ("refrigerator", "Refrigerators and freezers", "Request a diagnosis for cooling problems, leaks, frost buildup or ice maker issues.", ["fridge", "freezer"]),
+            ("oven", "Cooking appliances", "We diagnose oven heating problems and cooktop faults.", ["oven", "stove"]),
+        ],
+        "terms": ("What to expect from your service visit", [
+            "First, we confirm an appointment window by phone. During the visit, the technician checks the appliance and explains the findings. You receive the repair price before deciding whether to proceed.",
+            "The diagnostic visit is $80, waived when you proceed with the repair. " + _WARRANTY,
+            "Some repairs need a replacement part or a return visit. We explain the next steps after diagnosis rather than promising a completion time before checking the appliance.",
+        ]),
+        "steps_h2": None,
+        "steps": [],
+        "extra": ("Before your appointment", [
+            "Have the brand and model number ready if you can find them. A photo of the model label can help identify the appliance. Let us know about any error code you have seen and whether the fault happens every time or only sometimes.",
+            "Please make the area around the appliance accessible. You do not need to pull out a heavy appliance or take it apart before we arrive.",
+        ]),
+        "faq_h2": "Fountain Valley appliance repair questions",
+        "faqs": [
+            ("Do you serve ZIP code 92708?",
+             "Yes. Contact Fortex with your appliance details to confirm the next available appointment for your home in Fountain Valley."),
+            ("Can I request a same-day visit?",
+             "Same-day appointments may be available. Call to check the schedule; availability depends on the day and the service needed."),
+            ("Does sending a request reserve an appointment?",
+             "No. We call you to confirm availability and agree on an appointment window before the visit is booked."),
+            ("Will I receive a price before work begins?",
+             "Yes. After diagnosing the fault, we explain the repair price for your approval. The diagnostic visit is $80 and is waived when you proceed with the repair."),
+        ],
+        "form_h2": "Request appliance repair in Fountain Valley",
+        "form_lead": "Choose your appliance and leave a number where we can reach you. We’ll call to confirm the details and discuss the next available visit.",
+        "form_note": "No appointment is confirmed until we have spoken with you.",
+        "zip_placeholder": "92708",
+        "nearby": ("Looking for service nearby?", "See Huntington Beach appliance repair", "/areas/huntington-beach/"),
+        "photos": ["oven-1", "washer-1"],
+    },
+}
+for _slug, _p in CITY_PAGES.items():
+    for _row in _p["services"]:
+        _row[3][:] = [_SVC[k] for k in _row[3]]
 
 # Approximate city centres (lat, lon), used to draw the coverage map in
 # components.coverage_map(). Drawn as inline SVG rather than a Google Maps embed:

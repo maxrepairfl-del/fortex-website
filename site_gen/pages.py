@@ -7,7 +7,7 @@ from .components import (
 )
 from .data import (
     SITE, SERVICES, SERVICES_BY_SLUG, CITIES, NEARBY, STEPS, WHY, STATS,
-    REVIEWS, HOME_FAQ, BRANDS, BOOKING_APPLIANCES,
+    REVIEWS, HOME_FAQ, BRANDS, BOOKING_APPLIANCES, CITY_PAGES,
 )
 
 
@@ -563,7 +563,149 @@ def render_areas_index():
     )
 
 
+def city_request_form(c, p):
+    """Short request form for a city page.
+
+    Same Formspree endpoint, lead tracking and submit handling as the service
+    page form (data-booking). The appliance is unknown here, so it is a required
+    dropdown; ZIP and the problem stay optional. city is page context only, not
+    a confirmed customer address.
+    """
+    opts = "".join(f"<option>{esc(label)}</option>" for label, _ic in BOOKING_APPLIANCES)
+    nxt = f"{SITE['url']}/book/thank-you/"
+    return f"""<section class="section section--surface" id="request"><div class="wrap">
+  <div class="req-grid">
+    <form class="form-card" name="request" method="POST" action="{esc(SITE['form_endpoint'])}" data-booking data-lead-form>
+      <input type="hidden" name="_next" value="{esc(nxt)}">
+      <input type="hidden" name="_subject" value="New request from the {esc(c['name'])} page - fortexappliancerepair.com">
+      <p class="hp"><label>Don't fill this out: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+
+      <div class="field"><label for="cr-appl">Appliance <span class="req">*</span></label>
+        <select id="cr-appl" name="appliance" required><option value="" disabled selected>Choose…</option>{opts}</select></div>
+      <div class="field-row">
+        <div class="field"><label for="cr-name">Your name <span class="req">*</span></label>
+          <input id="cr-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="cr-phone">Phone <span class="req">*</span></label>
+          <input id="cr-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="cr-zip">ZIP code <span class="opt">optional</span></label>
+          <input id="cr-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="{esc(p['zip_placeholder'])}"></div>
+        <div class="field"><label for="cr-issue">What's wrong? <span class="opt">optional</span></label>
+          <input id="cr-issue" name="issue" placeholder="e.g. Not cooling, or won't drain"></div>
+      </div>
+
+      <input type="hidden" name="city" value="{esc(c['name'])}">
+      <input type="hidden" name="source_page" value="/areas/{c['slug']}/">
+      <input type="hidden" name="lead_source" value="Unknown" data-lead-source>
+      <input type="hidden" name="contact_method" value="Website Form">
+      <input type="hidden" name="landing_page" value="" data-landing-page>
+      <input type="hidden" name="ad_params" value="" data-ad-params>
+      <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request Appointment</button>
+      <p class="form-note">{esc(p['form_note'])}</p>
+    </form>
+    <div class="req-aside">
+      <p class="eyebrow">Request an appointment</p>
+      <h2>{esc(p['form_h2'])}</h2>
+      <p class="lede" style="margin-top:12px">{esc(p['form_lead'])}</p>
+    </div>
+  </div>
+</div></section>"""
+
+
+def render_city_page(c, p):
+    """City page with its own copy (CITY_PAGES), not the shared template.
+
+    Order follows the brief: the call/request buttons first, then a short
+    area note, what we fix and the terms, then the form, and the longer
+    material (steps, FAQ, reviews, map) below it so a phone visitor reaches
+    the form without scrolling through every SEO block.
+    """
+    def paras(items):
+        return "".join(f"<p>{esc(x)}</p>" for x in items)
+
+    trust = "".join(f"<li>{icon('check-circle', size=17)} {esc(t)}</li>" for t in p["trust"])
+    groups = ""
+    for ic, title, text, links in p["services"]:
+        lk = " · ".join(f'<a href="{href}">{esc(label)}</a>' for label, href in links)
+        groups += f"""<div class="step city-svc reveal">
+  <div class="ic" style="position:static;margin-bottom:12px">{icon(ic, size=24)}</div>
+  <h3 style="margin-top:0">{esc(title)}</h3><p>{esc(text)}</p>
+  <p class="city-links" style="margin-top:10px;font-weight:600">{lk}</p>
+</div>"""
+    steps = ""
+    if p["steps"]:
+        items = "".join(
+            f'<div class="step reveal"><div class="n">{i}</div><p style="margin-top:10px">{esc(t)}</p></div>'
+            for i, t in enumerate(p["steps"], 1)
+        )
+        steps = f"""<section class="section"><div class="wrap">
+  <div class="section-head center"><h2>{esc(p['steps_h2'])}</h2></div>
+  <div class="steps">{items}</div>
+</div></section>"""
+    extra = ""
+    if p["extra"]:
+        h2, items = p["extra"]
+        extra = f"""<section class="section"><div class="wrap">
+  <div class="prose"><h2 style="margin-top:0">{esc(h2)}</h2>{paras(items)}</div>
+</div></section>"""
+    about_h2, about = p["about"]
+    terms_h2, terms = p["terms"]
+    near_q, near_label, near_href = p["nearby"]
+    photo, photo2 = p["photos"]
+    body = f"""
+<section class="page-hero"><div class="wrap page-hero-grid">
+  <div>
+    <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <a href="/areas/">Service Areas</a> <span>›</span> <span>{esc(c['name'])}</span></div>
+    <h1>Appliance Repair in {esc(c['name'])}, CA</h1>
+    <p class="hero-lead">{esc(p['intro'])}</p>
+    <div class="hero-cta">
+      <a class="btn btn--primary btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
+      <a class="btn btn--outline btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call {esc(SITE['phone'])}</a>
+    </div>
+    <p class="hero-avail">{esc(p['micro'])}</p>
+    <ul class="hero-proof">{trust}</ul>
+  </div>
+  <div class="media reveal">{img(photo, sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="split">
+    <div class="prose"><h2 style="margin-top:0">{esc(about_h2)}</h2>{paras(about)}</div>
+    <div class="media city-photo2 reveal">{img(photo2, sizes='(max-width:1000px) 90vw, 460px')}</div>
+  </div>
+</div></section>
+<section class="section section--surface"><div class="wrap">
+  <div class="section-head center"><h2>{esc(p['services_h2'])}</h2></div>
+  <div class="cards {'grid-2' if len(p['services']) % 3 == 1 else 'grid-3'}">{groups}</div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="prose"><h2 style="margin-top:0">{esc(terms_h2)}</h2>{paras(terms)}</div>
+</div></section>
+{city_request_form(c, p)}
+{steps}
+{extra}
+<section class="section section--surface"><div class="wrap">
+  <div class="section-head center"><h2>{esc(p['faq_h2'])}</h2></div>
+  <div style="display:flex;justify-content:center">{faq_block(p['faqs'])}</div>
+</div></section>
+{reviews_section(REVIEWS[:3], heading='What customers say about Fortex')}
+<section class="section"><div class="wrap">
+  <div class="section-head center" style="margin-bottom:32px"><p class="eyebrow">Coverage</p>
+    <h2>Our Orange County service area</h2></div>
+  {coverage_map()}
+  <p class="center" style="margin-top:24px">{esc(near_q)} <a href="{near_href}">{esc(near_label)}</a>.</p>
+</div></section>
+{cta_band(heading=f"Appliance trouble in {c['name']}?", book_href="#request")}
+"""
+    return f"/areas/{c['slug']}/index.html", page(
+        p["title"], p["desc"], f"/areas/{c['slug']}/", body,
+        extra_schema=faq_schema(p["faqs"]), og_image=photo, book_href="#request",
+    )
+
+
 def render_city(c):
+    if c["slug"] in CITY_PAGES:
+        return render_city_page(c, CITY_PAGES[c["slug"]])
     svc = ""
     for s in SERVICES:
         svc += f"""<a class="svc-card reveal" href="/services/{s['slug']}/">

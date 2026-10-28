@@ -757,3 +757,17 @@ body.is-closed .ty-when--closed { display: block; }
 
 /* the word the visitor is looking for */
 .hero-terms .free { font-family: var(--font-head); font-weight: 800; font-size: 1.06em; letter-spacing: .01em; color: var(--red); }
+
+/* ---------- city pages with their own copy (render_city_page) ----------
+   On phones the second photo and roomy cards would push the request form
+   thousands of pixels down; the copy carries the page there. */
+@media (max-width: 1000px) {
+  .city-photo2 { display: none; }
+}
+@media (max-width: 560px) {
+  .city-svc { padding: 18px 18px; }
+  .city-svc .ic { width: 36px; height: 36px; margin-bottom: 8px !important; }
+  .city-svc .ic svg { width: 20px; height: 20px; }
+  .city-svc h3 { font-size: 1rem; }
+  .city-svc p { font-size: .92rem; }
+}
