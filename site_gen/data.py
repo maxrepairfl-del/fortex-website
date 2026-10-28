@@ -43,14 +43,14 @@ SITE = {
     "openai_pixel_debug": False,
     # ChatGPT Ads custom conversion fired on every tel: link click.
     "openai_call_event": "clicktocall",
-    # Ratings and counts, checked against the live profiles 2026-10-06. Used in
+    # Ratings and counts, checked against the live profiles 2026-10-28. Used in
     # the visible copy on the reviews page and the trust strip; update here and
     # they change everywhere. Yelp slipped to 4.9 after a 1-star on 2026-08-20 —
     # never round this up, a published rating has to match the source profile.
     "yelp_rating": "4.9",
-    "yelp_reviews": 124,
-    "google_rating": "5.0",  # 53 of 53 five-star on 2026-10-06
-    "google_reviews": 53,
+    "yelp_reviews": 126,
+    "google_rating": "5.0",  # 5.0 on 56 reviews, 2026-10-28
+    "google_reviews": 56,
     "license": "50759",
     "region": "Orange County, CA",
     "tagline": "Same-Day Appliance Repair in Orange County",
