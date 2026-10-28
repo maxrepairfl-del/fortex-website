@@ -491,7 +491,10 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 .field textarea { resize: vertical; min-height: 96px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .choice-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.choice {
+/* .field .choice: the tiles are <label>s inside .field, and .field label
+   (display:block, margin) would otherwise win and stack the icon off-centre. */
+.choice, .field .choice {
+  margin: 0;
   position: relative; border: 1.5px solid var(--line); border-radius: var(--r-sm);
   padding: 14px 10px; text-align: center; cursor: pointer; transition: .15s; font-size: .86rem; font-weight: 600; color: var(--ink);
   display: flex; flex-direction: column; align-items: center; gap: 7px;
@@ -563,6 +566,13 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
 .mobilebar .call { color: var(--ink); flex: 0 0 auto; padding-inline: 18px; }
 @media (max-width: 340px) { .mobilebar a { gap: 6px; } .mobilebar .call { padding-inline: 10px; } .mobilebar .book { padding-inline: 4px; } }
 .mobilebar .book { background: var(--red); color: #fff; }
+/* While the request form is on screen its own submit button is the action;
+   a second red "Request Appointment" that only scrolls would compete with it. */
+body.form-in-view .mobilebar .book { display: none; }
+body.form-in-view .mobilebar .call { flex: 1; }
+
+/* In-page jumps (#request, #quote) land below the sticky header, not under it. */
+[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 /* ---------- video embed (YouTube facade) ---------- */
 .video-embed { position: relative; max-width: 940px; margin: 0 auto; aspect-ratio: 16/9; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-lg); cursor: pointer; background: #0b1118; }
@@ -617,6 +627,10 @@ a.rating-pill:hover { border-color: var(--red); box-shadow: var(--shadow); trans
   .hero-badge { left: 50%; transform: translateX(-50%); bottom: -22px; }
   .hero-media { margin-bottom: 26px; }
   .promobar .hide-sm { display: none; }
+  /* Compact appliance picker so name and phone are reachable without a long scroll */
+  .choice-grid { grid-template-columns: repeat(3,1fr); gap: 8px; }
+  .choice, .field .choice { padding: 10px 6px; gap: 4px; font-size: .8rem; line-height: 1.2; }
+  .choice svg { width: 20px; height: 20px; }
 }
 
 /* ---------- inline CTA that follows the block just read ---------- */

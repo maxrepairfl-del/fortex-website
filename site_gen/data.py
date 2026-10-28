@@ -30,9 +30,13 @@ SITE = {
     # Empty strings drop them; both empty drops the tag from every page.
     "google_ads_id": "AW-18485374635",
     "google_analytics_id": "G-G501HKMCLD",
-    # Google Ads "Click to call" conversion, fired on every tel: link. The form
-    # conversion needs no code: Ads matches the /book/thank-you/ page view.
+    # Google Ads "Click to call" conversion, fired on every tel: link.
     "google_ads_call_send_to": "AW-18485374635/8zkYCMC52o8dEKvdwe5E",
+    # Google Ads form-lead conversion ("AW-.../label"), fired from the thank-you
+    # page once per lead id with transaction_id. Empty until a website-event
+    # conversion action exists in Ads; until then Ads still counts the old
+    # /book/thank-you/ URL rule, which also counts direct visits to that page.
+    "google_ads_lead_send_to": "",
     # ChatGPT Ads (OpenAI) pixel. Empty string drops it. Debug logs events to the
     # browser console; switch off once the event stream shows conversions.
     "openai_pixel_id": "YJVHhAoFRAe2LgskcGj3md",

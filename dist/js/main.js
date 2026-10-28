@@ -34,15 +34,25 @@
     var params = {};
     AD_KEYS.forEach(function (k) { if (qs.get(k)) params[k] = qs.get(k); });
 
+    // ChatGPT tags its ordinary answer links with utm_source=chatgpt.com and
+    // no medium, so the source alone does not mean an ad was clicked. Only a
+    // paid medium makes it ChatGPT Ads; anything else from an assistant is
+    // AI Organic.
+    var AI_SRC = /chatgpt|openai|perplexity|gemini|copilot|claude/;
+    var AI_REF = /chatgpt\.com|chat\.openai\.com|perplexity\.ai|gemini\.google\.com|copilot\.microsoft\.com|claude\.ai/;
+
     function classify(p, referrer) {
       var src = (p.utm_source || "").toLowerCase();
       var med = (p.utm_medium || "").toLowerCase();
-      if (p.gclid || p.gbraid || p.wbraid || (src === "google" && /cpc|ppc|paid/.test(med))) return "Google Ads";
-      if (/chatgpt|openai/.test(src)) return "ChatGPT Ads";
-      if (p.msclkid || (src === "bing" && /cpc|ppc|paid/.test(med))) return "Bing Ads";
-      if (/cpc|ppc|paid/.test(med) && src) return "Paid - " + src;
+      var paid = /cpc|ppc|paid/.test(med);
+      if (p.gclid || p.gbraid || p.wbraid || (src === "google" && paid)) return "Google Ads";
+      if (/chatgpt|openai/.test(src) && paid) return "ChatGPT Ads";
+      if (AI_SRC.test(src)) return "AI Organic";
+      if (p.msclkid || (src === "bing" && paid)) return "Bing Ads";
+      if (paid && src) return "Paid - " + src;
       if (src) return "Campaign - " + src;
       if (!referrer) return "Direct";
+      if (AI_REF.test(referrer)) return "AI Organic";
       if (/google\.|bing\.|duckduckgo\.|search\.yahoo\./.test(referrer)) return "Organic Search";
       if (/yelp\./.test(referrer)) return "Yelp";
       if (/facebook\.|instagram\./.test(referrer)) return "Social";
@@ -85,6 +95,20 @@
       if (forWhat) {
         tyEl.textContent = forWhat.replace(/[^\w &'/-]/g, "").slice(0, 40).toLowerCase();
       }
+    }
+  } catch (e) {}
+
+  /* ---------- hide the bar's booking link while a form is on screen ---------- */
+  try {
+    var forms = document.querySelectorAll("[data-booking]");
+    if (forms.length && "IntersectionObserver" in window) {
+      var visible = 0;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { visible += en.isIntersecting ? 1 : -1; });
+        visible = Math.max(0, visible);
+        document.body.classList.toggle("form-in-view", visible > 0);
+      }, { threshold: 0.15 });
+      Array.prototype.forEach.call(forms, function (f) { io.observe(f); });
     }
   } catch (e) {}
 
@@ -217,6 +241,20 @@
       var err = form.querySelector(".form-error");
       if (err) err.remove();
 
+      // One id per submission, stored with the lead in Formspree and carried
+      // to the thank-you page, which counts a conversion only for an id it
+      // has not counted before. A direct visit to that page has no id and
+      // counts nothing; a second real request gets a new id and counts again.
+      var leadId = "L" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      var idField = form.querySelector('input[name="lead_id"]');
+      if (!idField) {
+        idField = document.createElement("input");
+        idField.type = "hidden";
+        idField.name = "lead_id";
+        form.appendChild(idField);
+      }
+      idField.value = leadId;
+
       var done = false;
       var giveUp = setTimeout(function () {
         if (!done) { done = true; submitFailed(form, btn, btnHtml); }
@@ -231,7 +269,8 @@
         done = true; clearTimeout(giveUp);
         if (!res.ok) return submitFailed(form, btn, btnHtml);
         var next = form.querySelector('input[name="_next"]');
-        window.location.href = next && next.value ? next.value : "/book/thank-you/";
+        var url = next && next.value ? next.value : "/book/thank-you/";
+        window.location.href = url + (url.indexOf("?") < 0 ? "?" : "&") + "lid=" + leadId;
       }).catch(function () {
         if (done) return;
         done = true; clearTimeout(giveUp);

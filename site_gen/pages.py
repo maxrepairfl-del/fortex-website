@@ -753,15 +753,15 @@ def render_book():
         <label>Which appliance needs repair? <span class="req">*</span></label>
         <div class="choice-grid">{appls}</div>
       </div>
-      <div class="field">
-        <label for="issue">What's the problem? <span class="req">*</span></label>
-        <textarea id="issue" name="issue" placeholder="e.g. Refrigerator isn't cooling and is making a buzzing noise" required></textarea>
-      </div>
       <div class="field-row">
         <div class="field"><label for="name">Your name <span class="req">*</span></label>
           <input id="name" name="name" autocomplete="name" required></div>
         <div class="field"><label for="phone">Phone <span class="req">*</span></label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+          <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+      </div>
+      <div class="field">
+        <label for="issue">What's the problem? <span class="req">*</span></label>
+        <textarea id="issue" name="issue" placeholder="e.g. Refrigerator isn't cooling and is making a buzzing noise" required></textarea>
       </div>
       <div class="field-row">
         <div class="field"><label for="city">City</label>
@@ -847,17 +847,28 @@ def render_thankyou():
   </div>
 </div></section>
 <script>
-/* Lead conversions for ChatGPT Ads and GA4. The form only lands here after a
-   successful submit; the session flag keeps a reload from counting twice.
-   Google Ads counts this page view by its own URL rule, so GA4 gets send_to. */
+/* Lead conversions. Counted only for a lead id the form put on this URL after
+   Formspree accepted the submission, and only once per id: a direct visit has
+   no id and counts nothing, a reload repeats an id already counted, and a
+   second real request arrives with a new id and counts again. The id also
+   goes to Google Ads as transaction_id so Ads drops any duplicate itself. */
 (function () {{
-  var k = "fx_oai_lead_sent";
-  try {{ if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, "1"); }} catch (e) {{}}
+  var q = new URLSearchParams(location.search);
+  var lid = (q.get("lid") || "").replace(/[^A-Za-z0-9]/g, "").slice(0, 32);
+  if (!lid) return;
+  var k = "fx_leads_counted", seen = [];
+  try {{ seen = JSON.parse(localStorage.getItem(k) || "[]"); }} catch (e) {{}}
+  if (seen.indexOf(lid) >= 0) return;
+  seen.push(lid);
+  try {{ localStorage.setItem(k, JSON.stringify(seen.slice(-20))); }} catch (e) {{}}
   if (window.oaiq) oaiq("measure", "lead_created", {{ type: "customer_action" }});
+  if (!window.gtag) return;
   var ga = "{esc(SITE.get('google_analytics_id', ''))}";
-  if (ga && window.gtag) gtag("event", "generate_lead", {{
-    send_to: ga, appliance: new URLSearchParams(location.search).get("for") || "unknown"
+  if (ga) gtag("event", "generate_lead", {{
+    send_to: ga, lead_id: lid, appliance: q.get("for") || "unknown"
   }});
+  var ads = "{esc(SITE.get('google_ads_lead_send_to', ''))}";
+  if (ads) gtag("event", "conversion", {{ send_to: ads, transaction_id: lid }});
 }})();
 </script>
 """
