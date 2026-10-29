@@ -51,6 +51,8 @@ SITE = {
     "yelp_reviews": 126,
     "google_rating": "5.0",  # 5.0 on 56 reviews, 2026-10-28
     "google_reviews": 56,
+    # Date the four values above were last checked against the live profiles.
+    "ratings_checked": "2026-10-28",
     "license": "50759",
     "region": "Orange County, CA",
     "tagline": "Same-Day Appliance Repair in Orange County",
@@ -848,7 +850,9 @@ CITIES = [
      "areas": "Woodbridge, Northwood, Turtle Rock, University Park, Quail Hill, Great Park, Portola Springs and Orchard Hills"},
     {"slug": "huntington-beach", "name": "Huntington Beach", "photo": "dryer-branded",
      "blurb": "Same-day appliance repair across Huntington Beach, from downtown and the pier to Huntington Harbour and Edwards Hill.",
-     "areas": "Downtown HB, Huntington Harbour, Goldenwest, Edwards Hill, Seacliff and Bolsa Chica"},
+     "areas": "Downtown HB, Huntington Harbour, Goldenwest, Edwards Hill, Seacliff and Bolsa Chica",
+     # Same ZIPs as the HB page copy below; listed in llms.txt.
+     "zips": ["92646", "92647", "92648", "92649"]},
     {"slug": "anaheim", "name": "Anaheim", "photo": "oven-1",
      "blurb": "Trusted appliance repair in Anaheim and Anaheim Hills, reliable techs for homes near the resort district and beyond.",
      "areas": "Anaheim Hills, Anaheim Resort, Platinum Triangle, West Anaheim and The Colony"},
@@ -860,7 +864,7 @@ CITIES = [
      "areas": "East Lake Village, Travis Ranch, Fairmont, Bryant Ranch and Hidden Hills"},
     {"slug": "fountain-valley", "name": "Fountain Valley", "photo": "oven-1",
      "blurb": "In-home appliance repair for Fountain Valley homes in ZIP code 92708.",
-     "areas": "Fountain Valley (92708)"},
+     "areas": "Fountain Valley (92708)", "zips": ["92708"]},
 ]
 # Additional cities listed in the footer / areas page (no dedicated page yet)
 NEARBY = ["Newport Beach", "Costa Mesa", "Tustin", "Lake Forest",

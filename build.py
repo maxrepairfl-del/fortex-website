@@ -122,8 +122,10 @@ def llms_txt():
     ]
     lines += [f"- [{s['name']}]({u}/services/{s['slug']}/)" for s in SERVICES]
     lines += ["", "## Brands serviced", "", ", ".join(BRANDS), "", "## Service areas", ""]
-    lines += [f"- [{c['name']}, CA]({u}/areas/{c['slug']}/)" for c in CITIES]
-    lines += [f"- Also: {', '.join(NEARBY)}", "", "## Reviews", "",
+    lines += [f"- [{c['name']}, CA]({u}/areas/{c['slug']}/)"
+              + (f" (ZIP {', '.join(c['zips'])})" if c.get("zips") else "") for c in CITIES]
+    lines += [f"- Also: {', '.join(NEARBY)}", "",
+              f"## Reviews (checked {SITE['ratings_checked']})", "",
               f"- Yelp: {SITE['yelp_rating']} stars, {SITE['yelp_reviews']} reviews ({SITE['yelp_url']})",
               f"- Google: {SITE['google_rating']} stars, {SITE['google_reviews']} reviews ({SITE['google_maps_url']})",
               "", "## About", "",
