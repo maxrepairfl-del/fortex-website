@@ -102,7 +102,7 @@ def write_meta_files():
 
 def llms_txt():
     """Plain-text site summary for AI assistants (llmstxt.org), built from data.py."""
-    from site_gen.data import CITIES, NEARBY
+    from site_gen.data import CITIES, NEARBY, SERVICES, BRANDS, _PRICE
     u = SITE["url"]
     lines = [
         f"# {SITE['name']}", "",
@@ -111,12 +111,22 @@ def llms_txt():
         "Service visit is waived with any repair. "
         "1-year warranty on OEM parts, 90 days on labor.", "",
         f"- Phone: {SITE['phone']}",
-        f"- Hours: {SITE['hours']}",
+        f"- Email: {SITE['email']}",
+        f"- Hours: {SITE['hours']}, Sunday closed",
+        "- Based in: Huntington Beach, CA (mobile service, no walk-in shop)",
         f"- Book online: {u}/book/", "",
-        "## Service areas", "",
+        "## Pricing and warranty", "",
+        f"- {_PRICE}",
+        f"- Warranty: {SITE['warranty'].replace(' · ', ', ')}.", "",
+        "## Services", "",
     ]
+    lines += [f"- [{s['name']}]({u}/services/{s['slug']}/)" for s in SERVICES]
+    lines += ["", "## Brands serviced", "", ", ".join(BRANDS), "", "## Service areas", ""]
     lines += [f"- [{c['name']}, CA]({u}/areas/{c['slug']}/)" for c in CITIES]
-    lines += [f"- Also: {', '.join(NEARBY)}", "", "## About", "",
+    lines += [f"- Also: {', '.join(NEARBY)}", "", "## Reviews", "",
+              f"- Yelp: {SITE['yelp_rating']} stars, {SITE['yelp_reviews']} reviews ({SITE['yelp_url']})",
+              f"- Google: {SITE['google_rating']} stars, {SITE['google_reviews']} reviews ({SITE['google_maps_url']})",
+              "", "## About", "",
               f"- [How it works]({u}/how-it-works/)", f"- [About]({u}/about/)",
               f"- [Reviews]({u}/reviews/)", ""]
     return "\n".join(lines)

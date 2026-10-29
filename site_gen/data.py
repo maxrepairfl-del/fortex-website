@@ -70,6 +70,9 @@ SITE = {
     # Stable Maps URL for the same Business Profile (CID), used in schema sameAs.
     # The share.google link above is a redirect, fine for people, not for schema.
     "google_maps_url": "https://maps.google.com/?cid=16977179539346351682",
+    # BBB business profile (rating A, not accredited), listed in schema sameAs so
+    # search engines and assistants tie it to this business.
+    "bbb_url": "https://www.bbb.org/us/ca/huntington-beach/profile/appliance-repair/fortex-appliance-repair-llc-1126-1000143206",
     "instagram": "",
     "facebook": "",
 }

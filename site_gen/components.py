@@ -81,7 +81,8 @@ def base_schema():
             {"@type": "OpeningHoursSpecification",
              "dayOfWeek": "Saturday", "opens": "09:00", "closes": "18:00"},
         ],
-        "sameAs": [u for u in [SITE["yelp_url"], SITE.get("google_maps_url")] if u and u != "#"],
+        "sameAs": [u for u in [SITE["yelp_url"], SITE.get("google_maps_url"), SITE.get("bbb_url")]
+                   if u and u != "#"],
     }
 
 
