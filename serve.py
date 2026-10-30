@@ -11,7 +11,7 @@ import os
 import socketserver
 import sys
 
-DIST = "/Users/max/Desktop/operations/website/dist"
+DIST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dist")
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8092
 
 os.chdir(DIST)

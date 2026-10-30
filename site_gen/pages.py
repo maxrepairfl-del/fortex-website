@@ -315,16 +315,24 @@ def causes_block(s):
 
 
 def pricing_block(s):
+    p = s.get("pricing")
+    title = esc(p["title"]) if p else "Free service visit with any repair"
+    text = esc(p["text"]) if p else (
+        "If you decide not to go ahead, the visit is $80. That is the only number we can give "
+        "you honestly before we look. The same symptom can be an inexpensive part or an expensive "
+        "board, and we are not going to guess at your expense.")
+    third = ("Nothing starts until you say yes" if p else
+             "Nothing starts until you say yes, and then the visit is <strong>free</strong>")
     return f"""<section class="section section--surface"><div class="wrap">
   <div class="split">
     <div>
       <p class="eyebrow">What it costs</p>
-      <h2>Free service visit with any repair</h2>
-      <p class="lede" style="margin-top:14px">If you decide not to go ahead, the visit is $80. That is the only number we can give you honestly before we look. The same symptom can be an inexpensive part or an expensive board, and we are not going to guess at your expense.</p>
+      <h2>{title}</h2>
+      <p class="lede" style="margin-top:14px">{text}</p>
       <ul class="aside-list" style="margin-top:22px;gap:14px">
         <li>{icon('check-circle', size=20)}<span>A licensed technician finds the <strong>actual</strong> cause</span></li>
         <li>{icon('check-circle', size=20)}<span>You get the <strong>full, all-in price</strong> before anything is touched</span></li>
-        <li>{icon('check-circle', size=20)}<span>Nothing starts until you say yes, and then the visit is <strong>free</strong></span></li>
+        <li>{icon('check-circle', size=20)}<span>{third}</span></li>
         <li>{icon('check-circle', size=20)}<span>90 days on our labor, a full year on OEM parts</span></li>
       </ul>
     </div>
@@ -349,6 +357,23 @@ def maintenance_block(s):
     <p class="lede">Not broken, just tired? Maintenance is a flat price, the same for everyone, booked on its own, no diagnosis needed.</p></div>
   <div class="maint-grid">{cards}</div>
   {cta_row('Book maintenance at the price above.')}
+</div></section>"""
+
+
+def gallery_block(s):
+    """Photos from real jobs, captioned with what is being done in each."""
+    if not s.get("gallery"):
+        return ""
+    items = "".join(
+        f'<figure class="job-shot reveal">{img(slug, sizes="(max-width:700px) 46vw, 280px")}'
+        f'<figcaption>{esc(cap)}</figcaption></figure>'
+        for slug, cap in s["gallery"]
+    )
+    return f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">From our jobs</p>
+    <h2>What the work actually looks like</h2>
+    <p class="lede">Photos our technicians took on real service calls in Orange County.</p></div>
+  <div class="job-gallery">{items}</div>
 </div></section>"""
 
 
@@ -435,7 +460,7 @@ def service_request_form(s):
       <input type="hidden" name="landing_page" value="" data-landing-page>
       <input type="hidden" name="ad_params" value="" data-ad-params>
       <button class="btn btn--primary btn--lg btn--block" type="submit">{icon('calendar', size=20)} Request Appointment</button>
-      <p class="form-note">We'll call you to confirm availability and your appointment window. {esc(DIAGNOSTIC_SHORT)}</p>
+      <p class="form-note">We'll call you to confirm availability and your appointment window. {esc(s['pricing']['short'] if s.get('pricing') else DIAGNOSTIC_SHORT)}</p>
     </form>
     <div class="req-aside">
       <p class="eyebrow">Request an appointment</p>
@@ -450,7 +475,11 @@ def render_service(s):
     symptoms = "".join(
         f'<li>{icon("check", size=20)}<span>{esc(x)}</span></li>' for x in s["symptoms"]
     )
-    related = [x for x in SERVICES if x["slug"] != s["slug"]][:4]
+    # A page can name its closest neighbours first (wine cooler <-> wine cellar);
+    # the rest of the four slots fill from the service order as before.
+    first = [SERVICES_BY_SLUG[x] for x in s.get("related", [])]
+    related = (first + [x for x in SERVICES
+                        if x["slug"] != s["slug"] and x not in first])[:4]
     rel_cards = "".join(
         f"""<a class="svc-card reveal" href="/services/{r['slug']}/">
   <div class="ic">{icon(r['icon'], size=28)}</div><h3>{esc(r['short'])}</h3>
@@ -458,6 +487,9 @@ def render_service(s):
         for r in related
     )
     faqs = s["faqs"]
+    price = s.get("pricing")
+    lead_html = price["lead_html"] if price else DIAGNOSTIC_LEAD_HTML
+    simple = price["simple"] if price else DIAGNOSTIC_SIMPLE
     body = f"""
 <section class="page-hero"><div class="wrap page-hero-grid">
   <div>
@@ -468,7 +500,7 @@ def render_service(s):
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
       <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
     </div>
-    <p class="hero-terms">{icon('dollar', size=18)}<span>{DIAGNOSTIC_LEAD_HTML}</span></p>
+    <p class="hero-terms">{icon('dollar', size=18)}<span>{lead_html}</span></p>
     <p class="hero-avail">Same-day appointments may be available. Call to check.</p>
     <ul class="hero-proof">
       <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{stars()} {SITE['yelp_rating']} on Yelp · {SITE['yelp_reviews']} reviews</a></li>
@@ -480,7 +512,7 @@ def render_service(s):
 </div></section>
 <section class="simple-fix"><div class="wrap">
   <p class="simple-fix__q">What if it's something simple?</p>
-  <p>{esc(DIAGNOSTIC_SIMPLE)}</p>
+  <p>{esc(simple)}</p>
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Common problems</p>
@@ -490,9 +522,10 @@ def render_service(s):
 </div></section>
 {service_request_form(s)}
 {causes_block(s)}
+{gallery_block(s)}
 {types_block(s)}
 {steps_section()}
-{why_split(s['photo'], heading='Why choose Fortex for your repair')}
+{why_split(s.get('photo_2', s['photo']), heading='Why choose Fortex for your repair')}
 <section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(s['noun'])} repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
@@ -512,7 +545,7 @@ def render_service(s):
     }
     return f"/services/{s['slug']}/index.html", page(
         f"{s['name']} in Orange County, CA | {SITE['name']}",
-        f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 1-year OEM parts warranty. Call (949) 478-0089.",
+        s.get("meta_desc") or f"Same-day {s['noun'].lower()} repair in Orange County. Licensed & insured Fortex technicians, upfront pricing, 1-year OEM parts warranty. Call (949) 478-0089.",
         f"/services/{s['slug']}/", body,
         extra_schema=[svc_schema, faq_schema(faqs)], og_image=s["photo"],
         book_href="#request",

@@ -58,6 +58,8 @@ def jobs():
     """Yield (slug, src_path, fmt, ext) for every manifest entry."""
     for slug, (fname, _alt) in M.PHOTOS.items():
         yield slug, os.path.join(PHOTOS_DIR, fname), "jpeg", "jpg"
+    for slug, (fname, _alt) in M.JOB_PHOTOS.items():
+        yield slug, os.path.join(PHOTOS_DIR, fname), "jpeg", "jpg"
     for slug, (relpath, _alt) in M.BRAND.items():
         src = os.path.join(ASSETS, relpath)
         if relpath.lower().endswith(".png"):
@@ -72,12 +74,13 @@ def build_one(job):
         print(f"  !! missing source: {src}")
         return None
     made = 0
-    for w in M.WIDTHS:
+    widths = M.widths_for(slug)
+    for w in widths:
         dst = os.path.join(OUT, f"{slug}-{w}.{ext}")
         if needs_build(src, dst):
             sips_resize(src, dst, w, fmt)
             made += 1
-    largest = os.path.join(OUT, f"{slug}-{M.WIDTHS[-1]}.{ext}")
+    largest = os.path.join(OUT, f"{slug}-{widths[-1]}.{ext}")
     meta = dims(largest)
     print(f"  {slug:22s} {ext}  +{made} variants  {meta[0]}x{meta[1]}")
     return slug, meta

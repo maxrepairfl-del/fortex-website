@@ -49,6 +49,30 @@ PHOTOS = {
     "tech-fun":            ("IMG_8589.JPG", "Friendly Fortex technician with a drill in front of a washer and dryer"),
 }
 
+# Job photos sent by the technicians over Telegram (960x1280, already
+# compressed). Only widths up to the source size are generated, so nothing is
+# upscaled. slug -> (source file under assets/photos, alt text)
+JOB_WIDTHS = [400, 800, 960]
+JOB_PHOTOS = {
+    "cellar-room":       ("wine-cellar/cellar-27.jpg", "Glass-walled wine room on a Fortex wine cellar cooling service call"),
+    "cellar-room-2":     ("wine-cellar/cellar-35.jpg", "Glass-front wine cellar cabinets in an Orange County home"),
+    "cellar-temp":       ("wine-cellar/cellar-26.jpg", "Technician checking wine cellar temperature with an infrared thermometer"),
+    "cellar-controller": ("wine-cellar/cellar-22.jpg", "Wine cellar temperature controller showing 58°F against a 55°F setpoint"),
+    "cellar-pressure":   ("wine-cellar/cellar-20.jpg", "Refrigerant pressure control inside a wine cellar condensing unit"),
+    "cellar-coil-clean": ("wine-cellar/cellar-25.jpg", "Condenser coil of a wine cellar cooling unit being cleaned with foam"),
+    "cellar-coil":       ("wine-cellar/cellar-24.jpg", "Condenser coil of a wine cellar cooling unit after cleaning"),
+    "cellar-compressor": ("wine-cellar/cellar-31.jpg", "Compressor inside the outdoor condensing unit of a wine cellar split system"),
+    "cellar-evaporator": ("wine-cellar/cellar-32.jpg", "Technician tracing wiring on a wine cellar evaporator unit"),
+    "cellar-attic":      ("wine-cellar/cellar-33.jpg", "Ducted wine cellar evaporator installed in an attic"),
+    "cellar-pump":       ("wine-cellar/cellar-23.jpg", "Condensate pump for a wine cellar cooling system under a house"),
+    "cellar-gauges":     ("wine-cellar/cellar-34.jpg", "Refrigerant gauges connected to an outdoor wine cellar condensing unit"),
+}
+
+
+def widths_for(slug):
+    return JOB_WIDTHS if slug in JOB_PHOTOS else WIDTHS
+
+
 # slug -> (source file under assets/, alt text). PNGs keep transparency.
 BRAND = {
     "marketing-team":     ("brand/marketing-team.jpg",     "A Fortex technician with customers holding broken appliances"),
@@ -75,10 +99,11 @@ def img(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
     """Return a responsive <img> tag for a manifest slug."""
     is_brand = slug in BRAND
     ext = "png" if (is_brand and BRAND[slug][0].endswith(".png")) else "jpg"
-    alt = (BRAND.get(slug) or PHOTOS.get(slug))[1]
+    alt = (BRAND.get(slug) or PHOTOS.get(slug) or JOB_PHOTOS.get(slug))[1]
 
-    srcset = ", ".join(f"{base}/{slug}-{w}.{ext} {w}w" for w in WIDTHS)
-    fallback = f"{base}/{slug}-{WIDTHS[-2]}.{ext}"
+    widths = widths_for(slug)
+    srcset = ", ".join(f"{base}/{slug}-{w}.{ext} {w}w" for w in widths)
+    fallback = f"{base}/{slug}-{widths[-2]}.{ext}"
 
     wh = ""
     if slug in _META:

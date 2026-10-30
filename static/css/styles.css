@@ -771,3 +771,10 @@ body.is-closed .ty-when--closed { display: block; }
   .city-svc h3 { font-size: 1rem; }
   .city-svc p { font-size: .92rem; }
 }
+
+/* Job photo gallery on service pages (technicians' own photos, portrait) */
+.job-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.job-shot { margin: 0; }
+.job-shot img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; display: block; background: var(--surface, #f3f4f6); }
+.job-shot figcaption { font-size: .9rem; color: var(--body); margin-top: 8px; line-height: 1.35; }
+@media (max-width: 900px) { .job-gallery { grid-template-columns: repeat(2, 1fr); } }

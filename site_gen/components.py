@@ -8,7 +8,7 @@ import os
 from .data import (SITE, SERVICES, CITIES, NEARBY, BRANDS, CITY_COORDS,
                    SERVICE_AREA_POLYGON)
 from .icons import icon, logo_mark
-from .images import img
+from .images import img, widths_for
 
 
 def esc(s):
@@ -118,7 +118,8 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
          book_href="/book/",
          noindex=False):
     canonical = SITE["url"] + path
-    og = f'{SITE["url"]}/images/{og_image}-1200.jpg'
+    og_w = min(1200, widths_for(og_image)[-1])
+    og = f'{SITE["url"]}/images/{og_image}-{og_w}.jpg'
     schema = [base_schema()]
     crumbs = None if noindex else breadcrumb_schema(path)
     if crumbs:

@@ -7,6 +7,54 @@
 2000,
 934
 ],
+"cellar-attic": [
+960,
+720
+],
+"cellar-coil": [
+720,
+960
+],
+"cellar-coil-clean": [
+720,
+960
+],
+"cellar-compressor": [
+720,
+960
+],
+"cellar-controller": [
+720,
+960
+],
+"cellar-evaporator": [
+720,
+960
+],
+"cellar-gauges": [
+720,
+960
+],
+"cellar-pressure": [
+720,
+960
+],
+"cellar-pump": [
+720,
+960
+],
+"cellar-room": [
+720,
+960
+],
+"cellar-room-2": [
+720,
+960
+],
+"cellar-temp": [
+720,
+960
+],
 "diagnostic-meter": [
 2000,
 1333
