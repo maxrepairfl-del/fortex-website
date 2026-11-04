@@ -321,8 +321,11 @@ def pricing_block(s):
         "If you decide not to go ahead, the visit is $80. That is the only number we can give "
         "you honestly before we look. The same symptom can be an inexpensive part or an expensive "
         "board, and we are not going to guess at your expense.")
-    third = ("Nothing starts until you say yes" if p else
-             "Nothing starts until you say yes, and then the visit is <strong>free</strong>")
+    # The fee is waived on every service once the repair is approved, wine
+    # cellars included, so this does not vary by page. It used to drop out
+    # whenever a page supplied its own pricing, which left the cellar page
+    # quoting $120 beside shared blocks promising a free visit.
+    third = "Nothing starts until you say yes, and then the visit is <strong>free</strong>"
     return f"""<section class="section section--surface"><div class="wrap">
   <div class="split">
     <div>
