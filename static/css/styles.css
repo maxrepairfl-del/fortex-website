@@ -306,6 +306,14 @@ strong { color: var(--ink); font-weight: 700; }
 .step h3 { margin: 14px 0 8px; }
 .step p { font-size: .96rem; color: var(--muted); }
 
+.steps-list { list-style: none; margin: 0 auto; padding: 8px clamp(18px, 4vw, 44px); max-width: 860px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); }
+.steps-row { display: flex; gap: 20px; align-items: flex-start; padding: 22px 0; }
+.steps-row + .steps-row { border-top: 1px solid var(--line); }
+.steps-n { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; }
+.steps-row h3 { margin: 4px 0 6px; }
+.steps-row p { margin: 0; font-size: .98rem; color: var(--muted); }
+@media (max-width: 560px) { .steps-row { gap: 14px; } .steps-n { flex-basis: 38px; width: 38px; height: 38px; font-size: 1.05rem; } }
+
 /* ---------- feature band (why) ---------- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 70px); align-items: center; }
 .split .media img { border-radius: var(--r-lg); box-shadow: var(--shadow); width: 100%; aspect-ratio: 4/3; object-fit: cover; }

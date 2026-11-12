@@ -12,17 +12,17 @@ from .data import (
 
 
 # ----------------------------------------------------------- shared fragments
-def steps_section(heading="How it works", sub="Three simple steps from broken to fixed, usually in a single visit."):
-    cards = ""
+def steps_section(heading="What to expect", sub="From first call to a working appliance, with no surprises along the way."):
+    rows = ""
     for i, (ic, title, body) in enumerate(STEPS, 1):
-        cards += f"""<div class="step reveal">
-  <div class="n">{i}</div><div class="ic">{icon(ic, size=24)}</div>
-  <h3>{esc(title)}</h3><p>{esc(body)}</p>
-</div>"""
+        rows += f"""<li class="steps-row">
+  <span class="steps-n">{i}</span>
+  <div><h3>{esc(title)}</h3><p>{esc(body)}</p></div>
+</li>"""
     return f"""<section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
-    <h2>From first call to fixed, fast</h2><p class="lede">{esc(sub)}</p></div>
-  <div class="steps">{cards}</div>
+    <h2>From first call to fixed</h2><p class="lede">{esc(sub)}</p></div>
+  <ol class="steps-list reveal">{rows}</ol>
 </div></section>"""
 
 

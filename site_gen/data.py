@@ -97,12 +97,16 @@ BRANDS = [
 
 # ---------------------------------------------------------------- how it works
 STEPS = [
-    ("calendar", "Easy Scheduling",
-     "Call, text, or book online in under a minute. Tell us the appliance and the symptom and we lock in a same-day or next-day window that fits your schedule."),
-    ("shield", "Upfront Price",
-     "Our licensed technician arrives on time, diagnoses the problem, and gives you an upfront, all-in price. Free service visit with any repair, no hidden fees."),
-    ("award", "Warrantied Work",
-     "We fix it right and stand behind it: a full year on original manufacturer (OEM) parts and 90 days on our labor. Most repairs are done in a single visit."),
+    ("calendar", "Call, text or book online",
+     "It takes about a minute. Tell us the appliance, the brand and what it's doing. Between 8am and 6pm you get a quick reply."),
+    ("phone", "Confirmed within the hour",
+     "Within an hour, often sooner, you get a same-day or next-day appointment and the name of your technician."),
+    ("clock", "A 2-hour arrival window",
+     "No waiting at home all day. You get a 2-hour window, plus a text about 30 minutes before arrival when your technician is on the way."),
+    ("shield", "$80 diagnosis, free with repair",
+     "The technician finds the cause and gives you the full price before any work starts. Approve the repair and the service call is free."),
+    ("award", "Fixed, usually in one visit",
+     "Factory (OEM) parts from authorized distributors. 1 year on parts, 90 days on labor."),
 ]
 
 # ---------------------------------------------------------------- why fortex
