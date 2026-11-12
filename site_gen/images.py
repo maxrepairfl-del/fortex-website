@@ -69,6 +69,54 @@ JOB_PHOTOS = {
 }
 
 
+# Real job photos picked from the team's Telegram chats (2026-11-11), kept in
+# assets/photos-real. 720-1280px, so they use JOB_WIDTHS like the cellar set.
+REAL_PHOTOS = {
+    "sz-builtin-sxs":      ("../photos-real/brand-subzero-builtin-side-by-side.jpg", "Sub-Zero built-in side-by-side refrigerator in an Orange County kitchen"),
+    "builtin-panel-tech":  ("../photos-real/tech-panel-ready-builtin-fridge.jpg", "Fortex technician working inside a panel-ready built-in refrigerator"),
+    "brazing-builtin":     ("../photos-real/team-selfie-kitchen-2.jpg", "Two Fortex technicians brazing a sealed-system line on a built-in refrigerator"),
+    "gauges-compressor":   ("../photos-real/refrigerant-gauges.jpg", "Refrigerant manifold gauges connected at a refrigerator compressor"),
+    "digital-manifold":    ("../photos-real/digital-manifold-gauge.jpg", "Digital refrigerant manifold reading pressures on a refrigerator sealed system"),
+    "gauges-tools":        ("../photos-real/refrigerant-gauges-tools.jpg", "Refrigerant gauges, hoses and tools laid out on a refrigerator repair"),
+    "team-thumbs":         ("../photos-real/team-selfie-kitchen-3.jpg", "Two Fortex technicians smiling after a repair in a customer's kitchen"),
+    "pro-range-gold":      ("../photos-real/pro-range-48-gold-knobs.jpg", "48-inch professional gas range on a Fortex service call"),
+    "lg-washtower":        ("../photos-real/brand-lg-washtower-white.jpg", "Stacked washer and dryer tower serviced by Fortex"),
+    "commercial-line":     ("../photos-real/commercial-kitchen-line.jpg", "Restaurant kitchen line with commercial refrigeration"),
+    "wolf-burners-lit": ("../photos-real/brand-wolf-range-burners-lit.jpg", "Wolf range with all burners lit after a Fortex repair"),
+    "wolf-front": ("../photos-real/brand-wolf-range-front.jpg", "Wolf gas range with red knobs in an Orange County kitchen"),
+    "wolf-top-off": ("../photos-real/brand-wolf-range-top-off.jpg", "Wolf range with the cooktop lifted for burner repair"),
+    "pro-range-open": ("../photos-real/pro-range-disassembled.jpg", "Professional range with the control panel open during repair"),
+    "viking-range-48": ("../photos-real/brand-viking-range-48.jpg", "Viking 48-inch range on a Fortex service call"),
+    "viking-rangetop": ("../photos-real/brand-viking-rangetop.jpg", "Viking rangetop in a white kitchen"),
+    "viking-rangetop-2": ("../photos-real/brand-viking-rangetop-2.jpg", "Close-up of a Viking rangetop and its badge"),
+    "viking-microwave": ("../photos-real/brand-viking-microwave.jpg", "Viking built-in microwave being serviced"),
+    "thermador-range": ("../photos-real/brand-thermador-pro-grand-range.jpg", "Thermador Pro Grand range with star burners"),
+    "thermador-top": ("../photos-real/brand-thermador-pro-grand-top.jpg", "Thermador Pro Grand cooktop with star-shaped burners"),
+    "thermador-star": ("../photos-real/brand-thermador-star-burner.jpg", "Close-up of a Thermador star burner"),
+    "thermador-knob": ("../photos-real/brand-thermador-knob-gloved.jpg", "Technician's gloved hand holding a Thermador control knob"),
+    "lg-thinq": ("../photos-real/brand-lg-thinq-dispenser.jpg", "LG ThinQ refrigerator dispenser being checked by a technician"),
+    "lg-compressor-label": ("../photos-real/brand-lg-compressor-label.jpg", "Label on an LG linear refrigerator compressor"),
+    "lg-model-label": ("../photos-real/brand-lg-fridge-model-label.jpg", "LG refrigerator model and serial label"),
+    "lg-compressor": ("../photos-real/brand-lg-compressor.jpg", "LG refrigerator compressor in the machine compartment"),
+    "lg-washer-front": ("../photos-real/brand-lg-washer-front.jpg", "LG front-load washer on a pedestal"),
+    "lg-washer-drum": ("../photos-real/brand-lg-washer-drum-logo.jpg", "LG washer opened up for repair, logo on the tub"),
+    "washtower-black": ("../photos-real/brand-lg-washtower-black.jpg", "Stacked black-steel washer and dryer tower"),
+    "washer-gasket": ("../photos-real/washer-gasket-hand.jpg", "Technician pulling back a front-load washer door gasket"),
+    "drain-pump-hand": ("../photos-real/drain-pump-in-hand.jpg", "Drain pump removed from a machine for replacement"),
+    "dryer-ir": ("../photos-real/dryer-ir-thermometer.jpg", "Infrared thermometer reading dryer temperature"),
+    "dryer-vent-clog": ("../photos-real/dryer-vent-lint-clog.jpg", "Lint pulled from a clogged dryer vent"),
+    "dryer-lint-burn": ("../photos-real/dryer-lint-fire-damage.jpg", "Dryer interior scorched by lint build-up"),
+    "samsung-family-hub": ("../photos-real/brand-samsung-family-hub.jpg", "Samsung Family Hub refrigerator on a service call"),
+    "samsung-washer": ("../photos-real/brand-samsung-washer.jpg", "Samsung front-load washer"),
+    "samsung-washer-open": ("../photos-real/brand-samsung-washer-open.jpg", "Samsung washer opened up for repair"),
+    "samsung-dryer": ("../photos-real/brand-samsung-dryer-hands.jpg", "Technician's hands working on Samsung dryer wiring"),
+    "oven-flame": ("../photos-real/oven-gas-burner-flame.jpg", "Gas oven burner lit after an igniter repair"),
+    "broil-glow": ("../photos-real/oven-broil-element-glow.jpg", "Oven broil element glowing during a test"),
+    "clamp-meter":         ("../photos-real/clamp-meter-reading.jpg", "Clamp meter measuring current draw during an appliance diagnosis"),
+}
+JOB_PHOTOS.update(REAL_PHOTOS)
+
+
 def widths_for(slug):
     return JOB_WIDTHS if slug in JOB_PHOTOS else WIDTHS
 

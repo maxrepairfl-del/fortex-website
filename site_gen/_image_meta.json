@@ -7,6 +7,18 @@
 2000,
 934
 ],
+"brazing-builtin": [
+960,
+540
+],
+"broil-glow": [
+720,
+960
+],
+"builtin-panel-tech": [
+540,
+960
+],
 "cellar-attic": [
 960,
 720
@@ -55,9 +67,21 @@
 720,
 960
 ],
+"clamp-meter": [
+720,
+960
+],
+"commercial-line": [
+720,
+960
+],
 "diagnostic-meter": [
 2000,
 1333
+],
+"digital-manifold": [
+720,
+960
 ],
 "dishwasher-1": [
 2000,
@@ -71,6 +95,10 @@
 2000,
 1333
 ],
+"drain-pump-hand": [
+960,
+720
+],
 "dryer-1": [
 2000,
 1333
@@ -82,6 +110,18 @@
 "dryer-branded": [
 2000,
 1333
+],
+"dryer-ir": [
+720,
+960
+],
+"dryer-lint-burn": [
+540,
+960
+],
+"dryer-vent-clog": [
+540,
+960
 ],
 "freezer-frost": [
 2000,
@@ -115,6 +155,42 @@
 2000,
 1333
 ],
+"gauges-compressor": [
+720,
+960
+],
+"gauges-tools": [
+720,
+960
+],
+"lg-compressor": [
+540,
+960
+],
+"lg-compressor-label": [
+960,
+540
+],
+"lg-model-label": [
+540,
+960
+],
+"lg-thinq": [
+540,
+960
+],
+"lg-washer-drum": [
+540,
+960
+],
+"lg-washer-front": [
+720,
+960
+],
+"lg-washtower": [
+540,
+960
+],
 "marketing-team": [
 2000,
 1381
@@ -147,9 +223,45 @@
 2000,
 1333
 ],
+"oven-flame": [
+540,
+960
+],
+"pro-range-gold": [
+960,
+720
+],
+"pro-range-open": [
+960,
+720
+],
 "range-tools": [
 2000,
 1333
+],
+"samsung-dryer": [
+720,
+960
+],
+"samsung-family-hub": [
+720,
+960
+],
+"samsung-washer": [
+720,
+960
+],
+"samsung-washer-open": [
+720,
+960
+],
+"sz-builtin-sxs": [
+720,
+960
+],
+"team-thumbs": [
+960,
+540
 ],
 "tech-arrival": [
 2000,
@@ -163,13 +275,65 @@
 2000,
 1333
 ],
+"thermador-knob": [
+540,
+960
+],
+"thermador-range": [
+960,
+540
+],
+"thermador-star": [
+540,
+960
+],
+"thermador-top": [
+960,
+540
+],
 "toolbag-shoecovers": [
 2000,
 1333
 ],
+"viking-microwave": [
+720,
+960
+],
+"viking-range-48": [
+720,
+960
+],
+"viking-rangetop": [
+960,
+540
+],
+"viking-rangetop-2": [
+960,
+540
+],
 "washer-1": [
 2000,
 1333
+],
+"washer-gasket": [
+540,
+960
+],
+"washtower-black": [
+540,
+960
+],
+"wolf-burners-lit": [
+960,
+720
+],
+"wolf-front": [
+960,
+720
+],
+"wolf-top-off": [
+720,
+960
 ],
 "yelp-badge": [
 1955,

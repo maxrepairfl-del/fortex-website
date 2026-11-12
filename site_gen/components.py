@@ -86,6 +86,10 @@ def base_schema():
     }
 
 
+# Display names for URL parts that are not services or cities (brands etc.).
+BREADCRUMB_NAMES = {}
+
+
 def breadcrumb_schema(path):
     """BreadcrumbList matching the visible breadcrumb, built from the URL path."""
     from .data import SERVICES_BY_SLUG, CITIES_BY_SLUG
@@ -103,7 +107,7 @@ def breadcrumb_schema(path):
         elif parts[0] == "areas" and part in CITIES_BY_SLUG:
             name = CITIES_BY_SLUG[part]["name"]
         else:
-            name = part.replace("-", " ").title()
+            name = BREADCRUMB_NAMES.get(part, part.replace("-", " ").title())
         items.append((name, url + "/"))
     return {
         "@context": "https://schema.org", "@type": "BreadcrumbList",

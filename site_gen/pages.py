@@ -120,19 +120,34 @@ def why_split(photo="tech-portrait", heading="Orange County trusts Fortex"):
 </div></section>"""
 
 
+SERVICE_GROUPS = [
+    ("Refrigeration & wine", "sz-builtin-sxs",
+     ["refrigerator-repair", "freezer-repair", "wine-cooler-repair", "wine-cellar-cooling-repair"]),
+    ("Cooking", "pro-range-gold",
+     ["oven-repair", "stove-cooktop-repair", "microwave-repair"]),
+    ("Laundry & cleanup", "lg-washtower",
+     ["washing-machine-repair", "dryer-repair", "dishwasher-repair", "garbage-disposal-repair"]),
+    ("Commercial", "commercial-line",
+     ["commercial-freezer-repair", "ice-machine-repair"]),
+]
+
+
 def services_tiles(heading="What we fix", title="Repair for every major appliance",
-                   sub="From refrigerators to ice machines, tap your appliance to see common problems we fix."):
-    tiles = ""
-    for s in SERVICES:
-        tiles += f"""<a class="svc-tile reveal" href="/services/{s['slug']}/">
-  <span class="svc-tile__ic">{icon(s['icon'], size=26)}</span>
-  <span class="svc-tile__name">{esc(s['short'])}</span>
-</a>"""
+                   sub="Pick your appliance to see common problems, what we check and what it usually costs."):
+    groups = ""
+    for name, photo, slugs in SERVICE_GROUPS:
+        links = "".join(
+            f'<li><a href="/services/{x}/"><span>{esc(SERVICES_BY_SLUG[x]["short"])}</span>'
+            f'{icon("arrow-right", size=18)}</a></li>' for x in slugs)
+        groups += f"""<div class="svc-group reveal">
+  <div class="svc-group__photo">{img(photo, sizes='(max-width:700px) 92vw, 300px')}</div>
+  <h3>{esc(name)}</h3>
+  <ul class="svc-group__list">{links}</ul>
+</div>"""
     return f"""<section class="section section--surface" id="services"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
     <h2>{esc(title)}</h2><p class="lede">{esc(sub)}</p></div>
-  <div class="svc-tiles">{tiles}</div>
-  <div class="center" style="margin-top:30px"><a class="btn btn--outline" href="/services/">See all services &amp; details {icon('arrow-right', size=16)}</a></div>
+  <div class="svc-groups">{groups}</div>
 </div></section>"""
 
 
@@ -474,6 +489,11 @@ def service_request_form(s):
 </div></section>"""
 
 
+def _brand_links(slug):
+    from .brands import brand_links
+    return brand_links(slug)
+
+
 def render_service(s):
     symptoms = "".join(
         f'<li>{icon("check", size=20)}<span>{esc(x)}</span></li>' for x in s["symptoms"]
@@ -525,6 +545,7 @@ def render_service(s):
 </div></section>
 {service_request_form(s)}
 {causes_block(s)}
+{_brand_links(s['slug'])}
 {gallery_block(s)}
 {types_block(s)}
 {steps_section()}
@@ -1180,4 +1201,6 @@ def all_pages():
     ]
     pages += [render_service(s) for s in SERVICES]
     pages += [render_city(c) for c in CITIES]
+    from .brands import brand_pages
+    pages += brand_pages()
     return pages
