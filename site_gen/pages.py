@@ -128,7 +128,9 @@ SERVICE_GROUPS = [
     ("Laundry & cleanup", "lg-washtower",
      ["washing-machine-repair", "dryer-repair", "dishwasher-repair", "garbage-disposal-repair"]),
     ("Commercial", "commercial-line",
-     ["commercial-freezer-repair", "ice-machine-repair"]),
+     ["commercial-freezer-repair", "ice-machine-repair",
+      ("oven-repair", "Commercial Ovens"), ("stove-cooktop-repair", "Commercial Ranges & Stoves"),
+      ("dishwasher-repair", "Commercial Dishwashers")]),
 ]
 
 
@@ -136,9 +138,10 @@ def services_tiles(heading="What we fix", title="Repair for every major applianc
                    sub="Pick your appliance to see common problems, what we check and what it usually costs."):
     groups = ""
     for name, photo, slugs in SERVICE_GROUPS:
+        items = [x if isinstance(x, tuple) else (x, SERVICES_BY_SLUG[x]["short"]) for x in slugs]
         links = "".join(
-            f'<li><a href="/services/{x}/"><span>{esc(SERVICES_BY_SLUG[x]["short"])}</span>'
-            f'{icon("arrow-right", size=18)}</a></li>' for x in slugs)
+            f'<li><a href="/services/{x}/"><span>{esc(label)}</span>'
+            f'{icon("arrow-right", size=18)}</a></li>' for x, label in items)
         groups += f"""<div class="svc-group reveal">
   <div class="svc-group__photo">{img(photo, sizes='(max-width:700px) 92vw, 300px')}</div>
   <h3>{esc(name)}</h3>
