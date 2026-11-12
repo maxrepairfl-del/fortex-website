@@ -98,9 +98,9 @@ BRANDS = [
 # ---------------------------------------------------------------- how it works
 STEPS = [
     ("calendar", "Call, text or book online",
-     "It takes about a minute. Tell us the appliance, the brand and what it's doing. Between 8am and 6pm you get a quick reply."),
+     "It takes about a minute. Tell us the appliance, the brand and what it's doing. We reply quickly from 8am to 6pm."),
     ("phone", "Confirmed within the hour",
-     "Within an hour, often sooner, you get a same-day or next-day appointment and the name of your technician."),
+     "Within an hour, often sooner, you get a same-day or next-day appointment (visits start at 9am) and the name of your technician."),
     ("clock", "A 2-hour arrival window",
      "No waiting at home all day. You get a 2-hour window, plus a text about 30 minutes before arrival when your technician is on the way."),
     ("shield", "$80 diagnosis, free with repair",
