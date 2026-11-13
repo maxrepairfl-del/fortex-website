@@ -127,7 +127,7 @@ COMBO_PAGES = {
                           "Panel-ready Sub-Zero built-in refrigerator during service"),
         "prices": SUBZERO_PRICES,
         # (how often, what, why). Intervals follow Sub-Zero's own use & care
-        # guidance; the yearly professional visit is our recommendation.
+        # guidance.
         "care": [
             ("Every month", "Wipe the door gaskets with warm, soapy water",
              "Sticky or dirty gaskets stop sealing, and warm air gets in."),
@@ -137,15 +137,6 @@ COMBO_PAGES = {
              "Or when the filter light comes on. An old filter slows the ice maker and the dispenser."),
             ("Once a year", "Replace the air purification cartridge",
              "On models that have one. The control panel reminds you when it is due."),
-            ("Once a year", "Professional maintenance visit",
-             "A technician cleans and checks the cooling system, fans, defrost and seals before a small problem turns into a sealed-system repair."),
-        ],
-        # Flat prices set by the owner on 2026-11-13. Scope to be confirmed.
-        "maintenance": [
-            ("Basic maintenance", 180,
-             "Condenser cleaning, door gasket check and cleaning, temperature check in both sections, drain and defrost check."),
-            ("Advanced maintenance", 250,
-             "Everything in Basic, plus evaporator fan and coil inspection, ice maker and water valve check, and door and hinge adjustment."),
         ],
         "faqs": [
             ("Why is my Sub-Zero refrigerator warm but the freezer is fine?",
@@ -358,10 +349,10 @@ def care_section(noun, care):
         f'''<li class="care-row reveal"><span class="care-row__when">{esc(w)}</span>
   <div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>''' for w, t, d in care)
     return f"""<section class="section"><div class="wrap">
-  <div class="section-head"><p class="eyebrow">Care &amp; maintenance</p><h2>How often to service a {esc(noun)}</h2>
-    <p class="lede">A built-in Sub-Zero can run for decades with regular care. This is the schedule we recommend.</p></div>
+  <div class="section-head"><p class="eyebrow">Care tips</p><h2>How often to service a {esc(noun)}</h2>
+    <p class="lede">A built-in Sub-Zero can run for decades with regular care. This is the care schedule to follow at home.</p></div>
   <ul class="care-list">{rows}</ul>
-  {P.cta_row('Due for maintenance?', 'Basic maintenance is $180, Advanced is $250. Flat price, no diagnostic fee.', href='#request')}
+  {P.cta_row('Still running warm after this?', 'Call, or leave your number and we will call you back.', href='#request')}
 </div></section>"""
 
 
