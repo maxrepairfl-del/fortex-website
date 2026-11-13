@@ -74,8 +74,8 @@ MORE_BRANDS = {
         "title": "Wolf Range & Oven Repair in Orange County",
         "meta": "Wolf range, rangetop, cooktop and wall oven repair in Orange County. Dual-fuel and gas models, OEM parts, price before work. $80 service call free with repair.",
         "lead": "Dual-fuel and gas ranges, rangetops, cooktops and wall ovens with the red knobs. Burners that click or will not light, ovens that will not heat or hold temperature, convection fans and controls.",
-        "photo": "wolf-burners-lit", "photo_2": "wolf-top-off",
-        "product_photos": ["wolf-burners-lit", "wolf-top-off", "job-oven-bake-element-red", None],
+        "photo": "wolf-front", "photo_2": "wolf-top-off",
+        "product_photos": ["wolf-front", "wolf-top-off", "job-oven-bake-element-red", None],
         "products": [
             ("oven", "Ranges", "Dual-fuel and all-gas, 30 to 60 inch.", "/services/stove-cooktop-repair/wolf/"),
             ("oven", "Rangetops & cooktops", "Gas, induction and electric cooktops and rangetops.", "/services/stove-cooktop-repair/wolf/"),
@@ -177,7 +177,7 @@ MORE_BRANDS = {
         "title": "Samsung Appliance Repair in Orange County",
         "meta": "Samsung refrigerator, Family Hub, washer and dryer repair in Orange County. Ice maker freeze-ups, fan errors, drain and heat faults. $80 service call free with repair.",
         "lead": "Samsung refrigerators including Family Hub, front- and top-load washers and dryers. Ice makers that freeze up, fan errors, fridges warming up, washers that will not drain and dryers that will not heat.",
-        "photo": "samsung-family-hub", "photo_2": "samsung-washer-open",
+        "photo": "samsung-family-hub", "photo_2": "samsung-washer",
         "product_photos": [None, None, None, None],
         "products": [
             ("refrigerator", "Refrigerators", "French-door, 4-door Flex, Family Hub and Bespoke.", "/services/refrigerator-repair/samsung/"),
@@ -206,7 +206,7 @@ MORE_COMBOS = {
         "h1": "Wolf Range Repair in Orange County",
         "meta": "Wolf range or rangetop burner clicking, not lighting, oven not heating? Dual-fuel and gas Wolf repair in Orange County. $80 service call free with repair.",
         "lead": "Burners that click nonstop or will not light, a weak simmer, an oven that will not heat or runs off temperature. We repair Wolf dual-fuel and gas ranges, rangetops and cooktops in your kitchen.",
-        "photo": "wolf-burners-lit", "prices": RANGE_PRICES_WOLF,
+        "photo": "wolf-front", "prices": RANGE_PRICES_WOLF,
         "symptoms": [
             "Burner clicks but won't light",
             "Igniters keep clicking after the burner is lit",
@@ -223,9 +223,8 @@ MORE_COMBOS = {
             ("Oven won't heat (gas)", "Weak igniter not opening the safety valve", "Measure igniter current draw, replace the igniter"),
         ],
         "gallery": [
-            ("wolf-burners-lit", "Every burner lit after a Wolf igniter repair"),
             ("wolf-top-off", "Wolf cooktop lifted to reach the burner valves"),
-            ("wolf-front", "Wolf range back in service"),
+            ("wolf-front", "Wolf gas range"),
             ("pro-range-open", "Control panel open on a pro range during diagnosis"),
         ],
         "faqs": [
@@ -414,7 +413,6 @@ MORE_COMBOS = {
         ],
         "gallery": [
             ("lg-washer-front", "LG front-load washer on a service call"),
-            ("lg-washer-drum", "LG washer opened up for repair"),
             ("washer-gasket", "Checking the door boot for tears and debris"),
             ("drain-pump-hand", "Drain pump removed for replacement"),
         ],

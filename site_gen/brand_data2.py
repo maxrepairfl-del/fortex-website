@@ -159,7 +159,6 @@ NEW_COMBOS = {
         "gallery": [
             ("tg-vitalik-brand-thermador-builtin-fridge-label", "Thermador built-in refrigerator data plate"),
             ("tg-vitalik-brand-thermador-builtin-fridge-label-2", "Rating label checked before ordering parts"),
-            ("builtin-panel-tech", "Working inside a panel-ready built-in"),
             ("gallery-refrigeration-5", "Built-in refrigerator open for diagnosis"),
         ],
         "faqs": [
@@ -183,10 +182,8 @@ NEW_COMBOS = {
             ("Banging on spin (top-load)", "Suspension rods, worn tub dampers", "Replace the rods and dampers"),
         ],
         "gallery": [
-            ("job-brand-samsung-washer-open", "Samsung washer opened for repair"),
             ("tg-vitalik-brand-samsung-washer-controls", "Samsung washer control panel"),
             ("gallery-laundry-24", "Samsung top-load washer"),
-            ("gallery-laundry-83", "Samsung washer and dryer stack"),
         ],
         "faqs": [
             ("How much does Samsung washer repair cost?", "Most Samsung washer repairs fall between $160 and $520: drain pump, inlet valve, door lock, suspension and boards. Bearings and tub seal run $350 to $640."),
@@ -210,7 +207,6 @@ NEW_COMBOS = {
         ],
         "gallery": [
             ("job-brand-samsung-dryer-hands", "Technician working on Samsung dryer wiring"),
-            ("gallery-laundry-83", "Samsung washer and dryer stack"),
             ("dryer-ir", "Measuring dryer temperature during diagnosis"),
             ("tg-vitalik-dryer-drum-roller-closeup", "Worn dryer drum roller"),
         ],

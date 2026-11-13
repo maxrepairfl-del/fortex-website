@@ -62,43 +62,71 @@ BRAND_PAGES = {
     },
 }
 
+SUBZERO_PRICES = [
+    ("Dual-compressor sealed-system work", "$850 – $1,800"),
+    ("Condenser / evaporator service", "$520 – $1,100"),
+    ("Main control board", "$420 – $880"),
+    ("Built-in door hinge and spring cassette", "$280 – $580"),
+    ("Ice maker auger motor and solenoid", "$260 – $520"),
+    ("Door auto-close cam", "$220 – $440"),
+    ("Drawer gasket / door seal", "$180 – $380"),
+    ("Panel-ready door realignment", "$160 – $340"),
+]
+BRAND_PAGES["sub-zero"]["prices"] = SUBZERO_PRICES
+BRAND_PAGES["sub-zero"]["photo"] = "sub-zero-built-in-refrigerator-overview-l302"
+BRAND_PAGES["sub-zero"]["product_photos"] = ["sub-zero-built-in-refrigerator-overview-l302",
+                                             "sub-zero-built-in-refrigerator-work-l321", None, None]
+
 COMBO_PAGES = {
+    # Sample high-end landing page (owner's brief of 2026-11-13). Layout v2:
+    # hero -> request -> models -> problems with photo -> trust/steps/area ->
+    # FAQ -> estimated prices -> final call.
     ("sub-zero", "refrigerator-repair"): {
+        "v2": True,
         "noun": "Sub-Zero refrigerator",
         "icon": "refrigerator",
         "h1": "Sub-Zero Refrigerator Repair in Orange County",
-        "meta": "Sub-Zero refrigerator not cooling, warm, frosting or the door won't close? Built-in, integrated and PRO repair in Orange County. Prices from $160, $80 service call free with repair.",
-        "lead": "Warm fresh-food section, frost in the freezer, a door that will not close on its own or an ice maker that quit. We diagnose built-in, integrated and PRO models in place and give you the full price before any work.",
-        "photo": "sz-builtin-sxs",
-        "symptoms": [
-            "Refrigerator section warm, freezer fine (or the other way round)",
-            "Running constantly, or the condenser fan is loud",
-            "Frost or ice building up on the back wall",
-            "Door won't close by itself or doesn't seal",
-            "Ice maker stopped making ice or leaks",
-            "Service light or alarm on the control panel",
+        "meta": "Sub-Zero built-in refrigerator repair in Orange County: warm sections, frost, doors that won't close, ice makers. $80 service call, free with repair. Price agreed before work.",
+        "lead": "Built-in, integrated (panel-ready) and PRO Sub-Zero refrigerators, repaired in your kitchen. We find the cause first and agree the repair price with you before any work starts.",
+        "photo": "sub-zero-built-in-refrigerator-overview-l302",
+        "types": [
+            ("Built-in side-by-side", "36, 42 and 48 inch classic and PRO side-by-side models."),
+            ("Over-and-under & French door", "Built-in models with the freezer drawer at the bottom."),
+            ("Columns", "All-refrigerator and all-freezer columns, single or paired."),
+            ("Integrated (panel-ready)", "Units behind cabinet panels, serviced in place."),
         ],
-        "causes": [
-            ("One section warm", "Dirty condenser on top of the unit, evaporator fan, or a failing compressor on dual-refrigeration models", "Clean and check the condenser, test fans and sensors, read sealed-system pressures"),
-            ("Runs nonstop", "Condenser blocked by dust, failing condenser fan, low refrigerant", "Check airflow at the top grille, measure current draw and pressures"),
-            ("Frost on the back wall", "Defrost heater, defrost sensor or control fault", "Test the defrost circuit and control before replacing anything"),
-            ("Door won't self-close", "Worn hinge cassette or auto-close cam, sagging panel", "Replace the cassette or cam, re-align the door and panel"),
-            ("No ice / leaking", "Water valve, auger motor, frozen fill tube", "Test the valve and motor, clear and protect the fill line"),
+        "symptoms": ["Refrigerator section warm"],
+        "problems": [
+            ("Refrigerator warm, freezer fine (or the reverse)",
+             "Many Sub-Zero built-ins have two separate cooling systems, so one side can fail alone.",
+             "We check the condenser and fans first, then sensors, then the sealed system for that section."),
+            ("Running nonstop or loud",
+             "Usually a dusty condenser behind the top grille or a failing condenser fan.",
+             "We check airflow at the grille and the fan before anything bigger."),
+            ("Frost on the back wall",
+             "Points to the defrost circuit: heater, sensor or control.",
+             "We test the defrost circuit before replacing parts."),
+            ("Door won't close by itself",
+             "Worn hinge cassette or auto-close cam, or a heavy panel that has dropped.",
+             "We replace the worn part and realign the door and panel."),
+            ("Ice maker stopped or leaks",
+             "Water valve, auger motor or a frozen fill tube.",
+             "We test the valve and motor and clear the fill line."),
         ],
-        "gallery": [
-            ("sz-builtin-sxs", "Sub-Zero built-in side-by-side on a service call"),
-            ("builtin-panel-tech", "Working inside a panel-ready built-in, in place"),
-            ("gauges-compressor", "Gauges on the compressor to read sealed-system pressures"),
-        ],
+        "problem_photo": ("sub-zero-built-in-refrigerator-work-l321",
+                          "Panel-ready Sub-Zero built-in refrigerator during service"),
+        "prices": SUBZERO_PRICES,
         "faqs": [
             ("Why is my Sub-Zero refrigerator warm but the freezer is fine?",
-             "Many Sub-Zero built-ins have two separate cooling systems, so one section can fail while the other keeps working. The usual causes are a dusty condenser, an evaporator fan or a sensor. Less often it is the compressor for that section. We test it in that order."),
+             "Many Sub-Zero built-ins have two separate cooling systems, so one section can fail while the other keeps working. The usual causes are a dusty condenser, an evaporator fan or a sensor. Less often it is the compressor for that section. We check in that order."),
             ("How much does Sub-Zero refrigerator repair cost?",
-             "Most repairs fall between $160 and $880: gaskets, hinges, ice maker parts, fans and boards. Sealed-system work, such as a compressor on a dual-refrigeration model, runs $850 to $1,800. You get the exact price before any work starts."),
+             "It depends on the model and what the diagnosis finds. The estimated ranges for common Sub-Zero repairs are listed at the bottom of this page. The service call is $80 and free with repair, and we confirm the total before any work begins."),
+            ("Can you repair a panel-ready unit without damaging the cabinets?",
+             "Yes. Panel-ready units are serviced in place. We protect the floor and panels and realign the door so the panel sits flush when we are done."),
+            ("Are you a Sub-Zero factory-authorized service?",
+             "No. We are an independent, licensed repair company. If your unit is still under the factory warranty, use the manufacturer's service first."),
             ("How often should the condenser be cleaned?",
-             "Every 6 to 12 months, more often with pets. On most built-ins the condenser sits behind the top grille. A clogged condenser is one of the most common reasons a Sub-Zero runs warm or nonstop."),
-            ("Can you repair it the same day?",
-             "Often, yes: cleaning, fans, valves and gaskets are usually same-visit. Model-specific parts like a board or a hinge cassette may need to be ordered, and we tell you the timing with the price."),
+             "Every 6 to 12 months, more often with pets. On most built-ins the condenser sits behind the top grille, and a clogged condenser is a common reason a Sub-Zero runs warm or nonstop."),
         ],
     },
 }
@@ -125,30 +153,26 @@ def _range(text):
     return (nums[0], nums[-1]) if nums else (None, None)
 
 
-def price_table(rows, noun, path):
-    """Cost table written the way people search ("how much does X cost").
+PRICE_FOOTNOTE = ("Estimated repair ranges are a guide. Your final quote depends on the appliance "
+                  "model, parts required and diagnostic findings. We confirm the total before work "
+                  "begins. Service call: $80, free with repair.")
 
-    Placed low on the page. Phrased for searches from anywhere in the U.S.,
-    not just Orange County, and mirrored in an OfferCatalog so the ranges are
-    machine-readable."""
+
+def price_table(rows, noun, path):
+    """Estimated repair ranges, low on the page (after the FAQ).
+
+    Plain visible HTML, mirrored in an OfferCatalog with the same numbers. No
+    "most repairs cost X-Y" summary: the rows are reference ranges, not
+    statistics of our own completed jobs."""
     year = datetime.date.today().year
     trs = "".join(
-        f"<tr><td>{esc(noun)} {esc(_clean(a)[0].lower() + _clean(a)[1:])}</td>"
-        f"<td class=\"price\">{esc(b)}</td></tr>" for a, b in rows)
-    lo = min(_range(b)[0] for _, b in rows)
-    hi = max(_range(b)[1] for _, b in rows)
-    cheap, big = rows[-1], rows[0]
-    summary = (f"Most {noun} repairs cost between ${lo:,} and ${hi:,} in {year}, parts and labor included. "
-               f"For example, {_clean(cheap[0]).lower()} typically runs {cheap[1]}, while "
-               f"{_clean(big[0]).lower()} runs {big[1]}. The final price depends on the model "
-               f"and what the diagnosis finds.")
+        f"<tr><td>{esc(a)}</td><td class=\"price\">{esc(b)}</td></tr>" for a, b in rows)
     html = f"""<section class="section section--tight price-ref"><div class="wrap">
-  <div class="section-head"><h2>How much does {esc(noun)} repair cost? ({year} prices)</h2>
-    <p class="lede">{esc(summary)}</p></div>
+  <div class="section-head"><h2>Estimated {esc(noun)} repair costs</h2></div>
   <div class="cause-table price-table"><table>
-    <thead><tr><th>{esc(noun)} repair</th><th>Typical cost (parts + labor)</th></tr></thead><tbody>{trs}</tbody>
+    <thead><tr><th>Repair</th><th>Estimated range</th></tr></thead><tbody>{trs}</tbody>
   </table></div>
-  <p class="price-ref__note">In Orange County, CA the service call is $80 and free when you go ahead with the repair. You get the exact price before any work starts.</p>
+  <p class="price-ref__note">{esc(PRICE_FOOTNOTE)}</p>
 </div></section>"""
     offers = []
     for a, b in rows:
@@ -158,7 +182,7 @@ def price_table(rows, noun, path):
                        "priceSpecification": {"@type": "PriceSpecification", "priceCurrency": "USD",
                                               "minPrice": mn, "maxPrice": mx}})
     catalog = {"@context": "https://schema.org", "@type": "OfferCatalog",
-               "name": f"{noun} repair cost ({year})", "url": SITE["url"] + path,
+               "name": f"Estimated {noun} repair costs ({year})", "url": SITE["url"] + path,
                "itemListElement": offers}
     return html, catalog
 
@@ -173,7 +197,7 @@ def oem_block(brand, parts_line):
 </div></section>"""
 
 
-def hero(crumbs, h1, lead, photo):
+def hero(crumbs, h1, lead, photo, portrait=False):
     trail = " <span>›</span> ".join(
         f'<a href="{h}">{esc(t)}</a>' if h else f"<span>{esc(t)}</span>" for t, h in crumbs)
     return f"""<section class="page-hero"><div class="wrap page-hero-grid">
@@ -185,14 +209,14 @@ def hero(crumbs, h1, lead, photo):
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
       <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
     </div>
-    <p class="hero-terms">{icon('dollar', size=18)}<span>{P.DIAGNOSTIC_LEAD_HTML}</span></p>
+    <p class="hero-terms">{icon('dollar', size=18)}<span>{P.DIAGNOSTIC_LEAD_HTML} The repair price is agreed with you before work starts.</span></p>
     <ul class="hero-proof">
       <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{P.stars()} {SITE['yelp_rating']} on Yelp · {SITE['yelp_reviews']} reviews</a></li>
       <li>{icon('shield-plain', size=17)} Licensed CA #{SITE['license']}</li>
       <li>{icon('award', size=17)} 1 year on OEM parts / 90 days labor</li>
     </ul>
   </div>
-  <div class="media reveal">{img(photo, sizes='(max-width:1000px) 90vw, 460px', loading='eager', fetchpriority='high')}</div>
+  <div class="media{' media--portrait' if portrait else ''} reveal">{img(photo, sizes='(max-width:1000px) 80vw, 400px', loading='eager', fetchpriority='high')}</div>
 </div></section>"""
 
 
@@ -257,8 +281,67 @@ def render_brand(slug):
         extra_schema=[schema, faq_schema(b["faqs"]), catalog], og_image=b["photo"], book_href="#request")
 
 
+def types_section(noun, types):
+    cards = "".join(f'<div class="type-card reveal"><h3>{esc(t)}</h3><p>{esc(d)}</p></div>' for t, d in types)
+    return f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Models we service</p><h2>{esc(noun)}s we work on</h2></div>
+  <div class="type-grid">{cards}</div>
+</div></section>"""
+
+
+def problems_section(noun, problems, photo):
+    items = "".join(
+        f'<li class="problem reveal"><h3>{esc(t)}</h3><p>{esc(cause)}</p><p class="problem__do">{esc(do)}</p></li>'
+        for t, cause, do in problems)
+    fig = ""
+    if photo:
+        fig = (f'<figure class="problems__photo reveal">{img(photo[0], sizes="(max-width:900px) 70vw, 340px")}'
+               f'<figcaption>{esc(photo[1])}</figcaption></figure>')
+    return f"""<section class="section section--surface"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Common problems</p><h2>What usually goes wrong on a {esc(noun)}</h2></div>
+  <div class="problems{' problems--photo' if photo else ''}"><ul class="problems__list">{items}</ul>{fig}</div>
+  {P.cta_row('Sound like yours?', 'Call, or leave your number and we will call you back.', href='#request')}
+</div></section>"""
+
+
+def area_line():
+    return f"""<section class="section section--tight"><div class="wrap">
+  <p class="area-line">{icon('pin', size=18)}<span>We come to you across Orange County. <a href="/areas/">See the cities and neighborhoods we serve</a>.</span></p>
+</div></section>"""
+
+
+def render_combo_v2(bslug, uslug):
+    b, c = BRAND_PAGES[bslug], COMBO_PAGES[(bslug, uslug)]
+    from .data import SERVICES_BY_SLUG
+    svc = SERVICES_BY_SLUG[uslug]
+    path = f"/services/{uslug}/{bslug}/"
+    price_html, catalog = price_table(c["prices"], c["noun"], path)
+    body = f"""
+{hero([('Home', '/'), ('Services', '/services/'), (svc['short'], f'/services/{uslug}/'), (b['name'], None)], c['h1'], c['lead'], c['photo'], portrait=True)}
+{request_form(c['noun'], c['icon'], c['symptoms'][0].lower(), path)}
+{types_section(c['noun'], c['types'])}
+{problems_section(c['noun'], c['problems'], c.get('problem_photo'))}
+{oem_block(b['name'], b['parts_line'])}
+{P.steps_section()}
+{area_line()}
+{faq_section(f"{c['noun']} repair FAQs", c['faqs'])}
+{price_html}
+<section class="section section--tight"><div class="wrap"><p class="center">More {esc(b['name'])}: <a href="/brands/{bslug}/">all {esc(b['name'])} appliances we repair</a> · Other brands: <a href="/services/{uslug}/">{esc(svc['name'].lower())}</a></p></div></section>
+{cta_band(heading=f"Need your {c['noun']} fixed?", book_href="#request")}
+"""
+    schema = {"@context": "https://schema.org", "@type": "Service",
+              "serviceType": f"{c['noun']} repair",
+              "provider": {"@id": SITE["url"] + "/#business"},
+              "areaServed": SITE["region"], "name": c["h1"]}
+    return f"{path}index.html", page(
+        f"{c['h1']}, CA | {SITE['name']}", c["meta"], path, body,
+        extra_schema=[schema, faq_schema(c["faqs"]), catalog], og_image=c["photo"], book_href="#request")
+
+
 def render_combo(bslug, uslug):
     b, c = BRAND_PAGES[bslug], COMBO_PAGES[(bslug, uslug)]
+    if c.get("v2"):
+        return render_combo_v2(bslug, uslug)
     from .data import SERVICES_BY_SLUG
     svc = SERVICES_BY_SLUG[uslug]
     path = f"/services/{uslug}/{bslug}/"

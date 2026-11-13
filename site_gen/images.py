@@ -55,12 +55,12 @@ PHOTOS = {
 JOB_WIDTHS = [400, 800, 960]
 JOB_PHOTOS = {
     "cellar-room":       ("wine-cellar/cellar-27.jpg", "Glass-walled wine room on a Fortex wine cellar cooling service call"),
-    "cellar-room-2":     ("wine-cellar/cellar-35.jpg", "Glass-front wine cellar cabinets in an Orange County home"),
+    "cellar-room-2":     ("wine-cellar/cellar-35.jpg", "Glass-front wine cellar cabinets"),
     "cellar-temp":       ("wine-cellar/cellar-26.jpg", "Technician checking wine cellar temperature with an infrared thermometer"),
     "cellar-controller": ("wine-cellar/cellar-22.jpg", "Wine cellar temperature controller showing 58°F against a 55°F setpoint"),
     "cellar-pressure":   ("wine-cellar/cellar-20.jpg", "Refrigerant pressure control inside a wine cellar condensing unit"),
     "cellar-coil-clean": ("wine-cellar/cellar-25.jpg", "Condenser coil of a wine cellar cooling unit being cleaned with foam"),
-    "cellar-coil":       ("wine-cellar/cellar-24.jpg", "Condenser coil of a wine cellar cooling unit after cleaning"),
+    "cellar-coil":       ("wine-cellar/cellar-24.jpg", "Condenser coil of a wine cellar cooling unit"),
     "cellar-compressor": ("wine-cellar/cellar-31.jpg", "Compressor inside the outdoor condensing unit of a wine cellar split system"),
     "cellar-evaporator": ("wine-cellar/cellar-32.jpg", "Technician tracing wiring on a wine cellar evaporator unit"),
     "cellar-attic":      ("wine-cellar/cellar-33.jpg", "Ducted wine cellar evaporator installed in an attic"),
@@ -72,8 +72,8 @@ JOB_PHOTOS = {
 # Real job photos picked from the team's Telegram chats (2026-11-11), kept in
 # assets/photos-real. 720-1280px, so they use JOB_WIDTHS like the cellar set.
 REAL_PHOTOS = {
-    "sz-builtin-sxs":      ("../photos-real/brand-subzero-builtin-side-by-side.jpg", "Sub-Zero built-in side-by-side refrigerator in an Orange County kitchen"),
-    "builtin-panel-tech":  ("../photos-real/tech-panel-ready-builtin-fridge.jpg", "Fortex technician working inside a panel-ready built-in refrigerator"),
+    "sz-builtin-sxs":      ("../photos-real/brand-subzero-builtin-side-by-side.jpg", "Sub-Zero built-in side-by-side refrigerator"),
+    "builtin-panel-tech":  ("../photos-real/tech-panel-ready-builtin-fridge.jpg", "Panel-ready Sub-Zero built-in refrigerator during service"),
     "brazing-builtin":     ("../photos-real/team-selfie-kitchen-2.jpg", "Two Fortex technicians brazing a sealed-system line on a built-in refrigerator"),
     "gauges-compressor":   ("../photos-real/refrigerant-gauges.jpg", "Refrigerant manifold gauges connected at a refrigerator compressor"),
     "digital-manifold":    ("../photos-real/digital-manifold-gauge.jpg", "Digital refrigerant manifold reading pressures on a refrigerator sealed system"),
@@ -82,8 +82,8 @@ REAL_PHOTOS = {
     "pro-range-gold":      ("../photos-real/pro-range-48-gold-knobs.jpg", "48-inch professional gas range on a Fortex service call"),
     "lg-washtower":        ("../photos-real/brand-lg-washtower-white.jpg", "Stacked washer and dryer tower serviced by Fortex"),
     "commercial-line":     ("../photos-real/commercial-kitchen-line.jpg", "Restaurant kitchen line with commercial refrigeration"),
-    "wolf-burners-lit": ("../photos-real/brand-wolf-range-burners-lit.jpg", "Wolf range with all burners lit after a Fortex repair"),
-    "wolf-front": ("../photos-real/brand-wolf-range-front.jpg", "Wolf gas range with red knobs in an Orange County kitchen"),
+    "wolf-burners-lit": ("../photos-real/brand-wolf-range-burners-lit.jpg", "Gas range with all burners lit"),
+    "wolf-front": ("../photos-real/brand-wolf-range-front.jpg", "Wolf gas range with red knobs"),
     "wolf-top-off": ("../photos-real/brand-wolf-range-top-off.jpg", "Wolf range with the cooktop lifted for burner repair"),
     "pro-range-open": ("../photos-real/pro-range-disassembled.jpg", "Professional range with the control panel open during repair"),
     "viking-range-48": ("../photos-real/brand-viking-range-48.jpg", "Viking 48-inch range on a Fortex service call"),
@@ -99,7 +99,7 @@ REAL_PHOTOS = {
     "lg-model-label": ("../photos-real/brand-lg-fridge-model-label.jpg", "LG refrigerator model and serial label"),
     "lg-compressor": ("../photos-real/brand-lg-compressor.jpg", "LG refrigerator compressor in the machine compartment"),
     "lg-washer-front": ("../photos-real/brand-lg-washer-front.jpg", "LG front-load washer on a pedestal"),
-    "lg-washer-drum": ("../photos-real/brand-lg-washer-drum-logo.jpg", "LG washer opened up for repair, logo on the tub"),
+    "lg-washer-drum": ("../photos-real/brand-lg-washer-drum-logo.jpg", "Front-load washer with the front panel removed"),
     "washtower-black": ("../photos-real/brand-lg-washtower-black.jpg", "Stacked black-steel washer and dryer tower"),
     "washer-gasket": ("../photos-real/washer-gasket-hand.jpg", "Technician pulling back a front-load washer door gasket"),
     "drain-pump-hand": ("../photos-real/drain-pump-in-hand.jpg", "Drain pump removed from a machine for replacement"),
@@ -108,7 +108,7 @@ REAL_PHOTOS = {
     "dryer-lint-burn": ("../photos-real/dryer-lint-fire-damage.jpg", "Dryer interior scorched by lint build-up"),
     "samsung-family-hub": ("../photos-real/brand-samsung-family-hub.jpg", "Samsung Family Hub refrigerator on a service call"),
     "samsung-washer": ("../photos-real/brand-samsung-washer.jpg", "Samsung front-load washer"),
-    "samsung-washer-open": ("../photos-real/brand-samsung-washer-open.jpg", "Samsung washer opened up for repair"),
+    "samsung-washer-open": ("../photos-real/brand-samsung-washer-open.jpg", "Samsung dryer with the front panel removed"),
     "samsung-dryer": ("../photos-real/brand-samsung-dryer-hands.jpg", "Technician's hands working on Samsung dryer wiring"),
     "oven-flame": ("../photos-real/oven-gas-burner-flame.jpg", "Gas oven burner lit after an igniter repair"),
     "broil-glow": ("../photos-real/oven-broil-element-glow.jpg", "Oven broil element glowing during a test"),
@@ -120,7 +120,23 @@ from .media import LIB_PHOTOS  # noqa: E402
 JOB_PHOTOS.update(LIB_PHOTOS)
 
 
+# Named web copies made from the originals in assets/photo-library by
+# scripts/make_web_copies.py (AVIF + WebP + JPEG, EXIF orientation applied).
+# The originals are never renamed or touched. slug -> (source under assets/, alt)
+WEB_COPIES = {
+    "sub-zero-built-in-refrigerator-overview-l302": (
+        "photo-library/refrigeration/job-brand-subzero-builtin-side-by-side.jpg",
+        "Sub-Zero built-in side-by-side refrigerator"),
+    "sub-zero-built-in-refrigerator-work-l321": (
+        "photo-library/refrigeration/job-tech-panel-ready-builtin-fridge.jpg",
+        "Panel-ready Sub-Zero built-in refrigerator during service"),
+}
+WEB_WIDTHS = [400, 640, 960]
+
+
 def widths_for(slug):
+    if slug in WEB_COPIES:
+        return WEB_WIDTHS
     return JOB_WIDTHS if slug in JOB_PHOTOS else WIDTHS
 
 
@@ -148,6 +164,8 @@ _META = load_meta()
 def img(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
         decoding="async", base="/images"):
     """Return a responsive <img> tag for a manifest slug."""
+    if slug in WEB_COPIES:
+        return picture(slug, sizes, cls, loading, fetchpriority, decoding, base)
     is_brand = slug in BRAND
     ext = "png" if (is_brand and BRAND[slug][0].endswith(".png")) else "jpg"
     alt = (BRAND.get(slug) or PHOTOS.get(slug) or JOB_PHOTOS.get(slug))[1]
@@ -176,3 +194,20 @@ def img(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
     if wh:
         attrs.append(wh.strip())
     return "<img " + " ".join(attrs) + ">"
+
+
+def picture(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
+            decoding="async", base="/images"):
+    """<picture> with AVIF and WebP sources and a JPEG fallback (web copies)."""
+    alt = WEB_COPIES[slug][1]
+    full = _META.get(slug, (WEB_WIDTHS[-1], None))[0]
+    ws = sorted({min(w, full) for w in WEB_WIDTHS})
+    def srcset(ext):
+        return ", ".join(f"{base}/{slug}-{w}.{ext} {w}w" for w in ws)
+    w, h = _META.get(slug, (None, None))
+    wh = f' width="{w}" height="{h}"' if w else ""
+    extra = (f' class="{cls}"' if cls else "") + (f' fetchpriority="{fetchpriority}"' if fetchpriority else "")
+    return (f'<picture><source type="image/avif" srcset="{srcset("avif")}" sizes="{sizes}">'
+            f'<source type="image/webp" srcset="{srcset("webp")}" sizes="{sizes}">'
+            f'<img src="{base}/{slug}-{ws[-1]}.jpg" srcset="{srcset("jpg")}" sizes="{sizes}" alt="{alt}" '
+            f'loading="{loading}" decoding="{decoding}"{extra}{wh}></picture>')
