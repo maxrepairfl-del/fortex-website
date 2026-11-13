@@ -389,7 +389,7 @@
         radius: 9, color: "#fff", weight: 3, fillColor: "#e5231c", fillOpacity: 1
       }).addTo(map)
         .bindTooltip(c.name, { direction: "top" })
-        .bindPopup('<strong>' + c.name + '</strong><br><a href="' + c.url + '">Appliance repair in ' + c.name + ' &rarr;</a>');
+        .bindPopup('<strong>' + c.name + '</strong><br><a href="' + c.url + '">Book a repair in ' + c.name + ' &rarr;</a>');
     });
 
     map.fitBounds(area.getBounds(), { padding: [24, 24] });

@@ -155,12 +155,360 @@
 2000,
 1333
 ],
+"gallery-commercial-150": [
+540,
+960
+],
+"gallery-commercial-2": [
+960,
+720
+],
+"gallery-commercial-42": [
+540,
+960
+],
+"gallery-commercial-52": [
+540,
+960
+],
+"gallery-commercial-53": [
+540,
+960
+],
+"gallery-commercial-68": [
+540,
+960
+],
+"gallery-cooking-101": [
+540,
+960
+],
+"gallery-cooking-113": [
+540,
+960
+],
+"gallery-cooking-16": [
+720,
+960
+],
+"gallery-cooking-22": [
+960,
+720
+],
+"gallery-cooking-23": [
+960,
+720
+],
+"gallery-cooking-26": [
+960,
+720
+],
+"gallery-cooking-29": [
+540,
+960
+],
+"gallery-cooking-38": [
+540,
+960
+],
+"gallery-cooking-43": [
+540,
+960
+],
+"gallery-cooking-62": [
+540,
+960
+],
+"gallery-cooking-9": [
+960,
+720
+],
+"gallery-dishwashers-119": [
+540,
+960
+],
+"gallery-dishwashers-142": [
+540,
+960
+],
+"gallery-dishwashers-148": [
+540,
+960
+],
+"gallery-dishwashers-32": [
+540,
+960
+],
+"gallery-dishwashers-33": [
+540,
+960
+],
+"gallery-laundry-10": [
+960,
+720
+],
+"gallery-laundry-103": [
+540,
+960
+],
+"gallery-laundry-106": [
+540,
+960
+],
+"gallery-laundry-120": [
+540,
+960
+],
+"gallery-laundry-15": [
+720,
+960
+],
+"gallery-laundry-20": [
+960,
+720
+],
+"gallery-laundry-24": [
+960,
+720
+],
+"gallery-laundry-4": [
+720,
+960
+],
+"gallery-laundry-47": [
+540,
+960
+],
+"gallery-laundry-63": [
+540,
+960
+],
+"gallery-laundry-83": [
+540,
+960
+],
+"gallery-laundry-84": [
+540,
+960
+],
+"gallery-refrigeration-114": [
+540,
+960
+],
+"gallery-refrigeration-136": [
+540,
+960
+],
+"gallery-refrigeration-5": [
+720,
+960
+],
+"gallery-refrigeration-6": [
+720,
+960
+],
+"gallery-team-110": [
+960,
+540
+],
 "gauges-compressor": [
 720,
 960
 ],
 "gauges-tools": [
 720,
+960
+],
+"job-brand-fisher-paykel-dishdrawer": [
+540,
+960
+],
+"job-brand-ge-front-load-washer": [
+960,
+960
+],
+"job-brand-ge-top-load-washer": [
+960,
+960
+],
+"job-brand-ge-top-load-washer-controls": [
+960,
+960
+],
+"job-brand-lg-french-door-fridge-kitchen": [
+960,
+960
+],
+"job-brand-lg-fridge-control-board": [
+960,
+960
+],
+"job-brand-maytag-dishwasher-circulation-pump": [
+960,
+960
+],
+"job-brand-monogram-dishwasher": [
+960,
+720
+],
+"job-brand-samsung-dryer-hands": [
+720,
+960
+],
+"job-brand-samsung-fridge-compressor": [
+960,
+960
+],
+"job-brand-samsung-fridge-control-board": [
+720,
+960
+],
+"job-brand-samsung-fridge-model-label": [
+960,
+960
+],
+"job-brand-samsung-washer": [
+720,
+960
+],
+"job-brand-samsung-washer-open": [
+720,
+960
+],
+"job-brand-thermador-star-burner": [
+540,
+960
+],
+"job-brand-viking-microwave": [
+720,
+960
+],
+"job-brand-whirlpool-top-load-washer": [
+960,
+960
+],
+"job-commercial-kitchen-line": [
+720,
+960
+],
+"job-dishwasher-inlet-valve-underside": [
+960,
+720
+],
+"job-dishwasher-pulled-out": [
+540,
+960
+],
+"job-dishwasher-racks-open": [
+960,
+960
+],
+"job-dishwasher-stainless-front": [
+720,
+960
+],
+"job-dryer-blower-housing-lint": [
+960,
+720
+],
+"job-dryer-burner-flame": [
+720,
+960
+],
+"job-dryer-gas-burner-meter": [
+960,
+960
+],
+"job-dryer-gas-valve-multimeter": [
+960,
+960
+],
+"job-dryer-lint-fire-damage": [
+540,
+960
+],
+"job-fridge-condenser-fan-blade": [
+960,
+960
+],
+"job-fridge-door-ice-maker": [
+960,
+960
+],
+"job-fridge-evaporator-after-defrost": [
+960,
+960
+],
+"job-fridge-evaporator-defrost-heater": [
+960,
+960
+],
+"job-fridge-evaporator-iced-over": [
+960,
+960
+],
+"job-fridge-evaporator-iced-over-2": [
+960,
+960
+],
+"job-fridge-ice-bin-crushed-ice": [
+720,
+960
+],
+"job-fridge-ir-thermometer-34f": [
+960,
+960
+],
+"job-microwave-disassembled": [
+720,
+960
+],
+"job-oven-bake-element-red": [
+720,
+960
+],
+"job-oven-broil-element-glow": [
+720,
+960
+],
+"job-oven-convection-blower-in-hand": [
+960,
+960
+],
+"job-oven-gas-burner-flame": [
+540,
+960
+],
+"job-refrigerant-gauges": [
+720,
+960
+],
+"job-team-selfie-kitchen-1": [
+960,
+540
+],
+"job-team-selfie-kitchen-3": [
+960,
+540
+],
+"job-tech-panel-ready-builtin-fridge": [
+540,
+960
+],
+"job-tools-dewalt-impact-driver": [
+960,
+960
+],
+"job-washer-impeller-gloved": [
+720,
+960
+],
+"job-washer-top-load-basket": [
+720,
+960
+],
+"job-washer-top-load-drive-motor": [
+960,
 960
 ],
 "lg-compressor": [
@@ -274,6 +622,162 @@
 "tech-portrait": [
 2000,
 1333
+],
+"tg-vitalik-bosch-dishwasher-pump": [
+720,
+960
+],
+"tg-vitalik-bosch-dishwasher-pump-area": [
+960,
+720
+],
+"tg-vitalik-brand-bosch-dishwasher-label": [
+960,
+960
+],
+"tg-vitalik-brand-bosch-side-by-side-open": [
+960,
+960
+],
+"tg-vitalik-brand-ge-washer-top-off": [
+960,
+960
+],
+"tg-vitalik-brand-hoshizaki-board-2": [
+874,
+960
+],
+"tg-vitalik-brand-hoshizaki-ice-machine": [
+874,
+960
+],
+"tg-vitalik-brand-hoshizaki-ice-machine-board": [
+960,
+960
+],
+"tg-vitalik-brand-hoshizaki-label": [
+960,
+840
+],
+"tg-vitalik-brand-lg-instaview-fridge": [
+960,
+960
+],
+"tg-vitalik-brand-samsung-washer-controls": [
+960,
+960
+],
+"tg-vitalik-brand-subzero-model-label": [
+960,
+960
+],
+"tg-vitalik-brand-thermador-builtin-fridge-label": [
+960,
+960
+],
+"tg-vitalik-brand-thermador-builtin-fridge-label-2": [
+960,
+960
+],
+"tg-vitalik-drain-pump-in-hand-2": [
+960,
+960
+],
+"tg-vitalik-dryer-belt-pulley": [
+960,
+960
+],
+"tg-vitalik-dryer-drum-roller-closeup": [
+960,
+960
+],
+"tg-vitalik-dryer-drum-rollers": [
+960,
+960
+],
+"tg-vitalik-dryer-idler-pulley": [
+720,
+960
+],
+"tg-vitalik-dryer-vent-duct-ceiling": [
+960,
+960
+],
+"tg-vitalik-electric-glass-cooktop": [
+960,
+960
+],
+"tg-vitalik-freezer-meter-diagnosis": [
+960,
+960
+],
+"tg-vitalik-fridge-compressor-embraco": [
+960,
+960
+],
+"tg-vitalik-fridge-compressor-secop": [
+960,
+960
+],
+"tg-vitalik-fridge-evaporator-fan": [
+960,
+960
+],
+"tg-vitalik-fridge-ir-thermometer-43f-warm": [
+960,
+960
+],
+"tg-vitalik-gas-burner-flame-test": [
+540,
+960
+],
+"tg-vitalik-ice-machine-cubes": [
+960,
+960
+],
+"tg-vitalik-ice-machine-fans-compressor": [
+960,
+960
+],
+"tg-vitalik-ice-machine-pump": [
+960,
+960
+],
+"tg-vitalik-microwave-error-display": [
+720,
+960
+],
+"tg-vitalik-microwave-magnetron-in-hand": [
+720,
+960
+],
+"tg-vitalik-microwave-magnetron-installed": [
+720,
+960
+],
+"tg-vitalik-microwave-meter-test": [
+720,
+960
+],
+"tg-vitalik-microwave-opened": [
+960,
+960
+],
+"tg-vitalik-oven-control-board": [
+960,
+960
+],
+"tg-vitalik-pro-range-cooktop-lifted": [
+960,
+960
+],
+"tg-vitalik-washer-drum-gasket-check": [
+960,
+960
+],
+"tg-vitalik-washer-inlet-valves": [
+960,
+960
 ],
 "thermador-knob": [
 540,

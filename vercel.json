@@ -66,6 +66,66 @@
       "source": "/services/oven-stove-repair/",
       "destination": "/services/oven-repair/",
       "permanent": true
+    },
+    {
+      "source": "/areas/irvine",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/irvine/",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/huntington-beach",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/huntington-beach/",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/anaheim",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/anaheim/",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/santa-ana",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/santa-ana/",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/yorba-linda",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/yorba-linda/",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/fountain-valley",
+      "destination": "/areas/",
+      "permanent": true
+    },
+    {
+      "source": "/areas/fountain-valley/",
+      "destination": "/areas/",
+      "permanent": true
     }
   ]
 }

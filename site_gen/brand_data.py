@@ -75,6 +75,7 @@ MORE_BRANDS = {
         "meta": "Wolf range, rangetop, cooktop and wall oven repair in Orange County. Dual-fuel and gas models, OEM parts, price before work. $80 service call free with repair.",
         "lead": "Dual-fuel and gas ranges, rangetops, cooktops and wall ovens with the red knobs. Burners that click or will not light, ovens that will not heat or hold temperature, convection fans and controls.",
         "photo": "wolf-burners-lit", "photo_2": "wolf-top-off",
+        "product_photos": ["wolf-burners-lit", "wolf-top-off", "job-oven-bake-element-red", None],
         "products": [
             ("oven", "Ranges", "Dual-fuel and all-gas, 30 to 60 inch.", "/services/stove-cooktop-repair/wolf/"),
             ("oven", "Rangetops & cooktops", "Gas, induction and electric cooktops and rangetops.", "/services/stove-cooktop-repair/wolf/"),
@@ -100,6 +101,7 @@ MORE_BRANDS = {
         "meta": "Viking range, rangetop, oven, refrigerator and microwave repair in Orange County. OEM parts, price before work. $80 service call free with repair.",
         "lead": "Viking ranges and rangetops, wall ovens, built-in refrigerators, dishwashers and microwaves. Clicking igniters, weak or uneven burners, ovens that will not heat, broilers and door locks.",
         "photo": "viking-range-48", "photo_2": "viking-rangetop",
+        "product_photos": ["viking-range-48", "gallery-cooking-26", "gallery-refrigeration-114", "viking-microwave"],
         "products": [
             ("oven", "Ranges & rangetops", "Gas and dual-fuel, 30 to 60 inch.", "/services/stove-cooktop-repair/viking/"),
             ("oven", "Wall ovens", "Convection, self-clean and double ovens.", "/services/oven-repair/"),
@@ -125,10 +127,11 @@ MORE_BRANDS = {
         "meta": "Thermador Pro Grand and Pro Harmony range, cooktop, oven, refrigerator and dishwasher repair in Orange County. OEM parts, price before work.",
         "lead": "Pro Grand and Pro Harmony ranges, star-burner cooktops, wall and steam ovens, Freedom refrigerators and dishwashers. Burners that will not light or simmer, ovens off temperature, error codes.",
         "photo": "thermador-range", "photo_2": "thermador-top",
+        "product_photos": ["thermador-range", "job-oven-broil-element-glow", None, None],
         "products": [
             ("oven", "Ranges & cooktops", "Pro Grand, Pro Harmony, star burner and induction.", "/services/stove-cooktop-repair/thermador/"),
             ("oven", "Wall & steam ovens", "Convection, steam and combination ovens.", "/services/oven-repair/"),
-            ("refrigerator", "Freedom refrigerators", "Column and built-in refrigerators and freezers.", "/services/refrigerator-repair/"),
+            ("refrigerator", "Freedom refrigerators", "Column and built-in refrigerators and freezers.", "/services/refrigerator-repair/thermador/"),
             ("dishwasher", "Dishwashers", "Leaks, drain and wash faults, error codes.", "/services/dishwasher-repair/"),
         ],
         "parts_line": INDEPENDENT_COOK,
@@ -175,10 +178,11 @@ MORE_BRANDS = {
         "meta": "Samsung refrigerator, Family Hub, washer and dryer repair in Orange County. Ice maker freeze-ups, fan errors, drain and heat faults. $80 service call free with repair.",
         "lead": "Samsung refrigerators including Family Hub, front- and top-load washers and dryers. Ice makers that freeze up, fan errors, fridges warming up, washers that will not drain and dryers that will not heat.",
         "photo": "samsung-family-hub", "photo_2": "samsung-washer-open",
+        "product_photos": [None, None, None, None],
         "products": [
             ("refrigerator", "Refrigerators", "French-door, 4-door Flex, Family Hub and Bespoke.", "/services/refrigerator-repair/samsung/"),
-            ("washer", "Washers", "Front-load and top-load.", "/services/washing-machine-repair/"),
-            ("dryer", "Dryers", "Electric and gas.", "/services/dryer-repair/"),
+            ("washer", "Washers", "Front-load and top-load.", "/services/washing-machine-repair/samsung/"),
+            ("dryer", "Dryers", "Electric and gas.", "/services/dryer-repair/samsung/"),
             ("dishwasher", "Dishwashers & ranges", "Samsung dishwashers, ranges and microwaves.", "/services/dishwasher-repair/"),
         ],
         "parts_line": "Ice makers, fan motors, defrost parts, control boards, drain pumps and heaters",

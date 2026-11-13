@@ -58,6 +58,7 @@ BRAND_PAGES = {
              "Common parts, yes. Brand-specific parts such as a control board or a hinge cassette are often ordered for your exact model, and we tell you the timing together with the price."),
         ],
         "combos": [("refrigerator-repair", "Sub-Zero refrigerator repair")],
+        "product_photos": ["sz-builtin-sxs", "builtin-panel-tech", None, None],
     },
 }
 
@@ -104,8 +105,11 @@ COMBO_PAGES = {
 }
 
 from .brand_data import MORE_BRANDS, MORE_COMBOS  # noqa: E402
+from .brand_data2 import NEW_BRANDS, NEW_COMBOS  # noqa: E402
 BRAND_PAGES.update(MORE_BRANDS)
+BRAND_PAGES.update(NEW_BRANDS)
 COMBO_PAGES.update(MORE_COMBOS)
+COMBO_PAGES.update(NEW_COMBOS)
 
 BREADCRUMB_NAMES.update({"brands": "Brands"})
 for _slug, _b in BRAND_PAGES.items():
@@ -211,15 +215,26 @@ def faq_section(title, faqs):
 
 
 # ---------------------------------------------------------------- pages
+def _photo_for(href, b):
+    """Photo for a product card: the linked page's own hero photo."""
+    from .data import SERVICES_BY_SLUG
+    parts = [x for x in href.strip("/").split("/") if x]
+    if len(parts) == 3 and parts[0] == "services":
+        c = COMBO_PAGES.get((parts[2], parts[1]))
+        if c:
+            return c["photo"]
+    if len(parts) >= 2 and parts[1] in SERVICES_BY_SLUG:
+        return SERVICES_BY_SLUG[parts[1]]["photo"]
+    return b["photo"]
+
+
 def render_brand(slug):
     b = BRAND_PAGES[slug]
     path = f"/brands/{slug}/"
     price_html, catalog = price_table(b['prices'], b['name'], path)
-    cards = "".join(
-        f"""<a class="svc-card reveal" href="{h}">
-  <div class="ic">{icon(ic, size=28)}</div><h3>{esc(t)}</h3><p>{esc(d)}</p>
-  <span class="more">Learn more {icon('arrow-right', size=16)}</span></a>"""
-        for ic, t, d, h in b["products"])
+    pp = b.get("product_photos") or []
+    cards = "".join(P.photo_card(h, pp[i] if i < len(pp) and pp[i] else _photo_for(h, b), t, d)
+                    for i, (ic, t, d, h) in enumerate(b["products"]))
     body = f"""
 {hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'], b['lead'], b['photo'])}
 <section class="section"><div class="wrap">
@@ -280,10 +295,8 @@ def render_combo(bslug, uslug):
 
 def render_brands_index():
     cards = "".join(
-        f"""<a class="svc-card reveal" href="/brands/{s}/">
-  <div class="ic">{icon('award', size=28)}</div><h3>{esc(b['name'])}</h3>
-  <p>{esc(b['lead'][:120].rsplit(' ', 1)[0])}…</p>
-  <span class="more">{esc(b['name'])} repair {icon('arrow-right', size=16)}</span></a>"""
+        P.photo_card(f"/brands/{s}/", b.get("card_photo", b["photo"]), b["name"],
+                     b["lead"][:120].rsplit(" ", 1)[0] + "…", more=f"{b['name']} repair")
         for s, b in BRAND_PAGES.items())
     body = f"""
 <section class="page-hero page-hero--simple"><div class="wrap">

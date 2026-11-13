@@ -48,6 +48,11 @@ GOOGLE_FONTS = (
 )
 
 
+def _all_cities():
+    from .extra_pages import ALL_CITY_NAMES
+    return ALL_CITY_NAMES
+
+
 def base_schema():
     return {
         "@context": "https://schema.org",
@@ -66,8 +71,7 @@ def base_schema():
             "addressRegion": "CA",
             "addressCountry": "US",
         },
-        "areaServed": [{"@type": "City", "name": c["name"]} for c in CITIES]
-        + [{"@type": "City", "name": n} for n in NEARBY],
+        "areaServed": [{"@type": "City", "name": n} for n in _all_cities()],
         # No aggregateRating on purpose. Google's structured-data policy treats a
         # rating a business publishes about itself as self-serving and excludes
         # it for LocalBusiness, and ours is sourced from Yelp and Google rather
@@ -281,7 +285,8 @@ def header(path="/", book_href="/book/"):
 <nav class="nav-links" aria-label="Primary">
   <a href="/"{_cur(path,'/')}>Home</a>
   <span class="has-menu"><a href="/services/"{_cur(path,'/services')}>Services ▾</a>{_services_menu()}</span>
-  <span class="has-menu"><a href="/areas/"{_cur(path,'/areas')}>Areas ▾</a>{_areas_menu()}</span>
+  <a href="/our-work/"{_cur(path,'/our-work')}>Our Work</a>
+  <a href="/areas/"{_cur(path,'/areas')}>Areas</a>
   <a href="/how-it-works/"{_cur(path,'/how-it-works')}>How It Works</a>
   <a href="/about/"{_cur(path,'/about')}>About</a>
   <a href="/reviews/"{_cur(path,'/reviews')}>Reviews</a>
@@ -300,7 +305,7 @@ def mobile_nav(book_href="/book/"):
     links = "".join(
         f'<a href="{href}">{label}</a>'
         for href, label in [
-            ("/", "Home"), ("/services/", "Services"), ("/areas/", "Service Areas"),
+            ("/", "Home"), ("/services/", "Services"), ("/our-work/", "Our Work"), ("/areas/", "Service Areas"),
             ("/how-it-works/", "How It Works"), ("/about/", "About"), ("/reviews/", "Reviews"),
         ]
     )
@@ -328,7 +333,8 @@ def footer(book_href="/book/"):
         f'<li><a href="/services/{s["slug"]}/">{esc(s["short"])}</a></li>' for s in SERVICES[:8]
     )
     areas = "".join(
-        f'<li><a href="/areas/{c["slug"]}/">{esc(c["name"])}</a></li>' for c in CITIES
+        f'<li><a href="/areas/">{esc(n)}</a></li>'
+        for n in ["Irvine", "Newport Beach", "Huntington Beach", "Costa Mesa", "Santa Ana", "Mission Viejo"]
     )
     return f"""<footer class="site-footer">
 <div class="wrap">
@@ -476,7 +482,7 @@ def coverage_map():
     """
     main = [
         {"name": c["name"], "lat": CITY_COORDS[c["name"]][0],
-         "lon": CITY_COORDS[c["name"]][1], "url": f"/areas/{c['slug']}/"}
+         "lon": CITY_COORDS[c["name"]][1], "url": "/book/"}
         for c in CITIES if c["name"] in CITY_COORDS
     ]
     near = [
@@ -496,7 +502,7 @@ def coverage_map():
     <noscript><p class="map-fallback">We serve {esc(names)}.</p></noscript>
   </div>
   <p class="map-legend">
-    <span><i class="dot dot--main"></i>Cities we cover in depth, tap a pin for details</span>
+    <span><i class="dot dot--main"></i>Our busiest cities</span>
     <span><i class="dot dot--near"></i>Also serving nearby</span>
   </p>
 </div>"""

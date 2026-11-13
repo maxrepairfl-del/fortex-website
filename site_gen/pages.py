@@ -11,6 +11,25 @@ from .data import (
 )
 
 
+# ----------------------------------------------------------- real job photos
+from . import media as _media  # noqa: E402
+for _s in SERVICES:
+    if _s["slug"] in _media.HEROES:
+        _s["photo"] = _media.slug(_media.HEROES[_s["slug"]][0])
+    if _s["slug"] in _media.GALLERIES:
+        _s["gallery"] = [(_media.slug(p), c) for p, c in _media.GALLERIES[_s["slug"]]]
+TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
+
+
+def photo_card(href, photo, title, desc="", more="Learn more"):
+    """Card led by a real job photo instead of an icon."""
+    d = f"<p>{esc(desc)}</p>" if desc else ""
+    return f"""<a class="photo-card reveal" href="{href}">
+  <span class="photo-card__img">{img(photo, sizes='(max-width:700px) 92vw, 300px')}</span>
+  <span class="photo-card__body"><h3>{esc(title)}</h3>{d}
+  <span class="more">{esc(more)} {icon('arrow-right', size=16)}</span></span></a>"""
+
+
 # ----------------------------------------------------------- shared fragments
 def steps_section(heading="What to expect", sub="From first call to a working appliance, with no surprises along the way."):
     rows = ""
@@ -102,19 +121,21 @@ def home_quote_form():
 </div></section>"""
 
 
-def why_split(photo="tech-portrait", heading="Orange County trusts Fortex"):
-    feats = ""
-    for ic, t, b in WHY:
-        feats += f"""<div class="feature">
-  <div class="fic">{icon(ic, size=24)}</div>
-  <div><h3>{esc(t)}</h3><p>{esc(b)}</p></div>
-</div>"""
+def why_split(photo=None, heading="Orange County trusts Fortex"):
+    """Why Fortex: a plain list with check marks next to a photo of the team.
+
+    The old version put a decorative icon on every point; a real photo of the
+    technicians does more for trust than six stock symbols."""
+    photo = photo or TEAM_PHOTO
+    items = "".join(
+        f"<li>{icon('check-circle', size=22)}<div><h3>{esc(t)}</h3><p>{esc(b)}</p></div></li>"
+        for _ic, t, b in WHY)
     return f"""<section class="section"><div class="wrap">
   <div class="split">
     <div class="media reveal">{img(photo, sizes='(max-width:1000px) 90vw, 520px')}</div>
     <div>
       <p class="eyebrow">Why Fortex</p><h2>{esc(heading)}</h2>
-      <div class="feature-list">{feats}</div>
+      <ul class="why-list">{items}</ul>
     </div>
   </div>
 </div></section>"""
@@ -212,12 +233,17 @@ def reviews_section(items=None, heading="Reviews"):
 </div></section>"""
 
 
+def _area_chips():
+    from .extra_pages import area_chips
+    return area_chips()
+
+
 def areas_section():
     return f"""<section class="section"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">Service area</p>
     <h2>Same-day appliance repair across Orange County</h2>
-    <p class="lede">Local technicians serving Irvine, Huntington Beach, Anaheim, Santa Ana, Yorba Linda and surrounding cities.</p></div>
-  {areas_grid()}
+    <p class="lede">Technicians across the whole county, from Seal Beach to San Clemente.</p></div>
+  {_area_chips()}
 </div></section>"""
 
 
@@ -261,7 +287,7 @@ def render_home():
 {video_section()}
 {home_quote_form()}
 {steps_section()}
-{why_split('fridge-wide')}
+{why_split()}
 {reviews_section()}
 {brand_strip()}
 {areas_section()}
@@ -284,7 +310,7 @@ def render_services_index():
   <h1>Appliance Repair Services</h1>
   <p>Licensed, insured, same-day repair for every major appliance and brand across Orange County. Pick your appliance to learn more, or book online in under a minute.</p>
 </div></section>
-{services_grid(heading='Our services', title='What we repair', sub='Select an appliance for common problems we fix, brands we service, and answers to frequent questions.')}
+{services_tiles(heading='Our services', title='What we repair', sub='Pick your appliance for common problems, the brands we work on and what a repair usually costs.')}
 {steps_section()}
 {trust_strip()}
 {cta_band()}
@@ -507,11 +533,7 @@ def render_service(s):
     related = (first + [x for x in SERVICES
                         if x["slug"] != s["slug"] and x not in first])[:4]
     rel_cards = "".join(
-        f"""<a class="svc-card reveal" href="/services/{r['slug']}/">
-  <div class="ic">{icon(r['icon'], size=28)}</div><h3>{esc(r['short'])}</h3>
-  <p>{esc(r['card'])}</p><span class="more">Learn more {icon('arrow-right', size=16)}</span></a>"""
-        for r in related
-    )
+        photo_card(f"/services/{r['slug']}/", r['photo'], r['short'], r['card']) for r in related)
     faqs = s["faqs"]
     price = s.get("pricing")
     lead_html = price["lead_html"] if price else DIAGNOSTIC_LEAD_HTML
@@ -552,7 +574,7 @@ def render_service(s):
 {gallery_block(s)}
 {types_block(s)}
 {steps_section()}
-{why_split(s.get('photo_2', s['photo']), heading='Why choose Fortex for your repair')}
+{why_split(heading='Why choose Fortex for your repair')}
 <section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(s['noun'])} repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
@@ -834,7 +856,7 @@ def render_how():
 </div></section>
 {steps_section(sub='No call-center runaround and no surprise fees. Just a fast, honest, warrantied repair.')}
 {video_section()}
-{why_split('toolbag-shoecovers', heading='What makes a Fortex visit different')}
+{why_split(_media.slug(_media.TEAM[2][0]), heading='What makes a Fortex visit different')}
 <section class="section section--surface"><div class="wrap">
   <div class="split">
     <div>
@@ -872,7 +894,7 @@ def render_about():
       <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
     </div>
   </div>
-  <div class="media reveal">{img('tech-portrait', sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+  <div class="media reveal">{img(TEAM_PHOTO, sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
 </div></section>
 {trust_strip()}
 <section class="section"><div class="wrap">
@@ -884,7 +906,8 @@ def render_about():
     <p>Whether it's a fridge that quit on a Saturday or a dryer that's been slow for weeks, our goal is the same: get your home running again quickly, and earn a customer for life.</p>
   </div>
 </div></section>
-{why_split('tech-arrival', heading='What we stand for')}
+{gallery_block({'gallery': [(_media.slug(p), c) for p, c in _media.TEAM]})}
+{why_split(_media.slug(_media.TEAM[1][0]), heading='What we stand for')}
 {stats_band()}
 {reviews_section()}
 {cta_band()}
@@ -1196,14 +1219,14 @@ def render_404():
 
 # ----------------------------------------------------------------- all pages
 def all_pages():
+    from .extra_pages import render_areas, render_our_work
     pages = [
-        render_home(), render_services_index(), render_areas_index(),
+        render_home(), render_services_index(), render_areas(), render_our_work(),
         render_how(), render_about(), render_reviews(),
         render_book(), render_thankyou(), render_404(),
         render_privacy(), render_terms(),
     ]
     pages += [render_service(s) for s in SERVICES]
-    pages += [render_city(c) for c in CITIES]
     from .brands import brand_pages
     pages += brand_pages()
     return pages

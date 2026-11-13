@@ -116,6 +116,9 @@ REAL_PHOTOS = {
 }
 JOB_PHOTOS.update(REAL_PHOTOS)
 
+from .media import LIB_PHOTOS  # noqa: E402
+JOB_PHOTOS.update(LIB_PHOTOS)
+
 
 def widths_for(slug):
     return JOB_WIDTHS if slug in JOB_PHOTOS else WIDTHS
