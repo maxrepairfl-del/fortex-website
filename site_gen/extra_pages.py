@@ -109,9 +109,6 @@ def render_our_work():
     <a class="more-link" href="/services/{slug}/">{esc(s['name'])} {icon('arrow-right', size=16)}</a></div>
   <div class="job-gallery">{shots}</div>
 </div>"""
-    team = "".join(
-        f'<figure class="job-shot reveal">{P.img(media.slug(p), sizes="(max-width:700px) 46vw, 280px")}'
-        f'<figcaption>{esc(c)}</figcaption></figure>' for p, c in media.TEAM)
     body = f"""
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Our Work</span></div>
@@ -119,9 +116,6 @@ def render_our_work():
   <p class="hero-lead">Every photo on this page was taken by our technicians on real service calls. No stock images. Frozen evaporators, burned-out igniters, lint-packed dryers and the fixes that followed.</p>
 </div></section>
 <section class="section"><div class="wrap">{groups}
-<div class="work-group"><div class="work-group__head"><h2>The team</h2>
-  <a class="more-link" href="/about/">About Fortex {icon('arrow-right', size=16)}</a></div>
-  <div class="job-gallery">{team}</div></div>
 </div></section>
 {P.steps_section()}
 {cta_band()}
