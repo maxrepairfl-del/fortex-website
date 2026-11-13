@@ -126,6 +126,27 @@ COMBO_PAGES = {
         "problem_photo": ("sub-zero-built-in-refrigerator-work-l321",
                           "Panel-ready Sub-Zero built-in refrigerator during service"),
         "prices": SUBZERO_PRICES,
+        # (how often, what, why). Intervals follow Sub-Zero's own use & care
+        # guidance; the yearly professional visit is our recommendation.
+        "care": [
+            ("Every month", "Wipe the door gaskets with warm, soapy water",
+             "Sticky or dirty gaskets stop sealing, and warm air gets in."),
+            ("Every 6 months", "Clean the condenser behind the top grille",
+             "Dust on the condenser is the most common reason a Sub-Zero runs warm or nonstop. More often with pets."),
+            ("Every 6 months", "Replace the water filter",
+             "Or when the filter light comes on. An old filter slows the ice maker and the dispenser."),
+            ("Once a year", "Replace the air purification cartridge",
+             "On models that have one. The control panel reminds you when it is due."),
+            ("Once a year", "Professional maintenance visit",
+             "A technician cleans and checks the cooling system, fans, defrost and seals before a small problem turns into a sealed-system repair."),
+        ],
+        # Flat prices set by the owner on 2026-11-13. Scope to be confirmed.
+        "maintenance": [
+            ("Basic maintenance", 180,
+             "Condenser cleaning, door gasket check and cleaning, temperature check in both sections, drain and defrost check."),
+            ("Advanced maintenance", 250,
+             "Everything in Basic, plus evaporator fan and coil inspection, ice maker and water valve check, and door and hinge adjustment."),
+        ],
         "faqs": [
             ("Why is my Sub-Zero refrigerator warm but the freezer is fine?",
              "Many Sub-Zero built-ins have two separate cooling systems, so one section can fail while the other keeps working. The usual causes are a dusty condenser, an evaporator fan or a sensor. Less often it is the compressor for that section. We check in that order."),
@@ -168,7 +189,7 @@ PRICE_FOOTNOTE = ("Estimated repair ranges are a guide. Your final quote depends
                   "begins. Service call: $80, free with repair.")
 
 
-def price_table(rows, noun, path):
+def price_table(rows, noun, path, maintenance=None):
     """Estimated repair ranges, low on the page (after the FAQ).
 
     Plain visible HTML, mirrored in an OfferCatalog with the same numbers. No
@@ -177,12 +198,23 @@ def price_table(rows, noun, path):
     year = datetime.date.today().year
     trs = "".join(
         f"<tr><td>{esc(a)}</td><td class=\"price\">{esc(b)}</td></tr>" for a, b in rows)
+    maint_html = ""
+    if maintenance:
+        mrows = "".join(
+            f"<tr><td><strong>{esc(t)}</strong><span class=\"price-ref__desc\">{esc(d)}</span></td>"
+            f"<td class=\"price\">${p}</td></tr>" for t, p, d in maintenance)
+        maint_html = f"""
+  <h3 class="price-ref__sub">{esc(noun)} maintenance</h3>
+  <div class="cause-table price-table"><table>
+    <thead><tr><th>Service</th><th>Fixed price</th></tr></thead><tbody>{mrows}</tbody>
+  </table></div>
+  <p class="price-ref__note">Maintenance is a flat price, booked on its own. No diagnostic fee.</p>"""
     html = f"""<section class="section section--tight price-ref"><div class="wrap">
   <div class="section-head"><h2>Estimated {esc(noun)} repair costs</h2></div>
   <div class="cause-table price-table"><table>
     <thead><tr><th>Repair</th><th>Estimated range</th></tr></thead><tbody>{trs}</tbody>
   </table></div>
-  <p class="price-ref__note">{esc(PRICE_FOOTNOTE)}</p>
+  <p class="price-ref__note">{esc(PRICE_FOOTNOTE)}</p>{maint_html}
 </div></section>"""
     offers = []
     for a, b in rows:
@@ -194,6 +226,9 @@ def price_table(rows, noun, path):
     catalog = {"@context": "https://schema.org", "@type": "OfferCatalog",
                "name": f"Estimated {noun} repair costs ({year})", "url": SITE["url"] + path,
                "itemListElement": offers}
+    for t, p, _d in maintenance or []:
+        offers.append({"@type": "Offer", "price": p, "priceCurrency": "USD",
+                       "itemOffered": {"@type": "Service", "name": f"{noun} {t.lower()}"}})
     return html, catalog
 
 
@@ -318,6 +353,18 @@ def problems_section(noun, problems, photo):
 </div></section>"""
 
 
+def care_section(noun, care):
+    rows = "".join(
+        f'''<li class="care-row reveal"><span class="care-row__when">{esc(w)}</span>
+  <div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>''' for w, t, d in care)
+    return f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Care &amp; maintenance</p><h2>How often to service a {esc(noun)}</h2>
+    <p class="lede">A built-in Sub-Zero can run for decades with regular care. This is the schedule we recommend.</p></div>
+  <ul class="care-list">{rows}</ul>
+  {P.cta_row('Due for maintenance?', 'Basic maintenance is $180, Advanced is $250. Flat price, no diagnostic fee.', href='#request')}
+</div></section>"""
+
+
 def area_line():
     return f"""<section class="section section--tight"><div class="wrap">
   <p class="area-line">{icon('pin', size=18)}<span>We come to you across Orange County. <a href="/areas/">See the cities and neighborhoods we serve</a>.</span></p>
@@ -329,7 +376,7 @@ def render_combo_v2(bslug, uslug):
     from .data import SERVICES_BY_SLUG
     svc = SERVICES_BY_SLUG[uslug]
     path = f"/services/{uslug}/{bslug}/"
-    price_html, catalog = price_table(c["prices"], c["noun"], path)
+    price_html, catalog = price_table(c["prices"], c["noun"], path, c.get("maintenance"))
     body = f"""
 {hero([('Home', '/'), ('Services', '/services/'), (svc['short'], f'/services/{uslug}/'), (b['name'], None)], c['h1'], c['lead'], c['photo'], portrait=True)}
 {request_form(c['noun'], c['icon'], c['symptoms'][0].lower(), path)}
@@ -338,6 +385,7 @@ def render_combo_v2(bslug, uslug):
 {oem_block(b['name'], b['parts_line'])}
 {P.steps_section()}
 {area_line()}
+{care_section(c['noun'], c['care']) if c.get('care') else ''}
 {faq_section(f"{c['noun']} repair FAQs", c['faqs'])}
 {price_html}
 <section class="section section--tight"><div class="wrap"><p class="center">More {esc(b['name'])}: <a href="/brands/{bslug}/">all {esc(b['name'])} appliances we repair</a> · Other brands: <a href="/services/{uslug}/">{esc(svc['name'].lower())}</a></p></div></section>
