@@ -894,3 +894,11 @@ body.is-closed .ty-when--closed { display: block; }
   .page-hero-grid .media--portrait { max-width: 320px; }
 }
 @media (max-width: 600px) { .type-grid { grid-template-columns: 1fr; } }
+
+.model-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+.model-card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: var(--r); padding: 20px 22px; box-shadow: var(--shadow-sm); }
+.model-card h3 { font-size: 1.15rem; margin-bottom: 4px; }
+.model-card__codes { font-size: .8rem; letter-spacing: .04em; color: var(--red); font-weight: 600; margin-bottom: 10px; }
+.model-card p { font-size: .94rem; color: var(--muted); line-height: 1.55; }
+.model-card .model-card__fix { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--ink); font-size: .9rem; }
+@media (max-width: 700px) { .model-grid { grid-template-columns: 1fr; } }

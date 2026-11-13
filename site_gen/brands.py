@@ -89,11 +89,21 @@ COMBO_PAGES = {
         "meta": "Sub-Zero built-in refrigerator repair in Orange County: warm sections, frost, doors that won't close, ice makers. $80 service call, free with repair. Price agreed before work.",
         "lead": "Built-in, integrated (panel-ready) and PRO Sub-Zero refrigerators, repaired in your kitchen. We find the cause first and agree the repair price with you before any work starts.",
         "photo": "sub-zero-built-in-refrigerator-overview-l302",
+        # (series, model families, what it is, common repairs). Series names and
+        # model families are Sub-Zero's own public product lines.
         "types": [
-            ("Built-in side-by-side", "36, 42 and 48 inch classic and PRO side-by-side models."),
-            ("Over-and-under & French door", "Built-in models with the freezer drawer at the bottom."),
-            ("Columns", "All-refrigerator and all-freezer columns, single or paired."),
-            ("Integrated (panel-ready)", "Units behind cabinet panels, serviced in place."),
+            ("Classic built-in", "BI-36 · BI-42 · BI-48 · CL series",
+             "The stainless built-ins most kitchens have: side-by-side, over-and-under and French door, 36 to 48 inches wide.",
+             "Condenser and evaporator fans, defrost, door gaskets, ice makers, control boards"),
+            ("PRO 48", "PRO4850 · PRO4850G",
+             "The 48-inch professional-style model with a heavy stainless exterior and a glass-door option.",
+             "Compressor and sealed system, control board, ice maker, condenser fan"),
+            ("Designer & integrated columns", "IC-30 · IC-36 · DEC · DET",
+             "Panel-ready refrigerator and freezer columns that sit flush behind cabinet panels, single or paired.",
+             "Hinges and auto-close cams, panel realignment, drawer rails, ice makers"),
+            ("Undercounter & drawers", "UC-24 · DEU",
+             "24-inch undercounter refrigerators, freezers and refrigerator drawers.",
+             "Compressor, fan motors, drawer slides, door seals"),
         ],
         "symptoms": ["Refrigerator section warm"],
         "problems": [
@@ -282,10 +292,14 @@ def render_brand(slug):
 
 
 def types_section(noun, types):
-    cards = "".join(f'<div class="type-card reveal"><h3>{esc(t)}</h3><p>{esc(d)}</p></div>' for t, d in types)
+    cards = "".join(
+        f'''<div class="model-card reveal"><h3>{esc(t)}</h3><p class="model-card__codes">{esc(codes)}</p>
+  <p>{esc(d)}</p><p class="model-card__fix"><strong>Common repairs:</strong> {esc(fix)}</p></div>'''
+        for t, codes, d, fix in types)
     return f"""<section class="section"><div class="wrap">
-  <div class="section-head"><p class="eyebrow">Models we service</p><h2>{esc(noun)}s we work on</h2></div>
-  <div class="type-grid">{cards}</div>
+  <div class="section-head"><p class="eyebrow">Models we service</p><h2>{esc(noun.split()[0])} models we repair</h2>
+    <p class="lede">Every built-in Sub-Zero line, repaired in place without pulling the cabinetry apart. Wine storage has <a href="/services/wine-cooler-repair/">its own page</a>.</p></div>
+  <div class="model-grid">{cards}</div>
 </div></section>"""
 
 
