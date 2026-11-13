@@ -11,8 +11,10 @@ sys.path.insert(0, ROOT)
 from site_gen import images as M  # noqa: E402
 OUT = os.path.join(ROOT, "dist", "images"); os.makedirs(OUT, exist_ok=True)
 meta = M.load_meta()
-for slug, (rel, _alt) in M.WEB_COPIES.items():
+for slug, (rel, _alt, *crop) in M.WEB_COPIES.items():
     im = ImageOps.exif_transpose(Image.open(os.path.join(ROOT, "assets", rel))).convert("RGB")
+    if crop:
+        im = im.crop(crop[0])
     big = None
     for w in M.WEB_WIDTHS:
         w = min(w, im.width)

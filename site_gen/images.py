@@ -126,7 +126,8 @@ JOB_PHOTOS.update(LIB_PHOTOS)
 WEB_COPIES = {
     "sub-zero-built-in-refrigerator-overview-l302": (
         "photo-library/refrigeration/job-brand-subzero-builtin-side-by-side.jpg",
-        "Sub-Zero built-in side-by-side refrigerator"),
+        "Sub-Zero built-in side-by-side refrigerator",
+        (80, 395, 825, 1280)),  # owner: centre on the fridge (2026-11-13)
     "sub-zero-built-in-refrigerator-work-l321": (
         "photo-library/refrigeration/job-tech-panel-ready-builtin-fridge.jpg",
         "Panel-ready Sub-Zero built-in refrigerator during service"),
