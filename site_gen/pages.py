@@ -13,11 +13,8 @@ from .data import (
 
 # ----------------------------------------------------------- real job photos
 from . import media as _media  # noqa: E402
-for _s in SERVICES:
-    if _s["slug"] in _media.HEROES:
-        _s["photo"] = _media.slug(_media.HEROES[_s["slug"]][0])
-    if _s["slug"] in _media.GALLERIES:
-        _s["gallery"] = [(_media.slug(p), c) for p, c in _media.GALLERIES[_s["slug"]]]
+# Service heroes/galleries stay as in data.py (owner asked on 2026-11-12 to
+# keep the original photos); media.HEROES / GALLERIES are not applied.
 TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
 WORK_PHOTO = "job-tech-control-board-shoe-covers"
 
@@ -131,7 +128,7 @@ def why_split(photo=None, heading="Orange County trusts Fortex"):
 
     The old version put a decorative icon on every point; a real photo of the
     technicians does more for trust than six stock symbols."""
-    photo = photo or WORK_PHOTO
+    photo = photo or "tech-portrait"
     items = "".join(
         f"<li>{icon('check-circle', size=22)}<div><h3>{esc(t)}</h3><p>{esc(b)}</p></div></li>"
         for _ic, t, b in WHY)
@@ -149,11 +146,11 @@ def why_split(photo=None, heading="Orange County trusts Fortex"):
 SERVICE_GROUPS = [
     ("Refrigerators & freezers", "sz-builtin-sxs",
      ["refrigerator-repair", "freezer-repair"]),
-    ("Wine", "job-wine-room-glass-doors",
+    ("Wine", SERVICES_BY_SLUG["wine-cellar-cooling-repair"]["photo"],
      ["wine-cooler-repair", "wine-cellar-cooling-repair"]),
     ("Cooking", "pro-range-gold",
      ["oven-repair", "stove-cooktop-repair", "microwave-repair"]),
-    ("Dishwashers & disposals", "gallery-dishwashers-142",
+    ("Dishwashers & disposals", SERVICES_BY_SLUG["dishwasher-repair"]["photo"],
      ["dishwasher-repair", "garbage-disposal-repair"]),
     ("Laundry", "lg-washtower",
      ["washing-machine-repair", "dryer-repair"]),
@@ -296,7 +293,7 @@ def render_home():
 {video_section()}
 {home_quote_form()}
 {steps_section()}
-{why_split()}
+{why_split('fridge-wide')}
 {reviews_section()}
 {brand_strip()}
 {areas_section()}
@@ -583,7 +580,7 @@ def render_service(s):
 {gallery_block(s)}
 {types_block(s)}
 {steps_section()}
-{why_split(heading='Why choose Fortex for your repair')}
+{why_split(s.get('photo_2', s['photo']), heading='Why choose Fortex for your repair')}
 <section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">FAQ</p><h2>{esc(s['noun'])} repair FAQs</h2></div>
   <div style="display:flex;justify-content:center">{faq_block(faqs)}</div>
@@ -865,7 +862,7 @@ def render_how():
 </div></section>
 {steps_section(sub='No call-center runaround and no surprise fees. Just a fast, honest, warrantied repair.')}
 {video_section()}
-{why_split(heading='What makes a Fortex visit different')}
+{why_split('toolbag-shoecovers', heading='What makes a Fortex visit different')}
 <section class="section section--surface"><div class="wrap">
   <div class="split">
     <div>
@@ -903,7 +900,7 @@ def render_about():
       <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
     </div>
   </div>
-  <div class="media reveal">{img('wolf-front', sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+  <div class="media reveal">{img('tech-portrait', sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
 </div></section>
 {trust_strip()}
 <section class="section"><div class="wrap">
@@ -915,7 +912,7 @@ def render_about():
     <p>Whether it's a fridge that quit on a Saturday or a dryer that's been slow for weeks, our goal is the same: get your home running again quickly, and earn a customer for life.</p>
   </div>
 </div></section>
-{why_split('viking-range-48', heading='What we stand for')}
+{why_split('tech-arrival', heading='What we stand for')}
 {stats_band()}
 {reviews_section()}
 {cta_band()}

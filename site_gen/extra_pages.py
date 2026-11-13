@@ -98,7 +98,7 @@ def render_our_work():
     groups = ""
     for slug in WORK_ORDER:
         s = SERVICES_BY_SLUG[slug]
-        items = s.get("gallery") or []
+        items = [(media.slug(p), c) for p, c in media.GALLERIES.get(slug, [])] or s.get("gallery") or []
         if not items:
             continue
         shots = "".join(
