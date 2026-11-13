@@ -29,7 +29,7 @@ BRAND_PAGES = {
         "meta": "Sub-Zero refrigerator, freezer and wine storage repair in Orange County. Built-in, integrated and PRO models. OEM parts, price before work, $80 service call free with repair.",
         "lead": "Built-in, integrated and PRO refrigerators, freezers, wine storage and undercounter units. Sealed-system work, hinges, ice makers and controls, done in your kitchen without pulling the cabinetry apart.",
         "photo": "sz-builtin-sxs",
-        "photo_2": "brazing-builtin",
+        "photo_2": "digital-manifold",
         "products": [
             ("refrigerator", "Built-in refrigerators", "Side-by-side, over-and-under and all-refrigerator / all-freezer columns, 36 to 48 inch.", "/services/refrigerator-repair/sub-zero/"),
             ("refrigerator", "Integrated (panel-ready)", "Units hidden behind cabinet panels. We work on them in place and keep the panels aligned.", "/services/refrigerator-repair/sub-zero/"),
@@ -88,7 +88,6 @@ COMBO_PAGES = {
         "gallery": [
             ("sz-builtin-sxs", "Sub-Zero built-in side-by-side on a service call"),
             ("builtin-panel-tech", "Working inside a panel-ready built-in, in place"),
-            ("brazing-builtin", "Brazing a sealed-system line on a built-in refrigerator"),
             ("gauges-compressor", "Gauges on the compressor to read sealed-system pressures"),
         ],
         "faqs": [
