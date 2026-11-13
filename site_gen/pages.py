@@ -903,7 +903,7 @@ def render_about():
       <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
     </div>
   </div>
-  <div class="media reveal">{img('builtin-panel-tech', sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+  <div class="media reveal">{img('wolf-front', sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
 </div></section>
 {trust_strip()}
 <section class="section"><div class="wrap">
