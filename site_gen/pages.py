@@ -19,6 +19,7 @@ for _s in SERVICES:
     if _s["slug"] in _media.GALLERIES:
         _s["gallery"] = [(_media.slug(p), c) for p, c in _media.GALLERIES[_s["slug"]]]
 TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
+WORK_PHOTO = "job-tech-control-board-shoe-covers"
 
 
 def photo_card(href, photo, title, desc="", more="Learn more"):
@@ -41,7 +42,11 @@ def steps_section(heading="What to expect", sub="From first call to a working ap
     return f"""<section class="section section--surface"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
     <h2>From first call to fixed</h2><p class="lede">{esc(sub)}</p></div>
-  <ol class="steps-list reveal">{rows}</ol>
+  <div class="steps-wrap">
+    <ol class="steps-list reveal">{rows}</ol>
+    <figure class="steps-photo reveal">{img(TEAM_PHOTO, sizes='(max-width:900px) 92vw, 420px')}
+      <figcaption>Who you can expect at your door</figcaption></figure>
+  </div>
 </div></section>"""
 
 
@@ -126,7 +131,7 @@ def why_split(photo=None, heading="Orange County trusts Fortex"):
 
     The old version put a decorative icon on every point; a real photo of the
     technicians does more for trust than six stock symbols."""
-    photo = photo or TEAM_PHOTO
+    photo = photo or WORK_PHOTO
     items = "".join(
         f"<li>{icon('check-circle', size=22)}<div><h3>{esc(t)}</h3><p>{esc(b)}</p></div></li>"
         for _ic, t, b in WHY)
@@ -142,12 +147,16 @@ def why_split(photo=None, heading="Orange County trusts Fortex"):
 
 
 SERVICE_GROUPS = [
-    ("Refrigeration & wine", "sz-builtin-sxs",
-     ["refrigerator-repair", "freezer-repair", "wine-cooler-repair", "wine-cellar-cooling-repair"]),
+    ("Refrigerators & freezers", "sz-builtin-sxs",
+     ["refrigerator-repair", "freezer-repair"]),
+    ("Wine", "job-wine-room-glass-doors",
+     ["wine-cooler-repair", "wine-cellar-cooling-repair"]),
     ("Cooking", "pro-range-gold",
      ["oven-repair", "stove-cooktop-repair", "microwave-repair"]),
-    ("Laundry & cleanup", "lg-washtower",
-     ["washing-machine-repair", "dryer-repair", "dishwasher-repair", "garbage-disposal-repair"]),
+    ("Dishwashers & disposals", "gallery-dishwashers-142",
+     ["dishwasher-repair", "garbage-disposal-repair"]),
+    ("Laundry", "lg-washtower",
+     ["washing-machine-repair", "dryer-repair"]),
     ("Commercial", "commercial-line",
      ["commercial-freezer-repair", "ice-machine-repair",
       ("oven-repair", "Commercial Ovens"), ("stove-cooktop-repair", "Commercial Ranges & Stoves"),
@@ -856,7 +865,7 @@ def render_how():
 </div></section>
 {steps_section(sub='No call-center runaround and no surprise fees. Just a fast, honest, warrantied repair.')}
 {video_section()}
-{why_split(_media.slug(_media.TEAM[2][0]), heading='What makes a Fortex visit different')}
+{why_split(heading='What makes a Fortex visit different')}
 <section class="section section--surface"><div class="wrap">
   <div class="split">
     <div>
@@ -894,7 +903,7 @@ def render_about():
       <a class="btn btn--outline btn--lg" href="{SITE['phone_href']}">{icon('phone', size=20)} {esc(SITE['phone'])}</a>
     </div>
   </div>
-  <div class="media reveal">{img(TEAM_PHOTO, sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+  <div class="media reveal">{img('builtin-panel-tech', sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
 </div></section>
 {trust_strip()}
 <section class="section"><div class="wrap">
