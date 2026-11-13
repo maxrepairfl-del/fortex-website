@@ -915,7 +915,7 @@ def render_about():
     <p>Whether it's a fridge that quit on a Saturday or a dryer that's been slow for weeks, our goal is the same: get your home running again quickly, and earn a customer for life.</p>
   </div>
 </div></section>
-{why_split('brazing-builtin', heading='What we stand for')}
+{why_split('viking-range-48', heading='What we stand for')}
 {stats_band()}
 {reviews_section()}
 {cta_band()}
