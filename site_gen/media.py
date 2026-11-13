@@ -14,7 +14,7 @@ HEROES = {
     "dishwasher-repair": ("dishwashers/gallery-dishwashers-142", "Stainless built-in dishwasher on a Fortex service call"),
     "washing-machine-repair": ("laundry/gallery-laundry-10", "Front-load washer and dryer pair in a laundry room on a Fortex service call"),
     "dryer-repair": ("laundry/gallery-laundry-15", "Electric dryer in a laundry room on a Fortex service call"),
-    "freezer-repair": ("refrigeration/gallery-refrigeration-6", "Refrigerator with the freezer drawers open for diagnosis"),
+    "freezer-repair": ("refrigeration/gallery-refrigeration-136", "Freezer compartment with ice built up over the evaporator cover"),
     "microwave-repair": ("cooking/gallery-cooking-16", "Over-the-range microwave above a gas range on a Fortex service call"),
     "oven-repair": ("cooking/gallery-cooking-62", "Built-in wall oven heating during a test after repair"),
     "stove-cooktop-repair": ("cooking/gallery-cooking-9", "Professional gas range in a white kitchen on a Fortex service call"),
@@ -66,7 +66,7 @@ GALLERIES = {
     ],
     "freezer-repair": [
         ("refrigeration/job-fridge-evaporator-iced-over-2", "Freezer evaporator frosted solid"),
-        ("refrigeration/gallery-refrigeration-136", "Ice build-up on the back wall of a freezer"),
+        ("refrigeration/job-fridge-evaporator-bottom-freezer", "Bottom-freezer evaporator and defrost heater, panel off"),
         ("refrigeration/tg-vitalik-fridge-evaporator-fan", "Evaporator fan behind the freezer panel"),
         ("refrigeration/job-fridge-evaporator-defrost-heater", "Defrost heater and sensor on the evaporator"),
         ("refrigeration/tg-vitalik-freezer-meter-diagnosis", "Meter readings taken inside the freezer"),

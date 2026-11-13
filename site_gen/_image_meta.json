@@ -303,10 +303,6 @@
 720,
 960
 ],
-"gallery-refrigeration-6": [
-720,
-960
-],
 "gallery-team-110": [
 960,
 540
@@ -436,6 +432,10 @@
 960
 ],
 "job-fridge-evaporator-after-defrost": [
+960,
+960
+],
+"job-fridge-evaporator-bottom-freezer": [
 960,
 960
 ],
