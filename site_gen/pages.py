@@ -13,6 +13,7 @@ from .data import (
 
 # ----------------------------------------------------------- real job photos
 from . import media as _media  # noqa: E402
+from .images import is_portrait  # noqa: E402
 # Service heroes/galleries stay as in data.py (owner asked on 2026-11-12 to
 # keep the original photos); media.HEROES / GALLERIES are not applied.
 TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
@@ -350,7 +351,8 @@ def causes_block(s):
     if not s.get("causes"):
         return ""
     rows = "".join(
-        f"<tr><td><strong>{esc(a)}</strong></td><td>{esc(b)}</td><td>{esc(c)}</td></tr>"
+        f"<tr><td data-label=\"What you see\"><strong>{esc(a)}</strong></td>"
+        f"<td data-label=\"Usual cause\">{esc(b)}</td><td data-label=\"What we check\">{esc(c)}</td></tr>"
         for a, b, c in s["causes"]
     )
     return f"""<section class="section"><div class="wrap">
@@ -562,7 +564,7 @@ def render_service(s):
       <li>{icon('award', size=17)} 1 year on OEM parts / 90 days labor</li>
     </ul>
   </div>
-  <div class="media reveal">{img(s['photo'], sizes='(max-width:1000px) 90vw, 460px', loading='eager')}</div>
+  <div class="media{' media--portrait' if is_portrait(s['photo']) else ''} reveal">{img(s['photo'], sizes='(max-width:1000px) 90vw, 460px', loading='eager', fetchpriority='high')}</div>
 </div></section>
 <section class="simple-fix"><div class="wrap">
   <p class="simple-fix__q">What if it's something simple?</p>

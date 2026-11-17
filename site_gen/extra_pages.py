@@ -54,9 +54,19 @@ def area_chips():
   <div class="center" style="margin-top:22px"><a class="btn btn--outline" href="/areas/">Every city and neighborhood we cover {icon('arrow-right', size=16)}</a></div>"""
 
 
+AREA_ZIPS = {"Huntington Beach": "92646, 92647, 92648, 92649", "Fountain Valley": "92708"}
+
+
+def _aid(g):
+    return g.split(",")[0].strip().lower().replace(" ", "-")
+
+
 def render_areas():
     groups = "".join(
-        f'<div class="area-group"><h3>{esc(g)}</h3><p>{esc(n)}</p></div>' for g, n in AREA_GROUPS)
+        f'<div class="area-group" id="{_aid(g)}"><h3>{esc(g)}</h3><p>{esc(n)}</p>'
+        + (f'<p class="area-zip">ZIP {esc(AREA_ZIPS[g])}</p>' if g in AREA_ZIPS else "") + '</div>'
+        for g, n in AREA_GROUPS)
+    jump = " ".join(f'<a class="brand-chip" href="#{_aid(g)}">{esc(g)}</a>' for g in ("Huntington Beach", "Fountain Valley", "Irvine", "Newport Beach", "Costa Mesa"))
     body = f"""
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/">Home</a> <span>›</span> <span>Service Areas</span></div>
@@ -73,7 +83,8 @@ def render_areas():
 <section class="section section--surface"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Cities &amp; neighborhoods</p>
     <h2>Every area we cover</h2>
-    <p class="lede">Don't see your neighborhood? Call or text. If it's in Orange County, we almost certainly come to you.</p></div>
+    <p class="lede">Not sure about your ZIP code? Call or text it to us before you book and we confirm in a minute. Long Beach and other nearby LA County cities depend on the day's schedule.</p></div>
+  <div class="brand-chips" style="margin-bottom:22px">{jump}</div>
   <div class="area-groups">{groups}</div>
 </div></section>
 {trust_strip()}

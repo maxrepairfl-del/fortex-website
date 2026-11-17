@@ -117,11 +117,19 @@ def llms_txt():
         f"- Book online: {u}/book/", "",
         "## Pricing and warranty", "",
         f"- {_PRICE}",
+        "- The $80 service call applies to every service, wine cellar cooling included; "
+        "outside Orange County a travel fee is quoted when you call.",
+        "- No duct or dryer-vent cleaning service.",
         f"- Warranty: {SITE['warranty'].replace(' · ', ', ')}.", "",
         "## Services", "",
     ]
     lines += [f"- [{s['name']}]({u}/services/{s['slug']}/)" for s in SERVICES]
-    lines += ["", "## Brands serviced", "", ", ".join(BRANDS), "", "## Service areas", ""]
+    from site_gen.brands import BRAND_PAGES, COMBO_PAGES
+    lines += ["", "## Brands serviced", "", ", ".join(BRANDS), "",
+              "## Brand pages (estimated repair ranges, not fixed prices)", ""]
+    lines += [f"- [{b['name']}]({u}/brands/{s}/)" for s, b in BRAND_PAGES.items()]
+    lines += [f"- [{c['noun']} repair]({u}/services/{us}/{bs}/)" for (bs, us), c in COMBO_PAGES.items()]
+    lines += ["", "## Service areas", ""]
     from site_gen.extra_pages import AREA_GROUPS
     lines += [f"- All of Orange County, CA: {u}/areas/"]
     lines += [f"- {g}: {n}" for g, n in AREA_GROUPS]

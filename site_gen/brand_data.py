@@ -4,13 +4,15 @@ Prices: docs/цены-unit-brand-2026-11-11.md (fortex-ops-bot). Wolf, LG and
 Samsung are estimated from brands of the same class.
 """
 
+# Wolf, Viking and Thermador ranges: Spark reference ranges chosen by the owner
+# (brief of 2026-11-13), only the rows that apply to a range / rangetop.
 RANGE_PRICES_WOLF = [
-    ("Burner igniter or spark module", "$220 – $420"),
-    ("Burner gas valve", "$240 – $460"),
-    ("Oven temperature sensor", "$210 – $380"),
-    ("Oven bake igniter or element", "$280 – $500"),
-    ("Convection fan motor", "$260 – $480"),
-    ("Control board", "$480 – $920"),
+    ("Spark igniter module", "$240 – $440"),
+    ("Griddle / sealed burner valve", "$240 – $460"),
+    ("Oven temperature sensor", "$220 – $400"),
+    ("Convection fan motor and thermal bearing", "$280 – $500"),
+    ("Self-clean door lock", "$220 – $400"),
+    ("UI control board", "$480 – $920"),
 ]
 RANGE_PRICES_VIKING = [
     ("Surface burner valve", "$220 – $420"),
@@ -19,7 +21,7 @@ RANGE_PRICES_VIKING = [
     ("Infrared broiler element", "$280 – $500"),
     ("Convection fan motor", "$260 – $460"),
     ("Self-clean door lock", "$200 – $360"),
-    ("Control board", "$340 – $580"),
+    ("Control board (model dependent)", "$340 – $580"),
 ]
 RANGE_PRICES_THERMADOR = [
     ("Star burner + spark module", "$220 – $420"),
@@ -27,8 +29,8 @@ RANGE_PRICES_THERMADOR = [
     ("Oven temperature sensor", "$210 – $380"),
     ("Convection fan motor", "$260 – $480"),
     ("Self-clean door lock", "$220 – $400"),
-    ("Induction driver board", "$460 – $820"),
-    ("Control board", "$480 – $920"),
+    ("Induction driver board (induction models)", "$460 – $820"),
+    ("UI control board", "$480 – $920"),
 ]
 FRIDGE_PRICES_LG = [
     ("Linear / inverter compressor", "$450 – $850"),
@@ -231,7 +233,7 @@ MORE_COMBOS = {
             ("How much does Wolf range repair cost?",
              "Most Wolf range repairs fall between $220 and $500: igniters, spark modules, valves, sensors and fan motors. A control board runs $480 to $920. You get the exact price before any work starts."),
             ("My Wolf burner clicks but won't light. Is it dangerous?",
-             "If you smell gas, turn the burner off and call us. Usually it is a dirty or wet igniter, a misplaced cap or a weak spark module, not a leak, but it should not be left as is."),
+             "Clicking without a flame is usually a dirty or wet igniter, a burner cap that is off, or a weak spark module. Turn the knob off and do not keep trying to light it. If you smell gas, do not use the range or any switch or device near it. Leave the house and call SoCalGas at 1-800-427-2200, or 911 if anyone is in danger, from outside. Book a repair only once the gas company says it is safe."),
             ("Can you fix the oven on a dual-fuel Wolf?",
              "Yes. The oven on a dual-fuel range is electric, so we check the elements, temperature sensor and control. On all-gas ranges it is usually the oven igniter."),
             ("Can it be fixed in one visit?",
@@ -431,7 +433,7 @@ MORE_COMBOS = {
         "noun": "LG dryer", "icon": "dryer",
         "h1": "LG Dryer Repair in Orange County",
         "meta": "LG dryer not heating, d80 / d90 / d95 vent error, not tumbling, squeaking? LG electric, gas and WashTower dryer repair in Orange County.",
-        "lead": "No heat, long dry times, a d80-series vent warning, squeaks or a drum that will not turn. We repair LG electric, gas and WashTower dryers and check the vent while we are there.",
+        "lead": "No heat, long dry times, a d80-series vent warning, squeaks or a drum that will not turn. We repair LG electric, gas and WashTower dryers and measure the airflow while we are there.",
         "photo": "lg-washtower", "prices": DRYER_PRICES,
         "symptoms": [
             "Runs but doesn't heat",
@@ -443,7 +445,7 @@ MORE_COMBOS = {
         ],
         "causes": [
             ("No heat", "Thermal fuse or high-limit, heating element, gas igniter or coils", "Test fuse, element and igniter, find why the fuse blew"),
-            ("d80 / d90 / d95", "Vent blocked 80 to 95 percent", "Measure airflow, clear the vent and duct"),
+            ("d80 / d90 / d95", "Airflow restricted 80 to 95 percent", "Measure airflow at the dryer and check the lint path inside it. The house duct itself needs a vent-cleaning service"),
             ("Long dry times", "Restricted vent, weak heater, moisture sensor", "Check airflow and heat, clean the sensor bars"),
             ("Drum won't turn", "Broken belt, idler, motor", "Replace the belt or idler, test the motor"),
             ("Squeak / thump", "Drum rollers, glides, idler pulley", "Replace the worn rollers and glides"),
@@ -451,16 +453,15 @@ MORE_COMBOS = {
         "gallery": [
             ("lg-washtower", "LG WashTower on a service call"),
             ("dryer-ir", "Measuring dryer temperature during diagnosis"),
-            ("dryer-vent-clog", "Lint pulled from a clogged dryer vent"),
             ("dryer-lint-burn", "Scorch marks from lint build-up inside a dryer"),
         ],
         "faqs": [
             ("What does d80 mean on an LG dryer?",
-             "The dryer measures airflow and warns that the vent is about 80 percent blocked; d90 and d95 mean worse. Clean the lint screen and vent. If it comes back, we check the duct."),
+             "The dryer measures airflow and warns that the exhaust is about 80 percent restricted; d90 and d95 mean worse. Clean the lint screen first. If the code comes back, the house vent duct needs cleaning by a vent-cleaning service. We do not clean ducts, but we check the dryer itself."),
             ("How much does LG dryer repair cost?",
              "Most LG dryer repairs fall between $160 and $380: thermal fuse, heating element, igniter, belt and rollers. A control board runs $280 to $520."),
             ("Why does my dryer keep blowing the thermal fuse?",
-             "Almost always a restricted vent. Replacing the fuse without fixing the airflow means it will blow again, so we check the vent every time."),
+             "Almost always restricted airflow. Replacing the fuse without fixing the airflow means it will blow again, so we measure it every time and tell you if the house duct needs a vent-cleaning service."),
             ("Do you repair LG WashTower dryers?",
              "Yes, the dryer section of WashTower units too."),
         ],

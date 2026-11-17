@@ -10,7 +10,7 @@ import re
 from .components import esc, page, faq_block, faq_schema, cta_band, BREADCRUMB_NAMES
 from .data import SITE
 from .icons import icon
-from .images import img
+from .images import img, is_portrait
 from . import pages as P
 
 INDEPENDENT = ("Fortex Appliance Repair is an independent repair company. We are not "
@@ -223,6 +223,31 @@ def price_table(rows, noun, path, maintenance=None):
     return html, catalog
 
 
+# Parts named on a brand x appliance page are the parts of THAT appliance, not
+# the brand's whole range (audit 2026-11-16, A03).
+UNIT_PARTS = {
+    "refrigerator-repair": "Compressors, fan motors, sensors, defrost parts, door gaskets and ice maker parts",
+    "washing-machine-repair": "Drain pumps, inlet valves, door locks, suspension parts, bearings and control boards",
+    "dryer-repair": "Heating elements, thermal fuses, thermostats, belts, drum rollers, gas igniters and control boards",
+    "stove-cooktop-repair": "Burner valves, igniters, spark modules, oven sensors, fan motors and control boards",
+}
+
+
+def parts_for(bslug, uslug):
+    c = COMBO_PAGES[(bslug, uslug)]
+    return c.get("parts_line") or UNIT_PARTS.get(uslug) or BRAND_PAGES[bslug]["parts_line"]
+
+
+PRICE_FAQ = ("It depends on the model and what the diagnosis finds. Estimated ranges for common {noun} repairs "
+             "are listed at the bottom of this page. The service call is $80 and free with repair, and we "
+             "confirm the total before any work begins.")
+
+
+def _faqs(faqs, noun):
+    """Price questions point to the estimate table instead of quoting a 'most repairs' range."""
+    return [(q, PRICE_FAQ.format(noun=noun) if q.lower().startswith("how much") else a) for q, a in faqs]
+
+
 def oem_block(brand, parts_line):
     return f"""<section class="section section--tight"><div class="wrap">
   <div class="oem-note reveal">
@@ -252,7 +277,7 @@ def hero(crumbs, h1, lead, photo, portrait=False):
       <li>{icon('award', size=17)} 1 year on OEM parts / 90 days labor</li>
     </ul>
   </div>
-  <div class="media{' media--portrait' if portrait else ''} reveal">{img(photo, sizes='(max-width:1000px) 80vw, 400px', loading='eager', fetchpriority='high')}</div>
+  <div class="media{' media--portrait' if (portrait or is_portrait(photo)) else ''} reveal">{img(photo, sizes='(max-width:1000px) 80vw, 400px', loading='eager', fetchpriority='high')}</div>
 </div></section>"""
 
 
@@ -304,7 +329,7 @@ def render_brand(slug):
 {request_form(b['name'] + ' appliance', 'wrench', b.get('example', 'not cooling'), path)}
 {P.steps_section()}
 {P.why_split(b['photo_2'], heading=f"Why {b['name']} owners call Fortex")}
-{faq_section(f"{b['name']} repair FAQs", b['faqs'])}
+{faq_section(f"{b['name']} repair FAQs", _faqs(b['faqs'], b['name']))}
 {price_html}
 {cta_band(heading=f"Need your {b['name']} repaired?", book_href="#request")}
 """
@@ -314,7 +339,7 @@ def render_brand(slug):
               "areaServed": SITE["region"], "name": b["title"]}
     return f"{path}index.html", page(
         f"{b['title']}, CA | {SITE['name']}", b["meta"], path, body,
-        extra_schema=[schema, faq_schema(b["faqs"]), catalog], og_image=b["photo"], book_href="#request")
+        extra_schema=[schema, faq_schema(_faqs(b["faqs"], b["name"])), catalog], og_image=b["photo"], book_href="#request")
 
 
 def types_section(noun, types):
@@ -373,11 +398,11 @@ def render_combo_v2(bslug, uslug):
 {request_form(c['noun'], c['icon'], c['symptoms'][0].lower(), path)}
 {types_section(c['noun'], c['types'])}
 {problems_section(c['noun'], c['problems'], c.get('problem_photo'))}
-{oem_block(b['name'], b['parts_line'])}
+{oem_block(b['name'], parts_for(bslug, uslug))}
 {P.steps_section()}
 {area_line()}
 {care_section(c['noun'], c['care']) if c.get('care') else ''}
-{faq_section(f"{c['noun']} repair FAQs", c['faqs'])}
+{faq_section(f"{c['noun']} repair FAQs", _faqs(c['faqs'], c['noun']))}
 {price_html}
 <section class="section section--tight"><div class="wrap"><p class="center">More {esc(b['name'])}: <a href="/brands/{bslug}/">all {esc(b['name'])} appliances we repair</a> · Other brands: <a href="/services/{uslug}/">{esc(svc['name'].lower())}</a></p></div></section>
 {cta_band(heading=f"Need your {c['noun']} fixed?", book_href="#request")}
@@ -388,7 +413,7 @@ def render_combo_v2(bslug, uslug):
               "areaServed": SITE["region"], "name": c["h1"]}
     return f"{path}index.html", page(
         f"{c['h1']}, CA | {SITE['name']}", c["meta"], path, body,
-        extra_schema=[schema, faq_schema(c["faqs"]), catalog], og_image=c["photo"], book_href="#request")
+        extra_schema=[schema, faq_schema(_faqs(c["faqs"], c["noun"])), catalog], og_image=c["photo"], book_href="#request")
 
 
 def render_combo(bslug, uslug):
@@ -411,10 +436,10 @@ def render_combo(bslug, uslug):
 </div></section>
 {request_form(c['noun'], c['icon'], c['symptoms'][0].lower(), path)}
 {causes}
-{oem_block(b['name'], b['parts_line'])}
+{oem_block(b['name'], parts_for(bslug, uslug))}
 {gallery}
 {P.steps_section()}
-{faq_section(f"{c['noun']} repair FAQs", c['faqs'])}
+{faq_section(f"{c['noun']} repair FAQs", _faqs(c['faqs'], c['noun']))}
 {price_html}
 <section class="section section--tight"><div class="wrap"><p class="center">More {esc(b['name'])}: <a href="/brands/{bslug}/">all {esc(b['name'])} appliances we repair</a> · Other brands: <a href="/services/{uslug}/">{esc(svc['name'].lower())}</a></p></div></section>
 {cta_band(heading=f"Need your {c['noun']} fixed?", book_href="#request")}
@@ -425,7 +450,7 @@ def render_combo(bslug, uslug):
               "areaServed": SITE["region"], "name": c["h1"]}
     return f"{path}index.html", page(
         f"{c['h1']}, CA | {SITE['name']}", c["meta"], path, body,
-        extra_schema=[schema, faq_schema(c["faqs"]), catalog], og_image=c["photo"], book_href="#request")
+        extra_schema=[schema, faq_schema(_faqs(c["faqs"], c["noun"])), catalog], og_image=c["photo"], book_href="#request")
 
 
 def render_brands_index():

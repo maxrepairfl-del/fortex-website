@@ -912,3 +912,16 @@ body.is-closed .ty-when--closed { display: block; }
 .care-row h3 { font-size: 1.02rem; margin-bottom: 4px; }
 .care-row p { font-size: .92rem; color: var(--muted); line-height: 1.55; }
 @media (max-width: 600px) { .care-row { grid-template-columns: 1fr; gap: 4px; } }
+.menu-head { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px 2px; }
+.area-zip { margin-top: 6px; font-size: .86rem; font-weight: 600; color: var(--ink); }
+.area-group { scroll-margin-top: 90px; }
+
+/* Causes as cards on phones (audit A14); price table stays a table */
+@media (max-width: 700px) {
+  .cause-table:not(.price-table) table { min-width: 0; }
+  .cause-table:not(.price-table) thead { display: none; }
+  .cause-table:not(.price-table) tr { display: block; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .cause-table:not(.price-table) td { display: block; padding: 3px 0; border: 0; }
+  .cause-table:not(.price-table) td[data-label]:not(:first-child)::before { content: attr(data-label) ": "; font-weight: 600; color: var(--ink); }
+  .cause-table:not(.price-table) td:first-child { font-size: 1.02rem; margin-bottom: 2px; }
+}

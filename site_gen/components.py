@@ -265,6 +265,19 @@ def _services_menu():
     )
 
 
+BRAND_MENU = [("High-end", [("sub-zero", "Sub-Zero"), ("wolf", "Wolf"), ("viking", "Viking"), ("thermador", "Thermador"),
+                             ("fisher-paykel", "Fisher & Paykel"), ("hoshizaki", "Hoshizaki")]),
+              ("Everyday", [("lg", "LG"), ("samsung", "Samsung"), ("ge", "GE"), ("whirlpool", "Whirlpool"), ("bosch", "Bosch")])]
+
+
+def _brands_menu():
+    cols = "".join(
+        f'<div><p class="menu-head">{esc(h)}</p>' + "".join(f'<a href="/brands/{s}/">{esc(n)}</a>' for s, n in items) + "</div>"
+        for h, items in BRAND_MENU)
+    return (f'<div class="menu" style="min-width:340px;display:grid;grid-template-columns:1fr 1fr;gap:2px">{cols}'
+            '<a href="/brands/" style="grid-column:1/-1"><strong>All brands →</strong></a></div>')
+
+
 def _areas_menu():
     items = "".join(f'<a href="/areas/{c["slug"]}/">{esc(c["name"])}</a>' for c in CITIES)
     items += '<a href="/areas/"><strong>All areas →</strong></a>'
@@ -285,9 +298,9 @@ def header(path="/", book_href="/book/"):
 <nav class="nav-links" aria-label="Primary">
   <a href="/"{_cur(path,'/')}>Home</a>
   <span class="has-menu"><a href="/services/"{_cur(path,'/services')}>Services ▾</a>{_services_menu()}</span>
+  <span class="has-menu"><a href="/brands/"{_cur(path,'/brands')}>Brands ▾</a>{_brands_menu()}</span>
   <a href="/our-work/"{_cur(path,'/our-work')}>Our Work</a>
   <a href="/areas/"{_cur(path,'/areas')}>Areas</a>
-  <a href="/how-it-works/"{_cur(path,'/how-it-works')}>How It Works</a>
   <a href="/about/"{_cur(path,'/about')}>About</a>
   <a href="/reviews/"{_cur(path,'/reviews')}>Reviews</a>
 </nav>
@@ -305,7 +318,7 @@ def mobile_nav(book_href="/book/"):
     links = "".join(
         f'<a href="{href}">{label}</a>'
         for href, label in [
-            ("/", "Home"), ("/services/", "Services"), ("/our-work/", "Our Work"), ("/areas/", "Service Areas"),
+            ("/", "Home"), ("/services/", "Services"), ("/brands/", "Brands (high-end)"), ("/our-work/", "Our Work"), ("/areas/", "Service Areas"),
             ("/how-it-works/", "How It Works"), ("/about/", "About"), ("/reviews/", "Reviews"),
         ]
     )
@@ -361,6 +374,8 @@ def footer(book_href="/book/"):
         <li>{icon('mail', size=18)}<a href="mailto:{SITE['email']}">{esc(SITE['email'])}</a></li>
         <li>{icon('pin', size=18)}<span>Serving {esc(SITE['region'])}</span></li>
         <li>{icon('clock', size=18)}<span>{esc(SITE['hours'])}</span></li>
+        <li>{icon('arrow-right', size=18)}<a href="/how-it-works/">How it works</a></li>
+        <li>{icon('arrow-right', size=18)}<a href="/brands/">High-end brands</a></li>
       </ul>
       <a class="btn btn--primary" href="{book_href}" style="margin-top:6px">{book_label}</a>
     </div>

@@ -197,6 +197,12 @@ def img(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
     return "<img " + " ".join(attrs) + ">"
 
 
+def is_portrait(slug):
+    """True when the generated image is taller than wide (keep the whole appliance)."""
+    wh = _META.get(slug)
+    return bool(wh) and wh[1] > wh[0]
+
+
 def picture(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
             decoding="async", base="/images"):
     """<picture> with AVIF and WebP sources and a JPEG fallback (web copies)."""

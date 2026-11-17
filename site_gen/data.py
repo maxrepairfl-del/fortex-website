@@ -98,9 +98,9 @@ BRANDS = [
 # ---------------------------------------------------------------- how it works
 STEPS = [
     ("calendar", "Call, text or book online",
-     "It takes about a minute. Tell us the appliance, the brand and what it's doing. We reply quickly from 8am to 6pm."),
+     "It takes about a minute. Tell us the appliance, the brand and what it's doing. We reply quickly Monday to Saturday, 9am to 6pm."),
     ("phone", "Confirmed within the hour",
-     "Within an hour, often sooner, you get a same-day or next-day appointment (visits start at 9am) and the name of your technician."),
+     "During business hours you hear back within an hour with your appointment time and the name of your technician. Visits start at 9am. Outside hours, we call you first thing the next working day."),
     ("clock", "A 2-hour arrival window",
      "No waiting at home all day. You get a 2-hour window, plus a text about 30 minutes before arrival when your technician is on the way."),
     ("shield", "$80 diagnosis, free with repair",
@@ -351,7 +351,7 @@ SERVICES = [
             ("Is a long drying time actually a problem?",
              "Yes, and not only for your power bill. Restricted airflow makes the dryer overheat, which trips the high-limit thermostat and, over time, kills the heating element. It is also the condition behind most dryer fires."),
             ("Do you clean dryer vents?",
-             "Yes, where the run is reachable from both ends: an opening at the dryer and an outside vent hood we can get to. Long runs buried inside walls or ceilings with no outside access are not something we take on, and we will tell you that at the visit rather than charge you to find out."),
+             "No, we do not clean vent ducts. We repair the dryer itself and measure its airflow, so if the house duct is restricted we tell you, and a dryer-vent cleaning company can clear it."),
             ("My dryer squeals when it turns.",
              "Drum rollers, the idler pulley, or the belt. We replace the worn set rather than a single part, because the rest are the same age and would have you calling us again in a few months."),
             ("The drum isn't turning at all.",
@@ -423,7 +423,7 @@ SERVICES = [
     },
     {
         "slug": "garbage-disposal-repair", "name": "Garbage Disposal Repair", "short": "Garbage Disposals",
-        "icon": "disposal", "photo": "dishwasher-2",
+        "icon": "disposal", "photo": "toolbag-shoecovers",
         "hero_sub": 'Disposal humming, jammed, or leaking under the sink? We repair and replace disposals from every major brand.',
         "card": "Jammed, humming, or leaking? We repair and replace garbage disposals.",
         "intro": "A jammed or leaking garbage disposal is a quick fix for a pro. We repair and replace disposals of every horsepower, clear jams, stop leaks, and get your sink draining cleanly again.",
@@ -589,7 +589,7 @@ SERVICES = [
             ("Do you work on built-in and wall ovens?",
              "Yes, including high-end built-ins. We pull the unit from the cabinet, service it, and reset it flush. Sub-Zero, Thermador, Wolf, Viking, Bosch, Miele and other premium brands are routine for us."),
             ("My gas oven clicks but never lights. Is that dangerous?",
-             "It is the most common gas oven fault, and it is a weak igniter rather than a gas leak. The igniter has to draw enough current to open the safety valve; once it weakens it still glows but never opens the valve, so no gas flows. If you actually smell gas, that is different, shut off the supply and call us straight away."),
+             "It is the most common gas oven fault, and it is usually a weak igniter. The igniter has to draw enough current to open the safety valve; once it weakens it still glows but never opens the valve, so no gas flows. If you actually smell gas, that is different: do not use the oven or any switch or device near it. Leave the house and call SoCalGas at 1-800-427-2200, or 911 if anyone is in danger, from outside. Book a repair only once the gas company says it is safe."),
             ("Do you repair both gas and electric ovens?",
              "Yes, gas, electric, dual-fuel, convection and steam ovens from every major brand."),
             ("How long does an oven repair take?",
@@ -644,7 +644,7 @@ SERVICES = [
             ('The igniter keeps clicking even when the stove is off.',
              'Moisture or a stuck igniter switch. We dry and clean the switch assembly, and replace it only when the contacts are burnt.'),
             ('I can smell gas near my cooktop.',
-             'Stop using it, shut off the supply if you can reach it safely, and call us. That is different from the harmless clicking fault and we treat it as urgent.'),
+             'If you smell gas, do not use the cooktop or any switch or device near it. Leave the house and call SoCalGas at 1-800-427-2200, or 911 if anyone is in danger, from outside. Book a repair only once the gas company says it is safe.'),
             ('The flame is weak or yellow.',
              'A restricted orifice or a gas valve not delivering correct pressure. A yellow flame also means incomplete combustion, so it is worth fixing rather than living with.'),
             ('One electric element will not heat.',
@@ -661,7 +661,7 @@ SERVICES = [
     },
     {
         "slug": "wine-cooler-repair", "name": "Wine Cooler Repair", "short": "Wine Coolers",
-        "icon": "wine", "photo": "fridge-wide",
+        "icon": "wine", "photo": "tech-arrival",
         "related": ["wine-cellar-cooling-repair"],
         "hero_sub": 'Wine cooler not holding temperature, or one zone warm? We repair built-in and freestanding units, single and dual zone.',
         "card": "Not holding temperature? We repair wine coolers and beverage centers.",
@@ -721,8 +721,8 @@ SERVICES = [
     },
     {
         # Max, 2026-10-29: any brand, refrigerant work done in-house, installs too.
-        # Different call-out terms from every other page: $120 inside Orange
-        # County, plus a travel fee outside it (amount not fixed, so not printed).
+        # Service call $80 like every page (owner, 2026-11-16); travel fee
+        # outside Orange County (amount not fixed, so not printed).
         "slug": "wine-cellar-cooling-repair", "name": "Wine Cellar Cooling Repair",
         "short": "Wine Cellar Cooling",
         "icon": "wine", "photo": "cellar-room", "photo_2": "cellar-room-2",
@@ -732,11 +732,11 @@ SERVICES = [
         "card": "Cellar not holding temperature? We repair and install wine cellar cooling systems.",
         "intro": "A wine cellar cooling system is a small refrigeration system: a compressor, a condenser, an evaporator and a controller, often split between the cellar, the attic and the outside wall. We service all of it, including the refrigerant work, on every brand.",
         "pricing": {
-            "lead_html": "Your wine cellar service call is <b class=\"free\">FREE</b> with any repair. Otherwise, it's $120 within Orange County.",
-            "short": "Your wine cellar service call is free with any repair. Otherwise, it's $120 within Orange County.",
+            "lead_html": "Your wine cellar service call is <b class=\"free\">FREE</b> with any repair. Otherwise, it's $80 within Orange County.",
+            "short": "Your wine cellar service call is free with any repair. Otherwise, it's $80 within Orange County.",
             "simple": "Sometimes it is something simple: a tripped breaker, a controller set wrong, or a drain line that has backed up. We sort it out on the same visit, covered by the service call.",
-            "title": "Free with any repair, otherwise $120",
-            "text": "Wine cellar systems are refrigeration work, so the call-out is higher than on our appliance repairs: $120 within Orange County rather than $80. Like every Fortex service, it is waived once you approve the repair. Outside Orange County we add a travel fee and tell you the amount when you call, before anything is booked. After the diagnosis you get the full repair price before any work starts.",
+            "title": "Free with any repair, otherwise $80",
+            "text": "The service call is $80 within Orange County, the same as every Fortex service, and it is waived once you approve the repair. Outside Orange County we add a travel fee and tell you the amount when you call, before anything is booked. After the diagnosis you get the full repair price before any work starts.",
         },
         "symptoms": [
             'Cellar temperature creeping up and not coming back down',
@@ -782,7 +782,7 @@ SERVICES = [
             ('Do you handle the refrigerant yourselves?',
              'Yes. Leak checks, recovery and recharging are done by our own technicians, not passed on to someone else.'),
             ('How much is the service call?',
-             'For wine cellar systems it is $120 within Orange County, rather than the $80 on appliance repairs, because this is refrigeration work. Like every Fortex service call it is waived once you approve the repair, so if we fix it you pay nothing for the visit. Outside Orange County we add a travel fee and tell you the amount when you call. After the diagnosis you get the full repair price before any work starts.'),
+             'It is $80 within Orange County, the same as every Fortex service call, and it is waived once you approve the repair, so if we fix it you pay nothing for the visit. Outside Orange County we add a travel fee and tell you the amount when you call. After the diagnosis you get the full repair price before any work starts.'),
             ('Do you install new wine cellar cooling systems?',
              'Yes. We look at the room first: its size, the glass, the insulation and where the equipment can go, and then quote the installation. A system that is too small for a glass room runs nonstop and never quite gets there.'),
             ('My cellar is warming up. Is my wine at risk?',
@@ -797,7 +797,7 @@ SERVICES = [
     },
     {
         "slug": "commercial-freezer-repair", "name": "Commercial Freezer Repair", "short": "Commercial Freezers",
-        "icon": "commercial-freezer", "photo": "freezer-frost",
+        "icon": "commercial-freezer", "photo": "commercial-line",
         "hero_sub": 'Restaurant or shop freezer failing? We prioritise commercial units, because every hour down is inventory lost.',
         "card": "Restaurant or business freezer down? Priority repair to protect your inventory.",
         "intro": "For restaurants, cafés, and shops, a down freezer means inventory loss by the hour. We provide priority repair for commercial freezers, reach-ins, and walk-in units, getting your kitchen back in operation fast.",
@@ -854,7 +854,7 @@ SERVICES = [
     },
     {
         "slug": "ice-machine-repair", "name": "Ice Machine Repair", "short": "Ice Machines",
-        "icon": "ice", "photo": "fridge-diagnostic",
+        "icon": "ice", "photo": "tg-vitalik-brand-hoshizaki-ice-machine",
         "hero_sub": 'Ice maker producing nothing, jamming, or turning out hollow cubes? We repair built-in machines and refrigerator ice makers.',
         "card": "No ice or cloudy ice? We repair residential and commercial ice machines.",
         "intro": "Whether it's a built-in home ice maker or a commercial ice machine, no ice is a real problem. We repair and descale residential and commercial ice machines, restoring clean, consistent ice production.",

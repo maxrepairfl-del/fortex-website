@@ -103,7 +103,7 @@ NEW_BRANDS = {
     },
     "fisher-paykel": {
         "name": "Fisher & Paykel", "maker": "Fisher & Paykel Appliances",
-        "title": "Fisher & Paykel DishDrawer Repair in Orange County",
+        "title": "Fisher & Paykel Appliance Repair in Orange County",
         "meta": "Fisher & Paykel DishDrawer repair in Orange County: drawer won't close or start, not draining, error codes. $80 service call free with repair.",
         "lead": "Single and double DishDrawer dishwashers: a drawer that won't start or lock, water left in the bottom, error codes and leaks. We also repair Fisher & Paykel refrigerators and ranges.",
         "photo": "job-brand-fisher-paykel-dishdrawer", "photo_2": "gallery-dishwashers-33",
@@ -123,7 +123,7 @@ NEW_BRANDS = {
     },
     "hoshizaki": {
         "name": "Hoshizaki", "maker": "Hoshizaki America, Inc.",
-        "title": "Hoshizaki Ice Machine Repair in Orange County",
+        "title": "Hoshizaki Repair in Orange County",
         "meta": "Hoshizaki ice machine repair for restaurants, bars and offices in Orange County: low ice, no ice, leaks, cleaning and descaling. Commercial service.",
         "lead": "Hoshizaki cubers, flakers and undercounter ice machines for restaurants, bars, offices and clinics. Low ice, no ice, leaks, slow harvest, cleaning and descaling.",
         "photo": "tg-vitalik-brand-hoshizaki-ice-machine", "photo_2": "tg-vitalik-brand-hoshizaki-ice-machine-board",
@@ -195,13 +195,13 @@ NEW_COMBOS = {
         "noun": "Samsung dryer", "icon": "dryer",
         "h1": "Samsung Dryer Repair in Orange County",
         "meta": "Samsung dryer not heating, HE / hE / tS error, not tumbling, squeaking? Samsung electric and gas dryer repair in Orange County.",
-        "lead": "No heat, HE or tS errors, long dry times, squeaks and a drum that won't turn. We repair Samsung electric and gas dryers and check the vent while we're there.",
+        "lead": "No heat, HE or tS errors, long dry times, squeaks and a drum that won't turn. We repair Samsung electric and gas dryers and measure the airflow while we're there.",
         "photo": "gallery-laundry-84", "prices": DRYER_PRICES,
         "symptoms": ["Runs but doesn't heat", "HE / hE heating error", "tS or tO sensor error", "Takes two cycles to dry", "Squeaking or thumping", "Drum doesn't turn"],
         "causes": [
             ("No heat / HE", "Thermal fuse, high-limit thermostat, heating element or gas coils", "Test each part, find why the fuse blew"),
             ("tS / tO", "Thermistor or wiring", "Measure the thermistor, check the harness"),
-            ("Long dry times", "Restricted vent, weak heat", "Measure airflow, clear the vent"),
+            ("Long dry times", "Restricted airflow, weak heat", "Measure airflow and heat. If the house duct is blocked, it needs a vent-cleaning service"),
             ("Squeak / thump", "Drum rollers, idler pulley, glides", "Replace worn rollers and glides"),
             ("Drum won't turn", "Belt, idler or motor", "Replace the belt or idler, test the motor"),
         ],
@@ -212,7 +212,7 @@ NEW_COMBOS = {
         ],
         "faqs": [
             ("How much does Samsung dryer repair cost?", "Most Samsung dryer repairs fall between $160 and $380: thermal fuse, element, thermostat, belt and rollers. A control board runs $280 to $520."),
-            ("Why does my Samsung dryer keep blowing the fuse?", "Almost always a restricted vent. We check the airflow every time so it doesn't blow again."),
+            ("Why does my Samsung dryer keep blowing the fuse?", "Almost always restricted airflow. We measure it every time and tell you if the house duct needs a vent-cleaning service; we do not clean ducts ourselves."),
             ("Do you repair Samsung gas dryers?", "Yes, igniters, gas valve coils and flame sensors."),
         ],
     },
