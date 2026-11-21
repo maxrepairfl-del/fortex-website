@@ -106,7 +106,7 @@ NEW_BRANDS = {
         "title": "Fisher & Paykel Appliance Repair in Orange County",
         "meta": "Fisher & Paykel DishDrawer repair in Orange County: drawer won't close or start, not draining, error codes. $80 service call free with repair.",
         "lead": "Single and double DishDrawer dishwashers: a drawer that won't start or lock, water left in the bottom, error codes and leaks. We also repair Fisher & Paykel refrigerators and ranges.",
-        "photo": "job-brand-fisher-paykel-dishdrawer", "photo_2": "gallery-dishwashers-33",
+        "photo": "job-brand-fisher-paykel-dishdrawer", "photo_2": "tech-portrait",
         "products": [
             ("dishwasher", "DishDrawer dishwashers", "Single and double drawers, integrated and stainless.", "/services/dishwasher-repair/fisher-paykel/"),
             ("refrigerator", "Refrigerators", "Integrated and freestanding.", "/services/refrigerator-repair/"),
@@ -308,11 +308,10 @@ NEW_COMBOS = {
             ("Leaking", "Lid seal, hoses", "Replace the seal or hose"),
             ("Error codes", "Sensor, valve or motor fault", "Read the code, test the named part"),
         ],
-        "gallery": [
-            ("job-brand-fisher-paykel-dishdrawer", "Fisher & Paykel DishDrawer on a service call"),
-            ("gallery-dishwashers-32", "DishDrawer in a customer's kitchen"),
-            ("gallery-dishwashers-33", "Double DishDrawer"),
-        ],
+        # job-brand-fisher-paykel-dishdrawer, gallery-dishwashers-32 and -33 are the
+        # same frame (L132) at different sizes: no gallery until there are other
+        # real, different photos (owner brief, 2026-11-20).
+        "gallery": [],
         "faqs": [
             ("How much does DishDrawer repair cost?", "Most repairs fall between $180 and $520: drain pump, lid actuator and seal, valve, motor and boards."),
             ("Is a DishDrawer worth fixing?", "Usually. A new DishDrawer is expensive and has to fit the same cabinet opening, so a repair is almost always cheaper."),

@@ -426,7 +426,8 @@ def render_combo(bslug, uslug):
     price_html, catalog = price_table(c.get('prices', b['prices']), c['noun'], path)
     symptoms = "".join(f'<li>{icon("check", size=20)}<span>{esc(x)}</span></li>' for x in c["symptoms"])
     causes = P.causes_block({"causes": c["causes"]})
-    gallery = P.gallery_block({"gallery": c["gallery"]})
+    # Never repeat the hero photo in the gallery below it.
+    gallery = P.gallery_block({"gallery": [g for g in c.get("gallery", []) if g[0] != c["photo"]]})
     body = f"""
 {hero([('Home', '/'), ('Services', '/services/'), (svc['short'], f'/services/{uslug}/'), (b['name'], None)], c['h1'], c['lead'], c['photo'])}
 <section class="section"><div class="wrap">

@@ -179,7 +179,7 @@ MORE_BRANDS = {
         "title": "Samsung Appliance Repair in Orange County",
         "meta": "Samsung refrigerator, Family Hub, washer and dryer repair in Orange County. Ice maker freeze-ups, fan errors, drain and heat faults. $80 service call free with repair.",
         "lead": "Samsung refrigerators including Family Hub, front- and top-load washers and dryers. Ice makers that freeze up, fan errors, fridges warming up, washers that will not drain and dryers that will not heat.",
-        "photo": "samsung-family-hub", "photo_2": "samsung-washer",
+        "photo": "samsung-family-hub", "photo_2": "tech-portrait",
         "product_photos": [None, None, None, None],
         "products": [
             ("refrigerator", "Refrigerators", "French-door, 4-door Flex, Family Hub and Bespoke.", "/services/refrigerator-repair/samsung/"),
