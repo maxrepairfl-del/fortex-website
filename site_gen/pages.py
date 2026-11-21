@@ -416,7 +416,14 @@ def maintenance_block(s):
 
 
 def gallery_block(s):
-    """Photos from real jobs, captioned with what is being done in each."""
+    """Photos from real jobs, captioned with what is being done in each.
+
+    Switched off on service and brand pages (owner, 2026-11-21): the strip of
+    loosely related job photos read as filler. Job photos live on /our-work/;
+    service pages keep only the hero and photos tied to a specific problem.
+    The per-page "gallery" data is kept so it can be reused there.
+    """
+    return ""
     if not s.get("gallery"):
         return ""
     items = "".join(
