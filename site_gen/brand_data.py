@@ -103,7 +103,7 @@ MORE_BRANDS = {
         "meta": "Viking range, rangetop, oven, refrigerator and microwave repair in Orange County. OEM parts, price before work. $80 service call free with repair.",
         "lead": "Viking ranges and rangetops, wall ovens, built-in refrigerators, dishwashers and microwaves. Clicking igniters, weak or uneven burners, ovens that will not heat, broilers and door locks.",
         "photo": "viking-range-48", "photo_2": "viking-rangetop",
-        "product_photos": ["viking-range-48", "gallery-cooking-26", "gallery-refrigeration-114", "viking-microwave"],
+        "product_photos": ["viking-range-48", "gallery-cooking-26", None, "viking-microwave"],
         "products": [
             ("oven", "Ranges & rangetops", "Gas and dual-fuel, 30 to 60 inch.", "/services/stove-cooktop-repair/viking/"),
             ("oven", "Wall ovens", "Convection, self-clean and double ovens.", "/services/oven-repair/"),

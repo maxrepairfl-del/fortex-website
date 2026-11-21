@@ -112,7 +112,7 @@ NEW_BRANDS = {
             ("refrigerator", "Refrigerators", "Integrated and freestanding.", "/services/refrigerator-repair/"),
             ("oven", "Ranges & cooktops", "Gas, induction and dual-fuel.", "/services/stove-cooktop-repair/"),
         ],
-        "product_photos": [None, "gallery-refrigeration-114", None],
+        "product_photos": [None, None, None],  # L273 is KitchenAid (owner 2026-11-21)
         "parts_line": "Drawer motors and boards, drain pumps, lid actuators, seals and cable harnesses",
         "prices": DISHDRAWER_PRICES,
         "faqs": [
@@ -147,7 +147,7 @@ NEW_COMBOS = {
         "h1": "Thermador Refrigerator Repair in Orange County",
         "meta": "Thermador Freedom and built-in refrigerator repair in Orange County: not cooling, ice maker, frost, door alignment. $80 service call free with repair.",
         "lead": "Freedom column and built-in Thermador refrigerators and freezers: a warm fresh-food column, frost on the back wall, an ice maker that quit or a door that won't close flush. Serviced in place.",
-        "photo": "gallery-refrigeration-114", "prices": BUILTIN_FRIDGE_PRICES,
+        "photo": "tech-portrait", "prices": BUILTIN_FRIDGE_PRICES,  # L273 is KitchenAid, not Thermador (owner 2026-11-21); no clean Thermador fridge shot yet
         "symptoms": ["Refrigerator or freezer column warm", "Frost building up inside", "Ice maker not making ice", "Door won't close flush or seal", "Fan noise or clicking", "Error or alarm on the display"],
         "causes": [
             ("Column warm", "Dirty condenser, evaporator fan, defrost fault, sealed system", "Clean and test airflow, check fans and defrost, read pressures"),

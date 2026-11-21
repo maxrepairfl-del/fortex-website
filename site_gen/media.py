@@ -137,7 +137,7 @@ EXTRA = [
     ("refrigeration/job-brand-samsung-fridge-compressor", "Samsung refrigerator compressor"),
     ("refrigeration/job-brand-samsung-fridge-control-board", "Samsung refrigerator control board"),
     ("refrigeration/job-brand-samsung-fridge-model-label", "Samsung refrigerator model label"),
-    ("refrigeration/gallery-refrigeration-114", "Built-in refrigerator in a wood kitchen"),
+    ("refrigeration/gallery-refrigeration-114", "KitchenAid built-in refrigerator in a wood kitchen"),
     ("refrigeration/gallery-refrigeration-5", "Built-in refrigerator open for diagnosis"),
     ("laundry/job-brand-samsung-washer", "Samsung front-load washer"),
     ("laundry/job-brand-samsung-washer-open", "Samsung dryer with the front panel removed"),
