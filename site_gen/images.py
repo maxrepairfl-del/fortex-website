@@ -55,7 +55,7 @@ PHOTOS = {
 JOB_WIDTHS = [400, 800, 960]
 JOB_PHOTOS = {
     "cellar-room":       ("wine-cellar/cellar-27.jpg", "Glass-walled wine room on a Fortex wine cellar cooling service call"),
-    "cellar-room-2":     ("wine-cellar/cellar-35.jpg", "Glass-front wine cellar cabinets"),
+    "cellar-room-2":     ("wine-cellar/cellar-35.jpg", "Glass-front wine cabinets in a living room"),
     "cellar-temp":       ("wine-cellar/cellar-26.jpg", "Technician checking wine cellar temperature with an infrared thermometer"),
     "cellar-controller": ("wine-cellar/cellar-22.jpg", "Wine cellar temperature controller showing 58°F against a 55°F setpoint"),
     "cellar-pressure":   ("wine-cellar/cellar-20.jpg", "Refrigerant pressure control inside a wine cellar condensing unit"),

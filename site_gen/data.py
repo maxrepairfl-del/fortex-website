@@ -661,7 +661,7 @@ SERVICES = [
     },
     {
         "slug": "wine-cooler-repair", "name": "Wine Cooler Repair", "short": "Wine Coolers",
-        "icon": "wine", "photo": "tech-arrival",
+        "icon": "wine", "photo": "cellar-room-2", "photo_2": "tech-portrait",
         "related": ["wine-cellar-cooling-repair"],
         "hero_sub": 'Wine cooler not holding temperature, or one zone warm? We repair built-in and freestanding units, single and dual zone.',
         "card": "Not holding temperature? We repair wine coolers and beverage centers.",
@@ -725,7 +725,7 @@ SERVICES = [
         # outside Orange County (amount not fixed, so not printed).
         "slug": "wine-cellar-cooling-repair", "name": "Wine Cellar Cooling Repair",
         "short": "Wine Cellar Cooling",
-        "icon": "wine", "photo": "cellar-room", "photo_2": "cellar-room-2",
+        "icon": "wine", "photo": "cellar-room", "photo_2": "job-wine-room-glass-doors",
         "related": ["wine-cooler-repair", "refrigerator-repair", "commercial-freezer-repair"],
         "meta_desc": "Wine cellar cooling repair, service and installation in Orange County: split, ducted and self-contained systems, any brand, refrigerant work in-house. Call (949) 478-0089.",
         "hero_sub": 'Cellar warming up, unit running nonstop, or water where it should not be? We repair, service and install wine cellar cooling systems: split, ducted and self-contained.',

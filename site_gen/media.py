@@ -165,7 +165,7 @@ EXTRA = [
     ("dishwashers/tg-vitalik-bosch-dishwasher-pump", "Pump and wiring under a Bosch dishwasher"),
     ("dishwashers/tg-vitalik-bosch-dishwasher-pump-area", "Base of a Bosch dishwasher opened to the pump"),
     ("commercial/tg-vitalik-brand-hoshizaki-board-2", "Hoshizaki control board up close"),
-    ("wine/job-wine-room-glass-doors", "Glass-door wine room cooled by a system Fortex services"),
+    ("wine/job-wine-room-glass-doors", "Wine room behind glass doors"),
     ("parts-and-diagnostics/job-tech-control-board-shoe-covers", "Technician in shoe covers testing a control board on a service call"),
 ]
 
