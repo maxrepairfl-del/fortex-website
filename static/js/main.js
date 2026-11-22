@@ -416,3 +416,14 @@
   // Last resort: if nothing above triggered it, load once the page settles.
   window.addEventListener("load", function () { setTimeout(maybeStart, 1200); });
 })();
+
+// Repair stories on /our-work/ are collapsed <details>; open the one a link points to.
+(function () {
+  function openFromHash() {
+    var id = location.hash.slice(1); if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  document.addEventListener('DOMContentLoaded', openFromHash);
+})();

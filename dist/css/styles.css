@@ -946,3 +946,24 @@ body.is-closed .ty-when--closed { display: block; }
   .case-card__img img { max-height: 320px; margin: 0 auto; }
   .story__photo { max-width: 100%; }
 }
+
+/* Collapsible repair stories (owner, 2026-11-21) */
+details.story { max-width: 820px; margin: 0 0 18px; border: 1px solid var(--line, #e5e7eb); border-radius: var(--r-lg, 16px); background: #fff; }
+details.story[open] { margin-bottom: 32px; }
+.story__head { list-style: none; cursor: pointer; display: grid; grid-template-columns: 170px 1fr; gap: 18px; align-items: center; padding: 14px; }
+.story__head::-webkit-details-marker { display: none; }
+.story__thumb img { display: block; width: 100%; height: auto; max-height: 220px; object-fit: contain; border-radius: 10px; }
+.story__sum h2 { font-size: 1.25rem; margin: 4px 0 6px; }
+.story__sum p { margin: 0 0 8px; }
+.story__sum .eyebrow { margin: 0; }
+.story__toggle { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--accent, #c8102e); }
+.story__toggle svg { transition: transform .2s; transform: rotate(90deg); }
+details.story[open] .story__toggle svg { transform: rotate(-90deg); }
+.story__close { display: none; }
+details.story[open] .story__open { display: none; }
+details.story[open] .story__close { display: inline; }
+.story__body { padding: 0 18px 18px; max-width: 720px; }
+@media (max-width: 600px) {
+  .story__head { grid-template-columns: 1fr; }
+  .story__thumb img { max-height: 300px; margin: 0 auto; }
+}

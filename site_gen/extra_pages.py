@@ -129,7 +129,6 @@ def render_our_work():
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Repair stories</p><h2>How a few repairs actually went</h2></div>
-  <div class="case-list">{cases.story_index()}</div>
   {''.join(cases.render_story(c) for c in cases.CASES)}
 </div></section>
 <section class="section section--surface"><div class="wrap">

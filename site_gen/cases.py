@@ -81,11 +81,18 @@ def render_story(c):
     parts = []
     for item in c["body"]:
         parts.append(f"<p>{item[1]}</p>" if item[0] == "p" else _fig(item[1], item[2]))
-    return f"""<article class="story" id="{c['id']}">
-  <p class="eyebrow">Repair story · {esc(c['detail'])}</p>
-  <h2>{esc(c['title'])}</h2>
-  {''.join(parts)}
-</article>"""
+    # Collapsed by default (owner, 2026-11-21): the header shows photo, title and
+    # a short line; the full story opens on click. A link to #id opens it too
+    # (static/js/main.js).
+    return f"""<details class="story" id="{c['id']}">
+  <summary class="story__head">
+    <div class="story__thumb">{picture(c['photo'], sizes="(max-width:600px) 92vw, 180px")}</div>
+    <div class="story__sum"><p class="eyebrow">Repair story · {esc(c['detail'])}</p>
+      <h2>{esc(c['title'])}</h2><p>{esc(c['card_desc'])}</p>
+      <span class="story__toggle"><span class="story__open">Read the full story</span><span class="story__close">Hide the story</span> {icon('arrow-right', size=18)}</span></div>
+  </summary>
+  <div class="story__body">{''.join(parts)}</div>
+</details>"""
 
 
 def story_index():
