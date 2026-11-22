@@ -120,8 +120,8 @@ def llms_txt():
         f"- {_PRICE}",
         "- The $80 service call applies to every service, wine cellar cooling included; "
         "outside Orange County a travel fee is quoted when you call.",
-        "- Dryer vent: we diagnose exhaust restrictions and clean straightforward, accessible duct runs up to 25 feet; "
-        "roof outlets and complex runs are referred to a dryer vent cleaning specialist.",
+        "- Dryer vent: we inspect exhaust restrictions and clean dryer vents that exit through an exterior side wall; "
+        "we do not clean vents that exit through the roof.",
         f"- Warranty: {SITE['warranty'].replace(' · ', ', ')}.", "",
         "## Services", "",
     ]

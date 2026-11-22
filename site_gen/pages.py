@@ -14,7 +14,7 @@ from .data import (
 # ----------------------------------------------------------- real job photos
 from . import media as _media  # noqa: E402
 from .images import is_portrait  # noqa: E402
-from .cases import service_case_section, CASES_BY_SERVICE, case_url, dryer_problems_section  # noqa: E402
+from .cases import service_story_section, CASES_BY_SERVICE, dryer_problems_section  # noqa: E402
 # Service heroes/galleries stay as in data.py (owner asked on 2026-11-12 to
 # keep the original photos); media.HEROES / GALLERIES are not applied.
 TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
@@ -173,10 +173,15 @@ def services_tiles(heading="What we fix", title="Repair for every major applianc
         links = "".join(
             f'<li><a href="/services/{x}/"><span>{esc(label)}</span>'
             f'{icon("arrow-right", size=18)}</a></li>' for x, label in items)
+        # No commercial pages of their own yet: do not suggest every piece of
+        # commercial equipment is covered (owner package 2026-11-21, section 8).
+        note = ('<p class="svc-group__note">Commercial appliance requests are reviewed before scheduling. '
+                'Tell us the equipment type and brand so we can confirm whether we can help.</p>'
+                if name == "Commercial" else "")
         groups += f"""<div class="svc-group reveal">
   <div class="svc-group__photo">{img(photo, sizes='(max-width:700px) 92vw, 300px')}</div>
   <h3>{esc(name)}</h3>
-  <ul class="svc-group__list">{links}</ul>
+  <ul class="svc-group__list">{links}</ul>{note}
 </div>"""
     return f"""<section class="section section--surface" id="services"><div class="wrap">
   <div class="section-head center"><p class="eyebrow">{esc(heading)}</p>
@@ -454,7 +459,7 @@ def types_block(s):
     <h2>Yes, we work on yours</h2>
     <p class="lede">Including the awkward installs other companies would rather not take on.</p></div>
   <div class="type-grid">{cards}</div>
-  {cta_row('Not sure which you have?', 'Text us a photo of the model sticker and we will bring the right part.', href='#request')}
+  {cta_row('Not sure which you have?', 'Send a photo of the model label so we can check parts availability before the visit.', href='#request')}
 </div></section>"""
 
 
@@ -555,7 +560,7 @@ def render_service(s):
     case_line = ""
     if s["slug"] == "microwave-repair":
         c = CASES_BY_SERVICE["microwave-repair"]
-        case_line = (f'<p class="case-line">From a recent repair: <a href="{case_url(c)}">'
+        case_line = (f'<p class="case-line">From a recent repair: <a href="#{c["id"]}">'
                      'a microwave that wasn’t heating and was sparking inside</a>.</p>')
     # A page can name its closest neighbours first (wine cooler <-> wine cellar);
     # the rest of the four slots fill from the service order as before.
@@ -568,6 +573,8 @@ def render_service(s):
     price = s.get("pricing")
     lead_html = price["lead_html"] if price else DIAGNOSTIC_LEAD_HTML
     simple = price["simple"] if price else DIAGNOSTIC_SIMPLE
+    simple_note = (f'<p class="simple-fix__note">{esc(s["simple_note"])}</p>'
+                   if s.get("simple_note") else "")
     body = f"""
 <section class="page-hero"><div class="wrap page-hero-grid">
   <div>
@@ -590,7 +597,7 @@ def render_service(s):
 </div></section>
 <section class="simple-fix"><div class="wrap">
   <p class="simple-fix__q">What if it's something simple?</p>
-  <p>{esc(simple)}</p>
+  <p>{esc(simple)}</p>{simple_note}
 </div></section>
 <section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Common problems</p>
@@ -601,7 +608,7 @@ def render_service(s):
 </div></section>
 {service_request_form(s)}
 {dryer_problems_section() if s['slug'] == 'dryer-repair' else causes_block(s)}
-{service_case_section(s['slug'])}
+{service_story_section(s['slug'])}
 {_brand_links(s['slug'])}
 {gallery_block(s)}
 {types_block(s)}
@@ -896,7 +903,7 @@ def render_how():
       <h2>Free service call with your repair</h2>
       <div class="prose" style="margin-top:18px">
         <p>Every visit starts with a thorough diagnostic. Your technician inspects the appliance, identifies the true root cause, and explains it in plain language, then gives you a clear, all-in price.</p>
-        <p>If you approve the repair, the service call is free. There are no hidden fees and no pressure. Most parts are already on the van, so the majority of repairs are completed in that same visit.</p>
+        <p>If you approve the repair, the service call is free. There are no hidden fees and no pressure. We carry common parts, and many repairs are finished in that same visit. Model-specific parts are ordered, and we tell you the timing with the price.</p>
       </div>
     </div>
     <div class="media reveal">{img('diagnostic-meter', sizes='(max-width:1000px) 90vw, 520px')}</div>

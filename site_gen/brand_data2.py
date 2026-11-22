@@ -49,11 +49,13 @@ NEW_BRANDS = {
             ("washer", "Washers", "Front-load and top-load GE and GE Profile washers.", "/services/washing-machine-repair/ge/"),
             ("dryer", "Dryers", "Electric and gas dryers.", "/services/dryer-repair/"),
             ("refrigerator", "Refrigerators", "French-door, side-by-side and bottom-freezer.", "/services/refrigerator-repair/"),
-            ("oven", "Ranges & microwaves", "Gas and electric ranges, wall ovens, over-the-range microwaves.", "/services/stove-cooktop-repair/"),
+            ("oven", "Ranges & cooktops", "Gas and electric ranges and cooktops.", "/services/stove-cooktop-repair/"),
+            ("oven", "Wall ovens", "Single and double wall ovens.", "/services/oven-repair/"),
+            ("microwave", "Microwaves", "Over-the-range and built-in microwaves.", "/services/microwave-repair/"),
         ],
         "product_photos": [None, "ge-profile-washer-dryer-stack-overview-clear", None, None],
         "parts_line": "Drain pumps, lid locks, shift actuators, control boards and heaters",
-        "prices": WASHER_PRICES[:4] + DRYER_PRICES[:2],
+        "prices": [("Washer", WASHER_PRICES[:4]), ("Dryer", DRYER_PRICES[:2])],
         "faqs": [
             ("Do you repair GE Profile and Café appliances?", "Yes. GE Profile and Café use the same service parts as GE, and we repair all three."),
             ("Do you use original GE parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
@@ -74,7 +76,7 @@ NEW_BRANDS = {
         ],
         "product_photos": [None, "no-brand-dryer-drum-rollers-check-detail-clear", None, "job-brand-maytag-dishwasher-circulation-pump"],
         "parts_line": "Drive motors, couplers, lid locks, pumps, belts and control boards",
-        "prices": WASHER_PRICES[:4] + DRYER_PRICES[:2],
+        "prices": [("Washer", WASHER_PRICES[:4]), ("Dryer", DRYER_PRICES[:2])],
         "faqs": [
             ("Do you repair Maytag, KitchenAid and Amana too?", "Yes. They are made by Whirlpool and share most service parts, and we repair all of them."),
             ("Do you use original Whirlpool parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
@@ -90,11 +92,12 @@ NEW_BRANDS = {
         "products": [
             ("dishwasher", "Dishwashers", "100, 300, 500, 800 Series and Benchmark.", "/services/dishwasher-repair/bosch/"),
             ("refrigerator", "Refrigerators", "French-door and counter-depth.", "/services/refrigerator-repair/"),
-            ("oven", "Ranges & wall ovens", "Gas, electric and induction.", "/services/oven-repair/"),
+            ("oven", "Ranges & cooktops", "Gas, electric and induction.", "/services/stove-cooktop-repair/"),
+            ("oven", "Wall ovens", "Single and double wall ovens.", "/services/oven-repair/"),
         ],
         "product_photos": [None, "bosch-side-by-side-refrigerator-open-overview-clear", None],
         "parts_line": "Drain pumps, circulation pumps, heaters, float switches, door springs and control boards",
-        "prices": DISHWASHER_PRICES,
+        "prices": [("Dishwasher", DISHWASHER_PRICES)],
         "faqs": [
             ("What does E15 mean on a Bosch dishwasher?", "Water in the base pan has tripped the float switch. The dishwasher stops to prevent a flood. We find the leak, fix it and dry the base."),
             ("What does E24 mean?", "The dishwasher can't drain: usually a clogged filter, a blocked drain hose or a failed drain pump."),
@@ -130,7 +133,7 @@ NEW_BRANDS = {
              "We test the lid actuator and its wiring and replace the part that failed."),
         ],
         "parts_line": "Drawer motors and boards, drain pumps, lid actuators, seals and cable harnesses",
-        "prices": DISHDRAWER_PRICES,
+        "prices": [("DishDrawer", DISHDRAWER_PRICES)],
         "faqs": [
             ("Can one drawer fail while the other works?", "Yes. Each DishDrawer has its own pump and board, so one drawer can stop while the other keeps working."),
             ("Why won't my DishDrawer close or start?", "Often a lid actuator, a worn cable harness that flexes with the drawer, or a control board fault. We test before replacing."),
@@ -148,7 +151,7 @@ NEW_BRANDS = {
             ("commercial-freezer", "Commercial refrigeration", "Reach-ins, prep tables and walk-ins.", "/services/commercial-freezer-repair/"),
         ],
         "parts_line": "Water pumps, inlet valves, float switches, thermistors, fan motors and control boards",
-        "prices": ICE_MACHINE_PRICES,
+        "prices": [("Ice machine", ICE_MACHINE_PRICES)],
         "faqs": [
             ("How often should a Hoshizaki be cleaned?", "Every 6 months at minimum, more often with hard water. Scale is the most common cause of low ice and slow harvest."),
             ("Do you service restaurants and bars?", "Yes, commercial ice machines and refrigeration across Orange County."),
@@ -162,7 +165,7 @@ NEW_COMBOS = {
         "noun": "Thermador refrigerator", "icon": "refrigerator",
         "h1": "Thermador Refrigerator Repair in Orange County",
         "meta": "Thermador Freedom and built-in refrigerator repair in Orange County: not cooling, ice maker, frost, door alignment. $80 service call free with repair.",
-        "lead": "Freedom column and built-in Thermador refrigerators and freezers: a warm fresh-food column, frost on the back wall, an ice maker that quit or a door that won't close flush. Serviced in place.",
+        "lead": "Freedom column and built-in Thermador refrigerators and freezers: a warm fresh-food column, frost on the back wall, an ice maker that quit or a door that won't close flush. Many repairs are done in place.",
         "photo": "tech-portrait", "prices": BUILTIN_FRIDGE_PRICES,  # L273 is KitchenAid, not Thermador (owner 2026-11-21); no clean Thermador fridge shot yet
         "symptoms": ["Refrigerator or freezer column warm", "Frost building up inside", "Ice maker not making ice", "Door won't close flush or seal", "Fan noise or clicking", "Error or alarm on the display"],
         "causes": [
@@ -179,7 +182,7 @@ NEW_COMBOS = {
         ],
         "faqs": [
             ("How much does Thermador refrigerator repair cost?", "Most repairs fall between $180 and $850: fans, defrost parts, ice makers, hinges and boards. Sealed-system work runs $750 to $1,500. You get the exact price before any work."),
-            ("Can you repair a Freedom column without removing it?", "Yes, columns are serviced in place and the panels re-aligned afterwards."),
+            ("Can you repair a Freedom column without removing it?", "Often, yes. Many repairs are done in place; some need the unit pulled out, and we tell you before we start. Panels are realigned afterwards."),
             ("Do you use original Thermador parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
@@ -217,7 +220,7 @@ NEW_COMBOS = {
         "causes": [
             ("No heat / HE", "Thermal fuse, high-limit thermostat, heating element or gas coils", "Test each part, find why the fuse blew"),
             ("tS / tO", "Thermistor or wiring", "Measure the thermistor, check the harness"),
-            ("Long dry times", "Restricted airflow, weak heat", "Measure airflow and heat, inspect the exhaust duct. Straightforward runs up to 25 feet we can clean"),
+            ("Long dry times", "Restricted airflow, weak heat", "Measure airflow and heat. Check the dryer and exhaust duct. We clean side-wall-exit vents, but not roof-exit vents."),
             ("Squeak / thump", "Drum rollers, idler pulley, glides", "Replace worn rollers and glides"),
             ("Drum won't turn", "Belt, idler or motor", "Replace the belt or idler, test the motor"),
         ],
@@ -228,7 +231,7 @@ NEW_COMBOS = {
         ],
         "faqs": [
             ("How much does Samsung dryer repair cost?", "Most Samsung dryer repairs fall between $160 and $380: thermal fuse, element, thermostat, belt and rollers. A control board runs $280 to $520."),
-            ("Why does my Samsung dryer keep blowing the fuse?", "Almost always restricted airflow. We measure it every time and check the exhaust duct. We clean straightforward, accessible duct runs up to 25 feet; a roof outlet or a run with difficult bends goes to a dryer vent cleaning specialist."),
+            ("Why does my Samsung dryer keep blowing the fuse?", "Almost always restricted airflow. We measure it every time. We inspect dryer vent restrictions and clean dryer vents that exit through an exterior side wall. We do not clean vents that exit through the roof."),
             ("Do you repair Samsung gas dryers?", "Yes, igniters, gas valve coils and flame sensors."),
         ],
     },

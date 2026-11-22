@@ -27,7 +27,7 @@ BRAND_PAGES = {
         "maker": "Sub-Zero Group, Inc.",
         "title": "Sub-Zero Repair in Orange County",
         "meta": "Sub-Zero refrigerator, freezer and wine storage repair in Orange County. Built-in, integrated and PRO models. OEM parts, price before work, $80 service call free with repair.",
-        "lead": "Built-in, integrated and PRO refrigerators, freezers, wine storage and undercounter units. Sealed-system work, hinges, ice makers and controls, done in your kitchen without pulling the cabinetry apart.",
+        "lead": "Built-in, integrated and PRO refrigerators, freezers, wine storage and undercounter units. Sealed-system work, hinges, ice makers and controls, many done in place, some with the unit pulled out.",
         "photo": "sz-builtin-sxs",
         "photo_2": "digital-manifold",
         "products": [
@@ -53,7 +53,7 @@ BRAND_PAGES = {
             ("Are you a Sub-Zero factory-authorized service?",
              "No. We are an independent, licensed repair company. We use original Sub-Zero parts bought from authorized distributors and back our work with 1 year on parts and 90 days on labor. If your unit is still under the factory warranty, use the manufacturer's service first."),
             ("Can you fix a panel-ready unit without damaging the cabinets?",
-             "Yes. Panel-ready units are serviced in place. We protect the floor and panels, and re-align the door so the panel sits flush with the cabinetry when we are done."),
+             "Yes. Many repairs are done in place; some need the unit pulled out. Either way we protect the floor and panels, and re-align the door so the panel sits flush with the cabinetry when we are done."),
             ("Do you carry Sub-Zero parts on the van?",
              "Common parts, yes. Brand-specific parts such as a control board or a hinge cassette are often ordered for your exact model, and we tell you the timing together with the price."),
         ],
@@ -72,7 +72,7 @@ SUBZERO_PRICES = [
     ("Drawer gasket / door seal", "$180 – $380"),
     ("Panel-ready door realignment", "$160 – $340"),
 ]
-BRAND_PAGES["sub-zero"]["prices"] = SUBZERO_PRICES
+BRAND_PAGES["sub-zero"]["prices"] = [("Refrigerator", SUBZERO_PRICES)]
 BRAND_PAGES["sub-zero"]["photo"] = "sub-zero-built-in-refrigerator-overview-l302"
 BRAND_PAGES["sub-zero"]["product_photos"] = ["sub-zero-built-in-refrigerator-overview-l302",
                                              "sub-zero-built-in-refrigerator-work-l321", None, None]
@@ -144,7 +144,7 @@ COMBO_PAGES = {
             ("How much does Sub-Zero refrigerator repair cost?",
              "It depends on the model and what the diagnosis finds. The estimated ranges for common Sub-Zero repairs are listed at the bottom of this page. The service call is $80 and free with repair, and we confirm the total before any work begins."),
             ("Can you repair a panel-ready unit without damaging the cabinets?",
-             "Yes. Panel-ready units are serviced in place. We protect the floor and panels and realign the door so the panel sits flush when we are done."),
+             "Yes. Many repairs are done in place; some need the unit pulled out. Either way we protect the floor and panels and realign the door so the panel sits flush when we are done."),
             ("Are you a Sub-Zero factory-authorized service?",
              "No. We are an independent, licensed repair company. If your unit is still under the factory warranty, use the manufacturer's service first."),
             ("How often should the condenser be cleaned?",
@@ -188,10 +188,23 @@ def price_table(rows, noun, path, maintenance=None):
 
     Plain visible HTML, mirrored in an OfferCatalog with the same numbers. No
     "most repairs cost X-Y" summary: the rows are reference ranges, not
-    statistics of our own completed jobs."""
+    statistics of our own completed jobs.
+
+    `rows` is a flat list of (repair, range) for a single-appliance page, or a
+    list of (appliance, rows) groups for a brand page covering several
+    appliances, so every row says which appliance it belongs to (owner
+    package 2026-11-21, section 9)."""
     year = datetime.date.today().year
-    trs = "".join(
-        f"<tr><td>{esc(a)}</td><td class=\"price\">{esc(b)}</td></tr>" for a, b in rows)
+    groups = rows if rows and isinstance(rows[0][1], list) else [(None, rows)]
+
+    def table(rs):
+        trs = "".join(f"<tr><td>{esc(a)}</td><td class=\"price\">{esc(b)}</td></tr>" for a, b in rs)
+        return f"""<div class="cause-table price-table"><table>
+    <thead><tr><th>Repair</th><th>Estimated range</th></tr></thead><tbody>{trs}</tbody>
+  </table></div>"""
+    body = "".join(
+        (f'<h3 class="price-ref__sub">{esc(g)} repair estimates</h3>' if g else "") + table(rs)
+        for g, rs in groups)
     maint_html = ""
     if maintenance:
         mrows = "".join(
@@ -203,20 +216,20 @@ def price_table(rows, noun, path, maintenance=None):
     <thead><tr><th>Service</th><th>Fixed price</th></tr></thead><tbody>{mrows}</tbody>
   </table></div>
   <p class="price-ref__note">Maintenance is a flat price, booked on its own. No diagnostic fee.</p>"""
-    html = f"""<section class="section section--tight price-ref"><div class="wrap">
+    html = f"""<section class="section section--tight price-ref" id="repair-costs"><div class="wrap">
   <div class="section-head"><h2>Estimated {esc(noun)} repair costs</h2></div>
-  <div class="cause-table price-table"><table>
-    <thead><tr><th>Repair</th><th>Estimated range</th></tr></thead><tbody>{trs}</tbody>
-  </table></div>
+  {body}
   <p class="price-ref__note">{esc(PRICE_FOOTNOTE)}</p>{maint_html}
 </div></section>"""
     offers = []
-    for a, b in rows:
-        mn, mx = _range(b)
-        offers.append({"@type": "Offer",
-                       "itemOffered": {"@type": "Service", "name": f"{noun} {_clean(a).lower()}"},
-                       "priceSpecification": {"@type": "PriceSpecification", "priceCurrency": "USD",
-                                              "minPrice": mn, "maxPrice": mx}})
+    for g, rs in groups:
+        for a, b in rs:
+            mn, mx = _range(b)
+            name = f"{noun} {g.lower()} {_clean(a).lower()}" if g else f"{noun} {_clean(a).lower()}"
+            offers.append({"@type": "Offer",
+                           "itemOffered": {"@type": "Service", "name": name},
+                           "priceSpecification": {"@type": "PriceSpecification", "priceCurrency": "USD",
+                                                  "minPrice": mn, "maxPrice": mx}})
     catalog = {"@context": "https://schema.org", "@type": "OfferCatalog",
                "name": f"Estimated {noun} repair costs ({year})", "url": SITE["url"] + path,
                "itemListElement": offers}
@@ -256,7 +269,8 @@ def oem_block(brand, parts_line):
   <div class="oem-note reveal">
     <div class="oem-note__ic">{icon('award', size=28)}</div>
     <div><h3>Original {esc(brand)} parts first, your budget in mind</h3>
-    <p>{esc(parts_line)}: we prefer factory (OEM) parts bought from authorized distributors. You come first, though: when a lower-cost aftermarket part would do the job without losing quality, we will offer it, explain the difference, and you decide. 1 year on OEM parts, 90 days on labor. Still under the manufacturer's warranty? Tell us when you book and we will point you to factory service first.</p></div>
+    <p>{esc(parts_line)}: we prefer factory (OEM) parts bought from authorized distributors. You come first, though: when a lower-cost aftermarket part would do the job without losing quality, we will offer it, explain the difference, and you decide. 1 year on OEM parts, 90 days on labor. Warranty terms for any aftermarket option are explained before you approve the repair.</p>
+    <p>Fortex is an independent repair company, not a factory-authorized service provider for {esc(brand)}. If your appliance is covered by the manufacturer’s warranty, contact the manufacturer first.</p></div>
   </div>
 </div></section>"""
 
@@ -273,7 +287,7 @@ def hero(crumbs, h1, lead, photo, portrait=False):
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
       <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
     </div>
-    <p class="hero-terms">{icon('dollar', size=18)}<span>{P.DIAGNOSTIC_LEAD_HTML} The repair price is agreed with you before work starts.</span></p>
+    <p class="hero-terms">{icon('dollar', size=18)}<span>{P.DIAGNOSTIC_LEAD_HTML} The repair price is agreed with you before work starts. <a href="#repair-costs">See estimated repair costs</a></span></p>
     <ul class="hero-proof">
       <li><a href="{SITE['yelp_url']}" target="_blank" rel="noopener nofollow">{P.stars()} {SITE['yelp_rating']} on Yelp · {SITE['yelp_reviews']} reviews</a></li>
       <li>{icon('shield-plain', size=17)} Licensed CA #{SITE['license']}</li>
@@ -354,7 +368,7 @@ def types_section(noun, types):
         for t, codes, d, fix in types)
     return f"""<section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Models we service</p><h2>{esc(noun.split()[0])} models we repair</h2>
-    <p class="lede">Every built-in Sub-Zero line, repaired in place without pulling the cabinetry apart. Wine storage has <a href="/services/wine-cooler-repair/">its own page</a>.</p></div>
+    <p class="lede">Every built-in Sub-Zero line. Many repairs are done in place; some need the unit pulled out. Wine storage has <a href="/services/wine-cooler-repair/">its own page</a>.</p></div>
   <div class="model-grid">{cards}</div>
 </div></section>"""
 

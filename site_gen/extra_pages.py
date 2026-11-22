@@ -127,10 +127,7 @@ def render_our_work():
   <h1>Our Work: Real Repairs in Orange County Homes</h1>
   <p class="hero-lead">Every photo on this page was taken by our technicians on real service calls. No stock images. Frozen evaporators, burned-out igniters, lint-packed dryers and the fixes that followed.</p>
 </div></section>
-<section class="section"><div class="wrap">
-  <div class="section-head"><p class="eyebrow">Repair stories</p><h2>How a few repairs actually went</h2></div>
-  {''.join(cases.render_story(c) for c in cases.CASES)}
-</div></section>
+{cases.our_work_examples()}
 <section class="section section--surface"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Photos</p><h2>Photos from our jobs</h2></div>
   {groups}

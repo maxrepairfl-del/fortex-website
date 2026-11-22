@@ -195,24 +195,74 @@
   var SMS = (document.querySelector('a[href^="sms:"]') || {}).href || "";
   var TEL_TEXT = (document.querySelector(".nav-phone") || {}).textContent || "call us";
 
-  function submitFailed(form, btn, btnHtml) {
+  // Shown when we cannot tell whether the provider got the request (timeout,
+  // lost connection, 5xx). An aborted or unanswered fetch is NOT proof that
+  // the request was not received, so this never says "not submitted".
+  var UNSURE = "We couldn’t confirm that your request went through. Please call or text us so we can check and help you schedule.";
+
+  function restoreBtn(btn, btnHtml) {
     if (btn) { btn.disabled = false; btn.style.opacity = ""; btn.innerHTML = btnHtml; }
-    var box = form.querySelector(".form-error");
-    if (!box) {
-      box = document.createElement("div");
-      box.className = "form-error";
-      box.setAttribute("role", "alert");
-      box.innerHTML =
-        "<strong>We couldn't send that just now.</strong>" +
-        "<span>Our form provider isn't responding. Your request was not submitted — " +
-        "please call or text and we'll get you booked right away.</span>" +
-        '<span class="form-error__cta">' +
+  }
+
+  function showFormMessage(form, btn, title, text, withContacts) {
+    var old = form.querySelector(".form-error");
+    if (old) old.remove();
+    var box = document.createElement("div");
+    box.className = "form-error";
+    box.setAttribute("role", "alert");
+    box.innerHTML = "<strong></strong><span></span>" + (withContacts
+      ? '<span class="form-error__cta">' +
           (TEL ? '<a class="btn btn--primary" href="' + TEL + '">' + TEL_TEXT.trim() + "</a>" : "") +
           (SMS ? '<a class="btn btn--outline" href="' + SMS + '">Text us</a>' : "") +
-        "</span>";
-      (btn && btn.parentNode ? btn.parentNode.insertBefore(box, btn) : form.appendChild(box));
-    }
+        "</span>"
+      : "");
+    box.querySelector("strong").textContent = title;
+    box.querySelector("span").textContent = text;
+    (btn && btn.parentNode ? btn.parentNode.insertBefore(box, btn) : form.appendChild(box));
     box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* Phone numbers: US/Canada (NANP) only, 10 digits, or 11 starting with the
+     country code 1. Nothing is silently cut off: a pasted "+1 (949) 478-0089"
+     keeps its last digit, and anything longer gets a message instead. */
+  function parsePhone(value) {
+    var d = String(value || "").replace(/\D/g, "");
+    if (!d) return { ok: false, msg: "Please enter your phone number." };
+    if (d.length === 11 && d.charAt(0) === "1") d = d.slice(1);
+    if (d.length < 10) return { ok: false, msg: "Please enter a full 10-digit phone number, for example (714) 555-0123." };
+    if (d.length > 10) return { ok: false, msg: "We can take US and Canada numbers: 10 digits, or 11 starting with 1." };
+    if (!/^[2-9]\d{2}[2-9]\d{6}$/.test(d)) return { ok: false, msg: "That doesn’t look like a valid US phone number. Please check the area code." };
+    return { ok: true, digits: d, pretty: "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6) };
+  }
+  window.__fortexParsePhone = parsePhone; // for checks in the console only
+
+  function phoneError(input, msg) {
+    var id = (input.id || "phone") + "-err";
+    var el = document.getElementById(id);
+    if (!msg) {
+      if (el) el.remove();
+      input.removeAttribute("aria-invalid");
+      input.setCustomValidity("");
+      return;
+    }
+    if (!el) {
+      el = document.createElement("p");
+      el.id = id;
+      el.className = "field-error";
+      el.setAttribute("role", "alert");
+      input.parentNode.appendChild(el);
+    }
+    el.textContent = msg;
+    input.setAttribute("aria-invalid", "true");
+    input.setAttribute("aria-describedby", id);
+  }
+
+  // Normalises the field in place; returns false (and shows why) if invalid.
+  function checkPhone(input) {
+    var r = parsePhone(input.value);
+    if (r.ok) { input.value = r.pretty; phoneError(input, ""); return true; }
+    phoneError(input, r.msg);
+    return false;
   }
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-booking]"), function (form) {
@@ -241,6 +291,14 @@
       else if (mq.addListener) mq.addListener(syncAppliance);
     }
 
+    var phone = form.querySelector('input[name="phone"]');
+    var inFlight = false;
+    // One id per enquiry: a retry of the same request keeps it, so a repeat
+    // that does reach the provider can be recognised. Formspree does not
+    // de-duplicate, so this does not guarantee a single email. A new id is
+    // made only after a confirmed success (the page then moves on anyway).
+    var leadId = null;
+
     form.addEventListener("submit", function (e) {
       // the radio-button form must have an appliance picked
       // Must match radios only. The service pages carry the appliance in a
@@ -258,20 +316,27 @@
         }
         return;
       }
+      // Check the phone at submit too: autofill and some keyboards never fire
+      // an input event. The typed value stays in the field on error.
+      if (phone && !checkPhone(phone)) {
+        e.preventDefault();
+        phone.focus();
+        return;
+      }
       if (!window.fetch || !form.action) return; // fall back to a native POST
 
       e.preventDefault();
+      if (inFlight) return; // no parallel submissions (double click, Enter twice)
+      inFlight = true;
       var btn = form.querySelector('button[type="submit"]');
-      var btnHtml = btn ? btn.innerHTML : "";
-      if (btn) { btn.disabled = true; btn.style.opacity = ".7"; btn.textContent = "Sending…"; }
+      var btnHtml = btn ? btn.getAttribute("data-html") || btn.innerHTML : "";
+      if (btn) { btn.setAttribute("data-html", btnHtml); btn.disabled = true; btn.style.opacity = ".7"; btn.textContent = "Sending…"; }
       var err = form.querySelector(".form-error");
       if (err) err.remove();
 
-      // One id per submission, stored with the lead in Formspree and carried
-      // to the thank-you page, which counts a conversion only for an id it
-      // has not counted before. A direct visit to that page has no id and
-      // counts nothing; a second real request gets a new id and counts again.
-      var leadId = "L" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      // The thank-you page counts a conversion only for an id it has not
+      // counted before, so a repeat of the same enquiry is not double-counted.
+      if (!leadId) leadId = "L" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
       var idField = form.querySelector('input[name="lead_id"]');
       if (!idField) {
         idField = document.createElement("input");
@@ -281,37 +346,82 @@
       }
       idField.value = leadId;
 
-      var done = false;
-      var giveUp = setTimeout(function () {
-        if (!done) { done = true; submitFailed(form, btn, btnHtml); }
-      }, 15000);
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var settled = false;
+      var timer;
+      function finish() { settled = true; inFlight = false; clearTimeout(timer); }
+      function unsure() {
+        restoreBtn(btn, btnHtml);
+        showFormMessage(form, btn, "We couldn’t confirm your request.", UNSURE, true);
+      }
+      timer = setTimeout(function () {
+        if (settled) return;
+        if (ctrl) {
+          // Stop waiting. The provider may still have received it: say so.
+          ctrl.abort();
+        } else {
+          // No way to cancel: keep blocking resubmits until the late answer
+          // arrives, but give the visitor the phone now.
+          restoreBtn(btn, btnHtml);
+          if (btn) btn.disabled = true;
+          showFormMessage(form, btn, "Still waiting for a response.", UNSURE, true);
+        }
+      }, window.__fortexFormTimeout || 15000);
 
       fetch(form.action, {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" },
+        signal: ctrl ? ctrl.signal : undefined,
       }).then(function (res) {
-        if (done) return;
-        done = true; clearTimeout(giveUp);
-        if (!res.ok) return submitFailed(form, btn, btnHtml);
-        var next = form.querySelector('input[name="_next"]');
-        var url = next && next.value ? next.value : "/book/thank-you/";
-        window.location.href = url + (url.indexOf("?") < 0 ? "?" : "&") + "lid=" + leadId;
+        if (settled) return;
+        if (res.ok) {
+          finish();
+          var id = leadId;
+          leadId = null; // a later, separate enquiry gets its own id
+          var next = form.querySelector('input[name="_next"]');
+          var url = next && next.value ? next.value : "/book/thank-you/";
+          (window.__fortexNavigate || function (u) { window.location.href = u; })(
+            url + (url.indexOf("?") < 0 ? "?" : "&") + "lid=" + id);
+          return;
+        }
+        // 4xx with field errors from the provider: the request was rejected,
+        // so say what to fix. Anything else (5xx) is uncertain.
+        if (res.status >= 400 && res.status < 500) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            if (settled) return;
+            finish();
+            var msgs = ((data && data.errors) || []).map(function (x) { return x && x.message; }).filter(Boolean);
+            if (msgs.length) {
+              restoreBtn(btn, btnHtml);
+              showFormMessage(form, btn, "Please check the form.", msgs.join(" "), true);
+            } else unsure();
+          });
+        }
+        finish();
+        unsure();
       }).catch(function () {
-        if (done) return;
-        done = true; clearTimeout(giveUp);
-        submitFailed(form, btn, btnHtml);
+        if (settled) return;
+        finish();
+        unsure();
       });
     });
 
-    // light phone formatting
-    var phone = form.querySelector('input[name="phone"]');
     if (phone) {
+      // Light formatting while typing. A number starting with 1 or longer
+      // than 10 digits is left exactly as typed (checked on blur and submit),
+      // so nothing is ever truncated.
       phone.addEventListener("input", function () {
-        var d = phone.value.replace(/\D/g, "").slice(0, 10);
-        if (d.length > 6) phone.value = "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+        var d = phone.value.replace(/\D/g, "");
+        if (d.length === 11 && d.charAt(0) === "1") d = d.slice(1);
+        else if (d.charAt(0) === "1" || d.length > 10 || phone.value.indexOf("+") >= 0) d = "";
+        if (d.length === 10) phone.value = "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+        else if (d.length > 6) phone.value = "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
         else if (d.length > 3) phone.value = "(" + d.slice(0, 3) + ") " + d.slice(3);
-        else if (d.length > 0) phone.value = "(" + d;
+        if (phone.getAttribute("aria-invalid") && parsePhone(phone.value).ok) phoneError(phone, "");
+      });
+      phone.addEventListener("blur", function () {
+        if (phone.value.trim()) checkPhone(phone);
       });
     }
   });
@@ -417,13 +527,26 @@
   window.addEventListener("load", function () { setTimeout(maybeStart, 1200); });
 })();
 
-// Repair stories on /our-work/ are collapsed <details>; open the one a link points to.
+// Repair stories are collapsed <details>. A link to a story opens it; a link
+// to a problem group with a single story opens that story too, while a group
+// with several (Not Drying) is only scrolled to, so the visitor picks one.
+// Clicking a link to the hash already in the address bar works again too.
 (function () {
   function openFromHash() {
     var id = location.hash.slice(1); if (!id) return;
     var el = document.getElementById(id);
-    if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView(); }
+    if (!el) return;
+    var target = el;
+    if (el.tagName !== "DETAILS" && el.hasAttribute("data-open-single")) {
+      target = el.querySelector("details") || el;
+    }
+    if (target.tagName === "DETAILS") target.open = true;
+    el.scrollIntoView();
   }
-  window.addEventListener('hashchange', openFromHash);
-  document.addEventListener('DOMContentLoaded', openFromHash);
+  window.addEventListener("hashchange", openFromHash);
+  document.addEventListener("DOMContentLoaded", openFromHash);
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a && a.getAttribute("href") === location.hash) setTimeout(openFromHash, 0);
+  });
 })();
