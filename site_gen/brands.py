@@ -159,6 +159,9 @@ BRAND_PAGES.update(MORE_BRANDS)
 BRAND_PAGES.update(NEW_BRANDS)
 COMBO_PAGES.update(MORE_COMBOS)
 COMBO_PAGES.update(NEW_COMBOS)
+from .brand_data3 import NEW_BRANDS3, NEW_COMBOS3  # noqa: E402
+BRAND_PAGES.update(NEW_BRANDS3)
+COMBO_PAGES.update(NEW_COMBOS3)
 
 BREADCRUMB_NAMES.update({"brands": "Brands"})
 for _slug, _b in BRAND_PAGES.items():
@@ -305,7 +308,7 @@ def _photo_for(href, b):
     parts = [x for x in href.strip("/").split("/") if x]
     if len(parts) == 3 and parts[0] == "services":
         c = COMBO_PAGES.get((parts[2], parts[1]))
-        if c:
+        if c and c["photo"] != "tech-portrait":
             return c["photo"]
     # A general service page's hero shows some other brand's appliance: on a
     # brand page that card gets an icon instead of a wrong-brand photo

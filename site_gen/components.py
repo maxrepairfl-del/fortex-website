@@ -266,8 +266,8 @@ def _services_menu():
 
 
 BRAND_MENU = [("High-end", [("sub-zero", "Sub-Zero"), ("wolf", "Wolf"), ("viking", "Viking"), ("thermador", "Thermador"),
-                             ("fisher-paykel", "Fisher & Paykel"), ("hoshizaki", "Hoshizaki")]),
-              ("Everyday", [("lg", "LG"), ("samsung", "Samsung"), ("ge", "GE"), ("whirlpool", "Whirlpool"), ("bosch", "Bosch")])]
+                             ("fisher-paykel", "Fisher & Paykel"), ("monogram", "Monogram"), ("hoshizaki", "Hoshizaki")]),
+              ("Everyday", [("lg", "LG"), ("samsung", "Samsung"), ("ge", "GE"), ("whirlpool", "Whirlpool"), ("kitchenaid", "KitchenAid"), ("bosch", "Bosch")])]
 
 
 def _brands_menu():

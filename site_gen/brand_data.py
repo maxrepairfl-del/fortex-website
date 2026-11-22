@@ -107,7 +107,7 @@ MORE_BRANDS = {
         "products": [
             ("oven", "Ranges & rangetops", "Gas and dual-fuel, 30 to 60 inch.", "/services/stove-cooktop-repair/viking/"),
             ("oven", "Wall ovens", "Convection, self-clean and double ovens.", "/services/oven-repair/"),
-            ("refrigerator", "Built-in refrigerators", "Side-by-side, bottom-freezer and column units.", "/services/refrigerator-repair/"),
+            ("refrigerator", "Built-in refrigerators", "Side-by-side, bottom-freezer and column units.", "/services/refrigerator-repair/viking/"),
             ("microwave", "Microwaves & dishwashers", "Built-in microwaves, drawers and dishwashers.", "/services/microwave-repair/"),
         ],
         "parts_line": INDEPENDENT_COOK,

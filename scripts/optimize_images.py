@@ -95,6 +95,9 @@ def main():
         for result in ex.map(build_one, all_jobs):
             if result:
                 meta[result[0]] = list(result[1])
+    # Keep the sizes of named web copies (scripts/make_web_copies.py writes them).
+    old = M.load_meta()
+    meta.update({k: v for k, v in old.items() if k in M.WEB_COPIES})
     with open(M.META_PATH, "w") as f:
         json.dump(meta, f, indent=0, sort_keys=True)
     # report total output weight

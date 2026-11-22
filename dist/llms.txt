@@ -48,6 +48,8 @@ Samsung, LG, Whirlpool, GE, GE Profile, GE Monogram, Maytag, KitchenAid, Frigida
 - [Bosch](https://www.fortexappliancerepair.com/brands/bosch/)
 - [Fisher & Paykel](https://www.fortexappliancerepair.com/brands/fisher-paykel/)
 - [Hoshizaki](https://www.fortexappliancerepair.com/brands/hoshizaki/)
+- [KitchenAid](https://www.fortexappliancerepair.com/brands/kitchenaid/)
+- [Monogram](https://www.fortexappliancerepair.com/brands/monogram/)
 - [Sub-Zero refrigerator repair](https://www.fortexappliancerepair.com/services/refrigerator-repair/sub-zero/)
 - [Wolf range repair](https://www.fortexappliancerepair.com/services/stove-cooktop-repair/wolf/)
 - [Viking range repair](https://www.fortexappliancerepair.com/services/stove-cooktop-repair/viking/)
@@ -64,6 +66,9 @@ Samsung, LG, Whirlpool, GE, GE Profile, GE Monogram, Maytag, KitchenAid, Frigida
 - [Bosch dishwasher repair](https://www.fortexappliancerepair.com/services/dishwasher-repair/bosch/)
 - [Fisher & Paykel DishDrawer repair](https://www.fortexappliancerepair.com/services/dishwasher-repair/fisher-paykel/)
 - [Hoshizaki ice machine repair](https://www.fortexappliancerepair.com/services/ice-machine-repair/hoshizaki/)
+- [KitchenAid refrigerator repair](https://www.fortexappliancerepair.com/services/refrigerator-repair/kitchenaid/)
+- [Viking refrigerator repair](https://www.fortexappliancerepair.com/services/refrigerator-repair/viking/)
+- [Monogram refrigerator repair](https://www.fortexappliancerepair.com/services/refrigerator-repair/monogram/)
 
 ## Service areas
 
