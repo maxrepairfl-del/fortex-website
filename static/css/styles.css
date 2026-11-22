@@ -967,3 +967,6 @@ details.story[open] .story__close { display: inline; }
   .story__head { grid-template-columns: 1fr; }
   .story__thumb img { max-height: 300px; margin: 0 auto; }
 }
+
+/* Brand card without a matching brand photo: icon panel, same height as photos */
+.photo-card__img--icon { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; background: var(--surface, #f3f4f6); color: var(--accent, #c8102e); }

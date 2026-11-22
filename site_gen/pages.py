@@ -21,11 +21,13 @@ TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
 WORK_PHOTO = "job-tech-control-board-shoe-covers"
 
 
-def photo_card(href, photo, title, desc="", more="Learn more"):
-    """Card led by a real job photo instead of an icon."""
+def photo_card(href, photo, title, desc="", more="Learn more", ic=None):
+    """Card led by a real job photo; an icon panel when there is no right photo."""
     d = f"<p>{esc(desc)}</p>" if desc else ""
+    top = (f"<span class=\"photo-card__img\">{img(photo, sizes='(max-width:700px) 92vw, 300px')}</span>" if photo
+           else f'<span class="photo-card__img photo-card__img--icon">{icon(ic or "wrench", size=56)}</span>')
     return f"""<a class="photo-card reveal" href="{href}">
-  <span class="photo-card__img">{img(photo, sizes='(max-width:700px) 92vw, 300px')}</span>
+  {top}
   <span class="photo-card__body"><h3>{esc(title)}</h3>{d}
   <span class="more">{esc(more)} {icon('arrow-right', size=16)}</span></span></a>"""
 

@@ -307,9 +307,10 @@ def _photo_for(href, b):
         c = COMBO_PAGES.get((parts[2], parts[1]))
         if c:
             return c["photo"]
-    if len(parts) >= 2 and parts[1] in SERVICES_BY_SLUG:
-        return SERVICES_BY_SLUG[parts[1]]["photo"]
-    return b["photo"]
+    # A general service page's hero shows some other brand's appliance: on a
+    # brand page that card gets an icon instead of a wrong-brand photo
+    # (owner, 2026-11-21: F&P refrigerator and range cards).
+    return None
 
 
 def render_brand(slug):
@@ -317,7 +318,7 @@ def render_brand(slug):
     path = f"/brands/{slug}/"
     price_html, catalog = price_table(b['prices'], b['name'], path)
     pp = b.get("product_photos") or []
-    cards = "".join(P.photo_card(h, pp[i] if i < len(pp) and pp[i] else _photo_for(h, b), t, d)
+    cards = "".join(P.photo_card(h, pp[i] if i < len(pp) and pp[i] else _photo_for(h, b), t, d, ic=ic)
                     for i, (ic, t, d, h) in enumerate(b["products"]))
     body = f"""
 {hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'], b['lead'], b['photo'])}
@@ -325,6 +326,7 @@ def render_brand(slug):
   <div class="section-head"><p class="eyebrow">What we repair</p><h2>{esc(b['name'])} appliances we work on</h2></div>
   <div class="cards grid-4">{cards}</div>
 </div></section>
+{problems_section(b['problems_noun'], b['problems'], None) if b.get('problems') else ''}
 {oem_block(b['name'], b['parts_line'])}
 {request_form(b['name'] + ' appliance', 'wrench', b.get('example', 'not cooling'), path)}
 {P.steps_section()}

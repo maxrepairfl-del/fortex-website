@@ -113,6 +113,22 @@ NEW_BRANDS = {
             ("oven", "Ranges & cooktops", "Gas, induction and dual-fuel.", "/services/stove-cooktop-repair/"),
         ],
         "product_photos": [None, None, None],  # L273 is KitchenAid (owner 2026-11-21)
+        # Owner 2026-11-21: the usual DishDrawer complaints.
+        "problems_noun": "Fisher & Paykel DishDrawer",
+        "problems": [
+            ("Grinding or squeaking noise",
+             "Usually debris caught in the drain or wash pump, or a pump that is wearing out.",
+             "We check the filter and both pumps for debris and wear before replacing anything."),
+            ("Not washing, dishes come out dirty",
+             "A clogged filter or spray arm, a weak wash pump or too little water coming in.",
+             "We clean the filter and spray arm, check the water fill and test the wash pump."),
+            ("Won't start",
+             "Often the lid can't close and lock: a worn lid actuator or a damaged drawer cable. Sometimes the key lock is simply on.",
+             "We check the lock setting first, then test the lid actuator, the cable and the control board."),
+            ("Drawer won't open or stays locked",
+             "The lid actuator holds the drawer shut during a cycle. When it fails, the drawer can stay locked.",
+             "We test the lid actuator and its wiring and replace the part that failed."),
+        ],
         "parts_line": "Drawer motors and boards, drain pumps, lid actuators, seals and cable harnesses",
         "prices": DISHDRAWER_PRICES,
         "faqs": [
@@ -300,9 +316,12 @@ NEW_COMBOS = {
         "meta": "Fisher & Paykel DishDrawer won't start, won't close, not draining, error code? Single and double DishDrawer repair in Orange County.",
         "lead": "A drawer that won't start or lock, water left in the bottom, beeping and error codes, leaks. We repair single and double DishDrawers, integrated and stainless.",
         "photo": "job-brand-fisher-paykel-dishdrawer", "prices": DISHDRAWER_PRICES,
-        "symptoms": ["Drawer won't start", "Lid doesn't close or seal", "Water left in the drawer", "Beeping / error code", "One drawer works, the other doesn't", "Leaking"],
+        "symptoms": ["Drawer won't start", "Drawer won't open or stays locked", "Grinding or squeaking noise", "Not washing, dishes come out dirty", "Lid doesn't close or seal", "Water left in the drawer", "Beeping / error code", "One drawer works, the other doesn't", "Leaking"],
         "causes": [
-            ("Won't start", "Lid actuator, control board, harness", "Test the actuator and harness, then the board"),
+            ("Won't start", "Lid actuator, control board, harness; or the key lock is on", "Check the lock setting, test the actuator and harness, then the board"),
+            ("Stays locked", "Lid actuator or its wiring", "Test the actuator and wiring, replace the failed part"),
+            ("Grinding or squeaking", "Debris in the drain or wash pump, worn pump", "Clear the filter, inspect and test both pumps"),
+            ("Not washing", "Clogged filter or spray arm, weak wash pump, low water fill", "Clean the filter and arm, check fill, test the pump"),
             ("Water left", "Drain pump, filter", "Clear the filter, test the pump"),
             ("One drawer dead", "That drawer's board, motor or cable", "Test that drawer's parts on their own"),
             ("Leaking", "Lid seal, hoses", "Replace the seal or hose"),
