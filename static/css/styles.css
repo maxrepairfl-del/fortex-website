@@ -1019,3 +1019,5 @@ details.story--card .story__photo { max-width: 560px; }
   .story__title { font-size: 1.15rem; }
   details.story--card .story__body { padding: 0 14px 16px; }
 }
+details.story--card .story__body p { margin: 0 0 12px; }
+details.story--card .story__body .story__photo { margin: 16px 0 20px; }
