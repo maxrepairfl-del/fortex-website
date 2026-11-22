@@ -56,7 +56,7 @@ NEW_BRANDS = {
         "prices": WASHER_PRICES[:4] + DRYER_PRICES[:2],
         "faqs": [
             ("Do you repair GE Profile and Café appliances?", "Yes. GE Profile and Café use the same service parts as GE, and we repair all three."),
-            ("Do you use original GE parts?", "Yes, OEM parts from authorized distributors, with 1 year on parts and 90 days on labor."),
+            ("Do you use original GE parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
             ("Can you fix a GE washer that won't spin?", "Usually in one visit: the common causes are the lid lock, the shift actuator on top-loaders, the drain pump or the belt."),
         ],
     },
@@ -77,7 +77,7 @@ NEW_BRANDS = {
         "prices": WASHER_PRICES[:4] + DRYER_PRICES[:2],
         "faqs": [
             ("Do you repair Maytag, KitchenAid and Amana too?", "Yes. They are made by Whirlpool and share most service parts, and we repair all of them."),
-            ("Do you use original Whirlpool parts?", "Yes, OEM parts from authorized distributors, with 1 year on parts and 90 days on labor."),
+            ("Do you use original Whirlpool parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
             ("Is an older Whirlpool washer worth fixing?", "Usually. Most Whirlpool washer repairs are a part under $500, far less than a new machine. We tell you honestly if it isn't worth it."),
         ],
     },
@@ -98,7 +98,7 @@ NEW_BRANDS = {
         "faqs": [
             ("What does E15 mean on a Bosch dishwasher?", "Water in the base pan has tripped the float switch. The dishwasher stops to prevent a flood. We find the leak, fix it and dry the base."),
             ("What does E24 mean?", "The dishwasher can't drain: usually a clogged filter, a blocked drain hose or a failed drain pump."),
-            ("Do you use original Bosch parts?", "Yes, OEM parts from authorized distributors, with 1 year on parts and 90 days on labor."),
+            ("Do you use original Bosch parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
     "fisher-paykel": {
@@ -134,7 +134,7 @@ NEW_BRANDS = {
         "faqs": [
             ("Can one drawer fail while the other works?", "Yes. Each DishDrawer has its own pump and board, so one drawer can stop while the other keeps working."),
             ("Why won't my DishDrawer close or start?", "Often a lid actuator, a worn cable harness that flexes with the drawer, or a control board fault. We test before replacing."),
-            ("Do you use original Fisher & Paykel parts?", "Yes, OEM parts from authorized distributors, with 1 year on parts and 90 days on labor."),
+            ("Do you use original Fisher & Paykel parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
     "hoshizaki": {
@@ -152,7 +152,7 @@ NEW_BRANDS = {
         "faqs": [
             ("How often should a Hoshizaki be cleaned?", "Every 6 months at minimum, more often with hard water. Scale is the most common cause of low ice and slow harvest."),
             ("Do you service restaurants and bars?", "Yes, commercial ice machines and refrigeration across Orange County."),
-            ("Do you use original Hoshizaki parts?", "Yes, OEM parts from authorized distributors."),
+            ("Do you use original Hoshizaki parts?", "Yes, by default: OEM parts from authorized distributors. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
 }
@@ -180,7 +180,7 @@ NEW_COMBOS = {
         "faqs": [
             ("How much does Thermador refrigerator repair cost?", "Most repairs fall between $180 and $850: fans, defrost parts, ice makers, hinges and boards. Sealed-system work runs $750 to $1,500. You get the exact price before any work."),
             ("Can you repair a Freedom column without removing it?", "Yes, columns are serviced in place and the panels re-aligned afterwards."),
-            ("Do you use original Thermador parts?", "Yes, OEM parts from authorized distributors, with 1 year on parts and 90 days on labor."),
+            ("Do you use original Thermador parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
     ("samsung", "washing-machine-repair"): {
@@ -307,7 +307,7 @@ NEW_COMBOS = {
         "faqs": [
             ("How much does Bosch dishwasher repair cost?", "Most Bosch repairs fall between $180 and $420: drain pump, leak repair, heater, valve, springs and boards."),
             ("Can I clear E15 myself?", "Tilting the machine can empty the base, but the leak is still there. It will come back until the leak is fixed."),
-            ("Do you use original Bosch parts?", "Yes, OEM parts from authorized distributors, with 1 year on parts and 90 days on labor."),
+            ("Do you use original Bosch parts?", "Yes, by default: OEM parts from authorized distributors, with 1 year on parts and 90 days on labor. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
     ("fisher-paykel", "dishwasher-repair"): {
@@ -334,7 +334,7 @@ NEW_COMBOS = {
         "faqs": [
             ("How much does DishDrawer repair cost?", "Most repairs fall between $180 and $520: drain pump, lid actuator and seal, valve, motor and boards."),
             ("Is a DishDrawer worth fixing?", "Usually. A new DishDrawer is expensive and has to fit the same cabinet opening, so a repair is almost always cheaper."),
-            ("Do you use original parts?", "Yes, OEM parts from authorized distributors."),
+            ("Do you use original parts?", "Yes, by default: OEM parts from authorized distributors. When a lower-cost aftermarket part would do the job without losing quality, we offer it and you decide."),
         ],
     },
     ("hoshizaki", "ice-machine-repair"): {

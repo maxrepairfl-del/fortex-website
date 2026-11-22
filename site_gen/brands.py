@@ -255,8 +255,8 @@ def oem_block(brand, parts_line):
     return f"""<section class="section section--tight"><div class="wrap">
   <div class="oem-note reveal">
     <div class="oem-note__ic">{icon('award', size=28)}</div>
-    <div><h3>Original {esc(brand)} parts only</h3>
-    <p>{esc(parts_line)}: we install factory (OEM) parts bought from authorized distributors, not cheaper aftermarket copies that can fit poorly or run outside spec. 1 year on parts, 90 days on labor. Still under the manufacturer's warranty? Tell us when you book and we will point you to factory service first.</p></div>
+    <div><h3>Original {esc(brand)} parts first, your budget in mind</h3>
+    <p>{esc(parts_line)}: we prefer factory (OEM) parts bought from authorized distributors. You come first, though: when a lower-cost aftermarket part would do the job without losing quality, we will offer it, explain the difference, and you decide. 1 year on OEM parts, 90 days on labor. Still under the manufacturer's warranty? Tell us when you book and we will point you to factory service first.</p></div>
   </div>
 </div></section>"""
 

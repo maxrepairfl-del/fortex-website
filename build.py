@@ -109,7 +109,8 @@ def llms_txt():
         f"> Licensed (CA #{SITE['license']}) and insured appliance repair across {SITE['region']}. "
         "Technicians come to the customer; there is no walk-in shop. "
         "Service visit is waived with any repair. "
-        "1-year warranty on OEM parts, 90 days on labor.", "",
+        "1-year warranty on OEM parts, 90 days on labor. "
+        "OEM parts by default; a lower-cost aftermarket part is offered when it would do the job without losing quality, and the customer decides.", "",
         f"- Phone: {SITE['phone']}",
         f"- Email: {SITE['email']}",
         f"- Hours: {SITE['hours']}, Sunday closed",

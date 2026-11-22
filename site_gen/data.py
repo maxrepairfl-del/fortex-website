@@ -106,7 +106,7 @@ STEPS = [
     ("shield", "$80 diagnosis, free with repair",
      "The technician finds the cause and gives you the full price before any work starts. Approve the repair and the service call is free."),
     ("award", "Fixed, usually in one visit",
-     "Factory (OEM) parts from authorized distributors. 1 year on parts, 90 days on labor."),
+     "Factory (OEM) parts from authorized distributors by default, or a lower-cost aftermarket part if we offered one and you chose it. 1 year on OEM parts, 90 days on labor."),
 ]
 
 # ---------------------------------------------------------------- why fortex
