@@ -131,6 +131,10 @@ WEB_COPIES = {
     "sub-zero-built-in-refrigerator-work-l321": (
         "photo-library/refrigeration/job-tech-panel-ready-builtin-fridge.jpg",
         "Panel-ready Sub-Zero built-in refrigerator during service"),
+    "fisher-paykel-dishdrawer-card": (
+        "photo-library/dishwashers/job-brand-fisher-paykel-dishdrawer.jpg",
+        "Fisher & Paykel double DishDrawer with the control panel",
+        (0, 256, 720, 796)),  # owner 2026-11-21: 4:3 card showing the top panel and buttons
     # Repair stories on /our-work/ (owner briefs 2026-11-21). Files named by the owner.
     "dacor-range-overview": (
         "photo-library/cooking/job-pro-range-dual-oven.jpg",

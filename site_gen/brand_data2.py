@@ -112,7 +112,7 @@ NEW_BRANDS = {
             ("refrigerator", "Refrigerators", "Integrated and freestanding.", "/services/refrigerator-repair/"),
             ("oven", "Ranges & cooktops", "Gas, induction and dual-fuel.", "/services/stove-cooktop-repair/"),
         ],
-        "product_photos": [None, None, None],  # L273 is KitchenAid (owner 2026-11-21)
+        "product_photos": ["fisher-paykel-dishdrawer-card", None, None],  # L273 is KitchenAid (owner 2026-11-21)
         # Owner 2026-11-21: the usual DishDrawer complaints.
         "problems_noun": "Fisher & Paykel DishDrawer",
         "problems": [
