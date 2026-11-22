@@ -83,7 +83,7 @@ MORE_BRANDS = {
             ("oven", "Rangetops & cooktops", "Gas, induction and electric cooktops and rangetops.", "/services/stove-cooktop-repair/wolf/"),
             ("oven", "Wall ovens", "Single, double, convection and steam ovens.", "/services/oven-repair/"),
             ("microwave", "Microwaves", "Built-in microwaves and microwave drawers.", "/services/microwave-repair/"),
-            ("oven", "Warming drawers", "Repaired on request. Tell us the model when you book.", "/book/"),
+            ("oven", "Warming drawers", "Repaired on request. Tell us the model when you book.", "/book/?appliance=Wolf%20warming%20drawer"),
         ],
         "parts_line": INDEPENDENT_COOK,
         "prices": [("Range and oven", RANGE_PRICES_WOLF)],

@@ -217,7 +217,7 @@ def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
 <link rel="stylesheet" href="{asset("/css/styles.css")}">
 {schema_tag}
 </head>
-<body>
+<body data-sms="{esc(SITE['sms_href'])}">
 {promobar()}
 {header(path, book_href)}
 {mobile_nav(book_href)}

@@ -192,7 +192,9 @@
      still submits the old way.
   */
   var TEL = (document.querySelector('a[href^="tel:"]') || {}).href || "";
-  var SMS = (document.querySelector('a[href^="sms:"]') || {}).href || "";
+  // The text-us link comes from the site settings (body data-sms), so the
+  // error box offers it even on pages without an sms: link of their own.
+  var SMS = (document.querySelector('a[href^="sms:"]') || {}).href || (document.body && document.body.getAttribute("data-sms")) || "";
   var TEL_TEXT = (document.querySelector(".nav-phone") || {}).textContent || "call us";
 
   // Shown when we cannot tell whether the provider got the request (timeout,
@@ -242,6 +244,7 @@
     if (!msg) {
       if (el) el.remove();
       input.removeAttribute("aria-invalid");
+      if (input.getAttribute("aria-describedby") === id) input.removeAttribute("aria-describedby");
       input.setCustomValidity("");
       return;
     }
@@ -266,6 +269,31 @@
   }
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-booking]"), function (form) {
+    // /book/?appliance=Wolf%20warming%20drawer: a card on a brand page already
+    // said what needs repair, so show that choice instead of asking again.
+    // Letters, digits, spaces, & and - only, shown as text, at most 60 chars.
+    var preset = form.getAttribute("name") === "booking" && window.URLSearchParams
+      ? (new URLSearchParams(location.search).get("appliance") || "") : "";
+    preset = /^[A-Za-z0-9 &-]{2,60}$/.test(preset) ? preset : "";
+    if (preset) {
+      var grid0 = form.querySelector(".choice-grid");
+      var sel0 = form.querySelector("[data-appliance-select]");
+      Array.prototype.forEach.call(form.querySelectorAll('input[type="radio"][name="appliance"]'), function (r) {
+        r.disabled = true; r.required = false;
+      });
+      if (sel0) { sel0.disabled = true; sel0.required = false; sel0.style.display = "none"; sel0.removeAttribute("data-appliance-select"); }
+      if (grid0) {
+        grid0.style.display = "none";
+        var chip = document.createElement("p");
+        chip.className = "req-chip";
+        chip.innerHTML = '<span><strong></strong></span><a href="/book/">Change</a>';
+        chip.querySelector("strong").textContent = preset;
+        grid0.parentNode.insertBefore(chip, grid0);
+        var hid = document.createElement("input");
+        hid.type = "hidden"; hid.name = "appliance"; hid.value = preset;
+        form.appendChild(hid);
+      }
+    }
     // Phones get a dropdown instead of the appliance tiles. Whichever control
     // is hidden is disabled, so it is neither validated nor submitted; a pick
     // carries over when the width changes (rotation, desktop resize).
