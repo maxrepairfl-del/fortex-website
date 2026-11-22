@@ -131,6 +131,31 @@ WEB_COPIES = {
     "sub-zero-built-in-refrigerator-work-l321": (
         "photo-library/refrigeration/job-tech-panel-ready-builtin-fridge.jpg",
         "Panel-ready Sub-Zero built-in refrigerator during service"),
+    # Repair stories on /our-work/ (owner briefs 2026-11-21). Files named by the owner.
+    "dacor-range-overview": (
+        "photo-library/cooking/job-pro-range-dual-oven.jpg",
+        "Dacor range during the service visit"),
+    "dacor-range-control-board-heat-damage": (
+        "photo-library/cooking/dacor range PCB replacement 3 old part.jpg",
+        "Original Dacor range control board with heat damage at a wiring connection"),
+    "dacor-range-aftermarket-control-board": (
+        "photo-library/cooking/dacor range PCB replacement 3.jpg",
+        "Aftermarket replacement control board installed in the Dacor range"),
+    "dacor-range-cooktop-lifted": (
+        "photo-library/cooking/dacor range PCB replacement.jpg",
+        "Dacor range with the cooktop assembly lifted for access to the control board"),
+    "dacor-oven-bake-element-heating": (
+        "photo-library/cooking/job-oven-bake-element-red.jpg",
+        "New original bake element heating in the Dacor oven"),
+    "viking-microwave-front": (
+        "photo-library/cooking/Viking microwave magnetron replacemen 1.jpg",
+        "Viking microwave during a service visit", 90),  # shot sideways: rotate upright
+    "viking-microwave-magnetron-damaged-cap": (
+        "photo-library/cooking/Viking microwave magnetron replacement damaged magnetron(burnt).jpg",
+        "Removed microwave magnetron with a damaged antenna cap"),
+    "viking-microwave-interior": (
+        "photo-library/cooking/Viking microwave magnetron replacement.jpg",
+        "Viking microwave interior during magnetron replacement"),
 }
 WEB_WIDTHS = [400, 640, 960]
 

@@ -91,6 +91,26 @@
 720,
 960
 ],
+"dacor-oven-bake-element-heating": [
+960,
+1280
+],
+"dacor-range-aftermarket-control-board": [
+960,
+960
+],
+"dacor-range-control-board-heat-damage": [
+960,
+960
+],
+"dacor-range-cooktop-lifted": [
+960,
+960
+],
+"dacor-range-overview": [
+720,
+1280
+],
 "dacor-range-pcb-replacement": [
 960,
 960
@@ -782,6 +802,18 @@
 "viking-microwave": [
 720,
 960
+],
+"viking-microwave-front": [
+960,
+720
+],
+"viking-microwave-interior": [
+960,
+960
+],
+"viking-microwave-magnetron-damaged-cap": [
+960,
+1280
 ],
 "viking-microwave-magnetron-replacemen-1": [
 720,

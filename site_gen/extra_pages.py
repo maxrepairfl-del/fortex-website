@@ -8,6 +8,7 @@ from .data import SITE, SERVICES_BY_SLUG
 from .icons import icon
 from . import media
 from . import pages as P
+from . import cases
 
 # ---------------------------------------------------------------- areas
 # Cities and the neighborhoods / communities inside them. Orange County first,
@@ -126,7 +127,14 @@ def render_our_work():
   <h1>Our Work: Real Repairs in Orange County Homes</h1>
   <p class="hero-lead">Every photo on this page was taken by our technicians on real service calls. No stock images. Frozen evaporators, burned-out igniters, lint-packed dryers and the fixes that followed.</p>
 </div></section>
-<section class="section"><div class="wrap">{groups}
+<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Repair stories</p><h2>How a few repairs actually went</h2></div>
+  <div class="case-list">{cases.story_index()}</div>
+  {''.join(cases.render_story(c) for c in cases.CASES)}
+</div></section>
+<section class="section section--surface"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">Photos</p><h2>Photos from our jobs</h2></div>
+  {groups}
 </div></section>
 {P.steps_section()}
 {cta_band()}

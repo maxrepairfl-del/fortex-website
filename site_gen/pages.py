@@ -14,6 +14,7 @@ from .data import (
 # ----------------------------------------------------------- real job photos
 from . import media as _media  # noqa: E402
 from .images import is_portrait  # noqa: E402
+from .cases import service_case_section, CASES_BY_SERVICE, case_url  # noqa: E402
 # Service heroes/galleries stay as in data.py (owner asked on 2026-11-12 to
 # keep the original photos); media.HEROES / GALLERIES are not applied.
 TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
@@ -542,6 +543,13 @@ def render_service(s):
     symptoms = "".join(
         f'<li>{icon("check", size=20)}<span>{esc(x)}</span></li>' for x in s["symptoms"]
     )
+    # Owner brief 2026-11-21: one line under the symptom list on the microwave
+    # page, linking only the story phrase (not a whole symptom) to the story.
+    case_line = ""
+    if s["slug"] == "microwave-repair":
+        c = CASES_BY_SERVICE["microwave-repair"]
+        case_line = (f'<p class="case-line">From a recent repair: <a href="{case_url(c)}">'
+                     'a microwave that wasn’t heating and was sparking inside</a>.</p>')
     # A page can name its closest neighbours first (wine cooler <-> wine cellar);
     # the rest of the four slots fill from the service order as before.
     first = [SERVICES_BY_SLUG[x] for x in s.get("related", [])]
@@ -581,10 +589,12 @@ def render_service(s):
   <div class="section-head"><p class="eyebrow">Common problems</p>
     <h2>Common problems we fix</h2></div>
   <ul class="checks">{symptoms}</ul>
+  {case_line}
   {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day appointments may be available. Call to check.', href='#request')}
 </div></section>
 {service_request_form(s)}
 {causes_block(s)}
+{service_case_section(s['slug'])}
 {_brand_links(s['slug'])}
 {gallery_block(s)}
 {types_block(s)}

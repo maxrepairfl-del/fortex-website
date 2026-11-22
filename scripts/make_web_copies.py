@@ -13,8 +13,8 @@ OUT = os.path.join(ROOT, "dist", "images"); os.makedirs(OUT, exist_ok=True)
 meta = M.load_meta()
 for slug, (rel, _alt, *crop) in M.WEB_COPIES.items():
     im = ImageOps.exif_transpose(Image.open(os.path.join(ROOT, "assets", rel))).convert("RGB")
-    if crop:
-        im = im.crop(crop[0])
+    for opt in crop:  # extra options: an int rotates (degrees CCW), a 4-tuple crops
+        im = im.rotate(opt, expand=True) if isinstance(opt, int) else im.crop(opt)
     big = None
     for w in M.WEB_WIDTHS:
         w = min(w, im.width)
