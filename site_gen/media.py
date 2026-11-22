@@ -14,7 +14,7 @@ HEROES = {
     "refrigerator-repair": ("refrigeration/job-brand-lg-french-door-fridge-kitchen", "French-door refrigerator on a service call"),
     "dishwasher-repair": ("dishwashers/no-brand-dishwasher-stainless-built-in-overview-clear", "Stainless built-in dishwasher on a Fortex service call"),
     "washing-machine-repair": ("laundry/no-brand-washer-dryer-pair-laundry-room-overview-clear", "Front-load washer and dryer pair in a laundry room on a Fortex service call"),
-    "dryer-repair": ("laundry/lg-dryer-front-overview-clear", "Electric dryer in a laundry room on a Fortex service call"),
+    "dryer-repair": ("laundry/lg-dryer-front-overview-clear", "LG dryer in a laundry room on a Fortex service call"),
     "freezer-repair": ("refrigeration/no-brand-freezer-evaporator-frost-side-by-side-detail-clear", "Freezer compartment with ice built up over the evaporator cover"),
     "microwave-repair": ("cooking/kitchenaid-microwave-over-range-overview-clear", "Over-the-range microwave above a gas range on a Fortex service call"),
     "oven-repair": ("cooking/kitchenaid-wall-oven-microwave-overview-clear", "Built-in wall oven heating during a test"),

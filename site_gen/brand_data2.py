@@ -217,7 +217,7 @@ NEW_COMBOS = {
         "causes": [
             ("No heat / HE", "Thermal fuse, high-limit thermostat, heating element or gas coils", "Test each part, find why the fuse blew"),
             ("tS / tO", "Thermistor or wiring", "Measure the thermistor, check the harness"),
-            ("Long dry times", "Restricted airflow, weak heat", "Measure airflow and heat. If the house duct is blocked, it needs a vent-cleaning service"),
+            ("Long dry times", "Restricted airflow, weak heat", "Measure airflow and heat, inspect the exhaust duct. Straightforward runs up to 25 feet we can clean"),
             ("Squeak / thump", "Drum rollers, idler pulley, glides", "Replace worn rollers and glides"),
             ("Drum won't turn", "Belt, idler or motor", "Replace the belt or idler, test the motor"),
         ],
@@ -228,7 +228,7 @@ NEW_COMBOS = {
         ],
         "faqs": [
             ("How much does Samsung dryer repair cost?", "Most Samsung dryer repairs fall between $160 and $380: thermal fuse, element, thermostat, belt and rollers. A control board runs $280 to $520."),
-            ("Why does my Samsung dryer keep blowing the fuse?", "Almost always restricted airflow. We measure it every time and tell you if the house duct needs a vent-cleaning service; we do not clean ducts ourselves."),
+            ("Why does my Samsung dryer keep blowing the fuse?", "Almost always restricted airflow. We measure it every time and check the exhaust duct. We clean straightforward, accessible duct runs up to 25 feet; a roof outlet or a run with difficult bends goes to a dryer vent cleaning specialist."),
             ("Do you repair Samsung gas dryers?", "Yes, igniters, gas valve coils and flame sensors."),
         ],
     },

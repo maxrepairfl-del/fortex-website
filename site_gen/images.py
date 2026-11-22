@@ -160,6 +160,42 @@ WEB_COPIES = {
     "viking-microwave-interior": (
         "photo-library/cooking/Viking microwave magnetron replacement.jpg",
         "Viking microwave interior during magnetron replacement"),
+    # Dryer story on /services/dryer-repair/ (owner brief 2026-11-21): one LG
+    # gas dryer, the three frames confirmed by the owner as the same machine.
+    "dryer-story-lg-front": (
+        "photo-library/laundry/lg-dryer-front-overview-clear.jpg",
+        "LG dryer during the service visit"),
+    "dryer-story-burner-lint": (
+        "photo-library/laundry/job-dryer-gas-burner-meter.jpg",
+        "Gas dryer burner area after partial lint removal during repair"),
+    "dryer-story-after-cleaning": (
+        "photo-library/laundry/no-brand-gas-dryer-burner-motor-exposed-disassembled-clear.jpg",
+        "Same gas dryer after internal cleaning, with burner area and drum-support rollers visible"),
+    # The other dryer stories (owner brief "all approved stories" 2026-11-21).
+    "dryer-story-lint-opening": (
+        "photo-library/laundry/no-brand-dryer-lint-buildup-inside-cabinet-disassembled-clear.jpg",
+        "Lint almost completely covering an internal dryer air opening"),
+    "dryer-story-duct-lint": (
+        "photo-library/laundry/no-brand-dryer-vent-duct-clogged-lint-detail-clear.jpg",
+        "Lint buildup inside a dryer exhaust connection"),
+    "dryer-story-wall-connection": (
+        "photo-library/laundry/no-brand-dryer-vent-lint-on-floor-detail-clear.jpg",
+        "Disconnected dryer exhaust duct with lint around the wall connection"),
+    "dryer-story-ge-stack-open": (
+        "photo-library/laundry/job-dryer-opened-drum-blower.jpg",
+        "Open GE stacked dryer during investigation of an airflow problem"),
+    "dryer-story-blower-wheel": (
+        "photo-library/laundry/job-dryer-blower-wheel-lint.jpg",
+        "Removed dryer blower wheel found cracked during diagnosis"),
+    "dryer-story-rollers-before": (
+        "photo-library/laundry/no-brand-gas-dryer-drum-removed-burner-duct-disassembled-clear.jpg",
+        "Gas dryer interior with lint buildup and drum-support rollers visible"),
+    "dryer-story-blower-passage": (
+        "photo-library/laundry/no-brand-dryer-heater-housing-lint-disassembled-clear.jpg",
+        "Lint packed into a removed internal dryer duct leading toward the blower"),
+    "dryer-story-second-blockage": (
+        "photo-library/laundry/job-dryer-vent-lint-clog.jpg",
+        "Lint and hair buildup inside another dryer during service"),
 }
 WEB_WIDTHS = [400, 640, 960]
 
@@ -235,9 +271,10 @@ def is_portrait(slug):
 
 
 def picture(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
-            decoding="async", base="/images"):
-    """<picture> with AVIF and WebP sources and a JPEG fallback (web copies)."""
-    alt = WEB_COPIES[slug][1]
+            decoding="async", base="/images", alt=None):
+    """<picture> with AVIF and WebP sources and a JPEG fallback (web copies).
+    `alt` overrides the default text when one frame is used in two stories."""
+    alt = alt or WEB_COPIES[slug][1]
     full = _META.get(slug, (WEB_WIDTHS[-1], None))[0]
     ws = sorted({min(w, full) for w in WEB_WIDTHS})
     def srcset(ext):

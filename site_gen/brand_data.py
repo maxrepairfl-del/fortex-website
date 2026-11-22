@@ -445,7 +445,7 @@ MORE_COMBOS = {
         ],
         "causes": [
             ("No heat", "Thermal fuse or high-limit, heating element, gas igniter or coils", "Test fuse, element and igniter, find why the fuse blew"),
-            ("d80 / d90 / d95", "Airflow restricted 80 to 95 percent", "Measure airflow at the dryer and check the lint path inside it. The house duct itself needs a vent-cleaning service"),
+            ("d80 / d90 / d95", "Airflow restricted 80 to 95 percent", "Measure airflow at the dryer, check the lint path inside it and inspect the exhaust duct. Straightforward runs up to 25 feet we can clean"),
             ("Long dry times", "Restricted vent, weak heater, moisture sensor", "Check airflow and heat, clean the sensor bars"),
             ("Drum won't turn", "Broken belt, idler, motor", "Replace the belt or idler, test the motor"),
             ("Squeak / thump", "Drum rollers, glides, idler pulley", "Replace the worn rollers and glides"),
@@ -457,11 +457,11 @@ MORE_COMBOS = {
         ],
         "faqs": [
             ("What does d80 mean on an LG dryer?",
-             "The dryer measures airflow and warns that the exhaust is about 80 percent restricted; d90 and d95 mean worse. Clean the lint screen first. If the code comes back, the house vent duct needs cleaning by a vent-cleaning service. We do not clean ducts, but we check the dryer itself."),
+             "The dryer measures airflow and warns that the exhaust is about 80 percent restricted; d90 and d95 mean worse. Clean the lint screen first. If the code comes back, the exhaust duct is likely restricted. We check the dryer and the duct. We clean straightforward, accessible duct runs up to 25 feet; a roof outlet or a run with difficult bends goes to a dryer vent cleaning specialist."),
             ("How much does LG dryer repair cost?",
              "Most LG dryer repairs fall between $160 and $380: thermal fuse, heating element, igniter, belt and rollers. A control board runs $280 to $520."),
             ("Why does my dryer keep blowing the thermal fuse?",
-             "Almost always restricted airflow. Replacing the fuse without fixing the airflow means it will blow again, so we measure it every time and tell you if the house duct needs a vent-cleaning service."),
+             "Almost always restricted airflow. Replacing the fuse without fixing the airflow means it will blow again, so we measure it every time and check the exhaust duct. We clean straightforward, accessible duct runs up to 25 feet; a roof outlet or a run with difficult bends goes to a dryer vent cleaning specialist."),
             ("Do you repair LG WashTower dryers?",
              "Yes, the dryer section of WashTower units too."),
         ],

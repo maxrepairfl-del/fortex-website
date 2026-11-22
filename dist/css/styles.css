@@ -970,3 +970,19 @@ details.story[open] .story__close { display: inline; }
 
 /* Brand card without a matching brand photo: icon panel, same height as photos */
 .photo-card__img--icon { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; background: var(--surface, #f3f4f6); color: var(--accent, #c8102e); }
+
+/* Dryer page: problem groups with an inline repair story (owner brief 2026-11-21) */
+.problem-group { max-width: 760px; scroll-margin-top: 90px; margin-bottom: 36px; }
+.problem-group > h3 { margin: 0 0 8px; }
+.problem-group > p { max-width: 68ch; }
+details.story--inline { margin: 18px 0 22px; scroll-margin-top: 90px; }
+.story__head--text { grid-template-columns: 1fr; padding: 16px 18px; }
+.story__title { font-size: 1.15rem; margin: 4px 0 6px; }
+.story--inline .story__body p { max-width: 68ch; }
+.story--inline .story__photo { max-width: 560px; }
+.problem-checks { max-width: 68ch; padding-left: 1.2em; margin: 0 0 8px; line-height: 1.6; }
+.problem-checks li { margin-bottom: 8px; }
+.problem-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 36px; }
+.problem-note { border: 1px solid var(--line, #e5e7eb); border-radius: var(--r-lg, 16px); padding: 18px; scroll-margin-top: 90px; }
+.problem-note h3 { font-size: 1.1rem; margin: 0 0 8px; }
+.problem-note p { margin: 0; line-height: 1.6; }

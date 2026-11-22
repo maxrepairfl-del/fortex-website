@@ -14,7 +14,7 @@ from .data import (
 # ----------------------------------------------------------- real job photos
 from . import media as _media  # noqa: E402
 from .images import is_portrait  # noqa: E402
-from .cases import service_case_section, CASES_BY_SERVICE, case_url  # noqa: E402
+from .cases import service_case_section, CASES_BY_SERVICE, case_url, dryer_problems_section  # noqa: E402
 # Service heroes/galleries stay as in data.py (owner asked on 2026-11-12 to
 # keep the original photos); media.HEROES / GALLERIES are not applied.
 TEAM_PHOTO = _media.slug(_media.TEAM[0][0])
@@ -542,8 +542,13 @@ def _brand_links(slug):
 
 
 def render_service(s):
+    # A symptom can point at its section further down the page (dryer brief
+    # 2026-11-21: the heating items link to #dryer-not-heating).
+    links = s.get("symptom_links", {})
     symptoms = "".join(
-        f'<li>{icon("check", size=20)}<span>{esc(x)}</span></li>' for x in s["symptoms"]
+        f'<li>{icon("check", size=20)}<span>'
+        + (f'<a href="{links[x]}">{esc(x)}</a>' if x in links else esc(x))
+        + '</span></li>' for x in s["symptoms"]
     )
     # Owner brief 2026-11-21: one line under the symptom list on the microwave
     # page, linking only the story phrase (not a whole symptom) to the story.
@@ -595,7 +600,7 @@ def render_service(s):
   {cta_row('Sound like your ' + s['noun'].lower() + '?', 'Same-day appointments may be available. Call to check.', href='#request')}
 </div></section>
 {service_request_form(s)}
-{causes_block(s)}
+{dryer_problems_section() if s['slug'] == 'dryer-repair' else causes_block(s)}
 {service_case_section(s['slug'])}
 {_brand_links(s['slug'])}
 {gallery_block(s)}
