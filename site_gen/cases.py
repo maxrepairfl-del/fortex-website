@@ -84,7 +84,7 @@ def case_url(c):
 DRYER_TOPICS = [
     {
         "id": "dryer-not-heating", "title": "Dryer Not Heating",
-        "intro": "Gas and electric dryers can stop heating for different reasons. We check the heating components, controls and airflow before recommending parts.",
+        "intro": "We check the heating parts, controls and airflow before recommending any part.",
         "stories": [{
             "id": "dryer-igniter-lint-repair",
             "title": "Not Heating: Damaged Igniter and Overheating",
@@ -106,7 +106,7 @@ DRYER_TOPICS = [
     },
     {
         "id": "dryer-not-drying", "title": "Dryer Not Drying Clothes",
-        "intro": "A dryer can turn and produce heat while leaving clothes damp. We check airflow inside the dryer and through the exhaust path to find where drying performance is being lost.",
+        "intro": "A dryer can turn and heat but still leave clothes damp when airflow is lost.",
         "stories": [
             {
                 "id": "dryer-airflow-blocked",
@@ -154,7 +154,7 @@ DRYER_TOPICS = [
     },
     {
         "id": "dryer-making-noise", "title": "Dryer Making Noise",
-        "intro": "Squeaking, grinding and thumping can come from different moving parts. We inspect for buildup and wear, then explain what can be serviced and what needs replacing.",
+        "intro": "We check for buildup and wear before deciding what needs replacing.",
         "stories": [{
             "id": "dryer-squeak-rollers-serviced",
             "title": "Squeaking Noise: Buildup Around the Drum Rollers",
@@ -174,7 +174,7 @@ DRYER_TOPICS = [
     },
     {
         "id": "dryer-not-spinning", "title": "Dryer Not Spinning",
-        "intro": "A stopped drum does not automatically mean the motor has failed. We check the belt, moving parts and possible blockages before recommending a replacement.",
+        "intro": "A stopped drum does not always mean a failed motor.",
         "stories": [{
             "id": "dryer-blower-jammed-motor-ok",
             "title": "Not Spinning: A Blocked Blower",
@@ -219,12 +219,13 @@ def story_card(c, heading="h4"):
     slug, cap, alt = c["preview"]
     return f"""<details class="story story--card" id="{c['id']}">
       <summary class="story__head">
+        <{heading} class="story__title">{esc(c['title'])}</{heading}>
         <figure class="story__thumb">{picture(slug, sizes="(max-width:600px) 92vw, 180px", alt=alt)}<figcaption>{esc(cap)}</figcaption></figure>
-        <div class="story__sum">
-          <{heading} class="story__title">{esc(c['title'])}</{heading}><p>{esc(c['card_desc'])}</p>
+        <div class="story__sum"><p>{esc(c['card_desc'])}</p>
           <span class="story__toggle"><span class="story__open">See this repair</span><span class="story__close">Hide details</span> {icon('arrow-right', size=18)}</span></div>
       </summary>
-      <div class="story__body">{_story_body(c['body'])}</div>
+      <div class="story__body">{_story_body(c['body'])}
+        <button type="button" class="story__hide" data-story-close>Hide details {icon('arrow-right', size=18)}</button></div>
     </details>"""
 
 

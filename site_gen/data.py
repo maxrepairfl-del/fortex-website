@@ -323,6 +323,7 @@ SERVICES = [
         ],
         # Owner package 2026-11-21, section 4: the $80 covers simple
         # adjustments, not disassembly or cleaning.
+        "form_example": "Not heating",
         "simple_note": "Simple adjustments are covered by the service call. Work that requires disassembly, internal cleaning or vent cleaning is quoted separately before you approve it.",
         "symptom_links": {
             "Runs but clothes come out damp": "#dryer-not-drying",

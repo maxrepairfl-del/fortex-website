@@ -520,7 +520,7 @@ def service_request_form(s):
         <div class="field"><label for="rq-zip">ZIP code <span class="opt">optional</span></label>
           <input id="rq-zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="92646"></div>
         <div class="field"><label for="rq-issue">What's wrong? <span class="opt">optional</span></label>
-          <input id="rq-issue" name="issue" placeholder="e.g. {esc(s['symptoms'][0])}"></div>
+          <input id="rq-issue" name="issue" placeholder="e.g. {esc(s.get('form_example') or s['symptoms'][0])}"></div>
       </div>
 
       <input type="hidden" name="appliance" value="{esc(appliance)}">

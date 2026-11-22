@@ -1021,3 +1021,23 @@ details.story--card .story__photo { max-width: 560px; }
 }
 details.story--card .story__body p { margin: 0 0 12px; }
 details.story--card .story__body .story__photo { margin: 16px 0 20px; }
+
+/* Owner/Codex review of mobile screenshots 2026-11-21 */
+details.story--card .story__head { grid-template-columns: 180px 1fr; grid-template-areas: "title title" "thumb sum"; column-gap: 18px; row-gap: 10px; }
+details.story--card .story__title { grid-area: title; margin: 0; }
+details.story--card .story__thumb { grid-area: thumb; }
+details.story--card .story__sum { grid-area: sum; }
+.story__sum p { margin: 0 0 8px; }
+.story__hide { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; padding: 8px 0; background: none; border: 0; font: inherit; font-weight: 600; color: var(--accent, #c8102e); cursor: pointer; }
+.story__hide svg { transform: rotate(-90deg); }
+.story__hide:focus-visible { outline: 3px solid var(--accent, #c8102e); outline-offset: 2px; border-radius: 4px; }
+.problem-group:last-child { margin-bottom: 0; }
+.problem-group__intro { margin-bottom: 14px; }
+@media (max-width: 600px) {
+  details.story--card .story__head { grid-template-columns: 1fr; grid-template-areas: "title" "thumb" "sum"; }
+  .form-card { padding: 18px 16px; }
+  .form-card .field { margin-bottom: 12px; }
+  .form-card .field label { margin-bottom: 5px; }
+  .form-card .field-row { gap: 0; }
+  .form-card .req-line { margin-bottom: 12px; }
+}

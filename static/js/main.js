@@ -550,3 +550,16 @@
     if (a && a.getAttribute("href") === location.hash) setTimeout(openFromHash, 0);
   });
 })();
+
+// "Hide details" at the end of an opened story: close it and bring its
+// title back into view, so a long story does not have to be scrolled back up.
+document.addEventListener("click", function (e) {
+  var b = e.target.closest && e.target.closest("[data-story-close]");
+  if (!b) return;
+  var d = b.closest("details");
+  if (!d) return;
+  d.open = false;
+  d.scrollIntoView({ block: "start" });
+  var s = d.querySelector("summary");
+  if (s) s.focus({ preventScroll: true });
+});
