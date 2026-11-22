@@ -854,7 +854,7 @@ SERVICES = [
     },
     {
         "slug": "ice-machine-repair", "name": "Ice Machine Repair", "short": "Ice Machines",
-        "icon": "ice", "photo": "tg-vitalik-brand-hoshizaki-ice-machine",
+        "icon": "ice", "photo": "hoshizaki-ice-machine-undercounter-overview-clear",
         "hero_sub": 'Ice maker producing nothing, jamming, or turning out hollow cubes? We repair built-in machines and refrigerator ice makers.',
         "card": "No ice or cloudy ice? We repair residential and commercial ice machines.",
         "intro": "Whether it's a built-in home ice maker or a commercial ice machine, no ice is a real problem. We repair and descale residential and commercial ice machines, restoring clean, consistent ice production.",

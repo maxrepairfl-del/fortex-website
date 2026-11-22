@@ -7,6 +7,22 @@
 2000,
 934
 ],
+"bosch-dishwasher-model-label-detail-clear": [
+960,
+960
+],
+"bosch-dishwasher-pump-area-detail-clear": [
+960,
+720
+],
+"bosch-dishwasher-pump-detail-blurry": [
+720,
+960
+],
+"bosch-side-by-side-refrigerator-open-overview-clear": [
+960,
+960
+],
 "brazing-builtin": [
 960,
 540
@@ -75,6 +91,10 @@
 720,
 960
 ],
+"dacor-range-pcb-replacement": [
+960,
+960
+],
 "diagnostic-meter": [
 2000,
 1333
@@ -123,6 +143,10 @@
 540,
 960
 ],
+"fisher-paykel-dishdrawer-double-overview-clear": [
+540,
+960
+],
 "freezer-frost": [
 2000,
 1333
@@ -155,164 +179,40 @@
 2000,
 1333
 ],
-"gallery-commercial-150": [
-540,
-960
-],
-"gallery-commercial-2": [
-960,
-720
-],
-"gallery-commercial-42": [
-540,
-960
-],
-"gallery-commercial-52": [
-540,
-960
-],
-"gallery-commercial-53": [
-540,
-960
-],
-"gallery-commercial-68": [
-540,
-960
-],
-"gallery-cooking-101": [
-540,
-960
-],
-"gallery-cooking-113": [
-540,
-960
-],
-"gallery-cooking-16": [
-720,
-960
-],
-"gallery-cooking-22": [
-960,
-720
-],
-"gallery-cooking-23": [
-960,
-720
-],
-"gallery-cooking-26": [
-960,
-720
-],
-"gallery-cooking-29": [
-540,
-960
-],
-"gallery-cooking-38": [
-540,
-960
-],
-"gallery-cooking-43": [
-540,
-960
-],
-"gallery-cooking-62": [
-540,
-960
-],
-"gallery-cooking-9": [
-960,
-720
-],
-"gallery-dishwashers-119": [
-540,
-960
-],
-"gallery-dishwashers-142": [
-540,
-960
-],
-"gallery-dishwashers-148": [
-540,
-960
-],
-"gallery-dishwashers-32": [
-540,
-960
-],
-"gallery-dishwashers-33": [
-540,
-960
-],
-"gallery-laundry-10": [
-960,
-720
-],
-"gallery-laundry-103": [
-540,
-960
-],
-"gallery-laundry-106": [
-540,
-960
-],
-"gallery-laundry-120": [
-540,
-960
-],
-"gallery-laundry-15": [
-720,
-960
-],
-"gallery-laundry-20": [
-960,
-720
-],
-"gallery-laundry-24": [
-960,
-720
-],
-"gallery-laundry-4": [
-720,
-960
-],
-"gallery-laundry-47": [
-540,
-960
-],
-"gallery-laundry-63": [
-540,
-960
-],
-"gallery-laundry-83": [
-540,
-960
-],
-"gallery-laundry-84": [
-540,
-960
-],
-"gallery-refrigeration-114": [
-540,
-960
-],
-"gallery-refrigeration-136": [
-540,
-960
-],
-"gallery-refrigeration-5": [
-720,
-960
-],
-"gallery-team-110": [
-960,
-540
-],
 "gauges-compressor": [
 720,
 960
 ],
 "gauges-tools": [
 720,
+960
+],
+"ge-profile-washer-dryer-stack-overview-clear": [
+540,
+960
+],
+"ge-washer-front-load-overview-clear": [
+540,
+960
+],
+"ge-washer-top-panel-open-control-board-disassembled-clear": [
+960,
+960
+],
+"hoshizaki-ice-machine-control-board-detail-clear": [
+874,
+960
+],
+"hoshizaki-ice-machine-control-board-detail-clear-2": [
+960,
+960
+],
+"hoshizaki-ice-machine-model-label-detail-clear": [
+960,
+840
+],
+"hoshizaki-ice-machine-undercounter-overview-clear": [
+874,
 960
 ],
 "job-brand-fisher-paykel-dishdrawer": [
@@ -519,6 +419,30 @@
 540,
 960
 ],
+"kitchenaid-built-in-refrigerator-wood-kitchen-overview-clear": [
+540,
+960
+],
+"kitchenaid-microwave-over-range-overview-clear": [
+720,
+960
+],
+"kitchenaid-superba-double-wall-oven-overview-clear": [
+960,
+720
+],
+"kitchenaid-wall-oven-microwave-overview-clear": [
+540,
+960
+],
+"larkin-walk-in-cooler-evaporator-fan-detail-clear": [
+540,
+960
+],
+"larkin-walk-in-cooler-evaporator-two-fans-detail-clear": [
+540,
+960
+],
 "lg-compressor": [
 540,
 960
@@ -526,6 +450,14 @@
 "lg-compressor-label": [
 960,
 540
+],
+"lg-dryer-front-overview-clear": [
+720,
+960
+],
+"lg-instaview-refrigerator-door-detail-clear": [
+960,
+960
 ],
 "lg-model-label": [
 540,
@@ -551,6 +483,14 @@
 2000,
 1381
 ],
+"maytag-commercial-washer-top-load-panel-off-disassembled-clear": [
+720,
+960
+],
+"maytag-washer-front-load-overview-clear": [
+960,
+720
+],
 "microwave-1": [
 2000,
 1333
@@ -558,6 +498,150 @@
 "microwave-2": [
 2000,
 1333
+],
+"microwave-error-display": [
+720,
+960
+],
+"no-brand-built-in-french-door-refrigerator-open-overview-clear": [
+720,
+960
+],
+"no-brand-commercial-ice-machine-bin-open-overview-clear": [
+960,
+720
+],
+"no-brand-commercial-ice-machine-condenser-fans-compressor-detail-clear": [
+960,
+960
+],
+"no-brand-commercial-ice-machine-evaporator-cubes-detail-clear": [
+960,
+960
+],
+"no-brand-commercial-ice-machine-gauges-sealed-system-disassembled-clear": [
+540,
+960
+],
+"no-brand-commercial-ice-machine-water-pump-detail-clear": [
+960,
+960
+],
+"no-brand-commercial-reach-in-refrigerator-two-door-overview-clear": [
+540,
+960
+],
+"no-brand-dishwasher-door-open-racks-overview-clear": [
+540,
+960
+],
+"no-brand-dishwasher-stainless-built-in-overview-clear": [
+540,
+960
+],
+"no-brand-dryer-belt-motor-pulley-detail-clear": [
+960,
+960
+],
+"no-brand-dryer-drum-roller-closeup-detail-clear": [
+960,
+960
+],
+"no-brand-dryer-drum-rollers-check-detail-clear": [
+960,
+960
+],
+"no-brand-dryer-idler-pulley-old-new-detail-clear": [
+720,
+960
+],
+"no-brand-dryer-vent-duct-ceiling-detail-clear": [
+960,
+960
+],
+"no-brand-electric-cooktop-radiant-elements-exposed-disassembled-clear": [
+540,
+960
+],
+"no-brand-electric-glass-cooktop-overview-clear-2": [
+960,
+960
+],
+"no-brand-freezer-evaporator-frost-side-by-side-detail-clear": [
+540,
+960
+],
+"no-brand-freezer-meter-diagnosis-detail-clear": [
+960,
+960
+],
+"no-brand-gas-cooktop-top-removed-disassembled-clear": [
+960,
+720
+],
+"no-brand-gas-cooktop-underside-wiring-disassembled-clear": [
+960,
+720
+],
+"no-brand-gas-dryer-heater-housing-lint-disassembled-clear": [
+540,
+960
+],
+"no-brand-gas-rangetop-griddle-48-overview-clear": [
+540,
+960
+],
+"no-brand-oven-broil-burner-flame-detail-clear": [
+540,
+960
+],
+"no-brand-refrigerator-compressor-embraco-label-detail-blurry": [
+960,
+960
+],
+"no-brand-refrigerator-compressor-secop-detail-clear": [
+960,
+960
+],
+"no-brand-refrigerator-evaporator-fan-detail-blurry": [
+960,
+960
+],
+"no-brand-refrigerator-ir-thermometer-43f-warm-detail-clear": [
+960,
+960
+],
+"no-brand-walk-in-cooler-evaporator-coil-detail-clear": [
+540,
+960
+],
+"no-brand-wall-oven-microwave-combo-pulled-out-disassembled-clear-2": [
+540,
+960
+],
+"no-brand-washer-door-boot-inspection-detail-clear": [
+540,
+960
+],
+"no-brand-washer-drain-pump-in-hand-detail-clear": [
+960,
+960
+],
+"no-brand-washer-drum-gasket-check-detail-clear": [
+960,
+960
+],
+"no-brand-washer-dryer-pair-laundry-room-overview-clear": [
+960,
+720
+],
+"no-brand-washer-front-panel-removed-disassembled-clear": [
+540,
+960
+],
+"no-brand-washer-inlet-valves-detail-clear": [
+960,
+960
 ],
 "oven-1": [
 2000,
@@ -607,9 +691,25 @@
 720,
 960
 ],
+"samsung-washer-control-panel-detail-clear": [
+960,
+960
+],
+"samsung-washer-dryer-stack-overview-clear": [
+540,
+960
+],
+"samsung-washer-dryer-stack-overview-clear-2": [
+540,
+960
+],
 "samsung-washer-open": [
 720,
 960
+],
+"samsung-washer-top-load-overview-clear": [
+960,
+720
 ],
 "sub-zero-built-in-refrigerator-overview-l302": [
 745,
@@ -619,9 +719,17 @@
 720,
 1280
 ],
+"sub-zero-refrigerator-model-label-detail-clear-2": [
+960,
+960
+],
 "sz-builtin-sxs": [
 720,
 960
+],
+"team-selfie-refrigerator-job-clear": [
+960,
+540
 ],
 "team-thumbs": [
 960,
@@ -639,165 +747,21 @@
 2000,
 1333
 ],
-"tg-vitalik-bosch-dishwasher-pump": [
-720,
-960
-],
-"tg-vitalik-bosch-dishwasher-pump-area": [
-960,
-720
-],
-"tg-vitalik-brand-bosch-dishwasher-label": [
+"thermador-bottom-freezer-refrigerator-model-label-detail-clear": [
 960,
 960
 ],
-"tg-vitalik-brand-bosch-side-by-side-open": [
-960,
-960
-],
-"tg-vitalik-brand-ge-washer-top-off": [
-960,
-960
-],
-"tg-vitalik-brand-hoshizaki-board-2": [
-874,
-960
-],
-"tg-vitalik-brand-hoshizaki-ice-machine": [
-874,
-960
-],
-"tg-vitalik-brand-hoshizaki-ice-machine-board": [
-960,
-960
-],
-"tg-vitalik-brand-hoshizaki-label": [
-960,
-840
-],
-"tg-vitalik-brand-lg-instaview-fridge": [
-960,
-960
-],
-"tg-vitalik-brand-samsung-washer-controls": [
-960,
-960
-],
-"tg-vitalik-brand-subzero-model-label": [
-960,
-960
-],
-"tg-vitalik-brand-thermador-builtin-fridge-label": [
-960,
-960
-],
-"tg-vitalik-brand-thermador-builtin-fridge-label-2": [
-960,
-960
-],
-"tg-vitalik-drain-pump-in-hand-2": [
-960,
-960
-],
-"tg-vitalik-dryer-belt-pulley": [
-960,
-960
-],
-"tg-vitalik-dryer-drum-roller-closeup": [
-960,
-960
-],
-"tg-vitalik-dryer-drum-rollers": [
-960,
-960
-],
-"tg-vitalik-dryer-idler-pulley": [
-720,
-960
-],
-"tg-vitalik-dryer-vent-duct-ceiling": [
-960,
-960
-],
-"tg-vitalik-electric-glass-cooktop": [
-960,
-960
-],
-"tg-vitalik-freezer-meter-diagnosis": [
-960,
-960
-],
-"tg-vitalik-fridge-compressor-embraco": [
-960,
-960
-],
-"tg-vitalik-fridge-compressor-secop": [
-960,
-960
-],
-"tg-vitalik-fridge-evaporator-fan": [
-960,
-960
-],
-"tg-vitalik-fridge-ir-thermometer-43f-warm": [
-960,
-960
-],
-"tg-vitalik-gas-burner-flame-test": [
-540,
-960
-],
-"tg-vitalik-ice-machine-cubes": [
-960,
-960
-],
-"tg-vitalik-ice-machine-fans-compressor": [
-960,
-960
-],
-"tg-vitalik-ice-machine-pump": [
-960,
-960
-],
-"tg-vitalik-microwave-error-display": [
-720,
-960
-],
-"tg-vitalik-microwave-magnetron-in-hand": [
-720,
-960
-],
-"tg-vitalik-microwave-magnetron-installed": [
-720,
-960
-],
-"tg-vitalik-microwave-meter-test": [
-720,
-960
-],
-"tg-vitalik-microwave-opened": [
-960,
-960
-],
-"tg-vitalik-oven-control-board": [
-960,
-960
-],
-"tg-vitalik-pro-range-cooktop-lifted": [
-960,
-960
-],
-"tg-vitalik-washer-drum-gasket-check": [
-960,
-960
-],
-"tg-vitalik-washer-inlet-valves": [
+"thermador-built-in-refrigerator-model-label-detail-clear": [
 960,
 960
 ],
 "thermador-knob": [
 540,
 960
+],
+"thermador-pro-gas-range-36-overview-clear-3": [
+960,
+720
 ],
 "thermador-range": [
 960,
@@ -816,6 +780,18 @@
 1333
 ],
 "viking-microwave": [
+720,
+960
+],
+"viking-microwave-magnetron-replacemen-1": [
+720,
+960
+],
+"viking-microwave-magnetron-replacement": [
+960,
+960
+],
+"viking-microwave-magnetron-replacement-damaged-magnetron-burnt": [
 720,
 960
 ],
@@ -850,6 +826,10 @@
 "wolf-front": [
 960,
 720
+],
+"wolf-microwave-wall-oven-column-overview-clear": [
+540,
+960
 ],
 "wolf-top-off": [
 720,

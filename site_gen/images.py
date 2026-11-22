@@ -137,7 +137,9 @@ WEB_WIDTHS = [400, 640, 960]
 
 def widths_for(slug):
     if slug in WEB_COPIES:
-        return WEB_WIDTHS
+        # Web copies are never upscaled: cap at the source width (og:image too).
+        full = _META.get(slug, (WEB_WIDTHS[-1], None))[0]
+        return sorted({min(w, full) for w in WEB_WIDTHS})
     return JOB_WIDTHS if slug in JOB_PHOTOS else WIDTHS
 
 

@@ -44,14 +44,14 @@ NEW_BRANDS = {
         "title": "GE Appliance Repair in Orange County",
         "meta": "GE, GE Profile and Café washer, dryer, refrigerator, range and microwave repair in Orange County. $80 service call free with repair.",
         "lead": "GE, GE Profile and Café washers, dryers, refrigerators, ranges and microwaves. Washers that won't spin or drain, fridges warming up, ranges that won't heat.",
-        "photo": "gallery-laundry-63", "photo_2": "job-brand-ge-top-load-washer",
+        "photo": "ge-washer-front-load-overview-clear", "photo_2": "job-brand-ge-top-load-washer",
         "products": [
             ("washer", "Washers", "Front-load and top-load GE and GE Profile washers.", "/services/washing-machine-repair/ge/"),
             ("dryer", "Dryers", "Electric and gas dryers.", "/services/dryer-repair/"),
             ("refrigerator", "Refrigerators", "French-door, side-by-side and bottom-freezer.", "/services/refrigerator-repair/"),
             ("oven", "Ranges & microwaves", "Gas and electric ranges, wall ovens, over-the-range microwaves.", "/services/stove-cooktop-repair/"),
         ],
-        "product_photos": [None, "gallery-laundry-120", None, None],
+        "product_photos": [None, "ge-profile-washer-dryer-stack-overview-clear", None, None],
         "parts_line": "Drain pumps, lid locks, shift actuators, control boards and heaters",
         "prices": WASHER_PRICES[:4] + DRYER_PRICES[:2],
         "faqs": [
@@ -72,7 +72,7 @@ NEW_BRANDS = {
             ("refrigerator", "Refrigerators", "French-door, side-by-side and top-freezer.", "/services/refrigerator-repair/"),
             ("dishwasher", "Dishwashers", "Drain, wash and leak problems.", "/services/dishwasher-repair/"),
         ],
-        "product_photos": [None, "tg-vitalik-dryer-drum-rollers", None, "job-brand-maytag-dishwasher-circulation-pump"],
+        "product_photos": [None, "no-brand-dryer-drum-rollers-check-detail-clear", None, "job-brand-maytag-dishwasher-circulation-pump"],
         "parts_line": "Drive motors, couplers, lid locks, pumps, belts and control boards",
         "prices": WASHER_PRICES[:4] + DRYER_PRICES[:2],
         "faqs": [
@@ -86,13 +86,13 @@ NEW_BRANDS = {
         "title": "Bosch Dishwasher & Appliance Repair in Orange County",
         "meta": "Bosch dishwasher repair in Orange County: E15 and E24 errors, not draining, not heating, leaking. Bosch refrigerators and ranges too. $80 service call free with repair.",
         "lead": "Bosch dishwashers first of all: E15 leak errors, E24 drain errors, no heat, no wash. We also repair Bosch refrigerators, ranges and wall ovens.",
-        "photo": "job-dishwasher-stainless-front", "photo_2": "tg-vitalik-bosch-dishwasher-pump",
+        "photo": "job-dishwasher-stainless-front", "photo_2": "bosch-dishwasher-pump-detail-blurry",
         "products": [
             ("dishwasher", "Dishwashers", "100, 300, 500, 800 Series and Benchmark.", "/services/dishwasher-repair/bosch/"),
             ("refrigerator", "Refrigerators", "French-door and counter-depth.", "/services/refrigerator-repair/"),
             ("oven", "Ranges & wall ovens", "Gas, electric and induction.", "/services/oven-repair/"),
         ],
-        "product_photos": [None, "tg-vitalik-brand-bosch-side-by-side-open", None],
+        "product_photos": [None, "bosch-side-by-side-refrigerator-open-overview-clear", None],
         "parts_line": "Drain pumps, circulation pumps, heaters, float switches, door springs and control boards",
         "prices": DISHWASHER_PRICES,
         "faqs": [
@@ -126,7 +126,7 @@ NEW_BRANDS = {
         "title": "Hoshizaki Repair in Orange County",
         "meta": "Hoshizaki ice machine repair for restaurants, bars and offices in Orange County: low ice, no ice, leaks, cleaning and descaling. Commercial service.",
         "lead": "Hoshizaki cubers, flakers and undercounter ice machines for restaurants, bars, offices and clinics. Low ice, no ice, leaks, slow harvest, cleaning and descaling.",
-        "photo": "tg-vitalik-brand-hoshizaki-ice-machine", "photo_2": "tg-vitalik-brand-hoshizaki-ice-machine-board",
+        "photo": "hoshizaki-ice-machine-undercounter-overview-clear", "photo_2": "hoshizaki-ice-machine-control-board-detail-clear-2",
         "products": [
             ("ice", "Cubers & flakers", "Modular heads, self-contained and undercounter units.", "/services/ice-machine-repair/hoshizaki/"),
             ("commercial-freezer", "Commercial refrigeration", "Reach-ins, prep tables and walk-ins.", "/services/commercial-freezer-repair/"),
@@ -157,9 +157,9 @@ NEW_COMBOS = {
             ("Alarm / error", "Sensor or control board", "Read the fault, test sensors before the board"),
         ],
         "gallery": [
-            ("tg-vitalik-brand-thermador-builtin-fridge-label", "Thermador built-in refrigerator data plate"),
-            ("tg-vitalik-brand-thermador-builtin-fridge-label-2", "Rating label checked before ordering parts"),
-            ("gallery-refrigeration-5", "Built-in refrigerator open for diagnosis"),
+            ("thermador-built-in-refrigerator-model-label-detail-clear", "Thermador built-in refrigerator data plate"),
+            ("thermador-bottom-freezer-refrigerator-model-label-detail-clear", "Rating label checked before ordering parts"),
+            ("no-brand-built-in-french-door-refrigerator-open-overview-clear", "Built-in refrigerator open for diagnosis"),
         ],
         "faqs": [
             ("How much does Thermador refrigerator repair cost?", "Most repairs fall between $180 and $850: fans, defrost parts, ice makers, hinges and boards. Sealed-system work runs $750 to $1,500. You get the exact price before any work."),
@@ -182,8 +182,8 @@ NEW_COMBOS = {
             ("Banging on spin (top-load)", "Suspension rods, worn tub dampers", "Replace the rods and dampers"),
         ],
         "gallery": [
-            ("tg-vitalik-brand-samsung-washer-controls", "Samsung washer control panel"),
-            ("gallery-laundry-24", "Samsung top-load washer"),
+            ("samsung-washer-control-panel-detail-clear", "Samsung washer control panel"),
+            ("samsung-washer-top-load-overview-clear", "Samsung top-load washer"),
         ],
         "faqs": [
             ("How much does Samsung washer repair cost?", "Most Samsung washer repairs fall between $160 and $520: drain pump, inlet valve, door lock, suspension and boards. Bearings and tub seal run $350 to $640."),
@@ -196,7 +196,7 @@ NEW_COMBOS = {
         "h1": "Samsung Dryer Repair in Orange County",
         "meta": "Samsung dryer not heating, HE / hE / tS error, not tumbling, squeaking? Samsung electric and gas dryer repair in Orange County.",
         "lead": "No heat, HE or tS errors, long dry times, squeaks and a drum that won't turn. We repair Samsung electric and gas dryers and measure the airflow while we're there.",
-        "photo": "gallery-laundry-84", "prices": DRYER_PRICES,
+        "photo": "samsung-washer-dryer-stack-overview-clear-2", "prices": DRYER_PRICES,
         "symptoms": ["Runs but doesn't heat", "HE / hE heating error", "tS or tO sensor error", "Takes two cycles to dry", "Squeaking or thumping", "Drum doesn't turn"],
         "causes": [
             ("No heat / HE", "Thermal fuse, high-limit thermostat, heating element or gas coils", "Test each part, find why the fuse blew"),
@@ -208,7 +208,7 @@ NEW_COMBOS = {
         "gallery": [
             ("job-brand-samsung-dryer-hands", "Technician working on Samsung dryer wiring"),
             ("dryer-ir", "Measuring dryer temperature during diagnosis"),
-            ("tg-vitalik-dryer-drum-roller-closeup", "Worn dryer drum roller"),
+            ("no-brand-dryer-drum-roller-closeup-detail-clear", "Worn dryer drum roller"),
         ],
         "faqs": [
             ("How much does Samsung dryer repair cost?", "Most Samsung dryer repairs fall between $160 and $380: thermal fuse, element, thermostat, belt and rollers. A control board runs $280 to $520."),
@@ -221,7 +221,7 @@ NEW_COMBOS = {
         "h1": "GE Washer Repair in Orange County",
         "meta": "GE washer won't spin, drain or agitate, lid lock blinking, error codes? GE and GE Profile front-load and top-load washer repair in Orange County.",
         "lead": "Top-loaders that won't spin or agitate, a blinking lid lock, front-loaders that won't drain, leaks and noise. We repair GE and GE Profile washers.",
-        "photo": "gallery-laundry-63", "prices": WASHER_PRICES,
+        "photo": "ge-washer-front-load-overview-clear", "prices": WASHER_PRICES,
         "symptoms": ["Won't spin or agitate", "Lid lock light blinking", "Won't drain", "Leaking", "Loud noise during spin", "Stops mid-cycle"],
         "causes": [
             ("Won't spin / agitate", "Shift actuator, lid lock, drive belt or motor", "Test the actuator and lock, check the drive"),
@@ -234,7 +234,7 @@ NEW_COMBOS = {
             ("job-brand-ge-front-load-washer", "GE front-load washer on a service call"),
             ("job-brand-ge-top-load-washer", "GE top-load washer"),
             ("job-brand-ge-top-load-washer-controls", "GE top-load washer controls"),
-            ("tg-vitalik-brand-ge-washer-top-off", "GE washer with the top panel off"),
+            ("ge-washer-top-panel-open-control-board-disassembled-clear", "GE washer with the top panel off"),
         ],
         "faqs": [
             ("How much does GE washer repair cost?", "Most GE washer repairs fall between $160 and $520: lid lock, shift actuator, drain pump, valves and boards. Bearings run $350 to $640."),
@@ -260,7 +260,7 @@ NEW_COMBOS = {
             ("job-washer-top-load-basket", "Top-load washer basket and agitator"),
             ("job-washer-top-load-drive-motor", "Drive motor and pulley under a top-loader"),
             ("job-washer-impeller-gloved", "Washer impeller removed"),
-            ("gallery-laundry-4", "Top-load washer opened up for repair"),
+            ("maytag-commercial-washer-top-load-panel-off-disassembled-clear", "Top-load washer opened up for repair"),
         ],
         "faqs": [
             ("How much does Whirlpool washer repair cost?", "Most Whirlpool washer repairs fall between $160 and $520: coupler, lid lock, pump, valves and boards. Bearings or a gearcase run $350 to $640."),
@@ -283,9 +283,9 @@ NEW_COMBOS = {
             ("Won't start", "Door latch, control board", "Test the latch first, then the board"),
         ],
         "gallery": [
-            ("tg-vitalik-brand-bosch-dishwasher-label", "Bosch dishwasher model label"),
-            ("tg-vitalik-bosch-dishwasher-pump", "Pump and wiring under a Bosch dishwasher"),
-            ("tg-vitalik-bosch-dishwasher-pump-area", "Base of a Bosch dishwasher opened to the pump"),
+            ("bosch-dishwasher-model-label-detail-clear", "Bosch dishwasher model label"),
+            ("bosch-dishwasher-pump-detail-blurry", "Pump and wiring under a Bosch dishwasher"),
+            ("bosch-dishwasher-pump-area-detail-clear", "Base of a Bosch dishwasher opened to the pump"),
             ("job-dishwasher-inlet-valve-underside", "Inlet valve and hoses under the tub"),
         ],
         "faqs": [
@@ -308,7 +308,7 @@ NEW_COMBOS = {
             ("Leaking", "Lid seal, hoses", "Replace the seal or hose"),
             ("Error codes", "Sensor, valve or motor fault", "Read the code, test the named part"),
         ],
-        # job-brand-fisher-paykel-dishdrawer, gallery-dishwashers-32 and -33 are the
+        # job-brand-fisher-paykel-dishdrawer, fisher-paykel-dishdrawer-double-overview-clear and -33 are the
         # same frame (L132) at different sizes: no gallery until there are other
         # real, different photos (owner brief, 2026-11-20).
         "gallery": [],
@@ -323,7 +323,7 @@ NEW_COMBOS = {
         "h1": "Hoshizaki Ice Machine Repair in Orange County",
         "meta": "Hoshizaki ice machine low ice, no ice, leaking, slow harvest? Commercial Hoshizaki repair, cleaning and descaling in Orange County.",
         "lead": "Low ice, no ice, a machine that runs but won't harvest, leaks and scale. We repair and clean Hoshizaki cubers, flakers and undercounter units for restaurants, bars and offices.",
-        "photo": "tg-vitalik-brand-hoshizaki-ice-machine", "prices": ICE_MACHINE_PRICES,
+        "photo": "hoshizaki-ice-machine-undercounter-overview-clear", "prices": ICE_MACHINE_PRICES,
         "symptoms": ["Low ice production", "No ice at all", "Ice cubes small or cloudy", "Long or failed harvest", "Water leaking", "Machine runs but bin stays empty"],
         "causes": [
             ("Low ice", "Scale on the evaporator, dirty condenser", "Descale and sanitize, clean the condenser"),
@@ -333,10 +333,10 @@ NEW_COMBOS = {
             ("Leaking", "Drain line, pump, water tank", "Trace and fix the leak"),
         ],
         "gallery": [
-            ("tg-vitalik-brand-hoshizaki-ice-machine-board", "Hoshizaki control board under test"),
-            ("tg-vitalik-brand-hoshizaki-board-2", "Hoshizaki control board up close"),
-            ("tg-vitalik-brand-hoshizaki-label", "Hoshizaki data plate"),
-            ("tg-vitalik-ice-machine-pump", "Water pump on a commercial ice machine"),
+            ("hoshizaki-ice-machine-control-board-detail-clear-2", "Hoshizaki control board under test"),
+            ("hoshizaki-ice-machine-control-board-detail-clear", "Hoshizaki control board up close"),
+            ("hoshizaki-ice-machine-model-label-detail-clear", "Hoshizaki data plate"),
+            ("no-brand-commercial-ice-machine-water-pump-detail-clear", "Water pump on a commercial ice machine"),
         ],
         "faqs": [
             ("How much does Hoshizaki repair cost?", "Most repairs fall between $200 and $850: cleaning and descaling, pumps, valves, sensors, fan motors and boards. Sealed-system work runs $1,200 to $2,500."),
