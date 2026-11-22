@@ -1041,3 +1041,4 @@ details.story--card .story__sum { grid-area: sum; }
   .form-card .field-row { gap: 0; }
   .form-card .req-line { margin-bottom: 12px; }
 }
+.section--stories { padding-bottom: 24px; }

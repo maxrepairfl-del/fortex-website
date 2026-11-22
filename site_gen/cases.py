@@ -238,7 +238,7 @@ def dryer_problems_section():
     <h3 class="problem-group__title">{esc(t['title'])}</h3>{intro}
     {''.join(story_card(c) for c in t['stories'])}
   </div>""")
-    return f"""<section class="section"><div class="wrap">
+    return f"""<section class="section section--stories"><div class="wrap">
   <div class="section-head"><p class="eyebrow">Likely causes</p>
     <h2>Common Dryer Problems: A Look at Our Repairs</h2></div>
   {''.join(groups)}
