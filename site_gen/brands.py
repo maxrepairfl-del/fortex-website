@@ -293,7 +293,7 @@ def oem_block(brand, parts_line):
 </div></section>"""
 
 
-def hero(crumbs, h1, lead, photo, portrait=False):
+def hero(crumbs, h1, lead, photo, portrait=False, chips=None):
     """First screen of a brand or brand x service page. photo=None means no
     confirmed photo of that appliance exists yet: the Fortex technician
     portrait is shown instead (owner 2026-11-23), never another brand's unit."""
@@ -303,7 +303,7 @@ def hero(crumbs, h1, lead, photo, portrait=False):
   <div>
     <div class="breadcrumb">{trail}</div>
     <h1>{esc(h1)}</h1>
-    <p class="hero-lead">{esc(lead)}</p>
+    <p class="hero-lead">{esc(lead)}</p>{_hero_chips(chips)}
     <div class="hero-cta">
       <a class="btn btn--primary btn--lg cta-call" href="{SITE['phone_href']}">{icon('phone', size=20)} Call Now</a>
       <a class="btn btn--outline btn--lg cta-book" href="#request">{icon('calendar', size=20)} Request Appointment</a>
@@ -320,6 +320,18 @@ def hero(crumbs, h1, lead, photo, portrait=False):
 
 
 NATURAL_HERO = {"fisher-paykel-dishdrawer-card"}
+
+
+def _hero_chips(chips):
+    """Small links to each appliance category card further down the page."""
+    if not chips:
+        return ""
+    links = "".join(f'<a href="#{cid}">{esc(t)}</a>' for t, cid in chips)
+    return f'\n    <nav class="hero-chips" aria-label="Appliance types">{links}</nav>'
+
+
+def cat_id(title):
+    return "cat-" + re.sub(r"[^a-z0-9]+", "-", title.lower().replace("&", "and")).strip("-")
 
 
 def _hero_media(photo, portrait=False):
@@ -374,7 +386,7 @@ def render_brand(slug):
         products_html = brand_categories(slug, b)
     else:
         tcards = "".join(
-            f'<div class="type-card"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
+            f'<div class="type-card" id="{cat_id(t)}"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
             + (f'<a class="more-link" href="{h}">{esc(lbl)} {icon("arrow-right", size=16)}</a>' if h else "")
             + "</div>" for t, d, lbl, h in tp["cards"])
         products_html = f"""<section class="section"><div class="wrap">
@@ -386,13 +398,15 @@ def render_brand(slug):
 </div></section>"""
 
     body = f"""
-{hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'], b['lead'], b['photo'])}
+{hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'],
+       BRAND_HUB_LEAD[slug], None, chips=hub_chips(b))}
 {products_html}
+{brand_examples(slug, b)}
 {problems_section(b['problems_noun'], b['problems'], None) if b.get('problems') else ''}
 {oem_block(b['name'], b['parts_line'])}
 {request_form(b['name'] + ' appliance', 'wrench', b.get('example', 'not cooling'), path)}
 {P.steps_section()}
-{P.why_split(heading=f"Why {b['name']} owners call Fortex", show_photo=bool(b['photo']))}
+{P.why_split(heading=f"Why {b['name']} owners call Fortex", show_photo=False)}
 {faq_section(f"{b['name']} repair FAQs", _faqs(b['faqs'], b['name']))}
 {price_html}
 {cta_band(heading=f"Need your {b['name']} repaired?", book_href="#request")}
@@ -403,7 +417,7 @@ def render_brand(slug):
               "areaServed": SITE["region"], "name": b["title"]}
     return f"{path}index.html", page(
         f"{b['title']}, CA | {SITE['name']}", b["meta"], path, body,
-        extra_schema=[schema, faq_schema(_faqs(b["faqs"], b["name"])), catalog], og_image=b["photo"], book_href="#request")
+        extra_schema=[schema, faq_schema(_faqs(b["faqs"], b["name"])), catalog], og_image=None, book_href="#request")
 
 
 def types_section(noun, types):
@@ -572,41 +586,110 @@ def category_link(href, brand):
     return label[0].upper() + label[1:]
 
 
+# Examples below the full category list (owner correction 2026-11-23). They
+# are examples, not the whole range; the hub hero is the technician portrait.
+# (title, slug, caption, link label, href)
 BRAND_EXAMPLES = {
+    "sub-zero": [("Refrigerators & freezers", "sub-zero-built-in-refrigerator-overview-l302",
+                  "Sub-Zero built-in side-by-side refrigerator in a kitchen.",
+                  "Sub-Zero refrigerator repair", "/services/refrigerator-repair/sub-zero/")],
+    "wolf": [("Ranges", "wolf-front", "Wolf range with red control knobs.",
+              "Wolf stove & cooktop repair", "/services/stove-cooktop-repair/wolf/")],
+    "viking": [("Ranges & rangetops", "viking-range-48", "Viking 48-inch range.",
+                "Viking stove & cooktop repair", "/services/stove-cooktop-repair/viking/")],
+    "thermador": [("Ranges & cooktops", "thermador-range", "Thermador Pro Grand range with star burners.",
+                   "Thermador stove & cooktop repair", "/services/stove-cooktop-repair/thermador/")],
     "lg": [
+        ("Refrigerators", "lg-fridge-overview-trust", "LG refrigerators, including French-door models.",
+         "LG refrigerator repair", "/services/refrigerator-repair/lg/"),
         ("Washers", "lg-washer-overview-trust",
          "Front-load LG washing machines, including models installed on pedestals.",
-         "LG washer repair", "/services/washing-machine-repair/lg/", "cover"),
+         "LG washer repair", "/services/washing-machine-repair/lg/"),
         ("Dryers", "lg-dryer-overview-trust",
          "LG dryers, including standalone and stacked installations.",
-         "LG dryer repair", "/services/dryer-repair/lg/", "cover"),
+         "LG dryer repair", "/services/dryer-repair/lg/"),
     ],
     "samsung": [
+        ("Refrigerators", "samsung-family-hub", "Samsung refrigerators, including Family Hub models.",
+         "Samsung refrigerator repair", "/services/refrigerator-repair/samsung/"),
         ("Washers", "samsung-washer-overview-trust",
          "Samsung washing machines, including top-load and front-load models.",
-         "Samsung washer repair", "/services/washing-machine-repair/samsung/", "cover"),
+         "Samsung washer repair", "/services/washing-machine-repair/samsung/"),
         ("Dryers", "samsung-dryer-overview-trust",
          "Samsung dryers, including units installed above a washer.",
-         "Samsung dryer repair", "/services/dryer-repair/samsung/", "cover"),
+         "Samsung dryer repair", "/services/dryer-repair/samsung/"),
     ],
+    "ge": [("Washers", "ge-washer-front-load-overview-clear", "GE front-load washer.",
+            "GE washer repair", "/services/washing-machine-repair/ge/")],
+    "bosch": [("Dishwashers", "job-dishwasher-stainless-front", "Bosch stainless dishwasher.",
+               "Bosch dishwasher repair", "/services/dishwasher-repair/bosch/")],
+    "fisher-paykel": [("DishDrawer dishwashers", "fisher-paykel-dishdrawer-card",
+                       "Fisher & Paykel double DishDrawer with the control panel.",
+                       "Fisher & Paykel dishwasher repair", "/services/dishwasher-repair/fisher-paykel/")],
+    "hoshizaki": [("Undercounter ice machines", "hoshizaki-ice-machine-undercounter-overview-clear",
+                   "Hoshizaki undercounter ice machine.",
+                   "Hoshizaki ice machine repair", "/services/ice-machine-repair/hoshizaki/")],
     "kitchenaid": [
+        ("Refrigerators", "kitchenaid-built-in-refrigerator-wood-kitchen-overview-clear",
+         "KitchenAid built-in refrigerators.",
+         "KitchenAid refrigerator repair", "/services/refrigerator-repair/kitchenaid/"),
         ("Wall ovens", "kitchenaid-wall-ovens-overview-trust",
          "KitchenAid wall ovens, including double-oven installations.",
-         "Oven repair", "/services/oven-repair/", "contain"),
+         "Oven repair", "/services/oven-repair/"),
         ("Cooktops", "kitchenaid-cooktop-overview-trust",
          "KitchenAid cooktops and ranges. Pictured: an electric glass cooktop.",
-         "Stove & cooktop repair", "/services/stove-cooktop-repair/", "contain"),
+         "Stove & cooktop repair", "/services/stove-cooktop-repair/"),
     ],
 }
 
-BRAND_HERO = {
-    "lg": "lg-fridge-overview-trust",
-    "whirlpool": None,
-    "monogram": None,
-    "fisher-paykel": "fisher-paykel-dishdrawer-card",
+# Two short sentences under the H1: what we repair for this brand (from the
+# agreed categories) and the usual problems. Details stay in the cards.
+BRAND_HUB_LEAD = {
+    "sub-zero": "We repair Sub-Zero refrigerators, freezers, wine storage and undercounter units in Orange County. Fridge running warm or the ice maker stopped? We can help.",
+    "wolf": "We repair Wolf ranges, rangetops, cooktops, wall ovens, microwaves and warming drawers in Orange County. Burners won’t light or the oven won’t heat? We can help.",
+    "viking": "We repair Viking ranges, rangetops, wall ovens, built-in refrigerators, microwaves and dishwashers in Orange County. Igniters clicking or the oven won’t heat? We can help.",
+    "thermador": "We repair Thermador ranges, cooktops, wall and steam ovens, Freedom refrigerators and dishwashers in Orange County. Star burner won’t light or the oven runs off temperature? We can help.",
+    "lg": "We repair LG refrigerators, dishwashers, washers, dryers, ranges, cooktops and microwaves in Orange County. Fridge not cooling or the washer won’t drain? We can help.",
+    "samsung": "We repair Samsung refrigerators, dishwashers, washers, dryers, ranges, cooktops and microwaves in Orange County. Ice maker freezing up or the dryer won’t heat? We can help.",
+    "ge": "We repair GE washers, dryers, refrigerators, ranges, cooktops, wall ovens and microwaves in Orange County. Washer won’t spin or the fridge is warm? We can help.",
+    "whirlpool": "We repair Whirlpool washers, dryers, refrigerators and dishwashers in Orange County. Washer won’t agitate or the dryer won’t heat? We can help.",
+    "bosch": "We repair Bosch dishwashers, refrigerators, ranges, cooktops and wall ovens in Orange County. Dishwasher not draining or showing an error code? We can help.",
+    "fisher-paykel": "We repair Fisher & Paykel DishDrawer dishwashers, refrigerators, ranges and cooktops in Orange County. DishDrawer won’t start or stays locked? We can help.",
+    "hoshizaki": "We repair Hoshizaki cube and flake ice machines and commercial refrigeration in Orange County. Low ice production or no ice at all? We can help.",
+    "kitchenaid": "We repair KitchenAid built-in refrigerators, wall ovens, ranges, cooktops and microwaves in Orange County. Fridge warming up or the oven won’t heat? We can help.",
+    "monogram": "We repair Monogram built-in refrigerators, wall ovens, ranges, microwaves, Advantium ovens and dishwashers in Orange County. A section running warm or the oven won’t heat? We can help.",
 }
-for _s, _p in BRAND_HERO.items():
-    BRAND_PAGES[_s]["photo"] = _p
+
+
+def hub_chips(b):
+    tp = b.get("text_products")
+    titles = [c[0] for c in tp["cards"]] if tp else [t for _ic, t, _d, _h in b["products"]]
+    return [(t, cat_id(t)) for t in titles]
+
+
+def brand_examples(slug, b):
+    ex = BRAND_EXAMPLES.get(slug)
+    if not ex:
+        return ""
+    single = len(ex) == 1
+    cards = "".join(
+        f'<div class="brand-example"><h4>{esc(t)}</h4>'
+        f'<div class="brand-example__img">{img(ph, sizes="(max-width:700px) calc(100vw - 32px), 400px")}</div>'
+        f'<p>{esc(cap)}</p><a class="more-link" href="{h}">{esc(lbl)} {icon("arrow-right", size=16)}</a></div>'
+        for t, ph, cap, lbl, h in ex)
+    return f"""<section class="section section--tight"><div class="wrap">
+  <h3 class="brand-examples__title">Examples of {esc(b['name'])} appliances we service</h3>
+  <p class="brand-examples__note">These are examples of the appliances we service. See the full list above.</p>
+  <div class="brand-examples brand-examples--{'1' if single else len(ex)}">{cards}</div>
+</div></section>"""
+
+
+# Brand hubs show the technician portrait (owner correction 2026-11-23);
+# b["photo"] is no longer used by render_brand.
+# LG and Samsung: dishwashers right after refrigerators, as in the hub lead.
+for _s in ("lg", "samsung"):
+    _order = ["Refrigerators", "Dishwashers", "Washers", "Dryers", "Ranges & cooktops", "Microwaves"]
+    BRAND_PAGES[_s]["products"] = sorted(BRAND_PAGES[_s]["products"], key=lambda x: _order.index(x[1]))
 
 COMBO_HERO = {
     ("lg", "refrigerator-repair"): "lg-fridge-overview-trust",
@@ -628,23 +711,12 @@ def brand_categories(slug, b):
     n = len(b["products"])
     cols = {1: 1, 2: 2, 3: 3, 4: 2}.get(n, 3)
     cards = "".join(
-        f'<div class="brand-cat"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
+        f'<div class="brand-cat" id="{cat_id(t)}"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
         f'<a class="more-link" href="{h}">{esc(category_link(h, b["name"]))} {icon("arrow-right", size=16)}</a></div>'
         for _ic, t, d, h in b["products"])
-    ex = BRAND_EXAMPLES.get(slug)
-    ex_html = ""
-    if ex:
-        ex_cards = "".join(
-            f'<div class="brand-example brand-example--{fit}"><h4>{esc(t)}</h4>'
-            f'<div class="brand-example__img">{picture(ph, sizes="(max-width:700px) calc(100vw - 32px), 420px")}</div>'
-            f'<p>{esc(cap)}</p><a class="more-link" href="{h}">{esc(lbl)} {icon("arrow-right", size=16)}</a></div>'
-            for t, ph, cap, lbl, h, fit in ex)
-        ex_html = (f'<h3 class="brand-examples__title">Examples of {esc(b["name"])} appliances we service</h3>'
-                   f'<div class="brand-examples">{ex_cards}</div>')
     return f"""<section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">What we repair</p><h2>{esc(b['name'])} appliances we repair</h2></div>
   <div class="brand-cats brand-cats--{cols}">{cards}</div>
-  {ex_html}
   <div class="type-cta"><p>Not sure which type you have? Tell us what is happening and we will help.</p>
     <a class="btn btn--primary" href="#request">{icon('calendar', size=18)} Request {esc(b['name'])} service</a></div>
 </div></section>"""

@@ -1092,3 +1092,21 @@ details.story--card .story__sum { grid-area: sum; }
   .brand-example--cover .brand-example__img img { object-fit: contain; }
 }
 .page-hero-grid .media--natural img { aspect-ratio: auto; height: auto; object-fit: contain; }
+
+/* Brand hub hero chips and examples (owner correction 2026-11-23) */
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+.hero-chips a { display: inline-block; padding: 6px 12px; border: 1px solid var(--line, #d1d5db); border-radius: 999px; background: #fff; color: var(--ink, #111827); font-size: .9rem; font-weight: 600; text-decoration: none; line-height: 1.3; }
+.hero-chips a:hover, .hero-chips a:focus-visible { border-color: var(--accent, #c8102e); color: var(--accent, #c8102e); }
+.brand-cat, .type-cards > .type-card { scroll-margin-top: 96px; }
+.brand-examples__note { margin: -8px 0 16px; color: var(--muted, #6b7280); }
+.brand-examples--1 { grid-template-columns: minmax(0, 400px); }
+.brand-examples--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; }
+.brand-examples--1 .brand-example__img { aspect-ratio: auto; height: auto; }
+.brand-examples--1 .brand-example__img img { height: auto; max-height: 340px; object-fit: contain; margin: 0 auto; }
+.brand-examples--2 .brand-example__img img, .brand-examples--3 .brand-example__img img { object-fit: contain; }
+@media (max-width: 860px) {
+  .brand-examples--3, .brand-examples--1 { grid-template-columns: 1fr; }
+  .brand-example__img { height: 300px; max-height: 300px; }
+  .brand-examples--1 .brand-example__img { height: auto; }
+  .brand-examples--1 .brand-example__img img { max-height: 300px; }
+}
