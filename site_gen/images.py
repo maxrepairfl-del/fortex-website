@@ -196,15 +196,26 @@ WEB_COPIES = {
     "dryer-story-second-blockage": (
         "photo-library/laundry/job-dryer-vent-lint-clog.jpg",
         "Lint and hair buildup inside another dryer during service"),
+    # One portrait for every Why Fortex block (owner brief 2026-11-23): a plain
+    # 4:3 crop of the original photo, nothing generated or retouched.
+    "fortex-trust-portrait": (
+        "photo-library/team/fortex-trust-portrait-4x3.jpg",
+        "Fortex Appliance Repair technician in a branded shirt"),
 }
 WEB_WIDTHS = [400, 640, 960]
+# Copies that also get a larger size (never above the source width).
+WEB_WIDTHS_EXTRA = {"fortex-trust-portrait": [1200]}
+
+
+def web_widths(slug):
+    return sorted(set(WEB_WIDTHS + WEB_WIDTHS_EXTRA.get(slug, [])))
 
 
 def widths_for(slug):
     if slug in WEB_COPIES:
         # Web copies are never upscaled: cap at the source width (og:image too).
-        full = _META.get(slug, (WEB_WIDTHS[-1], None))[0]
-        return sorted({min(w, full) for w in WEB_WIDTHS})
+        full = _META.get(slug, (web_widths(slug)[-1], None))[0]
+        return sorted({min(w, full) for w in web_widths(slug)})
     return JOB_WIDTHS if slug in JOB_PHOTOS else WIDTHS
 
 
@@ -275,8 +286,7 @@ def picture(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
     """<picture> with AVIF and WebP sources and a JPEG fallback (web copies).
     `alt` overrides the default text when one frame is used in two stories."""
     alt = alt or WEB_COPIES[slug][1]
-    full = _META.get(slug, (WEB_WIDTHS[-1], None))[0]
-    ws = sorted({min(w, full) for w in WEB_WIDTHS})
+    ws = widths_for(slug)
     def srcset(ext):
         return ", ".join(f"{base}/{slug}-{w}.{ext} {w}w" for w in ws)
     w, h = _META.get(slug, (None, None))

@@ -13,7 +13,7 @@ from .data import (
 
 # ----------------------------------------------------------- real job photos
 from . import media as _media  # noqa: E402
-from .images import is_portrait  # noqa: E402
+from .images import is_portrait, picture  # noqa: E402
 from .cases import service_story_section, CASES_BY_SERVICE, dryer_problems_section  # noqa: E402
 # Service heroes/galleries stay as in data.py (owner asked on 2026-11-12 to
 # keep the original photos); media.HEROES / GALLERIES are not applied.
@@ -131,14 +131,17 @@ def why_split(photo=None, heading="Orange County trusts Fortex"):
     """Why Fortex: a plain list with check marks next to a photo of the team.
 
     The old version put a decorative icon on every point; a real photo of the
-    technicians does more for trust than six stock symbols."""
-    photo = photo or "tech-portrait"
+    technicians does more for trust than six stock symbols.
+
+    Owner brief 2026-11-23: every Why Fortex block shows the same portrait of
+    a Fortex technician, whatever photo the caller passes (appliance photos
+    stay in heroes, stories and galleries)."""
     items = "".join(
         f"<li>{icon('check-circle', size=22)}<div><h3>{esc(t)}</h3><p>{esc(b)}</p></div></li>"
         for _ic, t, b in WHY)
     return f"""<section class="section"><div class="wrap">
   <div class="split">
-    <div class="media reveal">{img(photo, sizes='(max-width:1000px) 90vw, 520px')}</div>
+    <div class="media media--trust reveal">{picture('fortex-trust-portrait', sizes='(max-width:1000px) calc(100vw - 32px), 520px')}</div>
     <div>
       <p class="eyebrow">Why Fortex</p><h2>{esc(heading)}</h2>
       <ul class="why-list">{items}</ul>

@@ -1042,3 +1042,6 @@ details.story--card .story__sum { grid-area: sum; }
   .form-card .req-line { margin-bottom: 12px; }
 }
 .section--stories { padding-bottom: 24px; }
+
+/* Why Fortex portrait (owner brief 2026-11-23): natural 4:3, no fixed height */
+.split .media--trust img { aspect-ratio: 4 / 3; width: 100%; height: auto; display: block; object-fit: cover; }

@@ -16,7 +16,7 @@ for slug, (rel, _alt, *crop) in M.WEB_COPIES.items():
     for opt in crop:  # extra options: an int rotates (degrees CCW), a 4-tuple crops
         im = im.rotate(opt, expand=True) if isinstance(opt, int) else im.crop(opt)
     big = None
-    for w in M.WEB_WIDTHS:
+    for w in M.web_widths(slug):
         w = min(w, im.width)
         r = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS) if w < im.width else im
         for ext, kw in (("jpg", dict(quality=78, optimize=True, progressive=True)),
