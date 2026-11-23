@@ -1091,3 +1091,4 @@ details.story--card .story__sum { grid-area: sum; }
   .brand-example__img { max-height: 360px; aspect-ratio: auto; height: 360px; }
   .brand-example--cover .brand-example__img img { object-fit: contain; }
 }
+.page-hero-grid .media--natural img { aspect-ratio: auto; height: auto; object-fit: contain; }

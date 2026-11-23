@@ -319,11 +319,17 @@ def hero(crumbs, h1, lead, photo, portrait=False):
 </div></section>"""
 
 
+NATURAL_HERO = {"fisher-paykel-dishdrawer-card"}
+
+
 def _hero_media(photo, portrait=False):
     if not photo:
         return (f'<div class="media media--trust-hero reveal">'
                 f'{picture("fortex-trust-portrait", sizes="(max-width:1000px) 80vw, 460px", loading="eager", fetchpriority="high")}</div>')
-    return (f'<div class="media{" media--portrait" if (portrait or is_portrait(photo)) else ""} reveal">'
+    # Crops agreed with the owner keep their own proportions instead of the
+    # default 3:2 hero frame (DishDrawer: panel and both drawers in view).
+    natural = " media--natural" if photo in NATURAL_HERO else ""
+    return (f'<div class="media{" media--portrait" if (portrait or is_portrait(photo)) else ""}{natural} reveal">'
             f'{img(photo, sizes="(max-width:1000px) 80vw, 400px", loading="eager", fetchpriority="high")}</div>')
 
 
