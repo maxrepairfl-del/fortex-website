@@ -85,7 +85,7 @@ NEW_BRANDS = {
     },
     "bosch": {
         "name": "Bosch", "maker": "BSH Home Appliances Corporation",
-        "title": "Bosch Dishwasher & Appliance Repair in Orange County",
+        "title": "Bosch Appliance Repair in Orange County",
         "meta": "Bosch dishwasher repair in Orange County: E15 and E24 errors, not draining, not heating, leaking. Bosch refrigerators and ranges too. $80 service call free with repair.",
         "lead": "Bosch dishwashers first of all: E15 leak errors, E24 drain errors, no heat, no wash. We also repair Bosch refrigerators, ranges and wall ovens.",
         "photo": "job-dishwasher-stainless-front", "photo_2": "bosch-dishwasher-pump-detail-blurry",

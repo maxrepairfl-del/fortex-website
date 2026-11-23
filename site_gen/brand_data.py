@@ -73,7 +73,7 @@ INDEPENDENT_COOK = "Burner valves, igniters, spark modules, oven sensors, fan mo
 MORE_BRANDS = {
     "wolf": {
         "name": "Wolf", "maker": "Sub-Zero Group, Inc.",
-        "title": "Wolf Range & Oven Repair in Orange County",
+        "title": "Wolf Appliance Repair in Orange County",
         "meta": "Wolf range, rangetop, cooktop and wall oven repair in Orange County. Dual-fuel and gas models, OEM parts, price before work. $80 service call free with repair.",
         "lead": "Dual-fuel and gas ranges, rangetops, cooktops and wall ovens with the red knobs. Burners that click or will not light, ovens that will not heat or hold temperature, convection fans and controls.",
         "photo": "wolf-front", "photo_2": "wolf-top-off",
