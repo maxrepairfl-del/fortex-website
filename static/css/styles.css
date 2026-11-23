@@ -1055,3 +1055,4 @@ details.story--card .story__sum { grid-area: sum; }
 .type-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 22px; }
 .type-cta p { margin: 0; }
 @media (max-width: 860px) { .type-cards { grid-template-columns: 1fr; } }
+.problems:not(.problems--photo) .problems__list { max-width: 820px; }
