@@ -269,8 +269,7 @@ def oem_block(brand, parts_line):
   <div class="oem-note reveal">
     <div class="oem-note__ic">{icon('award', size=28)}</div>
     <div><h3>Original {esc(brand)} parts first, your budget in mind</h3>
-    <p>{esc(parts_line)}: we prefer factory (OEM) parts bought from authorized distributors. You come first, though: when a lower-cost aftermarket part would do the job without losing quality, we will offer it, explain the difference, and you decide. 1 year on OEM parts, 90 days on labor. Warranty terms for any aftermarket option are explained before you approve the repair.</p>
-    <p>Fortex is an independent repair company, not a factory-authorized service provider for {esc(brand)}. If your appliance is covered by the manufacturer’s warranty, contact the manufacturer first.</p></div>
+    <p>{esc(parts_line)}: we prefer factory (OEM) parts bought from authorized distributors. You come first, though: when a lower-cost aftermarket part would do the job without losing quality, we will offer it, explain the difference, and you decide. 1 year on OEM parts, 90 days on labor. Warranty terms for any aftermarket option are explained before you approve the repair.</p></div>
   </div>
 </div></section>"""
 
