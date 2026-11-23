@@ -127,7 +127,7 @@ def home_quote_form():
 </div></section>"""
 
 
-def why_split(photo=None, heading="Orange County trusts Fortex"):
+def why_split(photo=None, heading="Orange County trusts Fortex", show_photo=True):
     """Why Fortex: a plain list with check marks next to a photo of the team.
 
     The old version put a decorative icon on every point; a real photo of the
@@ -139,9 +139,13 @@ def why_split(photo=None, heading="Orange County trusts Fortex"):
     items = "".join(
         f"<li>{icon('check-circle', size=22)}<div><h3>{esc(t)}</h3><p>{esc(b)}</p></div></li>"
         for _ic, t, b in WHY)
+    # On a page whose first screen already shows the portrait, the benefits
+    # stand alone as text (owner 2026-11-23: never the same portrait twice).
+    media = (f'<div class="media media--trust reveal">{picture("fortex-trust-portrait", sizes="(max-width:1000px) calc(100vw - 32px), 520px")}</div>'
+             if show_photo else "")
     return f"""<section class="section"><div class="wrap">
-  <div class="split">
-    <div class="media media--trust reveal">{picture('fortex-trust-portrait', sizes='(max-width:1000px) calc(100vw - 32px), 520px')}</div>
+  <div class="split{'' if show_photo else ' split--text'}">
+    {media}
     <div>
       <p class="eyebrow">Why Fortex</p><h2>{esc(heading)}</h2>
       <ul class="why-list">{items}</ul>

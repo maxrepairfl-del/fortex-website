@@ -61,7 +61,7 @@ def base_schema():
         "@type": "HomeAndConstructionBusiness",
         "@id": SITE["url"] + "/#business",
         "name": SITE["name"],
-        "image": SITE["url"] + "/images/fridge-branded-1200.jpg",
+        "image": SITE["url"] + "/images/fortex-og-portrait-1200.jpg",  # owner 2026-11-23: no other brand's appliance as the business image
         "url": SITE["url"],
         "telephone": SITE["phone"],
         "priceRange": "$$",
@@ -122,10 +122,13 @@ def breadcrumb_schema(path):
     }
 
 
-def page(title, desc, path, body, extra_schema=None, og_image="fridge-branded",
+def page(title, desc, path, body, extra_schema=None, og_image="fortex-og-portrait",
          book_href="/book/",
          noindex=False):
     canonical = SITE["url"] + path
+    # No appliance photo on the page: the Fortex portrait preview, never
+    # another brand's appliance (owner 2026-11-23).
+    og_image = og_image or "fortex-og-portrait"
     og_w = min(1200, widths_for(og_image)[-1])
     og = f'{SITE["url"]}/images/{og_image}-{og_w}.jpg'
     schema = [base_schema()]

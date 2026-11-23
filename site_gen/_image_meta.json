@@ -215,6 +215,10 @@
 540,
 960
 ],
+"fortex-og-portrait": [
+1200,
+630
+],
 "fortex-trust-portrait": [
 1200,
 900
@@ -495,6 +499,10 @@
 540,
 960
 ],
+"kitchenaid-cooktop-overview-trust": [
+960,
+540
+],
 "kitchenaid-double-wall-oven-overview-clear": [
 540,
 960
@@ -514,6 +522,10 @@
 "kitchenaid-wall-oven-microwave-overview-clear": [
 540,
 960
+],
+"kitchenaid-wall-ovens-overview-trust": [
+960,
+1372
 ],
 "larkin-walk-in-cooler-evaporator-fan-detail-clear": [
 540,
@@ -535,6 +547,14 @@
 720,
 960
 ],
+"lg-dryer-overview-trust": [
+960,
+1200
+],
+"lg-fridge-overview-trust": [
+800,
+1150
+],
 "lg-instaview-refrigerator-door-detail-clear": [
 960,
 960
@@ -554,6 +574,10 @@
 "lg-washer-front": [
 720,
 960
+],
+"lg-washer-overview-trust": [
+880,
+1100
 ],
 "lg-washtower": [
 540,
@@ -763,6 +787,10 @@
 720,
 960
 ],
+"samsung-dryer-overview-trust": [
+864,
+1080
+],
 "samsung-family-hub": [
 720,
 960
@@ -786,6 +814,10 @@
 "samsung-washer-open": [
 720,
 960
+],
+"samsung-washer-overview-trust": [
+960,
+1200
 ],
 "samsung-washer-top-load-overview-clear": [
 960,

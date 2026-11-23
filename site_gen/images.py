@@ -201,13 +201,47 @@ WEB_COPIES = {
     "fortex-trust-portrait": (
         "photo-library/team/fortex-trust-portrait-4x3.jpg",
         "Fortex Appliance Repair technician in a branded shirt"),
+    # Link previews (og:image): the same portrait cut to 1200 x 630, face kept.
+    "fortex-og-portrait": (
+        "photo-library/team/fortex-trust-portrait-4x3.jpg",
+        "Fortex Appliance Repair technician in a branded shirt",
+        (0, 60, 1200, 690)),
+    # Brand pages (owner brief 2026-11-23). Crops follow the appliance edges.
+    "lg-fridge-overview-trust": (
+        "photo-library/refrigeration/job-brand-lg-french-door-fridge-kitchen.jpg",
+        "LG French-door refrigerator in a kitchen",
+        (290, 50, 1090, 1200)),
+    "lg-washer-overview-trust": (
+        "photo-library/laundry/job-brand-lg-washer-front.jpg",
+        "LG front-load washer with its control panel and door visible",
+        (0, 110, 880, 1210)),
+    "lg-dryer-overview-trust": (
+        "photo-library/laundry/lg-dryer-front-overview-clear.jpg",
+        "LG dryer with its control panel and door visible",
+        (250, 330, 1680, 2118)),
+    "samsung-washer-overview-trust": (
+        "photo-library/laundry/samsung-washer-top-load-overview-clear.jpg",
+        "Samsung top-load washing machine",
+        (110, 410, 1690, 2385)),
+    "samsung-dryer-overview-trust": (
+        "photo-library/laundry/samsung-washer-dryer-stack-overview-clear-2.jpg",
+        "Samsung dryer installed above a washing machine",
+        (210, 790, 1074, 1870)),
+    "kitchenaid-wall-ovens-overview-trust": (
+        "photo-library/cooking/kitchenaid-double-wall-oven-overview-clear.jpg",
+        "KitchenAid double wall oven installed in cabinetry",
+        (0, 30, 1350, 1960)),
+    "kitchenaid-cooktop-overview-trust": (
+        "photo-library/cooking/kitchenaid-electric-cooktop-overview-clear.jpg",
+        "KitchenAid electric glass cooktop installed in a countertop",
+        (0, 1000, 1350, 1760)),
 }
 WEB_WIDTHS = [400, 640, 960]
 # /images is served "immutable" for a year, so a copy whose pixels change
 # under the same file names gets a version in its URLs.
 WEB_COPY_VERSION = {"sub-zero-built-in-refrigerator-overview-l302": "2"}
 # Copies that also get a larger size (never above the source width).
-WEB_WIDTHS_EXTRA = {"fortex-trust-portrait": [1200]}
+WEB_WIDTHS_EXTRA = {"fortex-trust-portrait": [1200], "fortex-og-portrait": [1200]}
 
 
 def web_widths(slug):

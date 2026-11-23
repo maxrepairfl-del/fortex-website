@@ -10,7 +10,7 @@ import re
 from .components import esc, page, faq_block, faq_schema, cta_band, BREADCRUMB_NAMES
 from .data import SITE
 from .icons import icon
-from .images import img, is_portrait
+from .images import img, is_portrait, picture
 from . import pages as P
 
 INDEPENDENT = ("Fortex Appliance Repair is an independent repair company. We are not "
@@ -294,6 +294,9 @@ def oem_block(brand, parts_line):
 
 
 def hero(crumbs, h1, lead, photo, portrait=False):
+    """First screen of a brand or brand x service page. photo=None means no
+    confirmed photo of that appliance exists yet: the Fortex technician
+    portrait is shown instead (owner 2026-11-23), never another brand's unit."""
     trail = " <span>›</span> ".join(
         f'<a href="{h}">{esc(t)}</a>' if h else f"<span>{esc(t)}</span>" for t, h in crumbs)
     return f"""<section class="page-hero"><div class="wrap page-hero-grid">
@@ -312,8 +315,16 @@ def hero(crumbs, h1, lead, photo, portrait=False):
       <li>{icon('award', size=17)} 1 year on OEM parts / 90 days labor</li>
     </ul>
   </div>
-  <div class="media{' media--portrait' if (portrait or is_portrait(photo)) else ''} reveal">{img(photo, sizes='(max-width:1000px) 80vw, 400px', loading='eager', fetchpriority='high')}</div>
+  {_hero_media(photo, portrait)}
 </div></section>"""
+
+
+def _hero_media(photo, portrait=False):
+    if not photo:
+        return (f'<div class="media media--trust-hero reveal">'
+                f'{picture("fortex-trust-portrait", sizes="(max-width:1000px) 80vw, 460px", loading="eager", fetchpriority="high")}</div>')
+    return (f'<div class="media{" media--portrait" if (portrait or is_portrait(photo)) else ""} reveal">'
+            f'{img(photo, sizes="(max-width:1000px) 80vw, 400px", loading="eager", fetchpriority="high")}</div>')
 
 
 def request_form(noun, icon_name, example, path):
@@ -352,9 +363,10 @@ def render_brand(slug):
     b = BRAND_PAGES[slug]
     path = f"/brands/{slug}/"
     price_html, catalog = price_table(b['prices'], b['name'], path)
-    pp = b.get("product_photos") or []
     tp = b.get("text_products")
-    if tp:
+    if not tp:
+        products_html = brand_categories(slug, b)
+    else:
         tcards = "".join(
             f'<div class="type-card"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
             + (f'<a class="more-link" href="{h}">{esc(lbl)} {icon("arrow-right", size=16)}</a>' if h else "")
@@ -366,13 +378,7 @@ def render_brand(slug):
   <div class="type-cta"><p>{esc(tp['cta'])}</p>
     <a class="btn btn--primary" href="#request">{icon('calendar', size=18)} {esc(tp['button'])}</a></div>
 </div></section>"""
-    else:
-        cards = "".join(P.photo_card(h, pp[i] if i < len(pp) and pp[i] else _photo_for(h, b), t, d, ic=ic)
-                        for i, (ic, t, d, h) in enumerate(b["products"]))
-        products_html = f"""<section class="section"><div class="wrap">
-  <div class="section-head"><p class="eyebrow">What we repair</p><h2>{esc(b['name'])} appliances we work on</h2></div>
-  <div class="cards grid-4">{cards}</div>
-</div></section>"""
+
     body = f"""
 {hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'], b['lead'], b['photo'])}
 {products_html}
@@ -380,7 +386,7 @@ def render_brand(slug):
 {oem_block(b['name'], b['parts_line'])}
 {request_form(b['name'] + ' appliance', 'wrench', b.get('example', 'not cooling'), path)}
 {P.steps_section()}
-{P.why_split(b['photo_2'], heading=f"Why {b['name']} owners call Fortex")}
+{P.why_split(heading=f"Why {b['name']} owners call Fortex", show_photo=bool(b['photo']))}
 {faq_section(f"{b['name']} repair FAQs", _faqs(b['faqs'], b['name']))}
 {price_html}
 {cta_band(heading=f"Need your {b['name']} repaired?", book_href="#request")}
@@ -507,9 +513,15 @@ def render_combo(bslug, uslug):
 
 
 def render_brands_index():
+    # Compact text cards (owner 2026-11-23): brand, the appliances we repair,
+    # one link. Photos stay on the brand pages themselves.
+    def kinds(b):
+        tp = b.get("text_products")
+        names = [c[0] for c in tp["cards"]] if tp else [t for _ic, t, _d, _h in b["products"]]
+        return ", ".join(names)
     cards = "".join(
-        P.photo_card(f"/brands/{s}/", b.get("card_photo", b["photo"]), b["name"],
-                     b["lead"][:120].rsplit(" ", 1)[0] + "…", more=f"{b['name']} repair")
+        f'<a class="brand-index-card" href="/brands/{s}/"><h3>{esc(b["name"])}</h3>'
+        f'<p>{esc(kinds(b))}</p><span class="more-link">{esc(b["name"])} repair {icon("arrow-right", size=16)}</span></a>'
         for s, b in BRAND_PAGES.items())
     body = f"""
 <section class="page-hero page-hero--simple"><div class="wrap">
@@ -517,7 +529,7 @@ def render_brands_index():
   <h1>High-End &amp; Built-In Appliance Repair by Brand</h1>
   <p class="hero-lead">Prices, common problems and what to expect for the brands we work on most. We repair every major brand, these are the ones with their own page.</p>
 </div></section>
-<section class="section"><div class="wrap"><div class="cards grid-4">{cards}</div></div></section>
+<section class="section"><div class="wrap"><div class="brand-index">{cards}</div></div></section>
 {P.steps_section()}
 {cta_band()}
 """
@@ -525,6 +537,111 @@ def render_brands_index():
         f"Appliance Repair by Brand, Orange County | {SITE['name']}",
         "Sub-Zero, Wolf, Viking, Thermador, LG and more: repair prices, common problems and OEM parts. Independent repair across Orange County.",
         "/brands/", body)
+
+
+# ------------------------------------------------- brand photos (2026-11-23)
+# Owner brief "brand photos implementation": categories are text cards on
+# every brand page; LG, Samsung and KitchenAid also show two approved photo
+# cards. Heroes come only from confirmed photos of that brand's appliance;
+# where none exists the hero shows the Fortex technician portrait.
+SVC_LABEL = {
+    "refrigerator-repair": "refrigerator repair", "freezer-repair": "freezer repair",
+    "washing-machine-repair": "washer repair", "dryer-repair": "dryer repair",
+    "dishwasher-repair": "dishwasher repair", "oven-repair": "oven repair",
+    "stove-cooktop-repair": "stove & cooktop repair", "microwave-repair": "microwave repair",
+    "wine-cooler-repair": "wine cooler repair", "ice-machine-repair": "ice machine repair",
+    "wine-cellar-cooling-repair": "wine cellar cooling repair",
+    "commercial-freezer-repair": "commercial freezer repair",
+    "garbage-disposal-repair": "garbage disposal repair",
+}
+
+
+def category_link(href, brand):
+    if href.startswith("/book/"):
+        return "Request warming drawer service" if "warming" in href else "Request service"
+    parts = [x for x in href.strip("/").split("/") if x]
+    label = SVC_LABEL.get(parts[1], "repair") if len(parts) >= 2 else "repair"
+    if len(parts) == 3:
+        return f"{brand} {label}"
+    return label[0].upper() + label[1:]
+
+
+BRAND_EXAMPLES = {
+    "lg": [
+        ("Washers", "lg-washer-overview-trust",
+         "Front-load LG washing machines, including models installed on pedestals.",
+         "LG washer repair", "/services/washing-machine-repair/lg/", "cover"),
+        ("Dryers", "lg-dryer-overview-trust",
+         "LG dryers, including standalone and stacked installations.",
+         "LG dryer repair", "/services/dryer-repair/lg/", "cover"),
+    ],
+    "samsung": [
+        ("Washers", "samsung-washer-overview-trust",
+         "Samsung washing machines, including top-load and front-load models.",
+         "Samsung washer repair", "/services/washing-machine-repair/samsung/", "cover"),
+        ("Dryers", "samsung-dryer-overview-trust",
+         "Samsung dryers, including units installed above a washer.",
+         "Samsung dryer repair", "/services/dryer-repair/samsung/", "cover"),
+    ],
+    "kitchenaid": [
+        ("Wall ovens", "kitchenaid-wall-ovens-overview-trust",
+         "KitchenAid wall ovens, including double-oven installations.",
+         "Oven repair", "/services/oven-repair/", "contain"),
+        ("Cooktops", "kitchenaid-cooktop-overview-trust",
+         "KitchenAid cooktops and ranges. Pictured: an electric glass cooktop.",
+         "Stove & cooktop repair", "/services/stove-cooktop-repair/", "contain"),
+    ],
+}
+
+BRAND_HERO = {
+    "lg": "lg-fridge-overview-trust",
+    "whirlpool": None,
+    "monogram": None,
+    "fisher-paykel": "fisher-paykel-dishdrawer-card",
+}
+for _s, _p in BRAND_HERO.items():
+    BRAND_PAGES[_s]["photo"] = _p
+
+COMBO_HERO = {
+    ("lg", "refrigerator-repair"): "lg-fridge-overview-trust",
+    ("lg", "washing-machine-repair"): "lg-washer-overview-trust",
+    ("lg", "dryer-repair"): "lg-dryer-overview-trust",
+    ("samsung", "washing-machine-repair"): "samsung-washer-overview-trust",
+    ("samsung", "dryer-repair"): "samsung-dryer-overview-trust",
+    ("fisher-paykel", "dishwasher-repair"): "fisher-paykel-dishdrawer-card",
+    ("thermador", "refrigerator-repair"): None,
+    ("whirlpool", "washing-machine-repair"): None,
+    ("viking", "refrigerator-repair"): None,
+    ("monogram", "refrigerator-repair"): None,
+}
+for _k, _p in COMBO_HERO.items():
+    COMBO_PAGES[_k]["photo"] = _p
+
+
+def brand_categories(slug, b):
+    n = len(b["products"])
+    cols = {1: 1, 2: 2, 3: 3, 4: 2}.get(n, 3)
+    cards = "".join(
+        f'<div class="brand-cat"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
+        f'<a class="more-link" href="{h}">{esc(category_link(h, b["name"]))} {icon("arrow-right", size=16)}</a></div>'
+        for _ic, t, d, h in b["products"])
+    ex = BRAND_EXAMPLES.get(slug)
+    ex_html = ""
+    if ex:
+        ex_cards = "".join(
+            f'<div class="brand-example brand-example--{fit}"><h4>{esc(t)}</h4>'
+            f'<div class="brand-example__img">{picture(ph, sizes="(max-width:700px) calc(100vw - 32px), 420px")}</div>'
+            f'<p>{esc(cap)}</p><a class="more-link" href="{h}">{esc(lbl)} {icon("arrow-right", size=16)}</a></div>'
+            for t, ph, cap, lbl, h, fit in ex)
+        ex_html = (f'<h3 class="brand-examples__title">Examples of {esc(b["name"])} appliances we service</h3>'
+                   f'<div class="brand-examples">{ex_cards}</div>')
+    return f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">What we repair</p><h2>{esc(b['name'])} appliances we repair</h2></div>
+  <div class="brand-cats brand-cats--{cols}">{cards}</div>
+  {ex_html}
+  <div class="type-cta"><p>Not sure which type you have? Tell us what is happening and we will help.</p>
+    <a class="btn btn--primary" href="#request">{icon('calendar', size=18)} Request {esc(b['name'])} service</a></div>
+</div></section>"""
 
 
 def brand_pages():
