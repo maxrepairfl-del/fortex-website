@@ -74,8 +74,26 @@ SUBZERO_PRICES = [
 ]
 BRAND_PAGES["sub-zero"]["prices"] = [("Refrigerator", SUBZERO_PRICES)]
 BRAND_PAGES["sub-zero"]["photo"] = "sub-zero-built-in-refrigerator-overview-l302"
-BRAND_PAGES["sub-zero"]["product_photos"] = ["sub-zero-built-in-refrigerator-overview-l302",
-                                             "sub-zero-built-in-refrigerator-work-l321", None, None]
+# Owner brief 2026-11-23: on Sub-Zero the appliance types are compact text
+# cards (no photo, no icon panel). Installation type and door finish describe
+# the same appliance, so built-in and panel-ready are not separate cards.
+# Only this brand uses the text variant; the others keep their photo cards.
+BRAND_PAGES["sub-zero"]["text_products"] = {
+    "intro": "We service stainless-steel and panel-ready Sub-Zero appliances. Find your appliance type below.",
+    "cards": [
+        ("Refrigerators & freezers",
+         "Built-in and integrated refrigerators and freezers, including stainless-steel and panel-ready models, separate columns and PRO models.",
+         "Sub-Zero refrigerator repair", "/services/refrigerator-repair/sub-zero/"),
+        ("Wine storage",
+         "Full-size and undercounter wine storage units. We diagnose temperature problems, fan faults, sensors and door seals.",
+         "Wine cooler repair", "/services/wine-cooler-repair/"),
+        ("Undercounter units & drawers",
+         "Undercounter refrigerators, freezer units and refrigeration drawers. We also repair ice makers built into Sub-Zero refrigerators.",
+         None, None),
+    ],
+    "cta": "Not sure which type you have? Tell us what is happening and we will help.",
+    "button": "Request Sub-Zero service",
+}
 
 COMBO_PAGES = {
     # Sample high-end landing page (owner's brief of 2026-11-13). Layout v2:
@@ -123,8 +141,9 @@ COMBO_PAGES = {
              "Water valve, auger motor or a frozen fill tube.",
              "We test the valve and motor and clear the fill line."),
         ],
-        "problem_photo": ("sub-zero-built-in-refrigerator-work-l321",
-                          "Panel-ready Sub-Zero built-in refrigerator during service"),
+        # No photo beside the problems (owner 2026-11-23): the panel-ready
+        # work shot is a poor angle and there is no better Sub-Zero frame yet.
+        "problem_photo": None,
         "prices": SUBZERO_PRICES,
         # (how often, what, why). Intervals follow Sub-Zero's own use & care
         # guidance.
@@ -334,14 +353,29 @@ def render_brand(slug):
     path = f"/brands/{slug}/"
     price_html, catalog = price_table(b['prices'], b['name'], path)
     pp = b.get("product_photos") or []
-    cards = "".join(P.photo_card(h, pp[i] if i < len(pp) and pp[i] else _photo_for(h, b), t, d, ic=ic)
-                    for i, (ic, t, d, h) in enumerate(b["products"]))
-    body = f"""
-{hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'], b['lead'], b['photo'])}
-<section class="section"><div class="wrap">
+    tp = b.get("text_products")
+    if tp:
+        tcards = "".join(
+            f'<div class="type-card"><h3>{esc(t)}</h3><p>{esc(d)}</p>'
+            + (f'<a class="more-link" href="{h}">{esc(lbl)} {icon("arrow-right", size=16)}</a>' if h else "")
+            + "</div>" for t, d, lbl, h in tp["cards"])
+        products_html = f"""<section class="section"><div class="wrap">
+  <div class="section-head"><p class="eyebrow">What we repair</p><h2>{esc(b['name'])} appliances we repair</h2>
+    <p class="lede">{esc(tp['intro'])}</p></div>
+  <div class="type-cards">{tcards}</div>
+  <div class="type-cta"><p>{esc(tp['cta'])}</p>
+    <a class="btn btn--primary" href="#request">{icon('calendar', size=18)} {esc(tp['button'])}</a></div>
+</div></section>"""
+    else:
+        cards = "".join(P.photo_card(h, pp[i] if i < len(pp) and pp[i] else _photo_for(h, b), t, d, ic=ic)
+                        for i, (ic, t, d, h) in enumerate(b["products"]))
+        products_html = f"""<section class="section"><div class="wrap">
   <div class="section-head"><p class="eyebrow">What we repair</p><h2>{esc(b['name'])} appliances we work on</h2></div>
   <div class="cards grid-4">{cards}</div>
-</div></section>
+</div></section>"""
+    body = f"""
+{hero([('Home', '/'), ('Brands', '/brands/'), (b['name'], None)], b['title'], b['lead'], b['photo'])}
+{products_html}
 {problems_section(b['problems_noun'], b['problems'], None) if b.get('problems') else ''}
 {oem_block(b['name'], b['parts_line'])}
 {request_form(b['name'] + ' appliance', 'wrench', b.get('example', 'not cooling'), path)}

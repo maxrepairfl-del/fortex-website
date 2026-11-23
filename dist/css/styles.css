@@ -1045,3 +1045,13 @@ details.story--card .story__sum { grid-area: sum; }
 
 /* Why Fortex portrait (owner brief 2026-11-23): natural 4:3, no fixed height */
 .split .media--trust img { aspect-ratio: 4 / 3; width: 100%; height: auto; display: block; object-fit: cover; }
+
+/* Sub-Zero brand page: text-only appliance type cards (owner brief 2026-11-23) */
+.type-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.type-card { background: #fff; border: 1px solid var(--line, #e5e7eb); border-radius: var(--r-lg, 16px); padding: 22px; }
+.type-card h3 { font-size: 1.15rem; margin: 0 0 8px; }
+.type-card p { margin: 0 0 12px; line-height: 1.55; }
+.type-card p:last-child { margin-bottom: 0; }
+.type-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 22px; }
+.type-cta p { margin: 0; }
+@media (max-width: 860px) { .type-cards { grid-template-columns: 1fr; } }
