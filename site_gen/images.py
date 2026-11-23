@@ -127,7 +127,7 @@ WEB_COPIES = {
     "sub-zero-built-in-refrigerator-overview-l302": (
         "photo-library/refrigeration/job-brand-subzero-builtin-side-by-side.jpg",
         "Sub-Zero built-in side-by-side refrigerator in a kitchen",
-        (80, 395, 825, 1280)),  # owner: centre on the fridge (2026-11-13)
+        (80, 432, 825, 1280)),  # owner: centre on the fridge (2026-11-13); top ~4% above the grille, no ceiling (2026-11-23)
     "sub-zero-built-in-refrigerator-work-l321": (
         "photo-library/refrigeration/job-tech-panel-ready-builtin-fridge.jpg",
         "Panel-ready Sub-Zero built-in refrigerator during service"),
@@ -203,6 +203,9 @@ WEB_COPIES = {
         "Fortex Appliance Repair technician in a branded shirt"),
 }
 WEB_WIDTHS = [400, 640, 960]
+# /images is served "immutable" for a year, so a copy whose pixels change
+# under the same file names gets a version in its URLs.
+WEB_COPY_VERSION = {"sub-zero-built-in-refrigerator-overview-l302": "2"}
 # Copies that also get a larger size (never above the source width).
 WEB_WIDTHS_EXTRA = {"fortex-trust-portrait": [1200]}
 
@@ -287,12 +290,13 @@ def picture(slug, sizes="100vw", cls="", loading="lazy", fetchpriority=None,
     `alt` overrides the default text when one frame is used in two stories."""
     alt = alt or WEB_COPIES[slug][1]
     ws = widths_for(slug)
+    v = f"?v={WEB_COPY_VERSION[slug]}" if slug in WEB_COPY_VERSION else ""
     def srcset(ext):
-        return ", ".join(f"{base}/{slug}-{w}.{ext} {w}w" for w in ws)
+        return ", ".join(f"{base}/{slug}-{w}.{ext}{v} {w}w" for w in ws)
     w, h = _META.get(slug, (None, None))
     wh = f' width="{w}" height="{h}"' if w else ""
     extra = (f' class="{cls}"' if cls else "") + (f' fetchpriority="{fetchpriority}"' if fetchpriority else "")
     return (f'<picture><source type="image/avif" srcset="{srcset("avif")}" sizes="{sizes}">'
             f'<source type="image/webp" srcset="{srcset("webp")}" sizes="{sizes}">'
-            f'<img src="{base}/{slug}-{ws[-1]}.jpg" srcset="{srcset("jpg")}" sizes="{sizes}" alt="{alt}" '
+            f'<img src="{base}/{slug}-{ws[-1]}.jpg{v}" srcset="{srcset("jpg")}" sizes="{sizes}" alt="{alt}" '
             f'loading="{loading}" decoding="{decoding}"{extra}{wh}></picture>')
